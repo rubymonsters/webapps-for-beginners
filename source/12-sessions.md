@@ -57,7 +57,7 @@ This way the application could apply the "light" theme to the blog, because the
 user has selected it in some previous request: Cookies are a way to persist
 (keep) state (data) across multiple requests.
 
-Building on top of this, even though HTTP itself does not have a concept of a
+Building on top of cookies, even though HTTP itself does not have a concept of a
 "session" (or conversation), Sinatra (just as basically any web application
 tool or framework) supports sessions. A session is a way for a web application
 to set a cookie that persists arbitrary data across multiple requests.

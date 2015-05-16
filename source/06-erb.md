@@ -203,10 +203,3 @@ Does this make sense?
 
 Then maybe it's a good time for an
 <a href="/exercises/mailbox_erb.html">exercise on ERB</a>.
-
-
-
-
-
-
-

@@ -1,13 +1,32 @@
 - index
 - preface
-- libraries
+- path: libraries
+  children:
+    - standard_library
+    - rubygems
+    - bundler
+    - load_path
 - html
 - erb
 - http
 - rack
-- sinatra
+- path: sinatra
+  children:
+    - sinatra_rails
+    - dsl
+    - hello_world
+    - params
+    - templates
+    - layouts
+    - template_files
+    - instance_variables
 - forms
-- storing_data
+- path: storing_data
+  children:
+    - writing_file
+    - storing_name
+    - listing_names
+    - using_post
 - sessions
 - validations
 - resources
