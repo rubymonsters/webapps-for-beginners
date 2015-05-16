@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Forms | Webapps for Beginners</title>
+
+    <link href="assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/sinatra.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/storing_data.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li>
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li>
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li>
+    <a href="/rack.html">
+      Rack
+    </a>
+  </li>
+  <li>
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+  </li>
+  <li class="active">
+    <a href="/forms.html">
+      Forms
+    </a>
+  </li>
+  <li>
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+  </li>
+  <li>
+    <a href="/sessions.html">
+      Sessions
+    </a>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li>
+    <a href="/resources.html">
+      Resources
+    </a>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Forms</h1>
+
+<p>So far, all that our little application can do is return some HTML when asked.
+I.e. it can respond to <code>GET</code> requests by returning HTML.</p>
+
+<p>What if we want to talk back to our application, and send some data from the
+browser to it? You have seen this a million times, there are those little forms
+on websites that let you enter data and somehow submit it.</p>
+
+<p>So, how does that work?</p>
+
+<p>HTML defines a couple tags for describing forms that are part of a document
+(web page).</p>
+
+<p>Here&rsquo;s how a simple form looks like in HTML:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p>If you copy this HTML code to a file, and open the file in your browser it will
+look similar to this:</p>
+
+<p><img src="/assets/images/forms_1-770a2682.png"></p>
+
+<p>Neat.</p>
+
+<p>You can see that the two <code>&lt;input&gt;</code> tags are rendered (displayed) in different
+ways because they have two different types: <code>text</code> and <code>submit</code>. In modern HTML
+there are lots of other input element types. You can find a
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">full list here</a>.</p>
+
+<p>Let&rsquo;s make our little Sinatra application serve this form.</p>
+
+<p>Make a new template file <code>monstas.erb</code> in your <code>view</code> directory and add the the
+HTML above. Then replace your <code>get &#39;/hello/:name&#39;</code> route with the following:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="n">erb</span> <span class="ss">:monstas</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Restart the server and go to <a href="http://localhost:4567/monstas"><a href="http://localhost:4567/monstas">http://localhost:4567/monstas</a></a>.
+You should see something like our screenshot above.</p>
+
+<p>Now, this form isn&rsquo;t very useful, yet. If you submit it (enter something, and
+click &ldquo;Submit&rdquo;) nothing much will happen. It clears the input element, and
+appends a question mark to the URL for some reason, but that&rsquo;s it.</p>
+
+<p>What&rsquo;s happening here?</p>
+
+<p>When you click a button that is a &ldquo;submit&rdquo; input element then your browser will
+submit the form that this button is part of. But where? If we do not specify
+anything else the browser will submit it to the same URL that we are currently
+looking at.</p>
+
+<p>We might as well specify it, though. This also helps making clear what&rsquo;s going
+on. Curiously, the attribute is called <code>action</code> not <code>target</code> or <code>url</code>:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p>Now, what does &ldquo;submit&rdquo; mean, in this case? We said browsers speak HTTP when
+they talk to a web server (our Sinatra application), so &ldquo;submit&rdquo; means making
+another HTTP request. Again, if we do not specify anything else, the default
+method will be <code>GET</code>.</p>
+
+<p>So this basically just reloads the page, and displays the same form again,
+served from our <code>get &quot;/monstas&quot;</code> route. This is why the text in the input field
+goes away.</p>
+
+<p>Ok, where does the question mark come from though?</p>
+
+<p>When the browser submits the form it collects all the data from the form input
+elements, and sends it along with the HTTP request. In case of a <code>GET</code> request
+it will append it to the URL, after a question mark, as name/value pairs.</p>
+
+<p>However, our form input text element does not a name, and so the browser cannot
+pass it in a meaningful way.</p>
+
+<p>So let&rsquo;s change that, and specify a name for our text input. Since we want
+the user to input their name, the name of our input should be <code>name</code>:</p>
+<pre class="highlight html"><code>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<p>If you restart the application, reload the page, and again enter some text and
+click submit &hellip; you should see that the URL changes to something like
+<code>http://localhost:4567/monstas?name=Monstas</code>. Aha!</p>
+
+<p>So that&rsquo;s how the browser passes our input to the application. It just appends
+it to the URL as name/value pairs (in case of a <code>GET</code> request): these pairs
+after the question mark are called &ldquo;query parameters&rdquo; in HTTP.</p>
+
+<p>Let&rsquo;s check that, and output the <code>params</code> in our route:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="nb">p</span> <span class="n">params</span>
+  <span class="n">erb</span> <span class="ss">:monstas</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Again, restart the application, and load the URL
+<a href="http://localhost:4567/monstas?name=Monstas"><a href="http://localhost:4567/monstas?name=Monstas">http://localhost:4567/monstas?name=Monstas</a></a>.
+In your terminal you should then see something like:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="s2">"name"</span><span class="err">=&gt;</span><span class="s2">"Monstas"</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<p>So this is how we can access the data that has been passed from the browser as
+part of the HTTP request, when it submitted the form.</p>
+
+<p>Let&rsquo;s do something with it. Change your route like so:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">erb</span> <span class="ss">:monstas</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>And add this code at the top of your <code>monstas.erb</code> view:</p>
+<pre class="highlight html"><code><span class="err">&lt;</span>% if @name %&gt;
+  <span class="nt">&lt;h1&gt;</span>Hello <span class="err">&lt;</span>%= @name %&gt;!<span class="nt">&lt;/h1&gt;</span>
+<span class="err">&lt;</span>% end %&gt;
+</code></pre>
+
+<p>When you restart the server, and reload the page you should see something like
+this:</p>
+
+<p><img src="/assets/images/forms_2-5134e116.png"></p>
+
+<p>Awesome!</p>
+
+<p>So this is how you can pass (submit) data from the brower to your application,
+and use it in some way.</p>
+
+<p>Let&rsquo;s make one more improvement to our form. It currently always whipes out the
+text that has been submitted. Let&rsquo;s make sure we preseve it in the input element.</p>
+
+<p>We can do that by specifying the <code>value</code> attribute on the <code>input</code> tag, like so:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">value=</span><span class="s">"&lt;%= @name %&gt;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p>When you restart your application, and reload the page, it should now put the
+name to the input element:</p>
+
+<p><img src="/assets/images/forms_3-11a66dfa.png"></p>
+
+        <nav class="page-nav"><a class="prev" href="/sinatra.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/storing_data.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

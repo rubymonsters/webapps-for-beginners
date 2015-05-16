@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Sessions | Webapps for Beginners</title>
+
+    <link href="assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/storing_data.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/validations.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li>
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li>
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li>
+    <a href="/rack.html">
+      Rack
+    </a>
+  </li>
+  <li>
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+  </li>
+  <li>
+    <a href="/forms.html">
+      Forms
+    </a>
+  </li>
+  <li>
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+  </li>
+  <li class="active">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li>
+    <a href="/resources.html">
+      Resources
+    </a>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Sessions</h1>
+
+<p>HTTP is a so called <a href="http://en.wikipedia.org/wiki/Stateless_protocol">stateless protocol</a>.
+Wikipedia says:</p>
+
+<p><em>&ldquo;In computing, a stateless protocol is a communications protocol that treats
+each request as an independent transaction that is unrelated to any previous
+request so that the communication consists of independent pairs of request and
+response.&rdquo;</em></p>
+
+<p>Imagine talking to a person with a very shortlived memory:</p>
+
+<p>&ldquo;Hey, who are you?&rdquo; - <em>&ldquo;I&rsquo;m a web application.&rdquo;</em>
+&ldquo;Hey, who are you?&rdquo; - <em>&ldquo;I&rsquo;m a web application.&rdquo;</em>
+&ldquo;Hey, who are you?&rdquo; - <em>&ldquo;I&rsquo;m a web application.&rdquo;</em>
+&ldquo;How often have I just asked you who you are?&rdquo; - <em>&ldquo;I don&rsquo;t know, I don&rsquo;t keep track.&rdquo;</em></p>
+
+<p>That&rsquo;s what&rsquo;s meant by HTTP being stateless: The web application just responds
+to the request at hand, but has no way to identify how these requests relate to
+each other.</p>
+
+<p>Imagine thousands of users clicking around and using your web application. The
+application would just respond to each of these requests individually, but does
+not know from the protocol where these requests are coming from, or how many
+people (browsers) it is talking to: There is no concept of a conversation, or
+&ldquo;session&rdquo; in HTTP.</p>
+
+<p>Basically.</p>
+
+<p>However, of course there are ways to identify your users. We all know that we
+can sign in to a web application, and it would recognize who we are. Right?
+Often web applications use cookies for this.</p>
+
+<p>A cookie is a little piece of information that a web application can send along
+with a response, and that will be stored by the browser. From then on, when the
+browser makes another request to the same application it will include the cookie
+to the request, sending it back to the application.</p>
+
+<p>For example, an HTTP response that sets a cookie for a user&rsquo;s prefered visual
+theme could look like this:</p>
+<pre class="highlight plaintext"><code>HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: theme=light
+</code></pre>
+
+<p>From now on, the browser would then include the cookie to subsequent requests:</p>
+<pre class="highlight plaintext"><code>GET /blog.html HTTP/1.1
+Host: rubymonstas.org
+Cookie: theme=light
+</code></pre>
+
+<p>This way the application could apply the &ldquo;light&rdquo; theme to the blog, because the
+user has selected it in some previous request: Cookies are a way to persist
+(keep) state (data) across multiple requests.</p>
+
+<p>Building on top of this, even though HTTP itself does not have a concept of a
+&ldquo;session&rdquo; (or conversation), Sinatra (just as basically any web application
+tool or framework) supports sessions. A session is a way for a web application
+to set a cookie that persists arbitrary data across multiple requests.</p>
+
+<p>Let&rsquo;s have a look how this works.</p>
+
+<p>Say we&rsquo;d like to pass a message from our <code>post</code> route to the next request, saying
+&ldquo;Successfully stored the name [name]&rdquo;. After successfully storing the name to
+the file, we&rsquo;d like to pass a message to the <code>GET</code> request that the browser is
+going to be redirected to.</p>
+
+<p>We&rsquo;d only want to display this message once right after the redirection from
+the <code>post</code> route: when we&rsquo;d reload the page it should be gone. This is called
+transient state, and a session is a great place to keep it.</p>
+
+<p>First, we need to enable the <code>:sessions</code> feature in Sinatra. You can do that
+by adding this line above of your routes:</p>
+<pre class="highlight ruby"><code><span class="n">enable</span> <span class="ss">:sessions</span>
+</code></pre>
+
+<p>Now, we want to store the message in our <code>post</code> route:</p>
+<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/hello"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
+  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
+  <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Successfully stored the name </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">."</span>
+  <span class="n">redirect</span> <span class="s2">"/hello"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Ok, cool.</p>
+
+<p>This will add a <code>Set-Cookie</code> header to the reponse which has a long, messy looking, encrypted
+string as a value.</p>
+
+<p>In my browser it looks like this:</p>
+<pre class="highlight plaintext"><code>Set-Cookie: rack.session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiRWI4OTdhMDJlNDBkMDFlNjcxNWUw%0AZGI1ZWU5MzQ0YTQyMjAzYjFiZTE2YzYxNzgwMWQxYjI3NzhiOWNhYTQ4YzUG%0AOwBGSSIJY3NyZgY7AEZJIiU2ZjdjN2Y0ZmM0MTdmMGJkNjBkNmY5MmQ1NDEx%0ANGQ4ZgY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi03NGNlNDIxYTczNjMwZDY3MWViNTlkYzIzN2YyN2M5NGU3ZWU4NTRm%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLTA3NjBhNDRjMzU0%0AODIxMzJjZjIyNDQyYTBkODhjMDhiYjg1NTYyNTAGOwBGSSIIZm9vBjsARkki%0ACGJhcgY7AFQ%3D%0A; path=/; HttpOnly
+</code></pre>
+
+<p>Wow. Ok, the name of the cookie gives us a hint that this is a session, and it
+is managed by Rack, which is what Sinatra uses under the hood to persist the
+session.</p>
+
+<p>Luckily we do not need to understand how exactly it does this. All we need to
+know is that we can now use this data in the next request (the <code>GET</code> request)
+like so:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
+  <span class="vi">@message</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:message</span><span class="p">)</span>
+  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">erb</span> <span class="ss">:hello</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>I.e. we delete the key <code>:message</code> from our session (which is something very
+similar to a Ruby hash).  Deleting it will return the value that was stored on
+this key, and we assign it to the instance variable <code>@message</code>, which makes it
+available to our template.</p>
+
+<p>That means we can now use the message in our view like so:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Let&rsquo;s try it out. Restart your application, and go to <a href="http://localhost:4567"><a href="http://localhost:4567">http://localhost:4567</a></a>.
+If you enter a name, and click submit you should then see something like this:</p>
+
+<p><img src="/assets/images/sessions_1-de7ddcac.png"></p>
+
+<p>When you reload the page the message should be gone.</p>
+
+<p>How does this work?</p>
+
+<p>In our <code>post</code> route we store the message to the session hash. This has is
+something that Sinatra provides to us as developers. When we enable this
+feature then Sinatra will, after every request, store this hash to a cookie
+with the name <code>rack.session</code>, in the encrypted form that you saw above.</p>
+
+<p>We say the hash is being <a href="http://en.wikipedia.org/wiki/Serialization">serialized</a>,
+which is a fancy way of saying that it is turned into some kind of format that
+can be stored in text form. Sinatra (actually, Rack, under the hood) then also
+encrypts and signs this data, so it is safe to send it over the internet (in
+case we keep any sensitive data in it).</p>
+
+<p>Ok, so the <code>post</code> route includes the <code>Set-Cookie</code> header with this session
+cookie into its response, and sends it to the browser. The browser will, from
+now on, pass this cookie back the our application as part of every subsequent
+request.</p>
+
+<p>When our browser is now redirected to <code>GET</code> the same URL again, it passes the
+cookie, and Sinatra will, because we have the <code>:sessions</code> feature enabled,
+<em>deserialize</em> (i.e. decrypt and read) the session data, and put it into the
+hash that is returned by the method <code>session</code>, so we can work with it.</p>
+
+<p>In our <code>get</code> route we now simply always delete the key <code>:message</code> from the
+session hash. Should anything be in there it will be assigned to the <code>@message</code>
+instance variable, and the view will display it. If nothing&rsquo;s stored on the
+session key, for example when we reload the page, then deleting the key will
+simply return nil, and nothing will be displayed in the view.</p>
+
+<p>Does that make sense?</p>
+
+<p>Awesome :)</p>
+
+        <nav class="page-nav"><a class="prev" href="/storing_data.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/validations.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>
