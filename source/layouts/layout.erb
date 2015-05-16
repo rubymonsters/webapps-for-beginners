@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title><%= discover_page_title %></title>
+
+    <%= stylesheet_link_tag "/assets/stylesheets/monstas" %>
+  </head>
+
+  <body>
+    <nav class="page-nav"><%= prev_page %></nav>
+    <nav class="page-nav"><%= next_page %></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <%= toc %>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <%= yield %>
+        <nav class="page-nav"><%= prev_page %></nav>
+        <nav class="page-nav"><%= next_page %></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <%= javascript_include_tag "/assets/javascripts/modernizr" %>
+    <%= javascript_include_tag "/assets/javascripts/monstas" %>
+  </body>
+</html>

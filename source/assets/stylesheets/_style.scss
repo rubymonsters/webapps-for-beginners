@@ -1,0 +1,188 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,600,400);
+
+::-moz-selection { color: white; background: $red; text-shadow: none; }
+::selection      { color: white; background: $red; text-shadow: none; }
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  background: #fff;
+  font-family: 'Open Sans', 'Helvetica Neue', helvetica, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  margin: 1rem 0;
+}
+h1 { font-size: 2.750rem; margin-bottom: 2rem; } // 36px
+h2 { font-size: 1.50rem;  } // 24px
+h3 { font-size: 1.313rem; } // 21px
+h4 { font-size: 1.125rem; font-weight: bold; } // 18px
+
+p, ul, ol, pre {
+  margin-top: 1rem;
+}
+
+ul, ol {
+  list-style-type: disc;
+  padding-left: 2rem;
+}
+
+a {
+  color: $red;
+  text-decoration: underline;
+  &:hover { text-decoration: none; }
+}
+
+code {
+  text-align: left;
+  padding: 0.2rem 0 0.2rem 0;
+  margin: 0;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  font-size: 80%;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+pre {
+  overflow: auto;
+  margin: 1.2rem 0;
+  padding: 5px 0 5px 1.5em;
+  line-height: 160%;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  white-space: pre;
+  word-wrap: normal;
+
+  & > code {
+    padding: 0;
+    background: none;
+
+    &:before, &:after {
+      content: "";
+    }
+  }
+}
+
+code:before, code:after {
+  letter-spacing: -0.2rem;
+  content: "\00a0";
+}
+
+table {
+  margin-top: 1em;
+  width: 100%;
+
+  tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  td, th {
+    padding: 0.5em 1em 0.5em 0;
+  }
+}
+
+.toc {
+  a, span {
+    text-decoration: none;
+    color: #999;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  li ul {
+    display: none;
+  }
+
+  li.expanded ul {
+    display: block;
+  }
+
+  li.active > a {
+    color: $red;
+  }
+
+  li.directory:before {
+    content: '+';
+    position: absolute;
+    left: -1rem;
+    color: #ccc;
+  }
+
+  li.directory.expanded:before {
+    content: '-';
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: $red;
+  }
+}
+
+.solution {
+  font-size: 0.8rem;
+  color: #999;
+  text-decoration: none;
+}
+
+.credits {
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.hidden {
+  display: none;
+}
+
+.hint {
+  position: relative;
+  padding: 1rem 1rem 1rem 3.6rem;
+  background-color: #FFFFE0;
+  &:before {
+    content: "\f0eb";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 1rem;
+    font-size: 1.25rem;
+    font-family: "FontAwesome";
+    color: #666;
+    background-color: #FFF9D8;
+  }
+}
+
+// overwrite the default from syntax because we want to use bash prompts `$`,
+// but still also highlight as Ruby code
+.highlight .err {
+  color: #000;
+  font-weight: normal;
+  background-color: transparent;
+}
