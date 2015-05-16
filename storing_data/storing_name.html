@@ -10,18 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Preface | Webapps for Beginners</title>
+    <title>Storing the name | Webapps for Beginners</title>
 
-    <link href="assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/index.html">
-  Previous
-</a></nav>
-    <nav class="page-nav"><a class="next" href="/libraries.html">
-  Next
-</a></nav>
+    <nav class="page-nav"></nav>
+    <nav class="page-nav"></nav>
 
     <div>
       <nav class="toc">
@@ -32,7 +28,7 @@
       Webapps For Beginners
     </a>
   </li>
-  <li class="active">
+  <li>
     <a href="/preface.html">
       Preface
     </a>
@@ -160,16 +156,57 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Preface</h1>
+        <h1>Storing the name</h1>
 
-<p>Read this book at your own pace, and do exercises at your own pace.</p>
+<p>Ok, now that we know how to append something to a file, let&rsquo;s use that in our
+application.</p>
 
-        <nav class="page-nav"><a class="prev" href="/index.html">
-  Previous
-</a></nav>
-        <nav class="page-nav"><a class="next" href="/libraries.html">
-  Next
-</a></nav>
+<p>We could change our route like so:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+
+  <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="s2">"a+"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+    <span class="n">file</span><span class="p">.</span><span class="nf">puts</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">erb</span> <span class="ss">:hello</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>However, that stuffs a lot of clutter into our route, while we&rsquo;d like to keep
+these readable. So let&rsquo;s extract storing the name to method right away:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">store_name</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+  <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"a+"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+    <span class="n">file</span><span class="p">.</span><span class="nf">puts</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="vi">@name</span><span class="p">)</span>
+  <span class="n">erb</span> <span class="ss">:hello</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Better. Our route now describes what it does, instead of telling how exactly
+it is done.</p>
+
+<p>If you restart your Sinatra application, and reload the page, you should see
+a file <code>names.txt</code> created in the same directory, and it should contain the
+name from the form.</p>
+
+<p>You can check this using command line tools like this:</p>
+<pre class="highlight plaintext"><code>$ ls names.txt
+names.txt
+
+$ cat names.txt
+Monstas
+</code></pre>
+
+<p>Of course you can also just look at the file in your editor :)</p>
+
+        <nav class="page-nav"></nav>
+        <nav class="page-nav"></nav>
       </article>
     </div>
 
@@ -184,7 +221,7 @@
       </ul>
     </footer>
 
-    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
-    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
   </body>
 </html>

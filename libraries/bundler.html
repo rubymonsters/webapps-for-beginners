@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Bundler | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/libraries/rubygems.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/libraries/load_path.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory expanded">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li class="active">
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby Load Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li>
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li>
+    <a href="/rack.html">
+      Rack
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/forms.html">
+      Forms
+    </a>
+  </li>
+  <li>
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+  </li>
+  <li>
+    <a href="/sessions.html">
+      Sessions
+    </a>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li>
+    <a href="/resources.html">
+      Resources
+    </a>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Bundler</h1>
+
+<p>Consider an application that relies on lots and lots of gems. For example,
+a new, generated Rails application comes with a whopping 42 gems, and this
+number usually grows pretty quickly with typical Rails applications.</p>
+
+<p>Imagine working on an application like this over years, and there are new
+versions of gems being published all the time. Often they&rsquo;ll update the version
+numbers of their dependencies when new versions come out, or add new gems as
+dependencies, and remove old ones.</p>
+
+<p>How likely do you think it is that any of the version number ranges specified
+for all of these gems would conflict with any other version number range? In
+praxis it is very likely. Rubygems itself (the library <code>rubygems</code> that is part
+of your Ruby installation) is not very smart at figuring out which versions
+of certain gems play well with each other.</p>
+
+<p>On top of this, with plain Ruby and Rubygems, when you <code>require</code> any gem in your
+code, you&rsquo;ll simply get the latest version of this gem that is already installed
+on your computer. Assuming these versions do not conflict with each other, you
+still don&rsquo;t know if these are the exact same versions as the ones your
+co-workers have installed. And in praxis, again, this is pretty unlikely. This
+can be a source of many, often subtle, bugs that you don&rsquo;t really want to deal
+with.</p>
+
+<p>This is where Bundler comes into play.</p>
+
+<p>Bundler allows you to define which gems your application depends on (in a file
+called <code>Gemfile</code>, here&rsquo;s the one we&rsquo;re using for
+<a href="https://github.com/rubymonsters/ruby-for-beginners/blob/master/Gemfile">this book</a>),
+and then run <code>bundle install</code>. This will figure out which
+gem versions work well with each other (a task that Bundler is <em>great</em> at), and
+store the solution to this riddle to a separate file (called <code>Gemfile.lock</code>).</p>
+
+<p>These files are part of your code, and can be shared with other developers.
+When they now run <code>bundle install</code> themselves they&rsquo;ll get exactly the same gem
+versions that you also have.</p>
+
+<p>You can think of Rubygems of a tool to install gems on your computer. Over time
+this may result in a collection of lots and lots of gems in various versions
+that all sit somewhere on your filesystem.</p>
+
+<p>Bundler on the other hand is a tool for picking <em>some</em> of these gem versions,
+and restricting access to only these. You can think of it as a sandbox of the
+few gems that your application really should use. Like a looking glass that
+restricts the vision of your application to only see these few gem versions,
+even though there maybe tons of other gem versions installed on your computer.</p>
+
+<p>In order to use your application with Bundler you&rsquo;d prepend the command <code>bundle
+exec</code> to whatever other command you execute in your terminal, as follows.</p>
+
+<p>Imagine you&rsquo;d normally execute your program like this:</p>
+<pre class="highlight plaintext"><code>ruby my_amazing_app.rb
+</code></pre>
+
+<p>In order to use it with Bundler, and restrict the visible gem versions to the
+ones defined in your <code>Gemfile.lock</code> file you would run this instead:</p>
+<pre class="highlight plaintext"><code>bundle exec ruby my_amazing_app.rb
+</code></pre>
+
+<p>(For Rails applications you do not have to prepend <code>bundle exec</code> by the way, as
+Rails does this itself, under the hood.)</p>
+
+        <nav class="page-nav"><a class="prev" href="/libraries/rubygems.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/libraries/load_path.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

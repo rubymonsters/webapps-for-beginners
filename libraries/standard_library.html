@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Preface | Webapps for Beginners</title>
+    <title>Ruby Standard Library | Webapps for Beginners</title>
 
-    <link href="assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/index.html">
+    <nav class="page-nav"><a class="prev" href="/libraries.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/libraries.html">
+    <nav class="page-nav"><a class="next" href="/libraries/rubygems.html">
   Next
 </a></nav>
 
@@ -32,17 +32,17 @@
       Webapps For Beginners
     </a>
   </li>
-  <li class="active">
+  <li>
     <a href="/preface.html">
       Preface
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/libraries.html">
       Using Libraries
     </a>
     <ul>
-      <li>
+      <li class="active">
         <a href="/libraries/standard_library.html">
           Ruby Standard Library
         </a>
@@ -160,14 +160,40 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Preface</h1>
+        <h1>Ruby Standard Library</h1>
 
-<p>Read this book at your own pace, and do exercises at your own pace.</p>
+<p>Basically every programming language that you&rsquo;ll use in praxis has some kind
+of standard library that is shipped with the language itself. When you install
+Ruby on your computer this will also install the
+<a href="http://ruby-doc.org/stdlib-2.2.2/">Ruby Standard Library</a>.</p>
 
-        <nav class="page-nav"><a class="prev" href="/index.html">
+<p>It&rsquo;s documentation isn&rsquo;t the most pretty website on earth, but if you look at
+the &ldquo;package&rdquo; (library) names on the left you see things mentioned like:</p>
+
+<ul>
+<li>benchmark: tools to test how performant your code is</li>
+<li>debug: tools to make debugging code easier</li>
+<li>digest, openssl, securerandom: tools for encryption and security</li>
+<li>erb: Ruby&rsquo;s standard templating system (used in one of our exercises)</li>
+<li>net/imap, net/pop, net/smtp: stuff for sending and receiving emails</li>
+<li>zlib: tools for compressing files (you know <code>zip</code> files, don&rsquo;t you?)</li>
+</ul>
+
+<p>And a lot of other things. These are fairly low-level tools, of course. You do
+not see a library for &ldquo;logging in via Twitter or Google&rdquo;. They&rsquo;re more like
+nuts and bolts, rather than bicycles or cars, but they&rsquo;re super useful
+nonetheless.</p>
+
+<p>In order to make one of these libraries available in your code you don&rsquo;t have
+to do anything else than use <code>require</code>. E.g. <code>require &quot;zlib&quot;</code> would make the
+<a href="http://ruby-doc.org/stdlib-2.2.2/libdoc/zlib/rdoc/Zlib.html">zlib
+library</a> available, which means you could now use the methods <code>deflate</code> and
+<code>inflate</code> in order to compress and decompress files.</p>
+
+        <nav class="page-nav"><a class="prev" href="/libraries.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/libraries.html">
+        <nav class="page-nav"><a class="next" href="/libraries/rubygems.html">
   Next
 </a></nav>
       </article>
@@ -184,7 +210,7 @@
       </ul>
     </footer>
 
-    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
-    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
   </body>
 </html>

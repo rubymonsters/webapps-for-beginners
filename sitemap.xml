@@ -6,6 +6,22 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/libraries/standard_library.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/libraries/rubygems.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/libraries/bundler.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/libraries/load_path.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/libraries.html</loc>
       <priority>0.5</priority>
     </url>
@@ -26,11 +42,59 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/sinatra_rails.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/dsl.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/hello_world.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/params.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/templates.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/layouts.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/template_files.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/instance_variables.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/sinatra.html</loc>
       <priority>0.5</priority>
     </url>
     <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/forms.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/storing_data/writing_file.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/storing_data/storing_name.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/storing_data/listing_names.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/storing_data/using_post.html</loc>
       <priority>0.5</priority>
     </url>
     <url>
@@ -42,15 +106,15 @@
       <priority>0.5</priority>
     </url>
     <url>
-      <loc>http://webapps-for-beginners.rubymonstas.org/validations.html</loc>
-      <priority>0.5</priority>
-    </url>
-    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/resources.html</loc>
       <priority>0.5</priority>
     </url>
     <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/validations.html</loc>
       <priority>0.5</priority>
     </url>
 </urlset>

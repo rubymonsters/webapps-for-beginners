@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Preface | Webapps for Beginners</title>
+    <title>Using instance variables | Webapps for Beginners</title>
 
-    <link href="assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/index.html">
+    <nav class="page-nav"><a class="prev" href="/sinatra/template_files.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/libraries.html">
+    <nav class="page-nav"><a class="next" href="/forms.html">
   Next
 </a></nav>
 
@@ -32,7 +32,7 @@
       Webapps For Beginners
     </a>
   </li>
-  <li class="active">
+  <li>
     <a href="/preface.html">
       Preface
     </a>
@@ -84,7 +84,7 @@
       Rack
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/sinatra.html">
       Sinatra
     </a>
@@ -124,7 +124,7 @@
           Template files
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/sinatra/instance_variables.html">
           Using instance variables
         </a>
@@ -160,14 +160,41 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Preface</h1>
+        <h1>Using instance variables</h1>
 
-<p>Read this book at your own pace, and do exercises at your own pace.</p>
+<p>So far we&rsquo;ve passed data to our templates using the <code>:locals</code> option key which
+holds a hash.</p>
 
-        <nav class="page-nav"><a class="prev" href="/index.html">
+<p>Sinatra supports a second way of passing data, which uses instance variables.
+We mention this mostly because this is also the &ldquo;Rails way&rdquo; of passing data to
+your templates (views).</p>
+
+<p>Let&rsquo;s change our template to use an instance variable <code>@name</code>, like so:</p>
+<pre class="highlight erb"><code><span class="nt">&lt;h1&gt;</span>Hello <span class="cp">&lt;%=</span> <span class="vi">@name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h1&gt;</span>
+</code></pre>
+
+<p>If we now assign the same instance variable in our route, then Sinatra will
+make it available to the template, too:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">erb</span> <span class="ss">:hello</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This also is a little bit more concise, and spares a few keystrokes.</p>
+
+<p>So, which way is the better one?</p>
+
+<p>On one hand there&rsquo;s an argument that using the <code>:locals</code> way is the cleaner,
+and &ldquo;right&rdquo; way of doing it. On the other hand using instance variables is much
+more common due to the fact that Rails encourages it. As always, you should
+just use whatever feels better to you, and maybe ask your friends
+and fellow developers for their opinions and reasons.</p>
+
+        <nav class="page-nav"><a class="prev" href="/sinatra/template_files.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/libraries.html">
+        <nav class="page-nav"><a class="next" href="/forms.html">
   Next
 </a></nav>
       </article>
@@ -184,7 +211,7 @@
       </ul>
     </footer>
 
-    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
-    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
   </body>
 </html>

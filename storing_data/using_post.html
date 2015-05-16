@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Using POST | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <nav class="page-nav"></nav>
+    <nav class="page-nav"></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby Load Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li>
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li>
+    <a href="/rack.html">
+      Rack
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/forms.html">
+      Forms
+    </a>
+  </li>
+  <li>
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+  </li>
+  <li>
+    <a href="/sessions.html">
+      Sessions
+    </a>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li>
+    <a href="/resources.html">
+      Resources
+    </a>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Using POST</h1>
+
+<p>Ok, that&rsquo;s pretty cool. However, there&rsquo;s one big problem with our application
+that we definitely want to fix.</p>
+
+<p>The HTTP specification says that <code>GET</code> requests should be safe, and idempotent.
+What does that mean? <a href="http://en.wikipedia.org/wiki/Idempotence">Wikipedia says</a>:</p>
+
+<p><em>&ldquo;Idempotence is the property of certain operations in mathematics and computer
+science, that can be applied multiple times without changing the result beyond
+the initial application.&rdquo;</em></p>
+
+<p>Obviously, whenever we reload the URL our application adds the name again, and
+again, and again. Since we do this in response to a <code>GET</code> request we do not
+comply with the HTTP specification.</p>
+
+<p>When we store, modify, or delete data in our application we also say that we
+&ldquo;change the state&rdquo; of the application: It goes from &ldquo;3 names stored&rdquo; to &ldquo;4
+names stored&rdquo;.</p>
+
+<p><code>GET</code> requests should not modify the state of our application though. They
+should only &ldquo;get&rdquo; what&rsquo;s already there. So what do we do?</p>
+
+<p>The appropriate HTTP verb (request method) to use for this kind of request
+is <code>POST</code>. The result of a <code>POST</code> request does not need to be idempotent,
+and it&rsquo;s basically up to the application to decide what to do with it.</p>
+
+<p>In order to tell the browser to send a <code>POST</code> request instead of a <code>GET</code>
+request we add this as an attribute to the <code>&lt;form&gt;</code> tag like so:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">value=</span><span class="s">"&lt;%= @name %&gt;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p>When you reload the page, and try to submit the form again, you&rsquo;ll get
+Sinatra&rsquo;s 404 (Not Found) page though: &ldquo;Sinatra doesn’t know this ditty.&rdquo;</p>
+
+<p>Of course, we do not have a route for <code>POST</code> requests, yet. So let&rsquo;s add
+one, and more the logic for storing the name to it:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
+  <span class="n">erb</span> <span class="ss">:monstas</span>
+<span class="k">end</span>
+
+<span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">])</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Cool, our <code>get</code> route is now idempotent (it does not change any state), and we
+also have a <code>post</code> route for the same path, and we store the name if there is
+one. However, what should we now send back to the browser in response?</p>
+
+<p>For starters, we could just send a little confirmation:</p>
+<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">])</span>
+  <span class="s2">"Ok!"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><img src="/assets/images/storing_data_2-262afb82.png"></p>
+
+<p>Hmmmm. Ok, this isn&rsquo;t too bad, we could make this a proper HTML template.</p>
+
+<p>However, in today&rsquo;s web applications it is more common to redirect the browser
+to the page that displays the changed state: The web application would respond
+to the <code>POST</code> request by saying <em>&ldquo;Alright, I&rsquo;ve done this. Go here to check it
+out.&rdquo;</em></p>
+
+<p>The way of expressing this in terms of HTTP is by the way of returning the
+status code <code>303</code> (&ldquo;See Other&rdquo;), and adding a <code>location</code> header to the response
+that tells the browser where to go (what to <code>GET</code>) next.</p>
+
+<p>Sinatra lets us do this like so:</p>
+<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
+  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
+  <span class="n">redirect</span> <span class="s2">"/monstas"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The <code>redirect</code> method will make sure our application responds with the status
+code <code>303</code> and add a <code>location</code> header to the response with the value
+<code>http://localhost:4567/monstas</code> (since we have passed the path <code>/monstas</code>, but the
+<code>location</code> header needs a full URL).</p>
+
+<p>If you restart the server, go to <a href="http://localhost:4567/monstas"><a href="http://localhost:4567/monstas">http://localhost:4567/monstas</a></a>,
+and submit the form you&rsquo;ll see that your browser will be redirected, and make
+a new <code>GET</code> request to the same URL.</p>
+
+<p>So this is pretty cool. We now have two routes. One for displaying (<code>GET</code>ing)
+the current state of our application, and one for storing (<code>POST</code>ing) new data.</p>
+
+<p>Awesome!</p>
+
+        <nav class="page-nav"></nav>
+        <nav class="page-nav"></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

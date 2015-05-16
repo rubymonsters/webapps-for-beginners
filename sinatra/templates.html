@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Preface | Webapps for Beginners</title>
+    <title>Rendering templates | Webapps for Beginners</title>
 
-    <link href="assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/index.html">
+    <nav class="page-nav"><a class="prev" href="/sinatra/params.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/libraries.html">
+    <nav class="page-nav"><a class="next" href="/sinatra/layouts.html">
   Next
 </a></nav>
 
@@ -32,7 +32,7 @@
       Webapps For Beginners
     </a>
   </li>
-  <li class="active">
+  <li>
     <a href="/preface.html">
       Preface
     </a>
@@ -84,7 +84,7 @@
       Rack
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/sinatra.html">
       Sinatra
     </a>
@@ -109,7 +109,7 @@
           Params
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/sinatra/templates.html">
           Rendering templates
         </a>
@@ -160,14 +160,51 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Preface</h1>
+        <h1>Rendering templates</h1>
 
-<p>Read this book at your own pace, and do exercises at your own pace.</p>
+<p>So far, our application does not actually return HTML, it returns just plain
+text. Let&rsquo;s fix that. For this we&rsquo;ll want to re-use what we&rsquo;ve learned about
+rendering ERB templates.</p>
 
-        <nav class="page-nav"><a class="prev" href="/index.html">
+<p>In order to use ERB we need to require it, we need to define a ERB template,
+and make any variables used in the template known as local variables in our
+route:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"erb"</span>
+
+<span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
+  <span class="no">ERB</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;"</span><span class="p">).</span><span class="nf">result</span><span class="p">(</span><span class="nb">binding</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This code is familiar to you, isn&rsquo;t it? We get the name out of the params hash
+and stick it into a local variable <code>name</code> because that&rsquo;s the variable name we&rsquo;re
+using in our template, too.</p>
+
+<p>If you restart the server, and reload the page in your browser, it should now
+look like this:</p>
+
+<p><img src="/assets/images/sinatra_2-731564c1.png"></p>
+
+<p>Awesome.</p>
+
+<p>However, Sinatra also has built-in support for ERB templates (&ldquo;views&rdquo;), and
+allows us to achieve exactly the same thing like this:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
+  <span class="n">erb</span> <span class="s2">"&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;"</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">}</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>I.e. Sinatra has a method <code>erb</code>, that hides all the details of rendering the
+template from us, and also accepts a template. On top of this, it also accepts
+a hash that allows us to specify options. If we specify a key <code>:locals</code> and
+give it another hash, then Sinatra will make each key/value pair on this hash
+available as <em>local</em> variables (thus &ldquo;locals&rdquo;) in our ERB template.</p>
+
+        <nav class="page-nav"><a class="prev" href="/sinatra/params.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/libraries.html">
+        <nav class="page-nav"><a class="next" href="/sinatra/layouts.html">
   Next
 </a></nav>
       </article>
@@ -184,7 +221,7 @@
       </ul>
     </footer>
 
-    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
-    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
   </body>
 </html>

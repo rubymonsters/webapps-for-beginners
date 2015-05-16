@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Listing all names | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <nav class="page-nav"></nav>
+    <nav class="page-nav"></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby Load Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li>
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li>
+    <a href="/rack.html">
+      Rack
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/forms.html">
+      Forms
+    </a>
+  </li>
+  <li>
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+  </li>
+  <li>
+    <a href="/sessions.html">
+      Sessions
+    </a>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li>
+    <a href="/resources.html">
+      Resources
+    </a>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Listing all names</h1>
+
+<p>Let&rsquo;s make it so that we can look at the list of the names in the browser
+though. This is a web application, right.</p>
+
+<p>For this we&rsquo;ll need to read the names from the file. Again, if you ask Google
+for &ldquo;Ruby read file&rdquo; you&rsquo;ll find it&rsquo;s as simple as this:</p>
+<pre class="highlight ruby"><code><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</code></pre>
+
+<p>This returns a single, long string, which represents the content of the entire
+file. Because we store every name on a new line we can split this string with
+the newline character <code>&quot;\n&quot;</code> in order to get our names as an array:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
+  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>However, this would break if there&rsquo;s no file with this name, yet. So let&rsquo;s
+a little safeguard, and return an empty array if the file does not exist:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
+  <span class="k">return</span> <span class="p">[]</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">)</span>
+  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Does this make sense? If the file does not exist we return an empty array <code>[]</code>.
+If it exists we read it, and split the content into lines.</p>
+
+<p>Also, let&rsquo;s store the names on an instance variable in our route, so we can
+then use it in the template later:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
+  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
+  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
+  <span class="n">erb</span> <span class="ss">:hello</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now we can output the names as an unordered list (<code>&lt;ul&gt;</code>) in our <code>hello.erb</code>.
+So let&rsquo;s replace this (we now want to display the full list):</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>With this:</p>
+<pre class="highlight erb"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="cp">&lt;%</span> <span class="vi">@names</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="nb">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+</code></pre>
+
+<p><img src="/assets/images/storing_data_1-a05fb498.png"></p>
+
+        <nav class="page-nav"></nav>
+        <nav class="page-nav"></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

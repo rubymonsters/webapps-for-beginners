@@ -37,10 +37,32 @@
       Preface
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/libraries.html">
       Using Libraries
     </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby Load Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/html.html">
@@ -62,10 +84,52 @@
       Rack
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/sinatra.html">
       Sinatra
     </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/forms.html">
@@ -109,231 +173,6 @@ good enough.</p>
 <p>What we want to achive is that every name ever submitted to our application
 is appended to a file, let&rsquo;s say <code>names.txt</code>. So we&rsquo;ll keep a long running
 list of all these names.</p>
-
-<h2>Writing to a file</h2>
-
-<p>How to append a string to a file in Ruby? If you google for &ldquo;Ruby file append&rdquo;
-you&rsquo;ll find a bunch of answers that all basically look like this:</p>
-<pre class="highlight ruby"><code><span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"a+"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
-  <span class="n">file</span><span class="p">.</span><span class="nf">puts</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>This uses two local variables <code>filename</code> and <code>string</code>, which in our case would
-be <code>names.txt</code> and the name passed as the param. The slightly weird looking
-second argument <code>&quot;a+&quot;</code> tells the <code>open</code> method that we want to use the file for
-appending something (thus <code>a</code>), and that we&rsquo;d like it to create a new file
-unless it already exists (thus <code>+</code>).</p>
-
-<p>Also, <code>File.open</code> takes a block, and passes an object, an instance of the class
-<a href="http://ruby-doc.org/core-2.2.0/File.html">File</a> to it. It does this
-because the file needs to be closed once we&rsquo;re done with it. The <code>open</code> method
-makes sure we don&rsquo;t forget this, and closes the file once it has run our block.
-Pretty handy.</p>
-
-<p>Inside of the block we simply call <code>puts</code> on the file object, which will append
-the string that we pass, and also add a newline (just like <code>puts</code> does when you
-output a string to the terminal).</p>
-
-<h2>Storing the name</h2>
-
-<p>Ok, now that we know how to append something to a file, let&rsquo;s use that in our
-application.</p>
-
-<p>We could change our route like so:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
-  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
-
-  <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="s2">"a+"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
-    <span class="n">file</span><span class="p">.</span><span class="nf">puts</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="n">erb</span> <span class="ss">:hello</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>However, that stuffs a lot of clutter into our route, while we&rsquo;d like to keep
-these readable. So let&rsquo;s extract storing the name to method right away:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">store_name</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"a+"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
-    <span class="n">file</span><span class="p">.</span><span class="nf">puts</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
-  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="vi">@name</span><span class="p">)</span>
-  <span class="n">erb</span> <span class="ss">:hello</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>Better. Our route now describes what it does, instead of telling how exactly
-it is done.</p>
-
-<p>If you restart your Sinatra application, and reload the page, you should see
-a file <code>names.txt</code> created in the same directory, and it should contain the
-name from the form.</p>
-
-<p>You can check this using command line tools like this:</p>
-<pre class="highlight plaintext"><code>$ ls names.txt
-names.txt
-
-$ cat names.txt
-Monstas
-</code></pre>
-
-<p>Of course you can also just look at the file in your editor :)</p>
-
-<h2>Listing all names</h2>
-
-<p>Let&rsquo;s make it so that we can look at the list of the names in the browser
-though. This is a web application, right.</p>
-
-<p>For this we&rsquo;ll need to read the names from the file. Again, if you ask Google
-for &ldquo;Ruby read file&rdquo; you&rsquo;ll find it&rsquo;s as simple as this:</p>
-<pre class="highlight ruby"><code><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-</code></pre>
-
-<p>This returns a single, long string, which represents the content of the entire
-file. Because we store every name on a new line we can split this string with
-the newline character <code>&quot;\n&quot;</code> in order to get our names as an array:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>However, this would break if there&rsquo;s no file with this name, yet. So let&rsquo;s
-a little safeguard, and return an empty array if the file does not exist:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
-  <span class="k">return</span> <span class="p">[]</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">)</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>Does this make sense? If the file does not exist we return an empty array <code>[]</code>.
-If it exists we read it, and split the content into lines.</p>
-
-<p>Also, let&rsquo;s store the names on an instance variable in our route, so we can
-then use it in the template later:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
-  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
-  <span class="n">erb</span> <span class="ss">:hello</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>Now we can output the names as an unordered list (<code>&lt;ul&gt;</code>) in our <code>hello.erb</code>.
-So let&rsquo;s replace this (we now want to display the full list):</p>
-<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
-  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
-<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-</code></pre>
-
-<p>With this:</p>
-<pre class="highlight erb"><code><span class="nt">&lt;ul&gt;</span>
-  <span class="cp">&lt;%</span> <span class="vi">@names</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="cp">%&gt;</span>
-    <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="nb">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
-  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-<span class="nt">&lt;ul&gt;</span>
-</code></pre>
-
-<p><img src="/assets/images/storing_data_1-a05fb498.png"></p>
-
-<h2>Using POST</h2>
-
-<p>Ok, that&rsquo;s pretty cool. However, there&rsquo;s one big problem with our application
-that we definitely want to fix.</p>
-
-<p>The HTTP specification says that <code>GET</code> requests should be safe, and idempotent.
-What does that mean? <a href="http://en.wikipedia.org/wiki/Idempotence">Wikipedia says</a>:</p>
-
-<p><em>&ldquo;Idempotence is the property of certain operations in mathematics and computer
-science, that can be applied multiple times without changing the result beyond
-the initial application.&rdquo;</em></p>
-
-<p>Obviously, whenever we reload the URL our application adds the name again, and
-again, and again. Since we do this in response to a <code>GET</code> request we do not
-comply with the HTTP specification.</p>
-
-<p>When we store, modify, or delete data in our application we also say that we
-&ldquo;change the state&rdquo; of the application: It goes from &ldquo;3 names stored&rdquo; to &ldquo;4
-names stored&rdquo;.</p>
-
-<p><code>GET</code> requests should not modify the state of our application though. They
-should only &ldquo;get&rdquo; what&rsquo;s already there. So what do we do?</p>
-
-<p>The appropriate HTTP verb (request method) to use for this kind of request
-is <code>POST</code>. The result of a <code>POST</code> request does not need to be idempotent,
-and it&rsquo;s basically up to the application to decide what to do with it.</p>
-
-<p>In order to tell the browser to send a <code>POST</code> request instead of a <code>GET</code>
-request we add this as an attribute to the <code>&lt;form&gt;</code> tag like so:</p>
-<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">value=</span><span class="s">"&lt;%= @name %&gt;"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/form&gt;</span>
-</code></pre>
-
-<p>When you reload the page, and try to submit the form again, you&rsquo;ll get
-Sinatra&rsquo;s 404 (Not Found) page though: &ldquo;Sinatra doesn’t know this ditty.&rdquo;</p>
-
-<p>Of course, we do not have a route for <code>POST</code> requests, yet. So let&rsquo;s add
-one, and more the logic for storing the name to it:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
-  <span class="n">erb</span> <span class="ss">:monstas</span>
-<span class="k">end</span>
-
-<span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">])</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>Cool, our <code>get</code> route is now idempotent (it does not change any state), and we
-also have a <code>post</code> route for the same path, and we store the name if there is
-one. However, what should we now send back to the browser in response?</p>
-
-<p>For starters, we could just send a little confirmation:</p>
-<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">])</span>
-  <span class="s2">"Ok!"</span>
-<span class="k">end</span>
-</code></pre>
-
-<p><img src="/assets/images/storing_data_2-262afb82.png"></p>
-
-<p>Hmmmm. Ok, this isn&rsquo;t too bad, we could make this a proper HTML template.</p>
-
-<p>However, in today&rsquo;s web applications it is more common to redirect the browser
-to the page that displays the changed state: The web application would respond
-to the <code>POST</code> request by saying <em>&ldquo;Alright, I&rsquo;ve done this. Go here to check it
-out.&rdquo;</em></p>
-
-<p>The way of expressing this in terms of HTTP is by the way of returning the
-status code <code>303</code> (&ldquo;See Other&rdquo;), and adding a <code>location</code> header to the response
-that tells the browser where to go (what to <code>GET</code>) next.</p>
-
-<p>Sinatra lets us do this like so:</p>
-<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
-  <span class="n">redirect</span> <span class="s2">"/monstas"</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>The <code>redirect</code> method will make sure our application responds with the status
-code <code>303</code> and add a <code>location</code> header to the response with the value
-<code>http://localhost:4567/monstas</code> (since we have passed the path <code>/monstas</code>, but the
-<code>location</code> header needs a full URL).</p>
-
-<p>If you restart the server, go to <a href="http://localhost:4567/monstas"><a href="http://localhost:4567/monstas">http://localhost:4567/monstas</a></a>,
-and submit the form you&rsquo;ll see that your browser will be redirected, and make
-a new <code>GET</code> request to the same URL.</p>
-
-<p>So this is pretty cool. We now have two routes. One for displaying (<code>GET</code>ing)
-the current state of our application, and one for storing (<code>POST</code>ing) new data.</p>
-
-<p>Awesome!</p>
 
         <nav class="page-nav"><a class="prev" href="/forms.html">
   Previous

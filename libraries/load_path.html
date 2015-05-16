@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Preface | Webapps for Beginners</title>
+    <title>Ruby Load Path | Webapps for Beginners</title>
 
-    <link href="assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/index.html">
+    <nav class="page-nav"><a class="prev" href="/libraries/bundler.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/libraries.html">
+    <nav class="page-nav"><a class="next" href="/html.html">
   Next
 </a></nav>
 
@@ -32,12 +32,12 @@
       Webapps For Beginners
     </a>
   </li>
-  <li class="active">
+  <li>
     <a href="/preface.html">
       Preface
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/libraries.html">
       Using Libraries
     </a>
@@ -57,7 +57,7 @@
           Bundler
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/libraries/load_path.html">
           Ruby Load Path
         </a>
@@ -160,14 +160,38 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Preface</h1>
+        <h1>Ruby Load Path</h1>
 
-<p>Read this book at your own pace, and do exercises at your own pace.</p>
+<p>Ruby is software, and software stores things somewhere on your file system.
+In order to define places on your computer, where interesting stuff is stored
+software often has the concept of a &ldquo;load path&rdquo;.</p>
 
-        <nav class="page-nav"><a class="prev" href="/index.html">
+<p>If you are using a Unix based operating system, such as Linux or Mac OSX you
+may have seen the environment variable <code>$PATH</code> in installation instructions.
+This variable defines all the directories where executable files are stored.</p>
+
+<p>Ruby has a load path, too. Inside your Ruby program you can print it out using:</p>
+<pre class="highlight ruby"><code><span class="nb">puts</span> <span class="vg">$LOAD_PATH</span>
+</code></pre>
+
+<p>This will print out the array that is defined as the <code>$LOAD_PATH</code> when Ruby
+starts your program. <code>puts</code> is smart enough to put each string in that array
+on a separate line.</p>
+
+<p>Each of these lines represents a directory on your computer where Ruby files
+are stored. If you use <code>require</code> anywhere in your application (e.g. <code>ruby
+&quot;digest&quot;</code>) then Ruby will look for a Ruby file with the same name (e.g.
+<code>digest.rb</code>) in each of these directories. It will load the first file with
+this name that it can find.</p>
+
+<p>Would now be a good time to do a few exercises on
+<a href="/exercises/rubygems.html">Rubygems</a> and
+<a href="/exercises/bundler.html">Bundler</a>?</p>
+
+        <nav class="page-nav"><a class="prev" href="/libraries/bundler.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/libraries.html">
+        <nav class="page-nav"><a class="next" href="/html.html">
   Next
 </a></nav>
       </article>
@@ -184,7 +208,7 @@
       </ul>
     </footer>
 
-    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
-    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
   </body>
 </html>
