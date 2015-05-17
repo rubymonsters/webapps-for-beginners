@@ -158,6 +158,14 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/exercises/using_rubygems.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/exercises/using_bundler.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/</loc>
       <priority>0.5</priority>
     </url>
