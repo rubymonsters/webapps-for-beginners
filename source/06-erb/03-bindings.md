@@ -22,17 +22,17 @@ Hmmmmm, let's re-read that, and think about it.
 
 First of all, <a href="http://ruby-doc.org/core-2.2.2/Kernel.html">Kernel</a>
 is something we have never mentioned so far. It is a
-<a href="/bonus_2/modules">Ruby module</a> that is included to the class
-`Object`. That means that, whenever you create any object, this module, and
-thus all of its methods will be included.  Since Ruby's top level scope also is
-an object, `binding` is defined there, too. This also is, by the way, the
-secret reason to why methods like `p`, `puts`, and so on are available
-everywhere: they're defined in `Kernel`.
+<a href="http://ruby-for-beginners.rubymonstas.org/bonus_2/modules">Ruby module</a>
+that is included to the class `Object`. That means that, whenever you create
+any object, this module, and thus all of its methods will be included.  Since
+Ruby's top level scope also is an object, `binding` is defined there, too. This
+also is, by the way, the secret reason to why methods like `p`, `puts`, and so
+on are available everywhere: they're defined in `Kernel`.
 
 Now, what's this execution context the documentation is talking about?
 
-Remember when we talked about <a href="/methods/scopes.html">scopes</a> in the
-context of methods? That's the same as the Ruby documentation means by
+Remember when we talked about <a href="http://ruby-for-beginners.rubymonstas.org/methods/scopes.html">scopes</a>
+in the context of methods? That's the same as the Ruby documentation means by
 "execution context".  It is that empty room or space that Ruby enters whenever
 it starts your program, or enters a method. If you define a *local* variable,
 then this variable will be visible within this scope, or room, or "execution

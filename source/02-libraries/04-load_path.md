@@ -60,5 +60,5 @@ on my computer, Ruby will check all these directories for a file
 `something.rb`.
 
 Would now be a good time to do a few exercises on
-<a href="/exercises/rubygems.html">Rubygems</a> and
-<a href="/exercises/bundler.html">Bundler</a>?
+<a href="/exercises/using_rubygems.html">Rubygems</a> and
+<a href="/exercises/using_bundler.html">Bundler</a>?

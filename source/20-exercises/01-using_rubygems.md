@@ -90,9 +90,9 @@ for the key `"subject"` stored on that hash.
 So this prints out `"Hi there, Ruby Monstas!"`.
 
 By the way, if you've read the bonus chapter on
-<a href="/bonus_1/alternative-syntax.html">Alternative Syntax</a> then you may
-have notices that we also have a perfect example of a usecase for the `%(..)`
-string syntax here:
+<a href="http://ruby-for-beginners.rubymonstas.org/bonus_1/alternative-syntax.html">Alternative Syntax</a>
+then you may have notices that we also have a perfect example of a usecase for
+the `%(..)` string syntax here:
 
 JSON data will often contain double quotes (for any string), and often contain
 single quotes. Since JSON data, as a whole, needs to be a plain Ruby string

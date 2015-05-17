@@ -57,7 +57,7 @@ So there are 4 groups of routes:
 * `delete` is used to delete a member
 
 The two pairs `new` and `edit` as well as `edit` and `update` follow the same
-pattern that we've discussed in the chapter about <a href="/bonus_2/validations">Validations</a>:
+pattern that we've discussed in the chapter about <a href="/validations">Validations</a>:
 
 * The first request `GET`s an HTML form for the user to enter some data.
 * This form is then submitted as another request, using `POST` or `PUT`, to the second route.
