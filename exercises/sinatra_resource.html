@@ -10,18 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Template files | Webapps for Beginners</title>
+    <title>Sinatra Resource | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/sinatra/layouts.html">
+    <nav class="page-nav"><a class="prev" href="/exercises/mailbox_sinatra.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/sinatra/instance_variables.html">
-  Next
-</a></nav>
+    <nav class="page-nav"></nav>
 
     <div>
       <nav class="toc">
@@ -118,7 +116,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/sinatra.html">
       Sinatra
     </a>
@@ -158,7 +156,7 @@
           Layouts
         </a>
       </li>
-      <li class="active">
+      <li>
         <a href="/sinatra/template_files.html">
           Template files
         </a>
@@ -251,7 +249,7 @@
       Resources
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -276,7 +274,7 @@
           Mailbox via Sinatra
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/exercises/sinatra_resource.html">
           Sinatra Resource
         </a>
@@ -287,63 +285,84 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Template files</h1>
+        <h1>Sinatra Resource</h1>
 
-<p>So far we&rsquo;ve defined our templates as strings right inside our route. That
-worked well because our templates were ridiculously small. Of course, any
-real application will have much bigger templates. Managing these inside
-our routes would get pretty messy pretty quickly.</p>
+<p>This is a work in progress.</p>
 
-<p>It is, therefore, better to store them in separate files. And again, Sinatra
-has built-in support for that: when we call the method <code>erb</code> with a symbol
-instead of a string, then Sinatra assumes this is part of a filename, and
-it will look for a template file in a directory <code>views</code>.</p>
+<p>We&rsquo;ll need to explain how to make fake <code>PUT</code> and <code>DELETE</code> requests in a
+subchapter on resources.</p>
 
-<p>Let&rsquo;s create a new directory <code>views</code>, and add a file <code>hello.erb</code>, containing
-our template:</p>
-<pre class="highlight erb"><code><span class="nt">&lt;h1&gt;</span>Hello <span class="cp">&lt;%=</span> <span class="nb">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h1&gt;</span>
-</code></pre>
+<p>After reading the chapter about <a href="/resources.html">Resources</a> your
+objective is to implement a resource <code>members</code> in Sinatra.</p>
 
-<p>Also, add a file <code>layout.erb</code> with our layout template:</p>
-<pre class="highlight erb"><code><span class="nt">&lt;html&gt;&lt;body&gt;</span><span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span><span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
-</code></pre>
+<h2>Exercise 5.1</h2>
 
-<p>Now we are ready to change our route as follows:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
-  <span class="n">erb</span> <span class="ss">:hello</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">},</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="ss">:layout</span> <span class="p">}</span>
-<span class="k">end</span>
-</code></pre>
+<p>Start by writing a Sinatra application that has an <code>index</code> and a <code>show</code> route:</p>
 
-<p>Restart your application, and reload the page. You should see the same result.</p>
+<ol>
+<li>On <code>GET</code> to <code>/members</code> display a list of member names, which are stored
+in a file <code>members.txt</code>. The erb template name is <code>index.erb</code>.</li>
+<li>Each of the member names is a link that points to <code>/members/:name</code> (<code>:name</code>
+being the given member&rsquo;s name)</li>
+<li>On <code>GET</code> to <code>/members/:name</code> display a details page for this member
+(i.e. just show their name), and a link &ldquo;All Members&rdquo; that goes back to
+<code>/members</code>. The erb template name is <code>show.erb</code>.</li>
+</ol>
 
-<p>But our code looks much better this way, doesn&rsquo;t it?</p>
+<h2>Exercise 5.2</h2>
 
-<p>Interestingly, we don&rsquo;t even need the name the layout. Sinatra looks for
-this filename by default (we could specify a different name though, in case
-we need different layout templates in different contexts):</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
-  <span class="n">erb</span> <span class="ss">:hello</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">},</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">}</span>
-<span class="k">end</span>
-</code></pre>
+<p>Now add the <code>new</code> and <code>create</code> routes:</p>
 
-<p>And finally, we can also even totally omit the option, because Sinatra
-assumes we want a layout and finds one in the <code>views</code> directory:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
-  <span class="n">erb</span> <span class="ss">:hello</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">}</span> <span class="p">}</span>
-<span class="k">end</span>
-</code></pre>
+<ol>
+<li>Add a link &ldquo;New member&rdquo; to the <code>index.erb</code> view, and point it to
+<code>/members/new</code>.</li>
+<li>On <code>GET</code> to <code>/members/new</code> display a form that <code>POST</code>s to <code>/members</code>.
+This form has one input element called <code>name</code> and a submit button. Also,
+add a link &ldquo;Back&rdquo; that goes to <code>/members</code>.</li>
+<li>On <code>POST</code> to <code>/members</code> validate that the given name is not empty, and
+not already in our list. If the validation succeeds, redirect the user
+to <code>/members/:name</code> and pass a success message by using the session.
+If the validation fails re-render the form and display an error message.</li>
+<li>Make sure the success message is displayed in the <code>show.erb</code> view.</li>
+</ol>
 
-<p>If we don&rsquo;t want a layout, for some reason, then we can pass <code>:layout =&gt; false</code>
-instead.</p>
+<h2>Exercise 5.3</h2>
 
-<p>Neat.</p>
+<p>Next add the <code>edit</code> and <code>update</code> routes:</p>
 
-        <nav class="page-nav"><a class="prev" href="/sinatra/layouts.html">
+<ol>
+<li>In the <code>index.erb</code> view add a link &ldquo;Edit&rdquo; next to each of the listed names,
+and point it to <code>/members/:name/edit</code>.</li>
+<li>Also, add the same link to the <code>show.erb</code> view.</li>
+<li>On <code>GET</code> to <code>/members/:name/edit</code> display a form that <code>PUT</code>s to
+<code>/members/:name</code>. This form has the same elements as the form on <code>new.erb</code>.
+Also, add a link &ldquo;Back&rdquo; that goes to <code>/members</code>.</li>
+<li>On <code>PUT</code> to <code>/members/:name</code> validate the given name. If the validation
+succeeds redirect the user to <code>/members/:name</code> and pass a success message
+by using the session. If the validation fails re-render the form and display
+an error message.</li>
+</ol>
+
+<h2>Exercise 5.4</h2>
+
+<p>Finally add the <code>delete</code> and <code>destroy</code> routes:</p>
+
+<ol>
+<li>In the index view add a link &ldquo;Delete&rdquo; next to each of the &ldquo;Edit&rdquo; links,
+and point it to <code>/members/:name/delete</code>.</li>
+<li>Also, add the same link to the <code>show.erb</code> view.</li>
+<li>On <code>GET</code> to <code>/members/:name/delete</code> prompt the user for confirmation:
+&ldquo;Do you really want to remove the member [name]?&rdquo;, and add a form that sends
+a <code>DELETE</code> request to <code>/members/:name</code>, with a button &ldquo;Remove Member&rdquo;.
+Also add a link &ldquo;Back&rdquo; that goes to `/members/.</li>
+<li>On <code>DELETE</code> to <code>/members/:name</code> remove the name from the file <code>names.txt</code>,
+and redirect to <code>/members</code></li>
+</ol>
+
+        <nav class="page-nav"><a class="prev" href="/exercises/mailbox_sinatra.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/sinatra/instance_variables.html">
-  Next
-</a></nav>
+        <nav class="page-nav"></nav>
       </article>
     </div>
 

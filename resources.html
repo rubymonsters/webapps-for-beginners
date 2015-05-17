@@ -266,6 +266,21 @@
           Using Bundler
         </a>
       </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
     </ul>
   </li>
 </ul>
@@ -303,6 +318,12 @@ that, which we are now going to re-implement in Sinatra. This way you&rsquo;ll h
 great understanding of what a &ldquo;resource&rdquo; is in Rails once we get started with
 that framework.</p>
 
+<p>Also, for our purposes we&rsquo;ll deviate from Rails a little bit, and add an 8th
+route, which displays a page that asks for a confirmation to delete. In Rails
+this is solved with a little Javascript box that pops up and asks this
+question.  However, we don&rsquo;t want to get into Javascript too much just yet, and
+adding this route is a just as valid solution, too.</p>
+
 <p>Here&rsquo;s how these routes look like. We&rsquo;ll use the path <code>/members</code> in our
 example.</p>
 
@@ -313,6 +334,7 @@ example.</p>
 <li><code>POST /members</code> creates a new member from that form</li>
 <li><code>GET</code>/members/:id/edit` displays a form for editing a member&rsquo;s details</li>
 <li><code>PUT /members/:id</code> updates a member&rsquo;s details from that form</li>
+<li><code>GET /members/:id/delete</code> asks for a confirmation to delete the member</li>
 <li><code>DELETE /members/:id</code> deletes the member</li>
 </ul>
 
@@ -364,6 +386,12 @@ uses for them. We&rsquo;ll use these names for our templates, in case we need a 
 <td>Update that member</td>
 </tr>
 <tr>
+<td>delete</td>
+<td>GET</td>
+<td>/members/:id/delete</td>
+<td>Ask for a confirmation to delete</td>
+</tr>
+<tr>
 <td>destroy</td>
 <td>DELETE</td>
 <td>/members/:id</td>
@@ -377,7 +405,7 @@ uses for them. We&rsquo;ll use these names for our templates, in case we need a 
 <li><code>index</code> and <code>show</code> are used to display data.</li>
 <li><code>new</code> and <code>create</code> are used to create a new member.</li>
 <li><code>edit</code> and <code>update</code> are used to update a member.</li>
-<li><code>delete</code> is used to delete a member</li>
+<li><code>delete</code> and <code>destroy</code> are used to delete a member</li>
 </ul>
 
 <p>The two pairs <code>new</code> and <code>edit</code> as well as <code>edit</code> and <code>update</code> follow the same
@@ -385,11 +413,16 @@ pattern that we&rsquo;ve discussed in the chapter about <a href="/validations">V
 
 <ul>
 <li>The first request <code>GET</code>s an HTML form for the user to enter some data.</li>
-<li>This form is then submitted as another request, using <code>POST</code> or <code>PUT</code>, to the second route.</li>
+<li>This form is then submitted as another request, using <code>POST</code> or <code>PUT</code>, to the
+second route.</li>
 <li>The second route validates the data.</li>
-<li>If the data is valid it creates/updates the member, and redirects to the show view, passing a confirmation message.</li>
+<li>If the data is valid it creates/updates the member, and redirects to the show
+view, passing a confirmation message.</li>
 <li>If the data is not valid it re-renders the form with an error message.</li>
 </ul>
+
+<p>For the last pair there&rsquo;s no validation, of course. Instead we just delete the
+object and redirect to the index view.</p>
 
         <nav class="page-nav"><a class="prev" href="/validations.html">
   Previous
