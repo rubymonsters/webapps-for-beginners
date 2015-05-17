@@ -282,17 +282,17 @@ passed [around].&rdquo;</em></p>
 
 <p>First of all, <a href="http://ruby-doc.org/core-2.2.2/Kernel.html">Kernel</a>
 is something we have never mentioned so far. It is a
-<a href="/bonus_2/modules">Ruby module</a> that is included to the class
-<code>Object</code>. That means that, whenever you create any object, this module, and
-thus all of its methods will be included.  Since Ruby&rsquo;s top level scope also is
-an object, <code>binding</code> is defined there, too. This also is, by the way, the
-secret reason to why methods like <code>p</code>, <code>puts</code>, and so on are available
-everywhere: they&rsquo;re defined in <code>Kernel</code>.</p>
+<a href="http://ruby-for-beginners.rubymonstas.org/bonus_2/modules">Ruby module</a>
+that is included to the class <code>Object</code>. That means that, whenever you create
+any object, this module, and thus all of its methods will be included.  Since
+Ruby&rsquo;s top level scope also is an object, <code>binding</code> is defined there, too. This
+also is, by the way, the secret reason to why methods like <code>p</code>, <code>puts</code>, and so
+on are available everywhere: they&rsquo;re defined in <code>Kernel</code>.</p>
 
 <p>Now, what&rsquo;s this execution context the documentation is talking about?</p>
 
-<p>Remember when we talked about <a href="/methods/scopes.html">scopes</a> in the
-context of methods? That&rsquo;s the same as the Ruby documentation means by
+<p>Remember when we talked about <a href="http://ruby-for-beginners.rubymonstas.org/methods/scopes.html">scopes</a>
+in the context of methods? That&rsquo;s the same as the Ruby documentation means by
 &ldquo;execution context&rdquo;.  It is that empty room or space that Ruby enters whenever
 it starts your program, or enters a method. If you define a <em>local</em> variable,
 then this variable will be visible within this scope, or room, or &ldquo;execution
