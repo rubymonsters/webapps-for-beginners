@@ -27,6 +27,12 @@ that, which we are now going to re-implement in Sinatra. This way you'll have a
 great understanding of what a "resource" is in Rails once we get started with
 that framework.
 
+Also, for our purposes we'll deviate from Rails a little bit, and add an 8th
+route, which displays a page that asks for a confirmation to delete. In Rails
+this is solved with a little Javascript box that pops up and asks this
+question.  However, we don't want to get into Javascript too much just yet, and
+adding this route is a just as valid solution, too.
+
 Here's how these routes look like. We'll use the path `/members` in our
 example.
 
@@ -36,37 +42,42 @@ example.
 * `POST /members` creates a new member from that form
 * `GET `/members/:id/edit` displays a form for editing a member's details
 * `PUT /members/:id` updates a member's details from that form
+* `GET /members/:id/delete` asks for a confirmation to delete the member
 * `DELETE /members/:id` deletes the member
 
 Here's the same information as a table. Note that the names are the ones that Rails
 uses for them. We'll use these names for our templates, in case we need a template.
 
 
-| Name    | Method | Path              | Function                            |
-| ------- | ------ | ----------------- | ----------------------------------- |
-| index   | GET    | /members          | Display all members                 |
-| show    | GET    | /members/:id      | Display a single member             |
-| new     | GET    | /members/new      | Display a form for a new member     |
-| create  | POST   | /members          | Create that new member              |
-| edit    | GET    | /members/:id/edit | Display a form for editing a member |
-| update  | PUT    | /members/:id      | Update that member                  |
-| destroy | DELETE | /members/:id      | Delete a member                     |
+| Name    | Method | Path                | Function                            |
+| ------- | ------ | ------------------- | ----------------------------------- |
+| index   | GET    | /members            | Display all members                 |
+| show    | GET    | /members/:id        | Display a single member             |
+| new     | GET    | /members/new        | Display a form for a new member     |
+| create  | POST   | /members            | Create that new member              |
+| edit    | GET    | /members/:id/edit   | Display a form for editing a member |
+| update  | PUT    | /members/:id        | Update that member                  |
+| delete  | GET    | /members/:id/delete | Ask for a confirmation to delete    |
+| destroy | DELETE | /members/:id        | Delete a member                     |
 
 So there are 4 groups of routes:
 
 * `index` and `show` are used to display data.
 * `new` and `create` are used to create a new member.
 * `edit` and `update` are used to update a member.
-* `delete` is used to delete a member
+* `delete` and `destroy` are used to delete a member
 
 The two pairs `new` and `edit` as well as `edit` and `update` follow the same
 pattern that we've discussed in the chapter about <a href="/validations">Validations</a>:
 
 * The first request `GET`s an HTML form for the user to enter some data.
-* This form is then submitted as another request, using `POST` or `PUT`, to the second route.
+* This form is then submitted as another request, using `POST` or `PUT`, to the
+  second route.
 * The second route validates the data.
-* If the data is valid it creates/updates the member, and redirects to the show view, passing a confirmation message.
+* If the data is valid it creates/updates the member, and redirects to the show
+  view, passing a confirmation message.
 * If the data is not valid it re-renders the form with an error message.
 
-
+For the last pair there's no validation, of course. Instead we just delete the
+object and redirect to the index view.
 

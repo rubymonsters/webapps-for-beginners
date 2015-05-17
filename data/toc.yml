@@ -51,4 +51,6 @@
   children:
     - using_rubygems
     - using_bundler
-
+    - mailbox_erb
+    - mailbox_sinatra
+    - sinatra_resource
