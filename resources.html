@@ -19,7 +19,7 @@
     <nav class="page-nav"><a class="prev" href="/validations.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/exercises.html">
+    <nav class="page-nav"><a class="next" href="/resources/groups_routes.html">
   Next
 </a></nav>
 
@@ -246,10 +246,22 @@
       Validations
     </a>
   </li>
-  <li class="active">
+  <li class="active directory expanded">
     <a href="/resources.html">
       Resources
     </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/exercises.html">
@@ -299,135 +311,10 @@ other applications, and generally a great practice.</p>
 
 <p>Let&rsquo;s have a look at an example.</p>
 
-<p>Imagine we are building an application that allows managing the members of our
-study group. There&rsquo;s a way to</p>
-
-<ul>
-<li>list all of them</li>
-<li>look at a member&rsquo;s details</li>
-<li>add new members</li>
-<li>update a member&rsquo;s details</li>
-<li>remove members</li>
-</ul>
-
-<p>That&rsquo;s exactly what a <em>lot</em> of web applications do, except that you might be
-managing things other than members.</p>
-
-<p>Because it&rsquo;s such a common scheme, Rails has added a first class concept for
-that, which we are now going to re-implement in Sinatra. This way you&rsquo;ll have a
-great understanding of what a &ldquo;resource&rdquo; is in Rails once we get started with
-that framework.</p>
-
-<p>Also, for our purposes we&rsquo;ll deviate from Rails a little bit, and add an 8th
-route, which displays a page that asks for a confirmation to delete. In Rails
-this is solved with a little Javascript box that pops up and asks this
-question.  However, we don&rsquo;t want to get into Javascript too much just yet, and
-adding this route is a just as valid solution, too.</p>
-
-<p>Here&rsquo;s how these routes look like. We&rsquo;ll use the path <code>/members</code> in our
-example.</p>
-
-<ul>
-<li><code>GET /members</code> displays a list of all members</li>
-<li><code>GET /members/:id</code> displays the details for a single member</li>
-<li><code>GET /members/new</code> displays a form for creating a new member</li>
-<li><code>POST /members</code> creates a new member from that form</li>
-<li><code>GET</code>/members/:id/edit` displays a form for editing a member&rsquo;s details</li>
-<li><code>PUT /members/:id</code> updates a member&rsquo;s details from that form</li>
-<li><code>GET /members/:id/delete</code> asks for a confirmation to delete the member</li>
-<li><code>DELETE /members/:id</code> deletes the member</li>
-</ul>
-
-<p>Here&rsquo;s the same information as a table. Note that the names are the ones that Rails
-uses for them. We&rsquo;ll use these names for our templates, in case we need a template.</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Method</th>
-<th>Path</th>
-<th>Function</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>index</td>
-<td>GET</td>
-<td>/members</td>
-<td>Display all members</td>
-</tr>
-<tr>
-<td>show</td>
-<td>GET</td>
-<td>/members/:id</td>
-<td>Display a single member</td>
-</tr>
-<tr>
-<td>new</td>
-<td>GET</td>
-<td>/members/new</td>
-<td>Display a form for a new member</td>
-</tr>
-<tr>
-<td>create</td>
-<td>POST</td>
-<td>/members</td>
-<td>Create that new member</td>
-</tr>
-<tr>
-<td>edit</td>
-<td>GET</td>
-<td>/members/:id/edit</td>
-<td>Display a form for editing a member</td>
-</tr>
-<tr>
-<td>update</td>
-<td>PUT</td>
-<td>/members/:id</td>
-<td>Update that member</td>
-</tr>
-<tr>
-<td>delete</td>
-<td>GET</td>
-<td>/members/:id/delete</td>
-<td>Ask for a confirmation to delete</td>
-</tr>
-<tr>
-<td>destroy</td>
-<td>DELETE</td>
-<td>/members/:id</td>
-<td>Delete a member</td>
-</tr>
-</tbody></table>
-
-<p>So there are 4 groups of routes:</p>
-
-<ul>
-<li><code>index</code> and <code>show</code> are used to display data.</li>
-<li><code>new</code> and <code>create</code> are used to create a new member.</li>
-<li><code>edit</code> and <code>update</code> are used to update a member.</li>
-<li><code>delete</code> and <code>destroy</code> are used to delete a member</li>
-</ul>
-
-<p>The two pairs <code>new</code> and <code>edit</code> as well as <code>edit</code> and <code>update</code> follow the same
-pattern that we&rsquo;ve discussed in the chapter about <a href="/validations">Validations</a>:</p>
-
-<ul>
-<li>The first request <code>GET</code>s an HTML form for the user to enter some data.</li>
-<li>This form is then submitted as another request, using <code>POST</code> or <code>PUT</code>, to the
-second route.</li>
-<li>The second route validates the data.</li>
-<li>If the data is valid it creates/updates the member, and redirects to the show
-view, passing a confirmation message.</li>
-<li>If the data is not valid it re-renders the form with an error message.</li>
-</ul>
-
-<p>For the last pair there&rsquo;s no validation, of course. Instead we just delete the
-object and redirect to the index view.</p>
-
         <nav class="page-nav"><a class="prev" href="/validations.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/exercises.html">
+        <nav class="page-nav"><a class="next" href="/resources/groups_routes.html">
   Next
 </a></nav>
       </article>

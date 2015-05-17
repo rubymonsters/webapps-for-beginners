@@ -162,6 +162,14 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/resources/groups_routes.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/resources/fake_methods.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/resources.html</loc>
       <priority>0.5</priority>
     </url>

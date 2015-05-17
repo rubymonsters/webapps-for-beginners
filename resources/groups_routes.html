@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Listing all names | Webapps for Beginners</title>
+    <title>Groups of routes | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/storing_data/storing_name.html">
+    <nav class="page-nav"><a class="prev" href="/resources.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/storing_data/using_post.html">
+    <nav class="page-nav"><a class="next" href="/resources/fake_methods.html">
   Next
 </a></nav>
 
@@ -192,7 +192,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/storing_data.html">
       Storing data
     </a>
@@ -207,7 +207,7 @@
           Storing the name
         </a>
       </li>
-      <li class="active">
+      <li>
         <a href="/storing_data/listing_names.html">
           Listing all names
         </a>
@@ -246,12 +246,12 @@
       Validations
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/resources.html">
       Resources
     </a>
     <ul>
-      <li>
+      <li class="active">
         <a href="/resources/groups_routes.html">
           Groups of routes
         </a>
@@ -299,68 +299,142 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Listing all names</h1>
+        <h1>Groups of routes</h1>
 
-<p>Let&rsquo;s make it so that we can look at the list of the names in the browser
-though. This is a web application, right.</p>
+<p>Imagine we are building an application that allows managing the members of our
+study group. There&rsquo;s a way to</p>
 
-<p>For this we&rsquo;ll need to read the names from the file. Again, if you ask Google
-for &ldquo;Ruby read file&rdquo; you&rsquo;ll find it&rsquo;s as simple as this:</p>
-<pre class="highlight ruby"><code><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-</code></pre>
+<ul>
+<li>list all of them</li>
+<li>look at a member&rsquo;s details</li>
+<li>add new members</li>
+<li>update a member&rsquo;s details</li>
+<li>remove members</li>
+</ul>
 
-<p>This returns a single, long string, which represents the content of the entire
-file. Because we store every name on a new line we can split this string with
-the newline character <code>&quot;\n&quot;</code> in order to get our names as an array:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre>
+<p>That&rsquo;s exactly what a <em>lot</em> of web applications do, with maybe certain
+variations.</p>
 
-<p>However, this would break if there&rsquo;s no file with this name, yet. So let&rsquo;s
-a little safeguard, and return an empty array if the file does not exist:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
-  <span class="k">return</span> <span class="p">[]</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">)</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre>
+<p>Because it&rsquo;s such a common scheme, Rails has added a first class concept for
+that, which we are going to re-implement in Sinatra. This way you&rsquo;ll have a
+great understanding of what a &ldquo;resource&rdquo; is in Rails once we get started with
+that framework.</p>
 
-<p>Does this make sense? If the file does not exist we return an empty array <code>[]</code>.
-If it exists we read it, and split the content into lines.</p>
+<p>Also, for our purposes we&rsquo;ll deviate from Rails a little bit, and add an 8th
+route, which displays a page that asks for a confirmation to delete. In Rails
+this is solved with a little Javascript box that pops up and asks this
+question.  However, we don&rsquo;t want to get into Javascript too much just yet, and
+adding this route is a just as valid solution, too.</p>
 
-<p>Also, let&rsquo;s store the names on an instance variable in our route, so we can
-then use it in the template later:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
-  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
-  <span class="n">erb</span> <span class="ss">:hello</span>
-<span class="k">end</span>
-</code></pre>
+<p>Here&rsquo;s how these routes look like. We&rsquo;ll use the path <code>/members</code> in our
+example.</p>
 
-<p>Now we can output the names as an unordered list (<code>&lt;ul&gt;</code>) in our <code>hello.erb</code>.</p>
+<ul>
+<li><code>GET /members</code> displays a list of all members</li>
+<li><code>GET /members/:id</code> displays the details for a single member</li>
+<li><code>GET /members/new</code> displays a form for creating a new member</li>
+<li><code>POST /members</code> creates a new member from that form</li>
+<li><code>GET</code>/members/:id/edit` displays a form for editing a member&rsquo;s details</li>
+<li><code>PUT /members/:id</code> updates a member&rsquo;s details from that form</li>
+<li><code>GET /members/:id/delete</code> asks for a confirmation to delete the member</li>
+<li><code>DELETE /members/:id</code> deletes the member</li>
+</ul>
 
-<p>So let&rsquo;s replace this (we now want to display the full list):</p>
-<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
-  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
-<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-</code></pre>
+<p>Here&rsquo;s the same information as a table. Note that the names are the ones that Rails
+uses for them. We&rsquo;ll use these names for our templates, in case we need a template.</p>
 
-<p>With this:</p>
-<pre class="highlight erb"><code><span class="nt">&lt;ul&gt;</span>
-  <span class="cp">&lt;%</span> <span class="vi">@names</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="cp">%&gt;</span>
-    <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="nb">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
-  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-<span class="nt">&lt;ul&gt;</span>
-</code></pre>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Method</th>
+<th>Path</th>
+<th>Function</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>index</td>
+<td>GET</td>
+<td>/members</td>
+<td>Display all members</td>
+</tr>
+<tr>
+<td>show</td>
+<td>GET</td>
+<td>/members/:id</td>
+<td>Display a single member</td>
+</tr>
+<tr>
+<td>new</td>
+<td>GET</td>
+<td>/members/new</td>
+<td>Display a form for a new member</td>
+</tr>
+<tr>
+<td>create</td>
+<td>POST</td>
+<td>/members</td>
+<td>Create that new member</td>
+</tr>
+<tr>
+<td>edit</td>
+<td>GET</td>
+<td>/members/:id/edit</td>
+<td>Display a form for editing a member</td>
+</tr>
+<tr>
+<td>update</td>
+<td>PUT</td>
+<td>/members/:id</td>
+<td>Update that member</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>GET</td>
+<td>/members/:id/delete</td>
+<td>Ask for a confirmation to delete</td>
+</tr>
+<tr>
+<td>destroy</td>
+<td>DELETE</td>
+<td>/members/:id</td>
+<td>Delete a member</td>
+</tr>
+</tbody></table>
 
-<p><img src="/assets/images/storing_data_1-a05fb498.png"></p>
+<p>So there are 4 groups of routes:</p>
 
-<p>Wheeeee! Pretty cool.</p>
+<ul>
+<li><code>index</code> and <code>show</code> are used to display data.</li>
+<li><code>new</code> and <code>create</code> are used to create a new member.</li>
+<li><code>edit</code> and <code>update</code> are used to update a member.</li>
+<li><code>delete</code> and <code>destroy</code> are used to delete a member</li>
+</ul>
 
-        <nav class="page-nav"><a class="prev" href="/storing_data/storing_name.html">
+<p>The two pairs <code>new</code> and <code>edit</code> as well as <code>edit</code> and <code>update</code> follow the same
+pattern that we&rsquo;ve discussed in the chapter about <a href="/validations">Validations</a>:</p>
+
+<ul>
+<li>The first request <code>GET</code>s an HTML form for the user to enter some data.</li>
+<li>This form is then submitted as another request, using <code>POST</code> or <code>PUT</code>, to the
+second route.</li>
+<li>The second route validates the data.</li>
+<li>If the data is valid it creates/updates the member, and redirects to the show
+view, passing a confirmation message.</li>
+<li>If the data is not valid it re-renders the form with an error message.</li>
+</ul>
+
+<p>For the last pair there&rsquo;s no validation, of course. Instead we just delete the
+object and redirect to the index view.</p>
+
+<p>However there&rsquo;s a problem with all this:</p>
+
+<p>Today&rsquo;s browsers still do not allow sending HTTP requests using any other verb
+than <code>GET</code> and <code>POST</code>.</p>
+
+        <nav class="page-nav"><a class="prev" href="/resources.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/storing_data/using_post.html">
+        <nav class="page-nav"><a class="next" href="/resources/fake_methods.html">
   Next
 </a></nav>
       </article>

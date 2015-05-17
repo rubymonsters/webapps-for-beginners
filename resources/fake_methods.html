@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Listing all names | Webapps for Beginners</title>
+    <title>Faking HTTP verbs | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/storing_data/storing_name.html">
+    <nav class="page-nav"><a class="prev" href="/resources/groups_routes.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/storing_data/using_post.html">
+    <nav class="page-nav"><a class="next" href="/exercises.html">
   Next
 </a></nav>
 
@@ -192,7 +192,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/storing_data.html">
       Storing data
     </a>
@@ -207,7 +207,7 @@
           Storing the name
         </a>
       </li>
-      <li class="active">
+      <li>
         <a href="/storing_data/listing_names.html">
           Listing all names
         </a>
@@ -246,7 +246,7 @@
       Validations
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/resources.html">
       Resources
     </a>
@@ -256,7 +256,7 @@
           Groups of routes
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/resources/fake_methods.html">
           Faking HTTP verbs
         </a>
@@ -299,68 +299,59 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Listing all names</h1>
+        <h1>Faking HTTP verbs</h1>
 
-<p>Let&rsquo;s make it so that we can look at the list of the names in the browser
-though. This is a web application, right.</p>
-
-<p>For this we&rsquo;ll need to read the names from the file. Again, if you ask Google
-for &ldquo;Ruby read file&rdquo; you&rsquo;ll find it&rsquo;s as simple as this:</p>
-<pre class="highlight ruby"><code><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<p>Remember how we said that in an HTML form we can specify the HTTP verb that
+is supposed to be used for making the request like so:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+  ...
+<span class="nt">&lt;/form&gt;</span>
 </code></pre>
 
-<p>This returns a single, long string, which represents the content of the entire
-file. Because we store every name on a new line we can split this string with
-the newline character <code>&quot;\n&quot;</code> in order to get our names as an array:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
+<p>This makes the form <code>POST</code> to <code>/monstas</code>, instead of the default <code>GET</code>.</p>
+
+<p>Now, it&rsquo;s probably fair to say that every sane person in the world would expect
+that it is also possible to make that a <code>PUT</code>, or <code>DELETE</code> request. Like so:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span> <span class="na">method=</span><span class="s">"put"</span><span class="nt">&gt;</span>
+  ...
+<span class="nt">&lt;/form&gt;</span>
 </code></pre>
 
-<p>However, this would break if there&rsquo;s no file with this name, yet. So let&rsquo;s
-a little safeguard, and return an empty array if the file does not exist:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
-  <span class="k">return</span> <span class="p">[]</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">)</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
+<p>Except that &hellip; it&rsquo;s not. Today&rsquo;s browsers still do not allow sending HTTP
+requests using any other verb than <code>GET</code> and <code>POST</code>.</p>
+
+<p>The reasons for why that still is the case in 2015 are either fascinating or
+sad, depending how you look at it <a href=#footnote-1">[1]</a>
+But for now we&rsquo;ll need to accept and work around it.</p>
+
+<p>Sinatra (as well as Rails, and other frameworks) therefore support &ldquo;faking&rdquo;
+requests to look as if they were <code>PUT</code> or <code>DELETE</code> requests on the application
+side, even though in reality they&rsquo;re all <code>POST</code> requests.</p>
+
+<p>This works by adding a hidden form input tag to the form, like so:</p>
+<pre class="highlight html"><code><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"_method"</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">value=</span><span class="s">"put"</span> <span class="nt">/&gt;</span>
 </code></pre>
 
-<p>Does this make sense? If the file does not exist we return an empty array <code>[]</code>.
-If it exists we read it, and split the content into lines.</p>
+<p>A hidden input tag is just that, it is hidden, meaning that it is not displayed
+to the user. However, it is there, and it will be send to the application as
+part of the request just like any other input tag.</p>
 
-<p>Also, let&rsquo;s store the names on an instance variable in our route, so we can
-then use it in the template later:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
-  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
-  <span class="n">erb</span> <span class="ss">:hello</span>
-<span class="k">end</span>
-</code></pre>
+<p>Now, whenever Sinatra receives a <code>POST</code> request that has a parameter with the
+name <code>_method</code> it will treat this request as if it was a request with the HTTP
+method (verb) given by this parameter.</p>
 
-<p>Now we can output the names as an unordered list (<code>&lt;ul&gt;</code>) in our <code>hello.erb</code>.</p>
+<p>That means it will treat any <code>POST</code> request that has the parameter <code>_method</code>
+set to <code>put</code> as a <code>PUT</code> HTTP request: it will use a route that was defined with
+<code>put</code>.  Likewise, it will treat a <code>POST</code> requests that has the paramter set to
+<code>delete</code> as a <code>DELETE</code> HTTP request, and use the respective routes.</p>
 
-<p>So let&rsquo;s replace this (we now want to display the full list):</p>
-<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
-  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
-<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-</code></pre>
+<p><a name=footnote-1">[1]</a> You can read more about this, for example,
+<a href="http://programmers.stackexchange.com/questions/114156/why-are-there-are-no-put-and-delete-methods-on-html-forms">here</a>.</p>
 
-<p>With this:</p>
-<pre class="highlight erb"><code><span class="nt">&lt;ul&gt;</span>
-  <span class="cp">&lt;%</span> <span class="vi">@names</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="cp">%&gt;</span>
-    <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="nb">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
-  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-<span class="nt">&lt;ul&gt;</span>
-</code></pre>
-
-<p><img src="/assets/images/storing_data_1-a05fb498.png"></p>
-
-<p>Wheeeee! Pretty cool.</p>
-
-        <nav class="page-nav"><a class="prev" href="/storing_data/storing_name.html">
+        <nav class="page-nav"><a class="prev" href="/resources/groups_routes.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/storing_data/using_post.html">
+        <nav class="page-nav"><a class="next" href="/exercises.html">
   Next
 </a></nav>
       </article>

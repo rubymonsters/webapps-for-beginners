@@ -244,10 +244,22 @@
       Validations
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/resources.html">
       Resources
     </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory expanded">
     <a href="/exercises.html">
@@ -286,11 +298,6 @@
       <article>
         <nav class="menu"><a href="#"></a></nav>
         <h1>Sinatra Resource</h1>
-
-<p>This is a work in progress.</p>
-
-<p>We&rsquo;ll need to explain how to make fake <code>PUT</code> and <code>DELETE</code> requests in a
-subchapter on resources.</p>
 
 <p>After reading the chapter about <a href="/resources.html">Resources</a> your
 objective is to implement a resource <code>members</code> in Sinatra.</p>
@@ -358,6 +365,19 @@ Also add a link &ldquo;Back&rdquo; that goes to `/members/.</li>
 <li>On <code>DELETE</code> to <code>/members/:name</code> remove the name from the file <code>names.txt</code>,
 and redirect to <code>/members</code></li>
 </ol>
+
+<p class="hint">
+For the two forms on the <code>edit.erb</code> and <code>delete.erb</code>
+views you&rsquo;ll need to apply the trick from the
+<a href="/resources/fake_methods.html">Faking HTTP verbs</a> chapter.
+</p>
+
+<p class="hint">
+If you have a hard time figuring out why a certain request does not work as
+expected try reading the logs of your Sinatra application (in your terminal).
+If that still doesn&rsquo;t give you a good hint try inspecting the request in your
+browser&rsquo;s web inspector on the network tab.
+</p>
 
         <nav class="page-nav"><a class="prev" href="/exercises/mailbox_sinatra.html">
   Previous
