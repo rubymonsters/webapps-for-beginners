@@ -162,8 +162,8 @@ We can fix this by changing our view like so:
 
 Awesome.
 
-With this completed you have now walked through an important pattern, which
-also is used in Rails applications by default:
+With this completed you have now walked through an important pattern for web
+applications, which also is used in Rails applications by default:
 
 * There is an HTML form which is being retrieved via a `GET` request.
 * This form posts to another route, which validates the submitted data.

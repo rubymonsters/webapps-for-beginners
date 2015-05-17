@@ -41,7 +41,10 @@
     - listing_names
     - using_post
     - redirect
-- sessions
+- path: sessions
+  children:
+    - cookies
+    - sinatra_sessions
 - validations
 - resources
 - path: exercises
