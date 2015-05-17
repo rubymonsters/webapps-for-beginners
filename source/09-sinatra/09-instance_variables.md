@@ -28,8 +28,11 @@ This also is a little bit more concise, and spares a few keystrokes.
 So, which way is the better one?
 
 On one hand there's an argument that using the `:locals` way is the cleaner,
-and "right" way of doing it. On the other hand using instance variables is much
-more common due to the fact that Rails encourages it. As always, you should
-just use whatever feels better to you, and maybe ask your friends
-and fellow developers for their opinions and reasons.
+and "right" way of doing it: These two objects (our route, and the template)
+should be separated clearly, and not simply share things.  On the other hand
+using instance variables is much more common due to the fact that Rails
+encourages it.
+
+As always, you should just use whatever feels better to you, and maybe ask your
+friends and fellow developers for their opinions and reasons.
 

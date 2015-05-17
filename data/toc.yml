@@ -7,26 +7,40 @@
     - bundler
     - load_path
 - html
-- erb
+- path: erb
+  children:
+    - erb_templates
+    - rendering_erb
+    - bindings
 - http
-- rack
+- path: rack
+  children:
+    - hello_world
+    - rack_env
+    - method_path
 - path: sinatra
   children:
     - sinatra_rails
     - dsl
     - hello_world
+    - routes
     - params
     - templates
     - layouts
     - template_files
     - instance_variables
-- forms
+- path: forms
+  children:
+    - form_tag
+    - submitting_data
+    - accessing_data
 - path: storing_data
   children:
     - writing_file
     - storing_name
     - listing_names
     - using_post
+    - redirect
 - sessions
 - validations
 - resources

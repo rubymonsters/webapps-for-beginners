@@ -2,25 +2,29 @@
 
 <a href="http://en.wikipedia.org/wiki/HTML">HTML</a>, meaning "HyperText Markup
 Language", is a document format used for defining the semantic structure of a
-single web page.
+single web page.  One could say that HTML is what the internet is made of: All
+the websites that we are looking at every day are all defined (described) as
+HTML.
 
 HTML was first proposed by <a href="http://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a>
 in 1989, and layed grounds for the World Wide Web's huge breakthrough during
-the 1990s.
+the 1990s. It is being defined by the <a href="http://en.wikipedia.org/wiki/World_Wide_Web_Consortium">W3C</a>
+and it's latest version is <a href="http://en.wikipedia.org/wiki/HTML5">HTML 5</a>
+which added a bunch of exciting, and useful features.
 
 The fundamental, primary feature of any web browser, such as Firefox, Chrome,
-Safari, is to render (display) HTML documents. Whenever you type a URL into the
-browser's address bar (or click a link, such as
-<a href="http://rubymonstas.org">http://rubymonstas.org</a>) then the browser
-will send a request to this address (i.e. to some application running on some
-computer that responds to this address), and it will (in most cases) get an
-HTML document back as a response. It will then display this HTML document to
-you.
+Safari, is to render (display) HTML documents:
 
-What does "semantic structure" mean?
+Whenever you type a URL into the browser's address bar (or click a link, such
+as <a href="http://rubymonstas.org">http://rubymonstas.org</a>) then the
+browser will send a request to this address (i.e. to some application running
+on some computer that responds to this address), and it will (in most cases)
+get an HTML document back as a response, which it will display to you.
 
-Maybe it is best to look at an example first. This is a fairly simple HTML
-document:
+What is meant by "semantic structure" though?
+
+Maybe it is best to look at an example first. This is a fairly simple, but
+valid HTML document:
 
 ```html
 <html>
@@ -73,9 +77,8 @@ main headline is [...]"*, so it will display this as a headline to you. It then
 finds two `<p>` tags containing a few bits of plain text, so it displays two
 paragraphs. The last paragraph has an emphasized word, so it makes that one
 cursive (or something else, depending on style definitions defined elsewhere).
-
-Next it finds a 2nd level headline, and then an "unordered list", i.e. a list
-with bullet points.
+Next it finds a 2nd level headline `<h2>`, and then an "unordered list" `<ul>`,
+i.e. a list with bullet points.
 
 It is important to understand that HTML only defines the **semantic structure**
 of a document. It does, as such, say nothing about the visual representation of,
@@ -83,14 +86,14 @@ for example, a headline, the spacing between paragraphs, the font family and siz
 used, any colors, borders, or even element placement: The visual representation
 is defined in a different language called <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a>
 (or by the browser's defaults, should there not be any custom style definition
-for this web page, as in our example).
+for this web page, as in our example above).
 
 Why is the semantic structure of a document useful at all, even disregarding
 its visual styling when presented in the browser window?
 
 Maybe the simplest example is a link. In order to describe a link in text (HTML
-is just plain text, too, right?) we'll need to tell three pieces of information
-to the browser:
+is stored as plain text) we'll need to tell three pieces of information to the
+browser:
 
 * That we'd like to define a link,
 * what text to display for the link, and
@@ -119,7 +122,11 @@ If you think about it, there are lots of useful applications, that leverage
 the information that is provided by defining the **semantic structure** of a
 document (as opposed to its visual representation).
 
-For example, the entire success of Google as a search engine relied on the fact
+For example, one could apply different "themes", as in, styles to the same HTML
+page depending on people's preferences, or depending on the device this website
+is displayed on (e.g. desktop browser windows versus mobile devices).
+
+But also, the entire success of Google as a search engine relied on the fact
 that the semantic structure of a document provides clues about the relevance of
 certain search terms in this document: If a word is contained in the URL, the
 document title, the toplevel headlines, then it's probably important. Even more

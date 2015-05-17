@@ -1,14 +1,18 @@
 # HTTP
 
+*Just text messages*
+
 When computers talk to each other via the internet all they do is send around
-messages. You can think of these as simple text messages, most of the time.
-They may be encrypted, they may have some binary content attached to them (such
-as an image, or a movie), but essentially they're just text messages.
+messages.
+
+You can think of these as simple text messages: They may be encrypted, they may
+have some binary content attached to them (such as an image, or a movie), but
+essentially they're just text messages.
 
 HTTP is the protocol that browsers and web applications speak in order to
 know how exactly to formulate these messages. If you're not familiar with the
-term protocol, it means a clearly specified language, a set of formal rules for
-how to talk to each other.
+term "protocol", it means a clearly specified language, a set of formal rules
+for how to talk to each other.
 
 When you open your browser, type a URL into the addressbar, and hit return,
 your browser will send a text message to another computer, which is associated
@@ -27,8 +31,12 @@ Host: rubymonstas.org
 User-Agent: Mozilla/5.0
 ```
 
-The webserver that hosts our homepage then looks up the content of that web
-page, and sends another message back to your browser, containing this content:
+In essence, this message says *"Get me the page /location.html"*. Simple as
+that.
+
+The webserver that hosts our homepage then looks up the content of that page,
+and sends another message back to your browser, containing the content of
+the page, which is, of course HTML:
 
 ```http
 HTTP/1.1 200 OK
@@ -42,11 +50,13 @@ Content-Type: text/html
 </html>
 ```
 
-That's it, essentially. Your browser will extract the HTML that is sent as the
-body of the message, and display it.
+That's it. Your browser will extract the HTML that is sent as the body of the
+message, and display it.
 
 Let's look at the request and response in more detail. What does all of this
 stuff mean, exactly?
+
+## An HTTP Request
 
 HTTP defines that the first line of a request must contain three bits: a
 **verb**, a **resource**, and the version of the protocol. Out of these, we
@@ -70,19 +80,22 @@ Other common verbs are <a href="#footnote-1">[1]</a>
   Delete the user (with the id) `1`.
 
 HTTP also defines that after this first line there may come any number of
-headers, i.e. key/value pairs, containing meta information about the request.
+**headers**, i.e. key/value pairs, containing meta information about the request.
+
 In our example these are the hostname that was used in the URL, and the
 (simplified) name of the browser that was used to send the request. Both of
 these actually are mostly for information, and not a core part of the request.
 
+## An HTTP Response
+
 Now, let's have a look at the response.
 
 Again, HTTP defines that on the first line there need to be three bits of
-information: The HTTP version number, a status code number, and a status
+information: The HTTP version number, a **status code** number, and a status
 description. And again, we can just ignore the version number.
 
 The status code is a way for the responding server to tell our browser what
-*type of response* this is. Here are some common examples:
+*type of response* this is. Here are some common examples <a href="#footnote-2">[2]</a>:
 
 * `200 OK` means: Everything's cool, here's the thing you were looking for.
 * `301 Moved Permanently` means: The thing you are looking for does not exist
@@ -91,23 +104,21 @@ The status code is a way for the responding server to tell our browser what
 * `500 Internal Server Error` means: Ouch, I have run into an internal error on
    my side.
 
-There are lots of other status codes that servers can respond with, here's
-<a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">a list</a>.
-Many of them are very rarely used, and maybe the funniest one is `418 I'm a
-teapot`.
-
-Anyhow. The status code indicates the type of response, and most of the time,
+The status code indicates the type of response, and most of the time,
 for most `GET` requests, it will be `200 OK`.
 
-On the following lines, again, there can be key/value pairs that contain
-meta information about the response. In our case it says that the content
-type of the body is `text/html` (which just means it's HTML).
+On the following lines, again, there will be some **headers**: key/value pairs
+that contain meta information about the response. In our case there is a header
+that says the content type of the body is `text/html` (which just means it's
+HTML).
 
-Now, when there's a body on a request (sometimes requests come with a body,
-too) or response (as in our example), then it needs to be separated from
-the header with an extra, blank line. This tells the browser that we're
-done with the headers, and the rest of the message is the response body
-(the actual content).
+Now, when there's a **body** ("main content") on a request (sometimes requests
+come with a body, too) or response (as in our example), then it needs to be
+separated from the header with an extra, blank line. This tells the browser
+that we're done with the headers, and the rest of the message is the response
+body (the actual content).
+
+## Summary
 
 To summarize:
 
@@ -146,4 +157,9 @@ thing".
 For us, in praxis, for the time being, it is enough to remember that `GET`
 means "get", `POST` means "create", `PUT` means "update", and `DELETE` means
 "delete".
+
+<a name="footnote-2">[2]</a> There are lots of other status codes that servers
+can respond with, here's <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">a list</a>.
+Many of them are very rarely used, and maybe the funniest one is `418 I'm a
+teapot`.
 

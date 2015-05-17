@@ -1,9 +1,10 @@
 # Using POST
 
-Ok, that's pretty cool. However, there's one big problem with our application
-that we definitely want to fix.
+Ok, our little application is already pretty cool, isn't it?
 
-The HTTP specification says that `GET` requests should be safe, and idempotent.
+However, there's one big problem that we definitely want to fix: The HTTP
+specification says that `GET` requests should be safe, and idempotent.
+
 What does that mean? <a href="http://en.wikipedia.org/wiki/Idempotence">Wikipedia says</a>:
 
 *"Idempotence is the property of certain operations in mathematics and computer
@@ -38,8 +39,14 @@ request we add this as an attribute to the `<form>` tag like so:
 When you reload the page, and try to submit the form again, you'll get
 Sinatra's 404 (Not Found) page though: "Sinatra doesn’t know this ditty."
 
-Of course, we do not have a route for `POST` requests, yet. So let's add
-one, and more the logic for storing the name to it:
+Of course!
+
+We do not have a route for `POST` requests, yet. Remember how the HTTP
+verb is a key part of the HTTP request? And that Sinatra wants us to
+use these verbs in order to define our route?
+
+So let's add one, and move the logic for storing the name to the new
+route:
 
 ```ruby
 get "/monstas" do
@@ -52,9 +59,12 @@ post "/monstas" do
 end
 ```
 
-Cool, our `get` route is now idempotent (it does not change any state), and we
-also have a `post` route for the same path, and we store the name if there is
-one. However, what should we now send back to the browser in response?
+Cool!
+
+Our `get` route is now idempotent (it does not change any state), and we also
+have a `post` route for the same path, and we store the name if there is one.
+
+However, what should we now send back to the browser in response?
 
 For starters, we could just send a little confirmation:
 
@@ -69,35 +79,6 @@ end
 
 Hmmmm. Ok, this isn't too bad, we could make this a proper HTML template.
 
-However, in today's web applications it is more common to redirect the browser
-to the page that displays the changed state: The web application would respond
-to the `POST` request by saying *"Alright, I've done this. Go here to check it
-out."*
+However, where would the user go next? Shouldn't we display the updated
+list of all the names next?
 
-The way of expressing this in terms of HTTP is by the way of returning the
-status code `303` ("See Other"), and adding a `location` header to the response
-that tells the browser where to go (what to `GET`) next.
-
-Sinatra lets us do this like so:
-
-```ruby
-post "/monstas" do
-  name = params[:name]
-  store_name("names.txt", name)
-  redirect "/monstas"
-end
-```
-
-The `redirect` method will make sure our application responds with the status
-code `303` and add a `location` header to the response with the value
-`http://localhost:4567/monstas` (since we have passed the path `/monstas`, but the
-`location` header needs a full URL).
-
-If you restart the server, go to <a href="http://localhost:4567/monstas">http://localhost:4567/monstas</a>,
-and submit the form you'll see that your browser will be redirected, and make
-a new `GET` request to the same URL.
-
-So this is pretty cool. We now have two routes. One for displaying (`GET`ing)
-the current state of our application, and one for storing (`POST`ing) new data.
-
-Awesome!

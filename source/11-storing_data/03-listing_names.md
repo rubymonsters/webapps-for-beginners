@@ -44,6 +44,7 @@ get "/hello" do
 end
 ```
 Now we can output the names as an unordered list (`<ul>`) in our `hello.erb`.
+
 So let's replace this (we now want to display the full list):
 
 ```erb
@@ -62,3 +63,6 @@ With this:
 ```
 
 <img src="/assets/images/11-storing_data_1.png">
+
+Wheeeee! Pretty cool.
+

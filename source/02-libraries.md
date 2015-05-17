@@ -7,11 +7,12 @@ more awesome community:
 Being faced with a certain task that we want to accomplish we can often look
 for other people's solutions, and simply re-use and build on their code.
 
-In the chapter <a href="/bonus_2/libraries.html">Using Libraries</a> you have
-learned that Ruby comes with lots of things available as soon as your program
-starts, but others need to be loaded using the method `require`. For example
-we `require "digest"` and from then on there's a class `Digest::Sha2` defined,
-which provides handy tools (methods) that we wouldn't want to write ourselves.
+In the chapter <a href="http://ruby-for-beginners.rubymonstas.org/bonus_2/libraries.html">Using Libraries</a>
+you have learned that Ruby comes with lots of things available as soon as your
+program starts, but others need to be loaded using the method `require`. For
+example we did `require "digest"` and from then on there's a class
+`Digest::Sha2` defined, which provides some handy tools (methods) that we
+really wouldn't want to write ourselves.
 
 But how exactly does that work?
 

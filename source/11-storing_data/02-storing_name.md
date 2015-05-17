@@ -1,7 +1,7 @@
 # Storing the name
 
-Ok, now that we know how to append something to a file, let's use that in our
-application.
+Now that we know how to append something to a file, let's use that in our
+application, and store all those names to a file.
 
 We could change our route like so:
 
@@ -18,7 +18,9 @@ end
 ```
 
 However, that stuffs a lot of clutter into our route, while we'd like to keep
-these readable. So let's extract storing the name to method right away:
+these readable.
+
+So let's extract that to method right away:
 
 ```ruby
 def store_name(filename, string)

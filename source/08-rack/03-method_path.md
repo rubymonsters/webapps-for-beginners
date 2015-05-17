@@ -1,0 +1,73 @@
+# Method and Path
+
+We saw that the `env` hash that Rack passes to the method `call` contains the
+keys `REQUEST_METHOD` and `REQUEST_PATH`.
+
+Let's modify our app a little so we can make use of it:
+
+```ruby
+class Application
+  def call(env)
+    handle_request(env['REQUEST_METHOD'], env['REQUEST_PATH'])
+  end
+
+  private
+
+    def handle_request(method, path)
+      if method == "GET"
+        get(path)
+      else
+        method_not_allowed(method)
+      end
+    end
+
+    def get(path)
+      [200, { "Content-Type" => "text/html" }, ["You have requested the path #{path}, using GET"]]
+    end
+
+    def method_not_allowed(method)
+      [405, {}, ["Method not allowed: #{method}"]]
+    end
+end
+```
+
+Reading the code closely, do you understand what it does, and why?
+
+We have changed the method `call` to extract the values for the keys
+`REQUEST_METHOD` and `REQUEST_PATH`. And we then pass these two values to a new
+method `handle_request`, which checks the `method`:
+
+* If it's a `GET` request, then we call another method `get`, passing the `path`.
+  The method `get` complies with Rack's convention for returning a response: It
+  returns an array that has the response status, headers, and a body. We've
+  changed the body a little bit so it displays the `path` that was requested.
+
+* If it's not a `GET` request, then we call another method `method_not_allowed`.
+  This method also complies with Rack's convention, but returns a different
+  response. This time we use the status code `405` which means exactly this:
+  *"Method Not Allowed"*. Our little application just does not support any other
+  methods.
+
+Because these response arrays are the return values of these two methods,
+they'll also be the return value of the method `handle_request`, and it turn
+the method `call`. So they'll be passed back to Rack, and turned into the
+actual HTTP response that is returned to your browser.
+
+If you restart your server, and point your browser to
+<a href="http://localhost:9292/ruby/monstas">http://localhost:9292/ruby/monstas</a>
+you should now see something like this:
+
+<img src="/assets/images/08-rack_2.png">
+
+
+Congratulations!
+
+You have just written your first web application that responds to different
+requests with (albeit only slightly) different responses.
+
+Imagine working on this application more, and returning different HTML pages
+based on the `path` that is part of the request: You could use the ERB
+rendering method from the <a href="/erb.html">previous chapters about
+ERB</a> in order to render different ERB templates.
+
+And guess what, this is exactly what Sinatra makes super easy :)

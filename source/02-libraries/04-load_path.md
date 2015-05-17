@@ -1,5 +1,7 @@
 # Ruby Load Path
 
+*Where to look for all the things*
+
 Ruby is software, and software stores things somewhere on your file system.
 In order to define places on your computer, where interesting stuff is stored
 software often has the concept of a "load path".
@@ -23,6 +25,39 @@ are stored. If you use `require` anywhere in your application (e.g. `ruby
 "digest"`) then Ruby will look for a Ruby file with the same name (e.g.
 `digest.rb`) in each of these directories. It will load the first file with
 this name that it can find.
+
+If you are curious, you can quickly check the default load path of your
+Ruby installation like this:
+
+```
+ruby -e 'puts $LOAD_PATH'
+```
+
+The `-e` flag is a way to run some Ruby code without having to store it in
+a file.
+
+For me this prints:
+
+```
+/Users/sven/.rbenv/versions/2.2.1/lib/ruby/site_ruby/2.2.0
+/Users/sven/.rbenv/versions/2.2.1/lib/ruby/site_ruby/2.2.0/x86_64-darwin14
+/Users/sven/.rbenv/versions/2.2.1/lib/ruby/site_ruby
+/Users/sven/.rbenv/versions/2.2.1/lib/ruby/vendor_ruby/2.2.0
+/Users/sven/.rbenv/versions/2.2.1/lib/ruby/vendor_ruby/2.2.0/x86_64-darwin14
+/Users/sven/.rbenv/versions/2.2.1/lib/ruby/vendor_ruby
+/Users/sven/.rbenv/versions/2.2.1/lib/ruby/2.2.0
+/Users/sven/.rbenv/versions/2.2.1/lib/ruby/2.2.0/x86_64-darwin14
+```
+
+From this you can see that I am using <a href="https://github.com/sstephenson/rbenv">rbenv</a>
+to manage my Ruby versions, that my currently active Ruby version is `2.2.1`,
+and that I am running this on Mac OSX ("darwin").  All these paths are
+directories somewhere in the directory where Ruby 2.2.1 is installed on my
+computer.
+
+Whenever there's a `require "something"` statement in some Ruby code that I run
+on my computer, Ruby will check all these directories for a file
+`something.rb`.
 
 Would now be a good time to do a few exercises on
 <a href="/exercises/rubygems.html">Rubygems</a> and

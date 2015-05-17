@@ -27,10 +27,34 @@ Now we are ready to change our route as follows:
 
 ```ruby
 get '/hello/:name' do
-  erb :hello, { :locals => { :name => params[:name] } }
+  erb :hello, { :locals => { :name => params[:name] }, :layout => :layout }
 end
 ```
 
 Restart your application, and reload the page. You should see the same result.
 
-But our code looks much better, doesn't it?
+But our code looks much better this way, doesn't it?
+
+Interestingly, we don't even need the name the layout. Sinatra looks for
+this filename by default (we could specify a different name though, in case
+we need different layout templates in different contexts):
+
+```ruby
+get '/hello/:name' do
+  erb :hello, { :locals => { :name => params[:name] }, :layout => true }
+end
+```
+
+And finally, we can also even totally omit the option, because Sinatra
+assumes we want a layout and finds one in the `views` directory:
+
+```ruby
+get '/hello/:name' do
+  erb :hello, { :locals => { :name => params[:name] } }
+end
+```
+
+If we don't want a layout, for some reason, then we can pass `:layout => false`
+instead.
+
+Neat.
