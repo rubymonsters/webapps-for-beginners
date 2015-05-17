@@ -21,7 +21,7 @@ starts your program. `puts` is smart enough to put each string in that array
 on a separate line.
 
 Each of these lines represents a directory on your computer where Ruby files
-are stored. If you use `require` anywhere in your application (e.g. `ruby
+are stored. If you use `require` anywhere in your application (e.g. `require
 "digest"`) then Ruby will look for a Ruby file with the same name (e.g.
 `digest.rb`) in each of these directories. It will load the first file with
 this name that it can find.
