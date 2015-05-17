@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/erb.html">
+    <nav class="page-nav"><a class="prev" href="/erb/bindings.html">
   Previous
 </a></nav>
     <nav class="page-nav"><a class="next" href="/rack.html">
@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="active">
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -184,15 +245,19 @@
         <nav class="menu"><a href="#"></a></nav>
         <h1>HTTP</h1>
 
+<p><em>Just text messages</em></p>
+
 <p>When computers talk to each other via the internet all they do is send around
-messages. You can think of these as simple text messages, most of the time.
-They may be encrypted, they may have some binary content attached to them (such
-as an image, or a movie), but essentially they&rsquo;re just text messages.</p>
+messages.</p>
+
+<p>You can think of these as simple text messages: They may be encrypted, they may
+have some binary content attached to them (such as an image, or a movie), but
+essentially they&rsquo;re just text messages.</p>
 
 <p>HTTP is the protocol that browsers and web applications speak in order to
 know how exactly to formulate these messages. If you&rsquo;re not familiar with the
-term protocol, it means a clearly specified language, a set of formal rules for
-how to talk to each other.</p>
+term &ldquo;protocol&rdquo;, it means a clearly specified language, a set of formal rules
+for how to talk to each other.</p>
 
 <p>When you open your browser, type a URL into the addressbar, and hit return,
 your browser will send a text message to another computer, which is associated
@@ -209,8 +274,12 @@ browser:</p>
 <span class="na">User-Agent</span><span class="p">:</span> <span class="s">Mozilla/5.0</span>
 </code></pre>
 
-<p>The webserver that hosts our homepage then looks up the content of that web
-page, and sends another message back to your browser, containing this content:</p>
+<p>In essence, this message says <em>&ldquo;Get me the page /location.html&rdquo;</em>. Simple as
+that.</p>
+
+<p>The webserver that hosts our homepage then looks up the content of that page,
+and sends another message back to your browser, containing the content of
+the page, which is, of course HTML:</p>
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/html</span>
 
@@ -222,11 +291,13 @@ page, and sends another message back to your browser, containing this content:</
 <span class="nt">&lt;/html&gt;</span>
 </code></pre>
 
-<p>That&rsquo;s it, essentially. Your browser will extract the HTML that is sent as the
-body of the message, and display it.</p>
+<p>That&rsquo;s it. Your browser will extract the HTML that is sent as the body of the
+message, and display it.</p>
 
 <p>Let&rsquo;s look at the request and response in more detail. What does all of this
 stuff mean, exactly?</p>
+
+<h2>An HTTP Request</h2>
 
 <p>HTTP defines that the first line of a request must contain three bits: a
 <strong>verb</strong>, a <strong>resource</strong>, and the version of the protocol. Out of these, we
@@ -252,19 +323,22 @@ Delete the user (with the id) <code>1</code>.</li>
 </ul>
 
 <p>HTTP also defines that after this first line there may come any number of
-headers, i.e. key/value pairs, containing meta information about the request.
-In our example these are the hostname that was used in the URL, and the
+<strong>headers</strong>, i.e. key/value pairs, containing meta information about the request.</p>
+
+<p>In our example these are the hostname that was used in the URL, and the
 (simplified) name of the browser that was used to send the request. Both of
 these actually are mostly for information, and not a core part of the request.</p>
+
+<h2>An HTTP Response</h2>
 
 <p>Now, let&rsquo;s have a look at the response.</p>
 
 <p>Again, HTTP defines that on the first line there need to be three bits of
-information: The HTTP version number, a status code number, and a status
+information: The HTTP version number, a <strong>status code</strong> number, and a status
 description. And again, we can just ignore the version number.</p>
 
 <p>The status code is a way for the responding server to tell our browser what
-<em>type of response</em> this is. Here are some common examples:</p>
+<em>type of response</em> this is. Here are some common examples <a href="#footnote-2">[2]</a>:</p>
 
 <ul>
 <li><code>200 OK</code> means: Everything&rsquo;s cool, here&rsquo;s the thing you were looking for.</li>
@@ -275,23 +349,21 @@ here any more. Here&rsquo;s the place where it has been moved to, look over ther
 my side.</li>
 </ul>
 
-<p>There are lots of other status codes that servers can respond with, here&rsquo;s
-<a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">a list</a>.
-Many of them are very rarely used, and maybe the funniest one is <code>418 I&#39;m a
-teapot</code>.</p>
-
-<p>Anyhow. The status code indicates the type of response, and most of the time,
+<p>The status code indicates the type of response, and most of the time,
 for most <code>GET</code> requests, it will be <code>200 OK</code>.</p>
 
-<p>On the following lines, again, there can be key/value pairs that contain
-meta information about the response. In our case it says that the content
-type of the body is <code>text/html</code> (which just means it&rsquo;s HTML).</p>
+<p>On the following lines, again, there will be some <strong>headers</strong>: key/value pairs
+that contain meta information about the response. In our case there is a header
+that says the content type of the body is <code>text/html</code> (which just means it&rsquo;s
+HTML).</p>
 
-<p>Now, when there&rsquo;s a body on a request (sometimes requests come with a body,
-too) or response (as in our example), then it needs to be separated from
-the header with an extra, blank line. This tells the browser that we&rsquo;re
-done with the headers, and the rest of the message is the response body
-(the actual content).</p>
+<p>Now, when there&rsquo;s a <strong>body</strong> (&ldquo;main content&rdquo;) on a request (sometimes requests
+come with a body, too) or response (as in our example), then it needs to be
+separated from the header with an extra, blank line. This tells the browser
+that we&rsquo;re done with the headers, and the rest of the message is the response
+body (the actual content).</p>
+
+<h2>Summary</h2>
 
 <p>To summarize:</p>
 
@@ -333,7 +405,12 @@ thing&rdquo;.</p>
 means &ldquo;get&rdquo;, <code>POST</code> means &ldquo;create&rdquo;, <code>PUT</code> means &ldquo;update&rdquo;, and <code>DELETE</code> means
 &ldquo;delete&rdquo;.</p>
 
-        <nav class="page-nav"><a class="prev" href="/erb.html">
+<p><a name="footnote-2">[2]</a> There are lots of other status codes that servers
+can respond with, here&rsquo;s <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">a list</a>.
+Many of them are very rarely used, and maybe the funniest one is <code>418 I&#39;m a
+teapot</code>.</p>
+
+        <nav class="page-nav"><a class="prev" href="/erb/bindings.html">
   Previous
 </a></nav>
         <nav class="page-nav"><a class="next" href="/rack.html">

@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory expanded">
     <a href="/storing_data.html">
@@ -159,6 +215,11 @@
       <li>
         <a href="/storing_data/using_post.html">
           Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
         </a>
       </li>
     </ul>
@@ -220,8 +281,9 @@ then use it in the template later:</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>Now we can output the names as an unordered list (<code>&lt;ul&gt;</code>) in our <code>hello.erb</code>.
-So let&rsquo;s replace this (we now want to display the full list):</p>
+<p>Now we can output the names as an unordered list (<code>&lt;ul&gt;</code>) in our <code>hello.erb</code>.</p>
+
+<p>So let&rsquo;s replace this (we now want to display the full list):</p>
 <pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
 <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
@@ -236,6 +298,8 @@ So let&rsquo;s replace this (we now want to display the full list):</p>
 </code></pre>
 
 <p><img src="/assets/images/storing_data_1-a05fb498.png"></p>
+
+<p>Wheeeee! Pretty cool.</p>
 
         <nav class="page-nav"><a class="prev" href="/storing_data/storing_name.html">
   Previous

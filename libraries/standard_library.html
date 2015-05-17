@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -184,21 +245,25 @@
         <nav class="menu"><a href="#"></a></nav>
         <h1>Ruby Standard Library</h1>
 
+<p><em>Batteries included</em></p>
+
 <p>Basically every programming language that you&rsquo;ll use in praxis has some kind
-of standard library that is shipped with the language itself. When you install
-Ruby on your computer this will also install the
-<a href="http://ruby-doc.org/stdlib-2.2.2/">Ruby Standard Library</a>.</p>
+of standard library that is shipped with the language itself.</p>
+
+<p>When you install Ruby on your computer this will also install the <a
+href="http://ruby-doc.org/stdlib-2.2.2/">Ruby Standard Library</a>. This means
+you can simply <code>require</code> and use the things it includes.</p>
 
 <p>It&rsquo;s documentation isn&rsquo;t the most pretty website on earth, but if you look at
 the &ldquo;package&rdquo; (library) names on the left you see things mentioned like:</p>
 
 <ul>
-<li>benchmark: tools to test how performant your code is</li>
-<li>debug: tools to make debugging code easier</li>
-<li>digest, openssl, securerandom: tools for encryption and security</li>
-<li>erb: Ruby&rsquo;s standard templating system (used in one of our exercises)</li>
-<li>net/imap, net/pop, net/smtp: stuff for sending and receiving emails</li>
-<li>zlib: tools for compressing files (you know <code>zip</code> files, don&rsquo;t you?)</li>
+<li><code>benchmark</code>: tools to test how performant your code is</li>
+<li><code>debug</code>: tools to make debugging code easier</li>
+<li><code>digest</code>, openssl, securerandom: tools for encryption and security</li>
+<li><code>erb</code>: Ruby&rsquo;s standard templating system</li>
+<li><code>net/imap</code>, <code>net/pop</code>, <code>net/smtp</code>: stuff for sending and receiving emails</li>
+<li><code>zlib</code>: tools for compressing files (you know <code>zip</code> files, don&rsquo;t you?)</li>
 </ul>
 
 <p>And a lot of other things. These are fairly low-level tools, of course. You do

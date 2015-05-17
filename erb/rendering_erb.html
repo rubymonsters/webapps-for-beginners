@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Sinatra versus Rails | Webapps for Beginners</title>
+    <title>Rendering ERB | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/sinatra.html">
+    <nav class="page-nav"><a class="prev" href="/erb/erb_templates.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/sinatra/dsl.html">
+    <nav class="page-nav"><a class="next" href="/erb/bindings.html">
   Next
 </a></nav>
 
@@ -69,7 +69,7 @@
       HTML
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/erb.html">
       Embedded Ruby
     </a>
@@ -79,7 +79,7 @@
           ERB Templates
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/erb/rendering_erb.html">
           Rendering ERB
         </a>
@@ -118,12 +118,12 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/sinatra.html">
       Sinatra
     </a>
     <ul>
-      <li class="active">
+      <li>
         <a href="/sinatra/sinatra_rails.html">
           Sinatra versus Rails
         </a>
@@ -243,41 +243,105 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Sinatra versus Rails</h1>
+        <h1>Rendering ERB</h1>
 
-<p>Maybe you could compare Sinatra to a bicycle, and Rails to a car. Both do
-the job getting you from A to B.</p>
+<p>The Ruby code embedded in our template uses two local variables (or methods)
+with the names <code>name</code> and <code>messages</code>. Also, <code>each</code> is called on <code>messages</code>, so
+this should probably be an array:</p>
+<pre class="highlight ruby"><code><span class="nb">puts</span> <span class="nb">name</span>
 
-<p>Sinatra is much more lightweight, needs less resources, and does fewer things
-out of the box. Rails on the other hand is packed with features, comes with a
-ton of code, and makes it very easy to build complicated web applications in
-limited time, if you know how to use it.</p>
+<span class="n">messages</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="n">message</span>
+<span class="k">end</span>
+</code></pre>
 
-<p>With Rails every little piece of code in your application has a precisely
-defined place. So when you look at any other Rails application you know exactly
-what&rsquo;s were, and can get started immediately. Sinatra on the other hand defines
-almost nothing for you. People come up with their own structures, and different
-Sinatra applications can look very different.</p>
+<p>So how do we provide these objects to the ERB template? And how do we execute
+the whole thing?</p>
 
-<p>Of course, because it&rsquo;s lightweight, Sinatra also is much faster than Rails,
-and this is where our little metaphor ended fairly quickly :) Rack, by the way,
-would be a pair of shoes. Sinatra and Rails both use Rack under the hood.</p>
+<p>It&rsquo;s probably best to look at an example:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"erb"</span>
 
-<p>So which one is better for a beginner?</p>
+<span class="n">template</span> <span class="o">=</span> <span class="sx">%(
+  &lt;html&gt;
+    &lt;body&gt;
+      &lt;h1&gt;Messages for &lt;%= name %&gt;&lt;/h1&gt;
+      &lt;ul&gt;
+        &lt;% messages.each do |message| %&gt;
+          &lt;li&gt;&lt;%= message %&gt;&lt;/li&gt;
+        &lt;% end %&gt;
+      &lt;/ul&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+)</span>
 
-<p>Both are great :) Sinatra is great for learning the basics of HTTP and routing.
-Rails on the other hand is better for learning how to use a database, and
-actually store things, learn the concept of a &ldquo;resource&rdquo; etc.</p>
+<span class="nb">name</span> <span class="o">=</span> <span class="s2">"Ruby Monstas"</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s2">"We meet every Monday night at 7pm"</span><span class="p">,</span>
+  <span class="s2">"We've almost completed the beginners course!"</span><span class="p">,</span>
+  <span class="s2">"Feel free to come by and join us!"</span>
+<span class="p">]</span>
 
-<p>Also, next to Sinatra and Rails there are, of course, lots of other frameworks
-for building web applications. For example,
-<a href="http://lotusrb.org">Lotus</a> has gained popularity quite quickly
-recently.</p>
+<span class="n">html</span> <span class="o">=</span> <span class="no">ERB</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">).</span><span class="nf">result</span><span class="p">(</span><span class="nb">binding</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">html</span>
+</code></pre>
 
-        <nav class="page-nav"><a class="prev" href="/sinatra.html">
+<p>Does this code make sense to you?</p>
+
+<p>Let&rsquo;s walk through it:</p>
+
+<ul>
+<li>On the first line we require the erb from the
+<a href="http://ruby-doc.org/stdlib-2.2.2/libdoc/erb/rdoc/ERB.html">Ruby Standard Library</a>.</li>
+<li>As you&rsquo;ve learned in <a href="http://ruby-for-beginners.rubymonstas.org/bonus_1/alternative-syntax.html">this chapter</a>
+the syntax <code>%(something)</code> defines a string. So, <code>template</code> is just one, long
+string that contains our ERB template.</li>
+<li>Next we define two local variables <code>name</code> and <code>messages</code>, which hold a simple
+string, as well as an array with 3 strings.</li>
+<li>On the next line we create an instace of the class <code>ERB</code> and pass our
+<code>template</code> (the string defined earlier) to it.</li>
+<li>On this instance we then call the method <code>result</code> with something that is
+called <code>binding</code>.</li>
+<li>This method call to <code>result</code> returns something that we assign to the variable
+<code>html</code>, so, as you might guess, this should be the HTML we were after.</li>
+<li>We&rsquo;ll then just output the result to the terminal on the last line, using <code>puts</code>.</li>
+</ul>
+
+<p>If you run this code it will output something like this:</p>
+<pre class="highlight html"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Messages for Ruby Monstas<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>We meet every Monday night at 7pm<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>We've almost completed the beginners course!<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Feel free to come by and join us!<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>&hellip; which is a valid HTML document that a browser would render (display) like
+this:</p>
+
+<p><img src="/assets/images/erb_1-b7c55b20.png"></p>
+
+<p>Looks good?</p>
+
+<p>To recap, all that our code above does is the following:</p>
+
+<ul>
+<li>Define an template with some HTML and some embedded ERB tags.</li>
+<li>Define a couple variables that contain things that our template wants (<code>name</code> and <code>messages</code>).</li>
+<li>Create an instance of the class ERB, passing this template.</li>
+<li>On this instance, call the method <code>result</code>.</li>
+</ul>
+
+<p>In other words, it executes (we say &ldquo;renders&rdquo;) the ERB template using the
+<code>name</code> and <code>messages</code> objects, and returns the HTML as a result.</p>
+
+        <nav class="page-nav"><a class="prev" href="/erb/erb_templates.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/sinatra/dsl.html">
+        <nav class="page-nav"><a class="next" href="/erb/bindings.html">
   Next
 </a></nav>
       </article>

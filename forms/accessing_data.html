@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Sinatra versus Rails | Webapps for Beginners</title>
+    <title>Accessing Form Data | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/sinatra.html">
+    <nav class="page-nav"><a class="prev" href="/forms/submitting_data.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/sinatra/dsl.html">
+    <nav class="page-nav"><a class="next" href="/storing_data.html">
   Next
 </a></nav>
 
@@ -118,12 +118,12 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/sinatra.html">
       Sinatra
     </a>
     <ul>
-      <li class="active">
+      <li>
         <a href="/sinatra/sinatra_rails.html">
           Sinatra versus Rails
         </a>
@@ -170,7 +170,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/forms.html">
       Forms
     </a>
@@ -185,7 +185,7 @@
           Submitting Data
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/forms/accessing_data.html">
           Accessing Form Data
         </a>
@@ -243,41 +243,72 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Sinatra versus Rails</h1>
+        <h1>Accessing Form Data</h1>
 
-<p>Maybe you could compare Sinatra to a bicycle, and Rails to a car. Both do
-the job getting you from A to B.</p>
+<p>We mentioned earlier that form data will be available in the <code>params</code> hash.</p>
 
-<p>Sinatra is much more lightweight, needs less resources, and does fewer things
-out of the box. Rails on the other hand is packed with features, comes with a
-ton of code, and makes it very easy to build complicated web applications in
-limited time, if you know how to use it.</p>
+<p>Let&rsquo;s check that, and output the <code>params</code> in our route:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="nb">p</span> <span class="n">params</span>
+  <span class="n">erb</span> <span class="ss">:monstas</span>
+<span class="k">end</span>
+</code></pre>
 
-<p>With Rails every little piece of code in your application has a precisely
-defined place. So when you look at any other Rails application you know exactly
-what&rsquo;s were, and can get started immediately. Sinatra on the other hand defines
-almost nothing for you. People come up with their own structures, and different
-Sinatra applications can look very different.</p>
+<p>Again, restart the application, and load the URL
+<a href="http://localhost:4567/monstas?name=Monstas"><a href="http://localhost:4567/monstas?name=Monstas">http://localhost:4567/monstas?name=Monstas</a></a>.
+In your terminal you should then see something like:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="s2">"name"</span><span class="err">=&gt;</span><span class="s2">"Monstas"</span><span class="err">}</span><span class="w">
+</span></code></pre>
 
-<p>Of course, because it&rsquo;s lightweight, Sinatra also is much faster than Rails,
-and this is where our little metaphor ended fairly quickly :) Rack, by the way,
-would be a pair of shoes. Sinatra and Rails both use Rack under the hood.</p>
+<p>So this is how we can access the data that has been passed from the browser as
+part of the HTTP request, when it submitted the form.</p>
 
-<p>So which one is better for a beginner?</p>
+<p>Let&rsquo;s do something with it!</p>
 
-<p>Both are great :) Sinatra is great for learning the basics of HTTP and routing.
-Rails on the other hand is better for learning how to use a database, and
-actually store things, learn the concept of a &ldquo;resource&rdquo; etc.</p>
+<p>Change your route like so:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">erb</span> <span class="ss">:monstas</span>
+<span class="k">end</span>
+</code></pre>
 
-<p>Also, next to Sinatra and Rails there are, of course, lots of other frameworks
-for building web applications. For example,
-<a href="http://lotusrb.org">Lotus</a> has gained popularity quite quickly
-recently.</p>
+<p>And add this code at the top of your <code>monstas.erb</code> view:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@name</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Hello <span class="cp">&lt;%=</span> <span class="vi">@name</span> <span class="cp">%&gt;</span>!<span class="nt">&lt;/h1&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
 
-        <nav class="page-nav"><a class="prev" href="/sinatra.html">
+<p>When you restart the server, and reload the page you should see something like
+this:</p>
+
+<p><img src="/assets/images/forms_2-5134e116.png"></p>
+
+<p>Awesome!</p>
+
+<p>So this is how you can pass (submit) data from the brower to your application,
+and use it in some way.</p>
+
+<p>Let&rsquo;s make one more improvement to our form. It currently always whipes out the
+text that has been submitted. Let&rsquo;s make sure we preseve it in the input element.</p>
+
+<p>We can do that by specifying the <code>value</code> attribute on the <code>input</code> tag, like so:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">value=</span><span class="s">"&lt;%= @name %&gt;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p>When you restart your application, and reload the page, it should now put the
+name to the input element:</p>
+
+<p><img src="/assets/images/forms_3-11a66dfa.png"></p>
+
+<p>Perfect.</p>
+
+        <nav class="page-nav"><a class="prev" href="/forms/submitting_data.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/sinatra/dsl.html">
+        <nav class="page-nav"><a class="next" href="/storing_data.html">
   Next
 </a></nav>
       </article>

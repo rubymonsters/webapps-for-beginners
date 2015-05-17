@@ -19,7 +19,7 @@
     <nav class="page-nav"><a class="prev" href="/sinatra/dsl.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/sinatra/params.html">
+    <nav class="page-nav"><a class="next" href="/sinatra/routes.html">
   Next
 </a></nav>
 
@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory expanded">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li class="active">
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -159,6 +215,11 @@
       <li>
         <a href="/storing_data/using_post.html">
           Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
         </a>
       </li>
     </ul>
@@ -220,21 +281,26 @@ also tells us the port that it&rsquo;s running on.</p>
 <p>That was easy, wasn&rsquo;t it.</p>
 
 <p>Sinatra uses Rack under the hood, but it deals with the nitty gritty details of
-looking at the <code>REQUEST_METHOD</code> and <code>REQUEST_PATH</code> for you. Instead it allows you
-to use the methods <code>get</code>, <code>post</code>, <code>put</code>, and <code>delete</code> with a path argument, and
-simply specify a block that will be called whenever a request matches the request
-method (verb) and path.</p>
+looking at the <code>REQUEST_METHOD</code> and <code>REQUEST_PATH</code> for you.</p>
 
-<p>It also allows you to simply return a string from this block, which will then
-be used as the response body, and sets things like the status code and headers
-for you (when it returns the Rack style response array to Rack). Since the vast
-majority of requests will want to return 200 as a status code Sinatra just
-assumes you want that, too, unless you specify something else.</p>
+<p>Instead it allows you to use the methods <code>get</code>, <code>post</code>, <code>put</code>, and <code>delete</code>
+with a path argument, and simply specify a block that will be called whenever a
+request matches the request method (verb) and path.</p>
+
+<p>The Ruby code that makes up our little Sinatra application reads very well,
+and it only focusses on the bits and pieces we care about (as opposed to our
+Rack application, which had to include the knowledge about the <code>env</code> etc.)</p>
+
+<p>Sinatra also allows you to simply return a string from this block, which will
+then be used as the response body, and sets things like the status code and
+headers for you (when it returns the Rack style response array to Rack). Since
+the vast majority of requests will want to return 200 as a status code Sinatra
+just assumes you want that, too, unless you specify something else.</p>
 
         <nav class="page-nav"><a class="prev" href="/sinatra/dsl.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/sinatra/params.html">
+        <nav class="page-nav"><a class="next" href="/sinatra/routes.html">
   Next
 </a></nav>
       </article>

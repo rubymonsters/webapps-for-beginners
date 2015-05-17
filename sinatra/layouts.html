@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory expanded">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -184,7 +245,7 @@
         <nav class="menu"><a href="#"></a></nav>
         <h1>Layouts</h1>
 
-<p>Our HTML still isn&rsquo;t quite valid: &rsquo;<html>&rsquo; and &rsquo;<body>&rsquo; tags are mandatory,
+<p>Our HTML still isn&rsquo;t quite valid: <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code> tags are mandatory,
 even though browsers still render our HTML happily without them.</p>
 
 <p>We could add these wrapping tags to each and every one of our templates,
@@ -211,13 +272,23 @@ the source code of the web page (right click on the page, and select &ldquo;View
 Source&rdquo;, or whatever that&rsquo;s called in your browser) you&rsquo;ll see that it now has
 the <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code> tags from our layout template.</p>
 
-<p>What about that <code>yield</code> thing in the ERB tag in our layout template though?</p>
+<p>The only real change that we have made is that we&rsquo;ve added the <code>:layout</code> option
+to the options hash. Because this is too much stuff to fit on one line we have
+also sticked the template and options into local variables.</p>
 
-<p><code>yield</code> is a keyword in Ruby that calls a block that was given to a method.
-Hmmm.  Well, that&rsquo;s how it works under the hood, that is correct. However, in
+<p>As you can see the rendered &ldquo;content&rdquo; (from our main template) is being wrapped
+by, or inserted to our layout template.</p>
+
+<p>What about that <code>yield</code> thing in our layout template though?</p>
+
+<p><code>yield</code> is a keyword in Ruby that calls a block that was given to a method.</p>
+
+<p>Hmmmmm. Well, that&rsquo;s how it works under the hood, that is correct. However, in
 this context, all you need to remember is that, in a layout template, <code>&lt;%=
-yield %&gt;</code> needs to be place where the other template (the one that is being
+yield %&gt;</code> marks the place where the other template (the one that is being
 wrapped) is supposed to be inserted.</p>
+
+<p>Does this make sense?</p>
 
 <p>Imagine you have an application with, say, 10 <code>get</code> routes. Each of them
 renders a different template. Say, there&rsquo;s one for the homepage, one for
@@ -230,7 +301,7 @@ of these pages.</p>
 to be used, which will replace the <code>&lt;%= yield %&gt;</code> tag with the template, and
 wrap it.</p>
 
-<p>Does that make sense?</p>
+<p>That&rsquo;s pretty handy.</p>
 
         <nav class="page-nav"><a class="prev" href="/sinatra/templates.html">
   Previous

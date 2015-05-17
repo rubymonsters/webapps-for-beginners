@@ -19,7 +19,7 @@
     <nav class="page-nav"><a class="prev" href="/http.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/sinatra.html">
+    <nav class="page-nav"><a class="next" href="/rack/hello_world.html">
   Next
 </a></nav>
 
@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li class="active">
+  <li class="active directory expanded">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -185,290 +246,16 @@
         <h1>Rack</h1>
 
 <p><a href="http://rack.github.io/">Rack</a> is the most basic way to build a very
-simple web application in Ruby, and we are going to start with it. In praxis
-you may never build an application with Rack directly, but you&rsquo;ll use it when
-you work on Sinatra or Rails applications, since these use Rack under the hood.</p>
+simple web application in Ruby, and we are going to start with it.</p>
 
-<p>Let&rsquo;s jump right in.</p>
-
-<p>In a new directory <code>rack</code> create a file <code>config.ru</code> with the following content:</p>
-<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
-  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-    <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]]</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="n">run</span> <span class="no">Application</span><span class="p">.</span><span class="nf">new</span>
-</code></pre>
-
-<p>Now, make sure you have the gem Rack installed: In your terminal check <code>gem
-list rack</code>. Does that show something like <code>rack (1.6.1)</code> (or any other version
-number)? If it doesn&rsquo;t, install Rack with the command <code>gem install rack</code>.</p>
-
-<p>This gem comes with a little executable (command line program) called <code>rackup</code>.
-This command looks for a file <code>config.ru</code> in the current directory, and starts
-a web server using it.</p>
-
-<p>Make sure you have <code>cd</code>ed to your <code>rack</code> directory, and then run <code>rackup</code>. You
-should see something like:</p>
-<pre class="highlight plaintext"><code>$ rackup
-[2015-05-15 18:37:42] INFO  WEBrick 1.3.1
-[2015-05-15 18:37:42] INFO  ruby 2.2.1 (2015-02-26) [x86_64-darwin14]
-[2015-05-15 18:37:42] INFO  WEBrick::HTTPServer#start: pid=17588 port=9292
-</code></pre>
-
-<p>Of course the version numbers may be different, but the important bit that
-you want to look for is the port.</p>
-
-<p>Now your web application has started you can point your browser to
-<a href="http://localhost:9292"><a href="http://localhost:9292">http://localhost:9292</a></a>. You should see
-something like this:</p>
-
-<p><img src="/assets/images/rack_1-9c688c77.png"></p>
-
-<p>Pretty cool, isn&rsquo;t it? With just a few lines of plain Ruby code you have
-just written an actual web application.</p>
-
-<p>Now, let&rsquo;s have a closer look at the code.</p>
-
-<p>We define a class <code>Application</code>, and, on the last line, create an instance
-of it, which we pass to the method <code>run</code>. The method <code>run</code> is defined by
-Rack, and expects to be passed something that responds to the method <code>call</code>.</p>
-
-<p>That&rsquo;s why we defined a method <code>call</code> on our class. This method takes one
-argument <code>env</code>. It does not use the <code>env</code> (whatever that is), yet, but instead
-just returns the same static array whenever it is called.</p>
-
-<p>This array contains 3 things:</p>
-
-<ul>
-<li>The number 200, which represents the status code,</li>
-<li>a hash that contains a single header (the content type), and</li>
-<li>an array containing a single string, which is the body.</li>
-</ul>
-
-<p>So the method <code>call</code> returns what represents a response in Rack!</p>
-
-<p>Rack makes it so that whenever there&rsquo;s a request coming in (on the computer
-that is <code>localhost</code>, i.e. your own, local computer, and on the port 9292),
-it will turn this request into a hash that is passed to the method <code>call</code>.
-I.e. the argument <code>env</code> contains the request information. We&rsquo;ll have a look
-at that in a minute.</p>
-
-<p>Rack then expects that you return an array containing those three elements:</p>
-
-<ul>
-<li>The HTTP response code</li>
-<li>A hash of headers</li>
-<li>The response body, which must respond to each (i.e. we can just use an array)</li>
-</ul>
-
-<p>Once it got these three things back from our method <code>call</code> it will create
-the respective response (text) message out of it, and send it back to the
-browser.</p>
-
-<p>Let&rsquo;s have a look at the <code>env</code> data that is passed along with the request.
-Let&rsquo;s just print it out to the terminal as follows:</p>
-<pre class="highlight plaintext"><code>  def call(env)
-    p env
-    [200, { "Content-Type" =&gt; "text/html" }, ["Yay, your first web application! &lt;3"]]
-  end
-</code></pre>
-
-<p>In order for the server to pick up this change we need to restart it. Go to
-your terminal window where <code>rackup</code> (WEBrick) is running our app, and hit
-<code>ctrl-c</code>.  Then hit <code>cursor-up</code> to get the last command back (or type
-<code>rackup</code>), and hit <code>return</code>.</p>
-
-<p>If you now refresh the page in your browser (hit <code>cmd-r</code> or <code>ctrl-r</code> depending
-on your operating system) you should then see &hellip; wow, quite a bit of messy
-output in the logs in your terminal. For me it looks like this (some less
-interesting bits removed):</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="s2">"GATEWAY_INTERFACE"</span><span class="err">=&gt;</span><span class="s2">"CGI/1.1"</span><span class="err">,</span><span class="w"> </span><span class="s2">"PATH_INFO"</span><span class="err">=&gt;</span><span class="s2">"/"</span><span class="err">,</span><span class="w"> </span><span class="s2">"QUERY_STRING"</span><span class="err">=&gt;</span><span class="s2">""</span><span class="err">,</span><span class="w"> </span><span class="s2">"REMOTE_ADDR"</span><span class="err">=&gt;</span><span class="s2">"127.0.0.1"</span><span class="err">,</span><span class="w"> </span><span class="s2">"REM
-OTE_HOST"</span><span class="err">=&gt;</span><span class="s2">"localhost"</span><span class="err">,</span><span class="w"> </span><span class="s2">"REQUEST_METHOD"</span><span class="err">=&gt;</span><span class="s2">"GET"</span><span class="err">,</span><span class="w"> </span><span class="s2">"REQUEST_URI"</span><span class="err">=&gt;</span><span class="s2">"http://localhost:9292/"</span><span class="err">,</span><span class="w"> </span><span class="s2">"SCRIPT_NAME"</span><span class="w">
-</span><span class="err">=&gt;</span><span class="s2">""</span><span class="err">,</span><span class="w"> </span><span class="s2">"SERVER_NAME"</span><span class="err">=&gt;</span><span class="s2">"localhost"</span><span class="err">,</span><span class="w"> </span><span class="s2">"SERVER_PORT"</span><span class="err">=&gt;</span><span class="s2">"9292"</span><span class="err">,</span><span class="w"> </span><span class="s2">"SERVER_PROTOCOL"</span><span class="err">=&gt;</span><span class="s2">"HTTP/1.1"</span><span class="err">,</span><span class="w"> </span><span class="s2">"SERVER_SOFTWAR
-E"</span><span class="err">=&gt;</span><span class="s2">"WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_HOST"</span><span class="err">=&gt;</span><span class="s2">"localhost:9292"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_ACCEPT_LANGUAGE"</span><span class="err">=&gt;</span><span class="s2">"en
--US,en;q=0.8,de;q=0.6"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_CACHE_CONTROL"</span><span class="err">=&gt;</span><span class="s2">"max-age=0"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_ACCEPT_ENCODING"</span><span class="err">=&gt;</span><span class="s2">"gzip"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_ACCEPT
-"</span><span class="err">=&gt;</span><span class="s2">"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_USER_AGENT"</span><span class="err">=&gt;</span><span class="s2">"Mo
-zilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.1
-35 Safari/537.36"</span><span class="err">,</span><span class="w"> </span><span class="s2">"rack.version"</span><span class="err">=&gt;[1,</span><span class="w"> </span><span class="err">3],</span><span class="w"> </span><span class="s2">"rack.url_scheme"</span><span class="err">=&gt;</span><span class="s2">"http"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_VERSION"</span><span class="err">=&gt;</span><span class="s2">"HTTP/1.1"</span><span class="err">,</span><span class="w"> </span><span class="s2">"REQU
-EST_PATH"</span><span class="err">=&gt;</span><span class="s2">"/"</span><span class="err">}</span><span class="w">
-</span></code></pre>
-
-<p>What does all of this stuff mean?</p>
-
-<p>First of all, you can see that it&rsquo;s a Ruby hash with lots of keys that are all
-strings. Then, most of these strings are all upper case with an underscore <code>_</code>
-as a word separator. Some of these start with <code>HTTP_</code>, while others don&rsquo;t.
-However, there also are some keys that start with <code>rack</code>, and are all
-lowercase.</p>
-
-<p>Rack uses a simple convention for these keys:</p>
-
-<ul>
-<li>All headers that have been part of the actual HTTP request are prefixed with
-<code>HTTP</code> and uppercased. For example the request header <code>host: localhost:9292</code>
-will be translated to the hash key <code>HTTP_HOST</code> with the value <code>localhost:9292</code>.</li>
-<li>All other uppercase keys represent additional information that has been
-passed (added) from the webserver that has received the request (in this case
-WEBRick, which runs our little Rack application). For example, WEBRick adds
-the key <code>PATH_INFO</code> with the resource (path), as well as the key
-<code>REQUEST_METHOD</code> with the verb (method) from the HTTP request. These weren&rsquo;t
-headers in the request, but obvioulsy part of it. On top of this, WEBRick
-also adds other things, such as the <code>SERVER_SOFTWARE</code> key (telling us which
-WEBRick and Ruby version we are using), and so on.</li>
-<li>All keys that are prefixed with <code>rack.</code> represent internal additions that
-Rack adds.</li>
-</ul>
-
-<p>Let&rsquo;s write a little bit of code to make this more easy for us to inspect:</p>
-<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
-  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="n">inspect_env</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-    <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]]</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">inspect_env</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="p">[</span><span class="n">request_headers</span><span class="p">(</span><span class="n">env</span><span class="p">),</span> <span class="n">server_info</span><span class="p">(</span><span class="n">env</span><span class="p">),</span> <span class="n">rack_info</span><span class="p">(</span><span class="n">env</span><span class="p">)]</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">request_headers</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-    <span class="n">pairs</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="n">key</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'HTTP_'</span><span class="p">)</span> <span class="p">}</span>
-    <span class="nb">format</span><span class="p">(</span><span class="s1">'Request headers'</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">server_info</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-    <span class="n">pairs</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">reject</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="n">key</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'HTTP_'</span><span class="p">)</span> <span class="o">||</span> <span class="n">key</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'rack.'</span><span class="p">)</span> <span class="p">}</span>
-    <span class="nb">format</span><span class="p">(</span><span class="s1">'Server info'</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">rack_info</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-    <span class="n">pairs</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="n">key</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'rack.'</span><span class="p">)</span> <span class="p">}</span>
-    <span class="nb">format</span><span class="p">(</span><span class="s1">'Rack info'</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="n">heading</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
-    <span class="n">pairs</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="s1">'  '</span> <span class="o">+</span> <span class="p">[</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">.</span><span class="nf">inspect</span><span class="p">].</span><span class="nf">join</span><span class="p">(</span><span class="s1">': '</span><span class="p">)</span> <span class="p">}</span>
-    <span class="p">[</span><span class="n">heading</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">].</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>Again, after changing your code, you&rsquo;ll need to restart your server application.</p>
-
-<p>For me this outputs the following (again, stripping some of the less interesting bits):</p>
-<pre class="highlight plaintext"><code>Request headers
-
-  HTTP_HOST: "localhost:9292"
-  HTTP_REFERER: "http://localhost:9292/"
-  HTTP_ACCEPT_LANGUAGE: "en-US,en;q=0.8,de;q=0.6"
-  HTTP_ACCEPT_ENCODING: "gzip"
-  HTTP_USER_AGENT: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36"
-  HTTP_ACCEPT: "*/*"
-  HTTP_VERSION: "HTTP/1.1"
-
-Server info
-
-  GATEWAY_INTERFACE: "CGI/1.1"
-  PATH_INFO: "/favicon.ico"
-  QUERY_STRING: ""
-  REMOTE_ADDR: "127.0.0.1"
-  REMOTE_HOST: "localhost"
-  REQUEST_METHOD: "GET"
-  REQUEST_URI: "http://localhost:9292/"
-  SCRIPT_NAME: ""
-  SERVER_NAME: "localhost"
-  SERVER_PORT: "9292"
-  SERVER_PROTOCOL: "HTTP/1.1"
-  SERVER_SOFTWARE: "WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)"
-  REQUEST_PATH: "/"
-
-Rack info
-
-  rack.version: [1, 3]
-  rack.url_scheme: "http"
-</code></pre>
-
-<p>Now, that&rsquo;s way easier to read, right?</p>
-
-<p>Out of all of this the most interesting keys for us are <code>REQUEST_METHOD</code> and
-<code>REQUEST_PATH</code>.</p>
-
-<p>Let&rsquo;s modify our app a little so we can make use of it:</p>
-<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
-  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-    <span class="c1"># puts inspect_env(env)</span>
-    <span class="n">handle_request</span><span class="p">(</span><span class="n">env</span><span class="p">[</span><span class="s1">'REQUEST_METHOD'</span><span class="p">],</span> <span class="n">env</span><span class="p">[</span><span class="s1">'REQUEST_PATH'</span><span class="p">])</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">handle_request</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">method</span> <span class="o">==</span> <span class="s2">"GET"</span>
-      <span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">else</span>
-      <span class="n">method_not_allowed</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"You have requested the path </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">, using GET"</span><span class="p">]]</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">method_not_allowed</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
-    <span class="p">[</span><span class="mi">405</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s2">"Method not allowed: </span><span class="si">#{</span><span class="nb">method</span><span class="si">}</span><span class="s2">"</span><span class="p">]]</span>
-  <span class="k">end</span>
-
-  <span class="c1"># ...</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>If you restart your server, and point your browser to
-<a href="http://localhost:9292/ruby/monstas"><a href="http://localhost:9292/ruby/monstas">http://localhost:9292/ruby/monstas</a></a>
-you should now see something like this:</p>
-
-<p><img src="/assets/images/rack_2-afc29997.png"></p>
-
-<p>If you read the code above closely, do you understand what it does, and why?</p>
-
-<p>We have changed the method <code>call</code> to extract the two pieces of information that
-are most interesting to us from the <code>env</code> hash: these are the values for the
-keys <code>REQUEST_METHOD</code> and <code>REQUEST_PATH</code>.</p>
-
-<p>We then pass these two values to a new method <code>handle_request</code>, which checks
-the <code>method</code>:</p>
-
-<ul>
-<li><p>If it&rsquo;s a <code>GET</code> request, then we call another method <code>get</code>, passing the <code>path</code>.
-The method <code>get</code> complies with Rack&rsquo;s convention for returning a response: It
-returns an array that has the response status, headers, and a body. We&rsquo;ve
-changed the body a little bit so it displays the <code>path</code> that was requested.</p></li>
-<li><p>If it&rsquo;s not a <code>GET</code> request, then we call another method <code>method_not_allowed</code>.
-This method also complies with Rack&rsquo;s convention, but returns a different
-response. This time we use the status code <code>405</code> which means exactly this:
-<em>&ldquo;Method Not Allowed&rdquo;</em>. Our little application just does not support any other
-methods.</p></li>
-</ul>
-
-<p>Because these response arrays are the return values of these two methods,
-they&rsquo;ll also be the return value of the method <code>handle_request</code>, and it turn
-the method <code>call</code>. So they&rsquo;ll be passed back to Rack, and turned into the
-actual HTTP response that is returned to your browser.</p>
-
-<p>Congratulations!</p>
-
-<p>You have just written your first web application, and it responds to different
-requests with (albeit only slightly) different responses.</p>
-
-<p>Imagine working on this application more, and returning different HTML pages
-based on the <code>path</code> that is part of the request: You could use the ERB
-rendering method from the <a href="/bonus_2/erb.html">previous chapter about
-ERB</a> in order to render different ERB templates.</p>
-
-<p>And guess what, this is exactly what Sinatra makes super easy :)</p>
+<p>In praxis you may never build an application with Rack directly, but you&rsquo;ll use
+it when you work on Sinatra or Rails applications, since these use Rack under
+the hood.</p>
 
         <nav class="page-nav"><a class="prev" href="/http.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/sinatra.html">
+        <nav class="page-nav"><a class="next" href="/rack/hello_world.html">
   Next
 </a></nav>
       </article>

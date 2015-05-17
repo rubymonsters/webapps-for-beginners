@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory expanded">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -185,43 +246,51 @@
         <h1>Rendering templates</h1>
 
 <p>So far, our application does not actually return HTML, it returns just plain
-text. Let&rsquo;s fix that. For this we&rsquo;ll want to re-use what we&rsquo;ve learned about
-rendering ERB templates.</p>
+text.</p>
 
-<p>In order to use ERB we need to require it, we need to define a ERB template,
-and make any variables used in the template known as local variables in our
-route:</p>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"erb"</span>
+<p>Let&rsquo;s fix that.</p>
+
+<p>For this we&rsquo;ll want to re-use what we&rsquo;ve learned about rendering ERB templates.
+In order to use ERB we need to require it, define an ERB template, and make any
+variables used in the template known as local variables in our route:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"sinatra"</span>
+<span class="nb">require</span> <span class="s2">"erb"</span>
 
 <span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
-  <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
-  <span class="no">ERB</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;"</span><span class="p">).</span><span class="nf">result</span><span class="p">(</span><span class="nb">binding</span><span class="p">)</span>
+  <span class="no">ERB</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"&lt;h1&gt;Hello &lt;%= params[:name] %&gt;&lt;/h1&gt;"</span><span class="p">).</span><span class="nf">result</span><span class="p">(</span><span class="nb">binding</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
-<p>This code is familiar to you, isn&rsquo;t it? We get the name out of the params hash
-and stick it into a local variable <code>name</code> because that&rsquo;s the variable name we&rsquo;re
-using in our template, too.</p>
+<p>This code is familiar to you, isn&rsquo;t it?</p>
+
+<p>We get use <code>params[:name]</code> in the template because <code>params</code> is &ldquo;known&rdquo; in the
+scope that is passed as part of the <code>binding</code>. The rest is just the same
+as in our examples in the chapters about <a href="/erb.html">ERB</a></p>
 
 <p>If you restart the server, and reload the page in your browser, it should now
 look like this:</p>
 
 <p><img src="/assets/images/sinatra_2-731564c1.png"></p>
 
-<p>Awesome.</p>
+<p>Awesome, we&rsquo;re now serving HTML.</p>
 
-<p>However, Sinatra also has built-in support for ERB templates (&ldquo;views&rdquo;), and
-allows us to achieve exactly the same thing like this:</p>
+<p>However, Sinatra also has built-in support for ERB templates (&ldquo;views&rdquo;). We can
+achieve exactly the same thing without spelling out the
+<code>ERB.new(...).result(binding)</code> noise:</p>
 <pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
   <span class="n">erb</span> <span class="s2">"&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;"</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">}</span> <span class="p">}</span>
 <span class="k">end</span>
 </code></pre>
 
-<p>I.e. Sinatra has a method <code>erb</code>, that hides all the details of rendering the
-template from us, and also accepts a template. On top of this, it also accepts
-a hash that allows us to specify options. If we specify a key <code>:locals</code> and
-give it another hash, then Sinatra will make each key/value pair on this hash
-available as <em>local</em> variables (thus &ldquo;locals&rdquo;) in our ERB template.</p>
+<p>I.e. Sinatra has a method <code>erb</code> that hides all the details of rendering the
+template from us, and also accepts a template.</p>
+
+<p>On top of this, it also accepts a hash that allows us to specify various
+options. If we specify a key <code>:locals</code> and give it another hash, then Sinatra
+will make each key/value pair on this hash available as <em>local</em> variables (thus
+&ldquo;locals&rdquo;) in our ERB template.</p>
+
+<p>We think that&rsquo;s much nicer.</p>
 
         <nav class="page-nav"><a class="prev" href="/sinatra/params.html">
   Previous

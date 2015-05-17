@@ -30,11 +30,35 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/erb/erb_templates.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/erb/rendering_erb.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/erb/bindings.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/erb.html</loc>
       <priority>0.5</priority>
     </url>
     <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/http.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/rack/hello_world.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/rack/rack_env.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/rack/method_path.html</loc>
       <priority>0.5</priority>
     </url>
     <url>
@@ -51,6 +75,10 @@
     </url>
     <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/hello_world.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sinatra/routes.html</loc>
       <priority>0.5</priority>
     </url>
     <url>
@@ -78,6 +106,18 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/forms/form_tag.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/forms/submitting_data.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/forms/accessing_data.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/forms.html</loc>
       <priority>0.5</priority>
     </url>
@@ -98,6 +138,10 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/storing_data/redirect.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/storing_data.html</loc>
       <priority>0.5</priority>
     </url>
@@ -106,15 +150,15 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/validations.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/resources.html</loc>
       <priority>0.5</priority>
     </url>
     <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/</loc>
-      <priority>0.5</priority>
-    </url>
-    <url>
-      <loc>http://webapps-for-beginners.rubymonstas.org/validations.html</loc>
       <priority>0.5</priority>
     </url>
 </urlset>

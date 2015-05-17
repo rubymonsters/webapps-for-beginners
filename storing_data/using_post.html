@@ -19,7 +19,7 @@
     <nav class="page-nav"><a class="prev" href="/storing_data/listing_names.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/sessions.html">
+    <nav class="page-nav"><a class="next" href="/storing_data/redirect.html">
   Next
 </a></nav>
 
@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory expanded">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -184,11 +245,12 @@
         <nav class="menu"><a href="#"></a></nav>
         <h1>Using POST</h1>
 
-<p>Ok, that&rsquo;s pretty cool. However, there&rsquo;s one big problem with our application
-that we definitely want to fix.</p>
+<p>Ok, our little application is already pretty cool, isn&rsquo;t it?</p>
 
-<p>The HTTP specification says that <code>GET</code> requests should be safe, and idempotent.
-What does that mean? <a href="http://en.wikipedia.org/wiki/Idempotence">Wikipedia says</a>:</p>
+<p>However, there&rsquo;s one big problem that we definitely want to fix: The HTTP
+specification says that <code>GET</code> requests should be safe, and idempotent.</p>
+
+<p>What does that mean? <a href="http://en.wikipedia.org/wiki/Idempotence">Wikipedia says</a>:</p>
 
 <p><em>&ldquo;Idempotence is the property of certain operations in mathematics and computer
 science, that can be applied multiple times without changing the result beyond
@@ -220,8 +282,14 @@ request we add this as an attribute to the <code>&lt;form&gt;</code> tag like so
 <p>When you reload the page, and try to submit the form again, you&rsquo;ll get
 Sinatra&rsquo;s 404 (Not Found) page though: &ldquo;Sinatra doesn’t know this ditty.&rdquo;</p>
 
-<p>Of course, we do not have a route for <code>POST</code> requests, yet. So let&rsquo;s add
-one, and more the logic for storing the name to it:</p>
+<p>Of course!</p>
+
+<p>We do not have a route for <code>POST</code> requests, yet. Remember how the HTTP
+verb is a key part of the HTTP request? And that Sinatra wants us to
+use these verbs in order to define our route?</p>
+
+<p>So let&rsquo;s add one, and move the logic for storing the name to the new
+route:</p>
 <pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
   <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
   <span class="n">erb</span> <span class="ss">:monstas</span>
@@ -232,9 +300,12 @@ one, and more the logic for storing the name to it:</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>Cool, our <code>get</code> route is now idempotent (it does not change any state), and we
-also have a <code>post</code> route for the same path, and we store the name if there is
-one. However, what should we now send back to the browser in response?</p>
+<p>Cool!</p>
+
+<p>Our <code>get</code> route is now idempotent (it does not change any state), and we also
+have a <code>post</code> route for the same path, and we store the name if there is one.</p>
+
+<p>However, what should we now send back to the browser in response?</p>
 
 <p>For starters, we could just send a little confirmation:</p>
 <pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
@@ -247,41 +318,13 @@ one. However, what should we now send back to the browser in response?</p>
 
 <p>Hmmmm. Ok, this isn&rsquo;t too bad, we could make this a proper HTML template.</p>
 
-<p>However, in today&rsquo;s web applications it is more common to redirect the browser
-to the page that displays the changed state: The web application would respond
-to the <code>POST</code> request by saying <em>&ldquo;Alright, I&rsquo;ve done this. Go here to check it
-out.&rdquo;</em></p>
-
-<p>The way of expressing this in terms of HTTP is by the way of returning the
-status code <code>303</code> (&ldquo;See Other&rdquo;), and adding a <code>location</code> header to the response
-that tells the browser where to go (what to <code>GET</code>) next.</p>
-
-<p>Sinatra lets us do this like so:</p>
-<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
-  <span class="n">redirect</span> <span class="s2">"/monstas"</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>The <code>redirect</code> method will make sure our application responds with the status
-code <code>303</code> and add a <code>location</code> header to the response with the value
-<code>http://localhost:4567/monstas</code> (since we have passed the path <code>/monstas</code>, but the
-<code>location</code> header needs a full URL).</p>
-
-<p>If you restart the server, go to <a href="http://localhost:4567/monstas"><a href="http://localhost:4567/monstas">http://localhost:4567/monstas</a></a>,
-and submit the form you&rsquo;ll see that your browser will be redirected, and make
-a new <code>GET</code> request to the same URL.</p>
-
-<p>So this is pretty cool. We now have two routes. One for displaying (<code>GET</code>ing)
-the current state of our application, and one for storing (<code>POST</code>ing) new data.</p>
-
-<p>Awesome!</p>
+<p>However, where would the user go next? Shouldn&rsquo;t we display the updated
+list of all the names next?</p>
 
         <nav class="page-nav"><a class="prev" href="/storing_data/listing_names.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/sessions.html">
+        <nav class="page-nav"><a class="next" href="/storing_data/redirect.html">
   Next
 </a></nav>
       </article>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>The Rack Env | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/rack/hello_world.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/rack/method_path.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby Load Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory expanded">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li class="active">
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/sessions.html">
+      Sessions
+    </a>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li>
+    <a href="/resources.html">
+      Resources
+    </a>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>The Rack Env</h1>
+
+<p>Let&rsquo;s have a look at the <code>env</code> data that is passed along with the request.
+Let&rsquo;s just print it out to the terminal as follows:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="nb">p</span> <span class="n">env</span>
+    <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]]</span>
+  <span class="k">end</span>
+</code></pre>
+
+<p>In order for the server to pick up this change we need to restart it. Go to
+your terminal window where <code>rackup</code> (WEBrick) is running our app, and hit
+<code>ctrl-c</code>.  Then hit <code>cursor-up</code> to get the last command back (or type
+<code>rackup</code>), and hit <code>return</code>.</p>
+
+<p>If you now refresh the page in your browser (hit <code>cmd-r</code> or <code>ctrl-r</code> depending
+on your operating system) you should then see &hellip; wow, quite a bit of messy
+output in the logs in your terminal. For me it looks like this (some less
+interesting bits removed):</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="s2">"GATEWAY_INTERFACE"</span><span class="err">=&gt;</span><span class="s2">"CGI/1.1"</span><span class="err">,</span><span class="w"> </span><span class="s2">"PATH_INFO"</span><span class="err">=&gt;</span><span class="s2">"/"</span><span class="err">,</span><span class="w"> </span><span class="s2">"QUERY_STRING"</span><span class="err">=&gt;</span><span class="s2">""</span><span class="err">,</span><span class="w"> </span><span class="s2">"REMOTE_ADDR"</span><span class="err">=&gt;</span><span class="s2">"127.0.0.1"</span><span class="err">,</span><span class="w"> </span><span class="s2">"REM
+OTE_HOST"</span><span class="err">=&gt;</span><span class="s2">"localhost"</span><span class="err">,</span><span class="w"> </span><span class="s2">"REQUEST_METHOD"</span><span class="err">=&gt;</span><span class="s2">"GET"</span><span class="err">,</span><span class="w"> </span><span class="s2">"REQUEST_URI"</span><span class="err">=&gt;</span><span class="s2">"http://localhost:9292/"</span><span class="err">,</span><span class="w"> </span><span class="s2">"SCRIPT_NAME"</span><span class="w">
+</span><span class="err">=&gt;</span><span class="s2">""</span><span class="err">,</span><span class="w"> </span><span class="s2">"SERVER_NAME"</span><span class="err">=&gt;</span><span class="s2">"localhost"</span><span class="err">,</span><span class="w"> </span><span class="s2">"SERVER_PORT"</span><span class="err">=&gt;</span><span class="s2">"9292"</span><span class="err">,</span><span class="w"> </span><span class="s2">"SERVER_PROTOCOL"</span><span class="err">=&gt;</span><span class="s2">"HTTP/1.1"</span><span class="err">,</span><span class="w"> </span><span class="s2">"SERVER_SOFTWAR
+E"</span><span class="err">=&gt;</span><span class="s2">"WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_HOST"</span><span class="err">=&gt;</span><span class="s2">"localhost:9292"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_ACCEPT_LANGUAGE"</span><span class="err">=&gt;</span><span class="s2">"en
+-US,en;q=0.8,de;q=0.6"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_CACHE_CONTROL"</span><span class="err">=&gt;</span><span class="s2">"max-age=0"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_ACCEPT_ENCODING"</span><span class="err">=&gt;</span><span class="s2">"gzip"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_ACCEPT
+"</span><span class="err">=&gt;</span><span class="s2">"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_USER_AGENT"</span><span class="err">=&gt;</span><span class="s2">"Mo
+zilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.1
+35 Safari/537.36"</span><span class="err">,</span><span class="w"> </span><span class="s2">"rack.version"</span><span class="err">=&gt;[1,</span><span class="w"> </span><span class="err">3],</span><span class="w"> </span><span class="s2">"rack.url_scheme"</span><span class="err">=&gt;</span><span class="s2">"http"</span><span class="err">,</span><span class="w"> </span><span class="s2">"HTTP_VERSION"</span><span class="err">=&gt;</span><span class="s2">"HTTP/1.1"</span><span class="err">,</span><span class="w"> </span><span class="s2">"REQU
+EST_PATH"</span><span class="err">=&gt;</span><span class="s2">"/"</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<p>Woha! What does all of this stuff mean?</p>
+
+<p>First of all, you can see that it&rsquo;s a Ruby hash with lots of keys that are all
+strings. Then, most of these strings are all upper case with an underscore <code>_</code>
+as a word separator. Some of these start with <code>HTTP_</code>, while others don&rsquo;t.
+However, there also are some keys that start with <code>rack</code>, and are all
+lowercase.</p>
+
+<p>Rack uses a simple convention for these keys:</p>
+
+<ul>
+<li>All headers that have been part of the actual HTTP request are prefixed with
+<code>HTTP</code> and uppercased. For example the request header <code>host: localhost:9292</code>
+will be translated to the hash key <code>HTTP_HOST</code> with the value <code>localhost:9292</code>.</li>
+<li>All other uppercase keys represent additional information that has been
+passed (added) from the webserver that has received the request (in this case
+WEBRick, which runs our little Rack application). For example, WEBRick adds
+the key <code>PATH_INFO</code> with the resource (path), as well as the key
+<code>REQUEST_METHOD</code> with the verb (method) from the HTTP request. These weren&rsquo;t
+headers in the request, but obvioulsy part of it. On top of this, WEBRick
+also adds other things, such as the <code>SERVER_SOFTWARE</code> key (telling us which
+WEBRick and Ruby version we are using), and so on.</li>
+<li>All keys that are prefixed with <code>rack.</code> represent internal additions that
+Rack adds.</li>
+</ul>
+
+<p>Let&rsquo;s write a little bit of code to make this more easy for us to inspect:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="n">inspect_env</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]]</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">inspect_env</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="p">[</span><span class="n">request_headers</span><span class="p">(</span><span class="n">env</span><span class="p">),</span> <span class="n">server_info</span><span class="p">(</span><span class="n">env</span><span class="p">),</span> <span class="n">rack_info</span><span class="p">(</span><span class="n">env</span><span class="p">)]</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">request_headers</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="n">key</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'HTTP_'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="nb">format</span><span class="p">(</span><span class="s1">'Request headers'</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">server_info</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">reject</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="n">key</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'HTTP_'</span><span class="p">)</span> <span class="o">||</span> <span class="n">key</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'rack.'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="nb">format</span><span class="p">(</span><span class="s1">'Server info'</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">rack_info</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="n">key</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'rack.'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="nb">format</span><span class="p">(</span><span class="s1">'Rack info'</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="n">heading</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="s1">'  '</span> <span class="o">+</span> <span class="p">[</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">.</span><span class="nf">inspect</span><span class="p">].</span><span class="nf">join</span><span class="p">(</span><span class="s1">': '</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">[</span><span class="n">heading</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">].</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Again, after changing your code, you&rsquo;ll need to restart your server application.</p>
+
+<p>For me this outputs the following (again, stripping some of the less interesting bits):</p>
+<pre class="highlight plaintext"><code>Request headers
+
+  HTTP_HOST: "localhost:9292"
+  HTTP_REFERER: "http://localhost:9292/"
+  HTTP_ACCEPT_LANGUAGE: "en-US,en;q=0.8,de;q=0.6"
+  HTTP_ACCEPT_ENCODING: "gzip"
+  HTTP_USER_AGENT: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36"
+  HTTP_ACCEPT: "*/*"
+  HTTP_VERSION: "HTTP/1.1"
+
+Server info
+
+  GATEWAY_INTERFACE: "CGI/1.1"
+  PATH_INFO: "/"
+  QUERY_STRING: ""
+  REMOTE_ADDR: "127.0.0.1"
+  REMOTE_HOST: "localhost"
+  REQUEST_METHOD: "GET"
+  REQUEST_URI: "http://localhost:9292/"
+  SCRIPT_NAME: ""
+  SERVER_NAME: "localhost"
+  SERVER_PORT: "9292"
+  SERVER_PROTOCOL: "HTTP/1.1"
+  SERVER_SOFTWARE: "WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)"
+  REQUEST_PATH: "/"
+
+Rack info
+
+  rack.version: [1, 3]
+  rack.url_scheme: "http"
+</code></pre>
+
+<p>Now, that&rsquo;s way easier to read, right?</p>
+
+<p>Luckily, we can just ignore most of these things. The only interesting keys for
+us are <code>REQUEST_METHOD</code> and <code>REQUEST_PATH</code>: They&rsquo;re the relevant bits from the
+HTTP request.</p>
+
+<p>Let&rsquo;s do something with them next.</p>
+
+        <nav class="page-nav"><a class="prev" href="/rack/hello_world.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/rack/method_path.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

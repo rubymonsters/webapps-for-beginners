@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Sinatra versus Rails | Webapps for Beginners</title>
+    <title>Submitting Data | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/sinatra.html">
+    <nav class="page-nav"><a class="prev" href="/forms/form_tag.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/sinatra/dsl.html">
+    <nav class="page-nav"><a class="next" href="/forms/accessing_data.html">
   Next
 </a></nav>
 
@@ -118,12 +118,12 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/sinatra.html">
       Sinatra
     </a>
     <ul>
-      <li class="active">
+      <li>
         <a href="/sinatra/sinatra_rails.html">
           Sinatra versus Rails
         </a>
@@ -170,7 +170,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/forms.html">
       Forms
     </a>
@@ -180,7 +180,7 @@
           HTML Form Tags
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/forms/submitting_data.html">
           Submitting Data
         </a>
@@ -243,41 +243,72 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Sinatra versus Rails</h1>
+        <h1>Submitting Data</h1>
 
-<p>Maybe you could compare Sinatra to a bicycle, and Rails to a car. Both do
-the job getting you from A to B.</p>
+<p>When you click a button that is a &ldquo;submit&rdquo; input element then your browser will
+submit the form that this button is part of.</p>
 
-<p>Sinatra is much more lightweight, needs less resources, and does fewer things
-out of the box. Rails on the other hand is packed with features, comes with a
-ton of code, and makes it very easy to build complicated web applications in
-limited time, if you know how to use it.</p>
+<p>But to where? If we do not specify anything else the browser will submit it to
+the same URL that we are currently looking at, which is, in our case the path
+<code>/monstas</code>.</p>
 
-<p>With Rails every little piece of code in your application has a precisely
-defined place. So when you look at any other Rails application you know exactly
-what&rsquo;s were, and can get started immediately. Sinatra on the other hand defines
-almost nothing for you. People come up with their own structures, and different
-Sinatra applications can look very different.</p>
+<p>We might as well specify it: this helps making clear what&rsquo;s going on.
+Curiously, the attribute is called <code>action</code> (and not <code>target</code> or <code>url</code> as one
+might expect):</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
 
-<p>Of course, because it&rsquo;s lightweight, Sinatra also is much faster than Rails,
-and this is where our little metaphor ended fairly quickly :) Rack, by the way,
-would be a pair of shoes. Sinatra and Rails both use Rack under the hood.</p>
+<p>Now, what does &ldquo;submit&rdquo; mean, exactly, in this context?</p>
 
-<p>So which one is better for a beginner?</p>
+<p>We said browsers speak HTTP when they talk to a web server (our Sinatra
+application), so &ldquo;submitting&rdquo; a form means making another HTTP request. Again,
+if we do not specify anything else, the default method will be <code>GET</code>.</p>
 
-<p>Both are great :) Sinatra is great for learning the basics of HTTP and routing.
-Rails on the other hand is better for learning how to use a database, and
-actually store things, learn the concept of a &ldquo;resource&rdquo; etc.</p>
+<p>So our browser makes another <code>GET</code> request with the path <code>/monstas</code>. This
+basically just reloads the page, and displays the same form again, served from
+our <code>get &quot;/monstas&quot;</code> route. This also explains why the text in the input field
+goes away.</p>
 
-<p>Also, next to Sinatra and Rails there are, of course, lots of other frameworks
-for building web applications. For example,
-<a href="http://lotusrb.org">Lotus</a> has gained popularity quite quickly
-recently.</p>
+<p>Ok, where does the question mark come from though?</p>
 
-        <nav class="page-nav"><a class="prev" href="/sinatra.html">
+<p>When the browser submits the form it collects all the data from the form input
+elements, and sends it along with the HTTP request. In the case of a <code>GET</code>
+request <a href="#footnote-1">[1]</a> it will append it to the URL, after a
+question mark, as name/value pairs. These are called &ldquo;query parameters&rdquo; in
+HTTP.</p>
+
+<p>However, our form input text element does not a name, and so the browser cannot
+pass it in a meaningful way.</p>
+
+<p>So let&rsquo;s change that, and specify a name for our text input. Since we want
+the user to input their name, the name of our input should be <code>name</code>:</p>
+<pre class="highlight html"><code>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<p>If you restart the application, reload the page, and again enter some text and
+click submit &hellip; you should see that the URL changes to something like
+<code>http://localhost:4567/monstas?name=Monstas</code>.</p>
+
+<p>Aha!</p>
+
+<p>So that&rsquo;s how the browser passes our input to the application. It just appends
+it to the URL as query parameters (name/value pairs).</p>
+
+<p>Now, how can we make use of this form data in our application?</p>
+
+<p>Footnotes:</p>
+
+<p><a name="#footnote-1">[1]</a> You&rsquo;ll see later that form data is passed as part
+of the request body in case of <code>POST</code> requests. The request body is able to
+hold much more data than the URL, which is limited in its length.</p>
+
+        <nav class="page-nav"><a class="prev" href="/forms/form_tag.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/sinatra/dsl.html">
+        <nav class="page-nav"><a class="next" href="/forms/accessing_data.html">
   Next
 </a></nav>
       </article>

@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/sinatra/hello_world.html">
+    <nav class="page-nav"><a class="prev" href="/sinatra/routes.html">
   Previous
 </a></nav>
     <nav class="page-nav"><a class="next" href="/sinatra/templates.html">
@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory expanded">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li class="active">
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -184,8 +245,22 @@
         <nav class="menu"><a href="#"></a></nav>
         <h1>Params</h1>
 
-<p>Sinatra allows specifying patterns for paths. It will match the pattern
-against the path, and see if it applies. Let&rsquo;s try that out.</p>
+<p>Now, sometimes the request path contains dynamic data.</p>
+
+<p>For example, the path of the URL <a href="https://rubygems.org/gems/middleman"><a href="https://rubygems.org/gems/middleman">https://rubygems.org/gems/middleman</a></a>
+is <code>/gems/middleman</code>. The path of the details page for the gem Rack on
+RubyGems.org is <code>/gems/rack</code>, the path for Sinatra is <code>/gems/sinatra</code>, and so
+on.</p>
+
+<p>Obviously we don&rsquo;t want to hardcode (&ldquo;write out literally&rdquo;) all these names in
+our application code: We don&rsquo;t want to change our code for each and every new
+gem that is added. Instead we want to be able to express <em>&ldquo;a path that starts
+with <code>/gems</code> followed by another, second segment&rdquo;</em>.</p>
+
+<p>In Sinatra we can do this by specifying pattern as a path. Sinatra will then
+match the pattern against the path, and see if it applies.</p>
+
+<p>Let&rsquo;s try that out.</p>
 
 <p>Add the following route (request handler) to your program, at the end of the
 file:</p>
@@ -194,7 +269,7 @@ file:</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>&hellip; and restart your Sinatra application, then point your browser to
+<p>Restart your Sinatra application, and point your browser to
 <a href="http://localhost:4567/hello/monstas"><a href="http://localhost:4567/hello/monstas">http://localhost:4567/hello/monstas</a></a>.</p>
 
 <p>How does this work?</p>
@@ -204,9 +279,10 @@ it will automatically include relevant data from the request.</p>
 
 <p>In our case our route specifies a path that is a pattern: the last part of the
 path starts with a colon <code>:</code>. This tells Sinatra that we&rsquo;d like to accept any
-string here, and that we&rsquo;d like to call this string <code>name</code>. Sinatra therefore
-adds the key <code>&quot;name&quot;</code> to the <code>params</code> hash, and sets the given string from the
-path (i.e. from the URL) to it.</p>
+string here, and that we&rsquo;d like to call this string <code>name</code>.</p>
+
+<p>Sinatra therefore adds the key <code>&quot;name&quot;</code> to the <code>params</code> hash, and sets the
+given string from the path (i.e. from the URL) to it.</p>
 
 <p>When you point your browser to the URL
 <a href="http://localhost:4567/hello/Elizabeth"><a href="http://localhost:4567/hello/Elizabeth">http://localhost:4567/hello/Elizabeth</a></a>
@@ -231,7 +307,15 @@ routes, and we can ignore these for now.</p>
 
 <p>This is pretty cool.</p>
 
-        <nav class="page-nav"><a class="prev" href="/sinatra/hello_world.html">
+<p>The <code>params</code> hash can contain more than matches from the URL. You&rsquo;ll later see
+that it also contains any data send from HTML forms as part of the HTTP
+request. As well as any query params that can be part of the URL (separated
+with a question mark <code>?</code>).</p>
+
+<p>But for now it&rsquo;s good to know that Sinatra adds matches from the path pattern
+to the <code>params</code> hash.</p>
+
+        <nav class="page-nav"><a class="prev" href="/sinatra/routes.html">
   Previous
 </a></nav>
         <nav class="page-nav"><a class="next" href="/sinatra/templates.html">

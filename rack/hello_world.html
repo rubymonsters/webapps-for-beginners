@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Template files | Webapps for Beginners</title>
+    <title>Your first Rack app | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/sinatra/layouts.html">
+    <nav class="page-nav"><a class="prev" href="/rack.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/sinatra/instance_variables.html">
+    <nav class="page-nav"><a class="next" href="/rack/rack_env.html">
   Next
 </a></nav>
 
@@ -96,12 +96,12 @@
       HTTP
     </a>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/rack.html">
       Rack
     </a>
     <ul>
-      <li>
+      <li class="active">
         <a href="/rack/hello_world.html">
           Your first Rack app
         </a>
@@ -118,7 +118,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/sinatra.html">
       Sinatra
     </a>
@@ -158,7 +158,7 @@
           Layouts
         </a>
       </li>
-      <li class="active">
+      <li>
         <a href="/sinatra/template_files.html">
           Template files
         </a>
@@ -243,61 +243,111 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Template files</h1>
+        <h1>Your first Rack app</h1>
 
-<p>So far we&rsquo;ve defined our templates as strings right inside our route. That
-worked well because our templates were ridiculously small. Of course, any
-real application will have much bigger templates. Managing these inside
-our routes would get pretty messy pretty quickly.</p>
+<p>Let&rsquo;s jump right in.</p>
 
-<p>It is, therefore, better to store them in separate files. And again, Sinatra
-has built-in support for that: when we call the method <code>erb</code> with a symbol
-instead of a string, then Sinatra assumes this is part of a filename, and
-it will look for a template file in a directory <code>views</code>.</p>
-
-<p>Let&rsquo;s create a new directory <code>views</code>, and add a file <code>hello.erb</code>, containing
-our template:</p>
-<pre class="highlight erb"><code><span class="nt">&lt;h1&gt;</span>Hello <span class="cp">&lt;%=</span> <span class="nb">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h1&gt;</span>
-</code></pre>
-
-<p>Also, add a file <code>layout.erb</code> with our layout template:</p>
-<pre class="highlight erb"><code><span class="nt">&lt;html&gt;&lt;body&gt;</span><span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span><span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
-</code></pre>
-
-<p>Now we are ready to change our route as follows:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
-  <span class="n">erb</span> <span class="ss">:hello</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">},</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="ss">:layout</span> <span class="p">}</span>
+<p>In a new directory <code>rack</code> create a file <code>config.ru</code> with the following content:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]]</span>
+  <span class="k">end</span>
 <span class="k">end</span>
+
+<span class="n">run</span> <span class="no">Application</span><span class="p">.</span><span class="nf">new</span>
 </code></pre>
 
-<p>Restart your application, and reload the page. You should see the same result.</p>
+<p>Now, make sure you have the gem Rack installed: In your terminal check <code>gem
+list rack</code>. Does that show something like <code>rack (1.6.1)</code> (or any other version
+number)? If it doesn&rsquo;t, install Rack with the command <code>gem install rack</code>.</p>
 
-<p>But our code looks much better this way, doesn&rsquo;t it?</p>
+<p>This gem comes with a little executable (command line program) called <code>rackup</code>.
+This command looks for a file <code>config.ru</code> in the current directory, and starts
+a web server using it.</p>
 
-<p>Interestingly, we don&rsquo;t even need the name the layout. Sinatra looks for
-this filename by default (we could specify a different name though, in case
-we need different layout templates in different contexts):</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
-  <span class="n">erb</span> <span class="ss">:hello</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">},</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">}</span>
+<p>Make sure you have <code>cd</code>ed to your <code>rack</code> directory, and then run <code>rackup</code>. You
+should see something like:</p>
+<pre class="highlight plaintext"><code>$ rackup
+[2015-05-15 18:37:42] INFO  WEBrick 1.3.1
+[2015-05-15 18:37:42] INFO  ruby 2.2.1 (2015-02-26) [x86_64-darwin14]
+[2015-05-15 18:37:42] INFO  WEBrick::HTTPServer#start: pid=17588 port=9292
+</code></pre>
+
+<p>Of course the version numbers may be different, but the important bit that
+you want to look for is the port.</p>
+
+<p>Now your web application has started you can point your browser to
+<a href="http://localhost:9292"><a href="http://localhost:9292">http://localhost:9292</a></a>. You should see
+something like this:</p>
+
+<p><img src="/assets/images/rack_1-9460dec3.png"></p>
+
+<p>Pretty cool, isn&rsquo;t it? With just a few lines of plain Ruby code you have
+just written an actual web application.</p>
+
+<p>Now, let&rsquo;s have a closer look at the code.</p>
+
+<p>We define a class <code>Application</code>, and, on the last line, create an instance
+of it, which we pass to the method <code>run</code>. The method <code>run</code> is defined by
+Rack, and expects to be passed <em>something</em> that responds to the method <code>call</code>.
+<a href="#footnote-1">[1]</a></p>
+
+<p>That&rsquo;s why we defined a method <code>call</code> on our class. This method takes one
+argument <code>env</code>. It does not use the <code>env</code> (whatever that is), yet, but instead
+just returns the same static array whenever it is called.</p>
+
+<p>This array contains 3 things:</p>
+
+<ul>
+<li>The number 200, which represents the status code,</li>
+<li>a hash that contains a single header (the content type), and</li>
+<li>an array containing a single string, which is the body.</li>
+</ul>
+
+<p>So the method <code>call</code> returns something that represents a response in Rack!</p>
+
+<p>Rack makes it so that whenever there&rsquo;s a request coming in (on the computer
+that is <code>localhost</code>, i.e. your own, local computer, and on the port 9292),
+it will turn this request into a hash that is passed to the method <code>call</code>.
+I.e. the argument <code>env</code> contains the request information. We&rsquo;ll have a look
+at that in a minute.</p>
+
+<p>Rack then expects that you return an array containing those three elements:</p>
+
+<ul>
+<li>The HTTP response code</li>
+<li>A hash of headers</li>
+<li>The response body, which must respond to each (i.e. we can just use an array)</li>
+</ul>
+
+<p>Once it got these three things back from our method <code>call</code> it will create
+the respective response (text) message out of it, and send it back to the
+browser.</p>
+
+<p>Great!</p>
+
+<p>Footnotes:</p>
+
+<p><a name="footnote-1">[1]</a> Most examples for Rack applications will use
+a <code>Proc</code> or <code>lambda</code>, which can be called using their method <code>call</code>. Here&rsquo;s an
+example, using a lambda:</p>
+<pre class="highlight ruby"><code><span class="n">application</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">env</span><span class="o">|</span>
+  <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]]</span>
 <span class="k">end</span>
+
+<span class="n">run</span> <span class="n">application</span>
 </code></pre>
 
-<p>And finally, we can also even totally omit the option, because Sinatra
-assumes we want a layout and finds one in the <code>views</code> directory:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/hello/:name'</span> <span class="k">do</span>
-  <span class="n">erb</span> <span class="ss">:hello</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">}</span> <span class="p">}</span>
-<span class="k">end</span>
-</code></pre>
+<p>This is why the author of Rack picked <code>call</code> as the main method: Our web
+application will be &ldquo;called&rdquo; by Rack, and so it can be just an anonymous <code>Proc</code>
+or <code>lambda</code>. Pretty slick.</p>
 
-<p>If we don&rsquo;t want a layout, for some reason, then we can pass <code>:layout =&gt; false</code>
-instead.</p>
+<p>However, in our example we use a class, so we can add more methods to it later.</p>
 
-<p>Neat.</p>
-
-        <nav class="page-nav"><a class="prev" href="/sinatra/layouts.html">
+        <nav class="page-nav"><a class="prev" href="/rack.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/sinatra/instance_variables.html">
+        <nav class="page-nav"><a class="next" href="/rack/rack_env.html">
   Next
 </a></nav>
       </article>

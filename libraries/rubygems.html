@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -184,18 +245,29 @@
         <nav class="menu"><a href="#"></a></nav>
         <h1>Rubygems</h1>
 
-<p>Rubygems is Ruby&rsquo;s package manager. A gem is a library that has been prepared
-in a way so it can be distributed (published and downloaded) via the internet.
-Such libraries are commonly refered to as &ldquo;packages&rdquo;, and there are many different
-package managers for different purposes. You can think of it as an app store
-that can be used to download specific versions of libraries, which you can then
-use.</p>
+<p><em>Ruby&rsquo;s package manager</em></p>
 
-<p>Gems are libraries, often quite small, sometimes big (such as Rails), that
+<p>A gem is a library that has been prepared in a way so it can be distributed
+(published and downloaded) via the internet.  Such libraries are commonly
+refered to as &ldquo;packages&rdquo;, and there are many different package managers for
+different purposes. You can think of it as an app store that can be used to
+download specific versions of libraries, which you can then use.</p>
+
+<p>A package manager is a tool that knows how to install these packages on your
+system in a way so they&rsquo;re then available to be used. That means, when you
+install a gem using Rubygems you can then <code>require</code> and use it, just as if it
+was part of the standard library.</p>
+
+<p>Gems are libraries, often quite small, sometimes quite big (such as Rails), that
 provide certain tools for solving certain problems, just like the libraries
-contained in the Ruby Standard Library. If you found the example of a library
-that helps with signing in to a web application via Google hilarious, there&rsquo;s
-actually a <a href="https://rubygems.org/gems/google-oauth/versions/0.0.2">gem for that</a> :)</p>
+contained in the Ruby Standard Library. There are tons of gems <a href="#footnote-1">[1]</a>
+for tons of purposes, so you&rsquo;ll often hear someone saying <em>&ldquo;Hah, there&rsquo;s a Gem
+for that!&rdquo;</em> If you found the example of a library that helps to &ldquo;sign in to a
+web application via Google&rdquo; hilarious, there actually is a
+<a href="https://rubygems.org/gems/google-oauth/versions/0.0.2">gem for that</a>
+:)</p>
+
+<p>So, how do you use this?</p>
 
 <p>Ruby has a built-in command line tool <code>gem</code>, which also is installed alongside
 your Ruby installation, and it allows you to manage gems on your computer.</p>
@@ -204,7 +276,7 @@ your Ruby installation, and it allows you to manage gems on your computer.</p>
 gems that are installed on your computer (for the currently selected Ruby
 version if you use a Ruby version manager, such as RVM).</p>
 
-<p>In order to install a certain gem you can type <code>gem install [the-gem-name]</code>.
+<p>In order to install a certain gem you can run <code>gem install [the-gem-name]</code>.
 E.g. <code>gem install middleman</code> would install the
 <a href="https://middlemanapp.com/">Middleman</a> library, which is a super
 handy tool for generating static web pages. This book is published using
@@ -219,11 +291,11 @@ You can see the latest version number of this gem (which is <code>4.0.0.beta.2</
 of this writing), who the authors are, useful links to their homepage, source
 code, documentation, and so on.</p>
 
-<p>You can also see that the gem middleman depends on a variety of other gems,
+<p>You can also see that the gem Middleman depends on a variety of other gems,
 such as coffee-script, compass, execjs, and haml. This means that the authors
 of Middleman themselves make use of code which in turn is packaged as gems,
-too. This is very common. We say &ldquo;Middleman&rsquo;s dependencies are coffee-script,
-compass, &hellip;&rdquo;.</p>
+too. This is a very common thing to do. We say <em>&ldquo;Middleman&rsquo;s dependencies are
+coffee-script, compass, &hellip;&rdquo;</em></p>
 
 <p>When you run <code>gem install middleman</code> you&rsquo;ll see that this not only installs
 the Middleman gem, but also all of its dependencies, and all dependencies
@@ -231,8 +303,8 @@ that any of the dependencies might have. This means, when you install one
 gem you&rsquo;ll get all the other stuff that this gem needs, too.</p>
 
 <p>Also, each of these dependencies comes with a specification of a version number
-or range of version numbers. For example <code>~&gt; 2.2.0</code> means &ldquo;allow any version
-of this gem that starts with 2.2&rdquo;.</p>
+or range of version numbers. For example <code>~&gt; 2.2.0</code> means <em>&ldquo;allow any version
+of this gem that starts with 2.2&rdquo;</em>.</p>
 
 <p>Once installed on your computer you can use a gem in your code in just the same
 way as you use something from the Ruby Standard Library: You <code>require</code> it.</p>
@@ -242,6 +314,11 @@ a gem called <code>middleman-toc</code>
 <a href="https://github.com/rubymonsters/ruby-for-beginners/blob/master/config.rb#L1">here</a>.
 This is an extension to Middleman that allows to add a table of contents, and
 we need to <code>require</code> it before Middleman can use it.</p>
+
+<p>Footnotes:</p>
+
+<p><a name="footnote-1">[1]</a> <em>As of this writing, there are <a href="https://rubygems.org/gems">6373 gems</a>
+hosted on RubyGems.org.</em></p>
 
         <nav class="page-nav"><a class="prev" href="/libraries/standard_library.html">
   Previous

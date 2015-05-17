@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -159,6 +215,11 @@
       <li>
         <a href="/storing_data/using_post.html">
           Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
         </a>
       </li>
     </ul>
@@ -186,25 +247,29 @@
 
 <p><a href="http://en.wikipedia.org/wiki/HTML">HTML</a>, meaning &ldquo;HyperText Markup
 Language&rdquo;, is a document format used for defining the semantic structure of a
-single web page.</p>
+single web page.  One could say that HTML is what the internet is made of: All
+the websites that we are looking at every day are all defined (described) as
+HTML.</p>
 
 <p>HTML was first proposed by <a href="http://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a>
 in 1989, and layed grounds for the World Wide Web&rsquo;s huge breakthrough during
-the 1990s.</p>
+the 1990s. It is being defined by the <a href="http://en.wikipedia.org/wiki/World_Wide_Web_Consortium">W3C</a>
+and it&rsquo;s latest version is <a href="http://en.wikipedia.org/wiki/HTML5">HTML 5</a>
+which added a bunch of exciting, and useful features.</p>
 
 <p>The fundamental, primary feature of any web browser, such as Firefox, Chrome,
-Safari, is to render (display) HTML documents. Whenever you type a URL into the
-browser&rsquo;s address bar (or click a link, such as
-<a href="http://rubymonstas.org"><a href="http://rubymonstas.org">http://rubymonstas.org</a></a>) then the browser
-will send a request to this address (i.e. to some application running on some
-computer that responds to this address), and it will (in most cases) get an
-HTML document back as a response. It will then display this HTML document to
-you.</p>
+Safari, is to render (display) HTML documents:</p>
 
-<p>What does &ldquo;semantic structure&rdquo; mean?</p>
+<p>Whenever you type a URL into the browser&rsquo;s address bar (or click a link, such
+as <a href="http://rubymonstas.org"><a href="http://rubymonstas.org">http://rubymonstas.org</a></a>) then the
+browser will send a request to this address (i.e. to some application running
+on some computer that responds to this address), and it will (in most cases)
+get an HTML document back as a response, which it will display to you.</p>
 
-<p>Maybe it is best to look at an example first. This is a fairly simple HTML
-document:</p>
+<p>What is meant by &ldquo;semantic structure&rdquo; though?</p>
+
+<p>Maybe it is best to look at an example first. This is a fairly simple, but
+valid HTML document:</p>
 <pre class="highlight html"><code><span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;title&gt;</span>Ruby Monstas HTML Example<span class="nt">&lt;/title&gt;</span>
@@ -256,10 +321,9 @@ just like <code>&lt;/head&gt;</code> meaning <em>&ldquo;Ok, we&rsquo;re done wit
 main headline is [&hellip;]&rdquo;</em>, so it will display this as a headline to you. It then
 finds two <code>&lt;p&gt;</code> tags containing a few bits of plain text, so it displays two
 paragraphs. The last paragraph has an emphasized word, so it makes that one
-cursive (or something else, depending on style definitions defined elsewhere).</p>
-
-<p>Next it finds a 2nd level headline, and then an &ldquo;unordered list&rdquo;, i.e. a list
-with bullet points.</p>
+cursive (or something else, depending on style definitions defined elsewhere).
+Next it finds a 2nd level headline <code>&lt;h2&gt;</code>, and then an &ldquo;unordered list&rdquo; <code>&lt;ul&gt;</code>,
+i.e. a list with bullet points.</p>
 
 <p>It is important to understand that HTML only defines the <strong>semantic structure</strong>
 of a document. It does, as such, say nothing about the visual representation of,
@@ -267,14 +331,14 @@ for example, a headline, the spacing between paragraphs, the font family and siz
 used, any colors, borders, or even element placement: The visual representation
 is defined in a different language called <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a>
 (or by the browser&rsquo;s defaults, should there not be any custom style definition
-for this web page, as in our example).</p>
+for this web page, as in our example above).</p>
 
 <p>Why is the semantic structure of a document useful at all, even disregarding
 its visual styling when presented in the browser window?</p>
 
 <p>Maybe the simplest example is a link. In order to describe a link in text (HTML
-is just plain text, too, right?) we&rsquo;ll need to tell three pieces of information
-to the browser:</p>
+is stored as plain text) we&rsquo;ll need to tell three pieces of information to the
+browser:</p>
 
 <ul>
 <li>That we&rsquo;d like to define a link,</li>
@@ -303,7 +367,11 @@ level&rdquo;</em>, <em>&ldquo;This is a simple paragraph&rdquo;</em>, and so on.
 the information that is provided by defining the <strong>semantic structure</strong> of a
 document (as opposed to its visual representation).</p>
 
-<p>For example, the entire success of Google as a search engine relied on the fact
+<p>For example, one could apply different &ldquo;themes&rdquo;, as in, styles to the same HTML
+page depending on people&rsquo;s preferences, or depending on the device this website
+is displayed on (e.g. desktop browser windows versus mobile devices).</p>
+
+<p>But also, the entire success of Google as a search engine relied on the fact
 that the semantic structure of a document provides clues about the relevance of
 certain search terms in this document: If a word is contained in the URL, the
 document title, the toplevel headlines, then it&rsquo;s probably important. Even more

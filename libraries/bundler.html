@@ -69,20 +69,54 @@
       HTML
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/erb.html">
       Embedded Ruby
     </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/http.html">
       HTTP
     </a>
   </li>
-  <li>
+  <li class="directory">
     <a href="/rack.html">
       Rack
     </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/sinatra.html">
@@ -102,6 +136,11 @@
       <li>
         <a href="/sinatra/hello_world.html">
           Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
         </a>
       </li>
       <li>
@@ -131,10 +170,27 @@
       </li>
     </ul>
   </li>
-  <li>
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="directory">
     <a href="/storing_data.html">
@@ -161,6 +217,11 @@
           Using POST
         </a>
       </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
     </ul>
   </li>
   <li>
@@ -184,11 +245,19 @@
         <nav class="menu"><a href="#"></a></nav>
         <h1>Bundler</h1>
 
-<p>Consider an application that relies on lots and lots of gems. For example,
-a new, generated Rails application comes with a whopping 42 gems, and this
-number usually grows pretty quickly with typical Rails applications.</p>
+<p><em>Sandboxes of Gems</em></p>
 
-<p>Imagine working on an application like this over years, and there are new
+<p>Consider an application that relies on lots and lots of gems:</p>
+
+<p>For example, a new, generated Rails application comes with a whopping 42 gems,
+and this number usually grows pretty quickly with typical Rails applications.
+The application <a href="http://speakerinnen.org/">Speakerinnen Liste</a>
+does, at the time of this writing, install no less than 138 gems. Only 40 of these
+are defined in their <a href="https://github.com/rubymonsters/speakerinnen_liste/blob/master/Gemfile">Gemfile</a>,
+which are the ones that provide certain features used by the application. All
+the other 98 gems are dependencies that these 40 gems have.</p>
+
+<p>Now, imagine working on an application like this over years, and there are new
 versions of gems being published all the time. Often they&rsquo;ll update the version
 numbers of their dependencies when new versions come out, or add new gems as
 dependencies, and remove old ones.</p>
@@ -203,11 +272,14 @@ of certain gems play well with each other.</p>
 code, you&rsquo;ll simply get the latest version of this gem that is already installed
 on your computer. Assuming these versions do not conflict with each other, you
 still don&rsquo;t know if these are the exact same versions as the ones your
-co-workers have installed. And in praxis, again, this is pretty unlikely. This
-can be a source of many, often subtle, bugs that you don&rsquo;t really want to deal
-with.</p>
+co-workers have installed. And in praxis, again, this is pretty unlikely.</p>
 
-<p>This is where Bundler comes into play.</p>
+<p>All of this means that, maintaining the right versions of the right gems on
+your system manually, would be a sheer nightmare. And if you get it wrong then
+that can be a source of many, often subtle, bugs that you don&rsquo;t really want to
+deal with.</p>
+
+<p>And that&rsquo;s where Bundler comes to the rescue:</p>
 
 <p>Bundler allows you to define which gems your application depends on (in a file
 called <code>Gemfile</code>, here&rsquo;s the one we&rsquo;re using for
@@ -216,9 +288,9 @@ and then run <code>bundle install</code>. This will figure out which
 gem versions work well with each other (a task that Bundler is <em>great</em> at), and
 store the solution to this riddle to a separate file (called <code>Gemfile.lock</code>).</p>
 
-<p>These files are part of your code, and can be shared with other developers.
-When they now run <code>bundle install</code> themselves they&rsquo;ll get exactly the same gem
-versions that you also have.</p>
+<p>The <code>Gemfile</code> and <code>Gemfile.lock</code> files are part of your code, and can be shared
+with other developers. When they download your code, and run <code>bundle install</code>
+themselves they&rsquo;ll get exactly the same gem versions that you also have.</p>
 
 <p>You can think of Rubygems of a tool to install gems on your computer. Over time
 this may result in a collection of lots and lots of gems in various versions
@@ -231,9 +303,8 @@ restricts the vision of your application to only see these few gem versions,
 even though there maybe tons of other gem versions installed on your computer.</p>
 
 <p>In order to use your application with Bundler you&rsquo;d prepend the command <code>bundle
-exec</code> to whatever other command you execute in your terminal, as follows.</p>
-
-<p>Imagine you&rsquo;d normally execute your program like this:</p>
+exec</code> to whatever other command you execute in your terminal. Imagine you&rsquo;d
+normally execute your program like this:</p>
 <pre class="highlight plaintext"><code>ruby my_amazing_app.rb
 </code></pre>
 
@@ -242,8 +313,10 @@ ones defined in your <code>Gemfile.lock</code> file you would run this instead:<
 <pre class="highlight plaintext"><code>bundle exec ruby my_amazing_app.rb
 </code></pre>
 
-<p>(For Rails applications you do not have to prepend <code>bundle exec</code> by the way, as
-Rails does this itself, under the hood.)</p>
+<p class="hint">
+For Rails applications you do not have to prepend <code>bundle exec</code>, as
+Rails does this itself, under the hood.
+</p>
 
         <nav class="page-nav"><a class="prev" href="/libraries/rubygems.html">
   Previous
