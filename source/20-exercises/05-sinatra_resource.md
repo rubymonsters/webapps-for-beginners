@@ -1,10 +1,5 @@
 # Sinatra Resource
 
-This is a work in progress.
-
-We'll need to explain how to make fake `PUT` and `DELETE` requests in a
-subchapter on resources.
-
 After reading the chapter about <a href="/resources.html">Resources</a> your
 objective is to implement a resource `members` in Sinatra.
 
@@ -64,4 +59,16 @@ Finally add the `delete` and `destroy` routes:
 4. On `DELETE` to `/members/:name` remove the name from the file `names.txt`,
    and redirect to `/members`
 
+<p class="hint">
+For the two forms on the <code>edit.erb</code> and <code>delete.erb</code>
+views you'll need to apply the trick from the
+<a href="/resources/fake_methods.html">Faking HTTP verbs</a> chapter.
+</p>
+
+<p class="hint">
+If you have a hard time figuring out why a certain request does not work as
+expected try reading the logs of your Sinatra application (in your terminal).
+If that still doesn't give you a good hint try inspecting the request in your
+browser's web inspector on the network tab.
+</p>
 

@@ -46,7 +46,10 @@
     - cookies
     - sinatra_sessions
 - validations
-- resources
+- path: resources
+  children:
+    - groups_routes
+    - fake_methods
 - path: exercises
   children:
     - using_rubygems
