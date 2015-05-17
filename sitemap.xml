@@ -146,6 +146,14 @@
       <priority>0.5</priority>
     </url>
     <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sessions/cookies.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
+      <loc>http://webapps-for-beginners.rubymonstas.org/sessions/sinatra_sessions.html</loc>
+      <priority>0.5</priority>
+    </url>
+    <url>
       <loc>http://webapps-for-beginners.rubymonstas.org/sessions.html</loc>
       <priority>0.5</priority>
     </url>

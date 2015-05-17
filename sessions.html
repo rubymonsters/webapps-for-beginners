@@ -12,14 +12,14 @@
 
     <title>Sessions | Webapps for Beginners</title>
 
-    <link href="assets/stylesheets/monstas-8ef2dc26.css" rel="stylesheet" type="text/css" />
+    <link href="assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
     <nav class="page-nav"><a class="prev" href="/storing_data/redirect.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/validations.html">
+    <nav class="page-nav"><a class="next" href="/sessions/cookies.html">
   Next
 </a></nav>
 
@@ -224,10 +224,22 @@
       </li>
     </ul>
   </li>
-  <li class="active">
+  <li class="active directory expanded">
     <a href="/sessions.html">
       Sessions
     </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a href="/validations.html">
@@ -290,140 +302,14 @@ people (browsers) it is talking to: There is no concept of a conversation, or
 <p>Basically.</p>
 
 <p>However, of course there are ways to identify your users. We all know that we
-can sign in to a web application, and it would recognize who we are. Right?
-Often web applications use cookies for this.</p>
+can sign in to a web application, and it would recognize who we are. Right?</p>
 
-<p>A cookie is a little piece of information that a web application can send along
-with a response, and that will be stored by the browser. From then on, when the
-browser makes another request to the same application it will include the cookie
-to the request, sending it back to the application.</p>
-
-<p>For example, an HTTP response that sets a cookie for a user&rsquo;s prefered visual
-theme could look like this:</p>
-<pre class="highlight plaintext"><code>HTTP/1.0 200 OK
-Content-type: text/html
-Set-Cookie: theme=light
-</code></pre>
-
-<p>From now on, the browser would then include the cookie to subsequent requests:</p>
-<pre class="highlight plaintext"><code>GET /blog.html HTTP/1.1
-Host: rubymonstas.org
-Cookie: theme=light
-</code></pre>
-
-<p>This way the application could apply the &ldquo;light&rdquo; theme to the blog, because the
-user has selected it in some previous request: Cookies are a way to persist
-(keep) state (data) across multiple requests.</p>
-
-<p>Building on top of cookies, even though HTTP itself does not have a concept of a
-&ldquo;session&rdquo; (or conversation), Sinatra (just as basically any web application
-tool or framework) supports sessions. A session is a way for a web application
-to set a cookie that persists arbitrary data across multiple requests.</p>
-
-<p>Let&rsquo;s have a look how this works.</p>
-
-<p>Say we&rsquo;d like to pass a message from our <code>post</code> route to the next request, saying
-&ldquo;Successfully stored the name [name]&rdquo;. After successfully storing the name to
-the file, we&rsquo;d like to pass a message to the <code>GET</code> request that the browser is
-going to be redirected to.</p>
-
-<p>We&rsquo;d only want to display this message once right after the redirection from
-the <code>post</code> route: when we&rsquo;d reload the page it should be gone. This is called
-transient state, and a session is a great place to keep it.</p>
-
-<p>First, we need to enable the <code>:sessions</code> feature in Sinatra. You can do that
-by adding this line above of your routes:</p>
-<pre class="highlight ruby"><code><span class="n">enable</span> <span class="ss">:sessions</span>
-</code></pre>
-
-<p>Now, we want to store the message in our <code>post</code> route:</p>
-<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/hello"</span> <span class="k">do</span>
-  <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
-  <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Successfully stored the name </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">."</span>
-  <span class="n">redirect</span> <span class="s2">"/hello"</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>Ok, cool.</p>
-
-<p>This will add a <code>Set-Cookie</code> header to the reponse which has a long, messy looking, encrypted
-string as a value.</p>
-
-<p>In my browser it looks like this:</p>
-<pre class="highlight plaintext"><code>Set-Cookie: rack.session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiRWI4OTdhMDJlNDBkMDFlNjcxNWUw%0AZGI1ZWU5MzQ0YTQyMjAzYjFiZTE2YzYxNzgwMWQxYjI3NzhiOWNhYTQ4YzUG%0AOwBGSSIJY3NyZgY7AEZJIiU2ZjdjN2Y0ZmM0MTdmMGJkNjBkNmY5MmQ1NDEx%0ANGQ4ZgY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi03NGNlNDIxYTczNjMwZDY3MWViNTlkYzIzN2YyN2M5NGU3ZWU4NTRm%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLTA3NjBhNDRjMzU0%0AODIxMzJjZjIyNDQyYTBkODhjMDhiYjg1NTYyNTAGOwBGSSIIZm9vBjsARkki%0ACGJhcgY7AFQ%3D%0A; path=/; HttpOnly
-</code></pre>
-
-<p>Wow. Ok, the name of the cookie gives us a hint that this is a session, and it
-is managed by Rack, which is what Sinatra uses under the hood to persist the
-session.</p>
-
-<p>Luckily we do not need to understand how exactly it does this. All we need to
-know is that we can now use this data in the next request (the <code>GET</code> request)
-like so:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
-  <span class="vi">@message</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:message</span><span class="p">)</span>
-  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
-  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
-  <span class="n">erb</span> <span class="ss">:hello</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>I.e. we delete the key <code>:message</code> from our session (which is something very
-similar to a Ruby hash).  Deleting it will return the value that was stored on
-this key, and we assign it to the instance variable <code>@message</code>, which makes it
-available to our template.</p>
-
-<p>That means we can now use the message in our view like so:</p>
-<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
-  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
-<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-</code></pre>
-
-<p>Let&rsquo;s try it out. Restart your application, and go to <a href="http://localhost:4567"><a href="http://localhost:4567">http://localhost:4567</a></a>.
-If you enter a name, and click submit you should then see something like this:</p>
-
-<p><img src="/assets/images/sessions_1-de7ddcac.png"></p>
-
-<p>When you reload the page the message should be gone.</p>
-
-<p>How does this work?</p>
-
-<p>In our <code>post</code> route we store the message to the session hash. This has is
-something that Sinatra provides to us as developers. When we enable this
-feature then Sinatra will, after every request, store this hash to a cookie
-with the name <code>rack.session</code>, in the encrypted form that you saw above.</p>
-
-<p>We say the hash is being <a href="http://en.wikipedia.org/wiki/Serialization">serialized</a>,
-which is a fancy way of saying that it is turned into some kind of format that
-can be stored in text form. Sinatra (actually, Rack, under the hood) then also
-encrypts and signs this data, so it is safe to send it over the internet (in
-case we keep any sensitive data in it).</p>
-
-<p>Ok, so the <code>post</code> route includes the <code>Set-Cookie</code> header with this session
-cookie into its response, and sends it to the browser. The browser will, from
-now on, pass this cookie back the our application as part of every subsequent
-request.</p>
-
-<p>When our browser is now redirected to <code>GET</code> the same URL again, it passes the
-cookie, and Sinatra will, because we have the <code>:sessions</code> feature enabled,
-<em>deserialize</em> (i.e. decrypt and read) the session data, and put it into the
-hash that is returned by the method <code>session</code>, so we can work with it.</p>
-
-<p>In our <code>get</code> route we now simply always delete the key <code>:message</code> from the
-session hash. Should anything be in there it will be assigned to the <code>@message</code>
-instance variable, and the view will display it. If nothing&rsquo;s stored on the
-session key, for example when we reload the page, then deleting the key will
-simply return nil, and nothing will be displayed in the view.</p>
-
-<p>Does that make sense?</p>
-
-<p>Awesome :)</p>
+<p>Often web applications use cookies for this.</p>
 
         <nav class="page-nav"><a class="prev" href="/storing_data/redirect.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/validations.html">
+        <nav class="page-nav"><a class="next" href="/sessions/cookies.html">
   Next
 </a></nav>
       </article>

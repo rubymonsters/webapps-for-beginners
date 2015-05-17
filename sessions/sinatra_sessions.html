@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Listing all names | Webapps for Beginners</title>
+    <title>Sessions in Sinatra | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/storing_data/storing_name.html">
+    <nav class="page-nav"><a class="prev" href="/sessions/cookies.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/storing_data/using_post.html">
+    <nav class="page-nav"><a class="next" href="/validations.html">
   Next
 </a></nav>
 
@@ -192,7 +192,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/storing_data.html">
       Storing data
     </a>
@@ -207,7 +207,7 @@
           Storing the name
         </a>
       </li>
-      <li class="active">
+      <li>
         <a href="/storing_data/listing_names.html">
           Listing all names
         </a>
@@ -224,7 +224,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/sessions.html">
       Sessions
     </a>
@@ -234,7 +234,7 @@
           Cookies
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/sessions/sinatra_sessions.html">
           Sessions in Sinatra
         </a>
@@ -272,68 +272,118 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Listing all names</h1>
+        <h1>Sessions in Sinatra</h1>
 
-<p>Let&rsquo;s make it so that we can look at the list of the names in the browser
-though. This is a web application, right.</p>
+<p>Building on top of cookies, even though HTTP itself does not have a concept of a
+&ldquo;session&rdquo; (or conversation), Sinatra (just as basically any web application
+tool or framework) supports sessions.</p>
 
-<p>For this we&rsquo;ll need to read the names from the file. Again, if you ask Google
-for &ldquo;Ruby read file&rdquo; you&rsquo;ll find it&rsquo;s as simple as this:</p>
-<pre class="highlight ruby"><code><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<p>A session is a way for a web application to set a cookie that persists
+arbitrary data across multiple requests.</p>
+
+<p>Let&rsquo;s have a look how this works.</p>
+
+<p>Say we&rsquo;d like to pass a message from our <code>post</code> route to the next request, saying
+<em>&ldquo;Successfully stored the name [name]&rdquo;</em>. I.e. after storing the name to the
+file, we&rsquo;d like to pass a message to the <code>GET</code> request that the browser is
+going to be redirected to.</p>
+
+<p>We&rsquo;d only want to display this message once right after the redirection from
+the <code>post</code> route: when we&rsquo;d reload the page it should be gone. This is called
+transient state, and a session is a great place to keep it.</p>
+
+<p>First, we need to enable the <code>:sessions</code> feature in Sinatra. You can do that
+by adding this line above of your routes:</p>
+<pre class="highlight ruby"><code><span class="n">enable</span> <span class="ss">:sessions</span>
 </code></pre>
 
-<p>This returns a single, long string, which represents the content of the entire
-file. Because we store every name on a new line we can split this string with
-the newline character <code>&quot;\n&quot;</code> in order to get our names as an array:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<p>Now, we want to store the message in our <code>post</code> route:</p>
+<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/hello"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
+  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
+  <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Successfully stored the name </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">."</span>
+  <span class="n">redirect</span> <span class="s2">"/hello"</span>
 <span class="k">end</span>
 </code></pre>
 
-<p>However, this would break if there&rsquo;s no file with this name, yet. So let&rsquo;s
-a little safeguard, and return an empty array if the file does not exist:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
-  <span class="k">return</span> <span class="p">[]</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">)</span>
-  <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
+<p>Ok, cool.</p>
+
+<p>This will add a <code>Set-Cookie</code> header to the reponse which has a long, messy looking, encrypted
+string as a value.</p>
+
+<p>In my browser it looks like this:</p>
+<pre class="highlight plaintext"><code>Set-Cookie: rack.session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiRWI4OTdhMDJlNDBkMDFlNjcxNWUw%0AZGI1ZWU5MzQ0YTQyMjAzYjFiZTE2YzYxNzgwMWQxYjI3NzhiOWNhYTQ4YzUG%0AOwBGSSIJY3NyZgY7AEZJIiU2ZjdjN2Y0ZmM0MTdmMGJkNjBkNmY5MmQ1NDEx%0ANGQ4ZgY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi03NGNlNDIxYTczNjMwZDY3MWViNTlkYzIzN2YyN2M5NGU3ZWU4NTRm%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLTA3NjBhNDRjMzU0%0AODIxMzJjZjIyNDQyYTBkODhjMDhiYjg1NTYyNTAGOwBGSSIIZm9vBjsARkki%0ACGJhcgY7AFQ%3D%0A; path=/; HttpOnly
 </code></pre>
 
-<p>Does this make sense? If the file does not exist we return an empty array <code>[]</code>.
-If it exists we read it, and split the content into lines.</p>
+<p>Wow. Ok, the name of the cookie gives us a hint that this is a session, and it
+is managed by Rack, which is what Sinatra uses under the hood to persist the
+session.</p>
 
-<p>Also, let&rsquo;s store the names on an instance variable in our route, so we can
-then use it in the template later:</p>
+<p>Luckily we do not need to understand how exactly it does this. All we need to
+know is that we can now use this data in the next request (the <code>GET</code> request)
+like so:</p>
 <pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/hello"</span> <span class="k">do</span>
+  <span class="vi">@message</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:message</span><span class="p">)</span>
   <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
-  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
   <span class="n">erb</span> <span class="ss">:hello</span>
 <span class="k">end</span>
 </code></pre>
 
-<p>Now we can output the names as an unordered list (<code>&lt;ul&gt;</code>) in our <code>hello.erb</code>.</p>
+<p>I.e. we delete the key <code>:message</code> from our session (which is something very
+similar to a Ruby hash).  Deleting it will return the value that was stored on
+this key, and we assign it to the instance variable <code>@message</code>, which makes it
+available to our template.</p>
 
-<p>So let&rsquo;s replace this (we now want to display the full list):</p>
+<p>That means we can now use the message in our view like so:</p>
 <pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
 <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
 </code></pre>
 
-<p>With this:</p>
-<pre class="highlight erb"><code><span class="nt">&lt;ul&gt;</span>
-  <span class="cp">&lt;%</span> <span class="vi">@names</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="cp">%&gt;</span>
-    <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="nb">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
-  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-<span class="nt">&lt;ul&gt;</span>
-</code></pre>
+<p>Let&rsquo;s try it out. Restart your application, and go to <a href="http://localhost:4567"><a href="http://localhost:4567">http://localhost:4567</a></a>.
+If you enter a name, and click submit you should then see something like this:</p>
 
-<p><img src="/assets/images/storing_data_1-a05fb498.png"></p>
+<p><img src="/assets/images/sessions_1-b5f60913.png"></p>
 
-<p>Wheeeee! Pretty cool.</p>
+<p>When you reload the page the message should be gone.</p>
 
-        <nav class="page-nav"><a class="prev" href="/storing_data/storing_name.html">
+<p>How does this work?</p>
+
+<p>In our <code>post</code> route we store the message to the session hash. This has is
+something that Sinatra provides to us as developers. When we enable this
+feature then Sinatra will, after every request, store this hash to a cookie
+with the name <code>rack.session</code>, in the encrypted form that you saw above.</p>
+
+<p>We say the hash is being <a href="http://en.wikipedia.org/wiki/Serialization">serialized</a>,
+which is a fancy way of saying that it is turned into some kind of format that
+can be stored in text form. Sinatra (actually, Rack, under the hood) then also
+encrypts and signs this data, so it is safe to send it over the internet (in
+case we keep any sensitive data in it).</p>
+
+<p>Ok, so the <code>post</code> route includes the <code>Set-Cookie</code> header with this session
+cookie into its response, and sends it to the browser. The browser will, from
+now on, pass this cookie back the our application as part of every subsequent
+request.</p>
+
+<p>When our browser is now redirected to <code>GET</code> the same URL again, it passes the
+cookie, and Sinatra will, because we have the <code>:sessions</code> feature enabled,
+<em>deserialize</em> (i.e. decrypt and read) the session data, and put it into the
+hash that is returned by the method <code>session</code>, so we can work with it.</p>
+
+<p>In our <code>get</code> route we now simply always delete the key <code>:message</code> from the
+session hash. Should anything be in there it will be assigned to the <code>@message</code>
+instance variable, and the view will display it. If nothing&rsquo;s stored on the
+session key, for example when we reload the page, then deleting the key will
+simply return nil, and nothing will be displayed in the view.</p>
+
+<p>Does that make sense?</p>
+
+<p>Awesome :)</p>
+
+        <nav class="page-nav"><a class="prev" href="/sessions/cookies.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/storing_data/using_post.html">
+        <nav class="page-nav"><a class="next" href="/validations.html">
   Next
 </a></nav>
       </article>
