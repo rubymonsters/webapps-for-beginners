@@ -44,3 +44,8 @@
 - sessions
 - validations
 - resources
+- path: exercises
+  children:
+    - using_rubygems
+    - using_bundler
+
