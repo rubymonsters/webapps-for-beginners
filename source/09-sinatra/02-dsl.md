@@ -34,9 +34,9 @@ can be checked out, which will place an order."*
 
 In the context of Ruby code the term "domain specific language" is used to
 describe a piece of code or library that provides classes and methods that
-allow to "speak about them", or implement them, in the form of code.
+allow us to "speak about them", or implement them, in the form of code.
 
-The problem domain that Sinatra lives in is building web applications, which
+The problem domain that Sinatra lives in is building web applications which
 speak HTTP:
 
 It has methods like `get`, `post`, `put`, and `delete`, which you can use in
