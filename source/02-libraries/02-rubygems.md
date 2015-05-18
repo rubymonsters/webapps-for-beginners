@@ -27,7 +27,7 @@ So, how do you use this?
 Ruby has a built-in command line tool `gem`, which also is installed alongside
 your Ruby installation, and it allows you to manage gems on your computer.
 
-When you run `gem --list` in your terminal you should see a list of all the
+When you run `gem list` in your terminal you should see a list of all the
 gems that are installed on your computer (for the currently selected Ruby
 version if you use a Ruby version manager, such as RVM).
 
@@ -41,7 +41,7 @@ Where does `gem` fetch all these gems (packages) from though?
 
 Ruby gems are centrally hosted on <a href="https://rubygems.org">RubyGems.org</a>,
 and Middleman, for example, has
-<a href="https://rubygems.org/gems/middleman">entry on this site</a>, too.
+<a href="https://rubygems.org/gems/middleman">an entry on this site</a>, too.
 You can see the latest version number of this gem (which is `4.0.0.beta.2` as
 of this writing), who the authors are, useful links to their homepage, source
 code, documentation, and so on.
