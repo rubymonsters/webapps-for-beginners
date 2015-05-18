@@ -23,10 +23,10 @@ Hmmmmm, let's re-read that, and think about it.
 First of all, <a href="http://ruby-doc.org/core-2.2.2/Kernel.html">Kernel</a>
 is something we have never mentioned so far. It is a
 <a href="http://ruby-for-beginners.rubymonstas.org/bonus_2/modules">Ruby module</a>
-that is included to the class `Object`. That means that, whenever you create
-any object, this module, and thus all of its methods will be included.  Since
-Ruby's top level scope also is an object, `binding` is defined there, too. This
-also is, by the way, the secret reason to why methods like `p`, `puts`, and so
+that is included into the class `Object`. That means that, whenever you create
+any object, this module, and thus all of its methods, will be included.  Since
+Ruby's top level scope is also an object, `binding` is defined there too. This
+is also, by the way, the secret reason why methods like `p`, `puts`, and so
 on are available everywhere: they're defined in `Kernel`.
 
 Now, what's this execution context the documentation is talking about?
@@ -51,7 +51,7 @@ ever need it. And, on top of this, as a Sinatra or Rails developer you also
 never need it because both Sinatra and Rails ship tools that hide this weird
 stuff from you.
 
-For now, the one thing you can remember is that, by calling `binding` and
+For now, the one thing you can remember is that by calling `binding` and
 passing the result to the ERB instance, you simply pass *access* to the two
 local variables `name` and `messages`, so they can be used inside your ERB
 template.
