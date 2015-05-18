@@ -4,7 +4,7 @@ HTML is the main format that fuels the world wide web.
 
 Web applications are applications that run somewhere on the internet, and that
 web browsers talk to. E.g. if you check your Twitter, or Facebook feed your
-browner talks to the respective applications that are run by these companies.
+browser talks to the respective applications that are run by these companies.
 
 So one could say that the primary purpose of web applications is to produce
 HTML so it can be send to web browsers.
