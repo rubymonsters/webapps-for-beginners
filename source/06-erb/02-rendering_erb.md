@@ -81,7 +81,7 @@ If you run this code it will output something like this:
 ... which is a valid HTML document that a browser would render (display) like
 this:
 
-<img src="assets/images/06-erb_1.png">
+<img src="/assets/images/06-erb_1.png">
 
 Looks good?
 
