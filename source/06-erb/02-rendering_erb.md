@@ -81,14 +81,14 @@ If you run this code it will output something like this:
 ... which is a valid HTML document that a browser would render (display) like
 this:
 
-<img src="/assets/images/06-erb_1.png">
+<img src="assets/images/06-erb_1.png">
 
 Looks good?
 
 To recap, all that our code above does is the following:
 
-* Define an template with some HTML and some embedded ERB tags.
-* Define a couple variables that contain things that our template wants (`name` and `messages`).
+* Define a template with some HTML and some embedded ERB tags.
+* Define a couple of variables that contain things that our template wants (`name` and `messages`).
 * Create an instance of the class ERB, passing this template.
 * On this instance, call the method `result`.
 
