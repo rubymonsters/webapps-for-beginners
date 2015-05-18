@@ -42,7 +42,7 @@ That was easy, wasn't it.
 Sinatra uses Rack under the hood, but it deals with the nitty gritty details of
 looking at the `REQUEST_METHOD` and `REQUEST_PATH` for you.
 
-Instead it allows you to use the methods `get`, `post`, `put`, and `delete`
+It allows you to use the methods `get`, `post`, `put`, and `delete`
 with a path argument, and simply specify a block that will be called whenever a
 request matches the request method (verb) and path.
 
@@ -54,5 +54,5 @@ Sinatra also allows you to simply return a string from this block, which will
 then be used as the response body, and sets things like the status code and
 headers for you (when it returns the Rack style response array to Rack). Since
 the vast majority of requests will want to return 200 as a status code Sinatra
-just assumes you want that, too, unless you specify something else.
+just assumes you want that too, unless you specify something else.
 
