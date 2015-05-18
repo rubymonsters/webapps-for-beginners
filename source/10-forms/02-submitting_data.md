@@ -7,7 +7,7 @@ But to where? If we do not specify anything else the browser will submit it to
 the same URL that we are currently looking at, which is, in our case the path
 `/monstas`.
 
-We might as well specify it: this helps making clear what's going on.
+We might as well specify it: this helps make clear what's going on.
 Curiously, the attribute is called `action` (and not `target` or `url` as one
 might expect):
 
@@ -37,7 +37,7 @@ request <a href="#footnote-1">[1]</a> it will append it to the URL, after a
 question mark, as name/value pairs. These are called "query parameters" in
 HTTP.
 
-However, our form input text element does not a name, and so the browser cannot
+However, our form input text element does not have a name, and so the browser cannot
 pass it in a meaningful way.
 
 So let's change that, and specify a name for our text input. Since we want
