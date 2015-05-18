@@ -8,7 +8,7 @@ HTML.
 
 HTML was first proposed by <a href="http://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a>
 in 1989, and layed grounds for the World Wide Web's huge breakthrough during
-the 1990s. It is being defined by the <a href="http://en.wikipedia.org/wiki/World_Wide_Web_Consortium">W3C</a>
+the 1990s. It is defined by the <a href="http://en.wikipedia.org/wiki/World_Wide_Web_Consortium">W3C</a>
 and it's latest version is <a href="http://en.wikipedia.org/wiki/HTML5">HTML 5</a>
 which added a bunch of exciting, and useful features.
 
@@ -122,7 +122,7 @@ If you think about it, there are lots of useful applications, that leverage
 the information that is provided by defining the **semantic structure** of a
 document (as opposed to its visual representation).
 
-For example, one could apply different "themes", as in, styles to the same HTML
+For example, one could apply different "themes", as in styles, to the same HTML
 page depending on people's preferences, or depending on the device this website
 is displayed on (e.g. desktop browser windows versus mobile devices).
 
@@ -132,11 +132,11 @@ certain search terms in this document: If a word is contained in the URL, the
 document title, the toplevel headlines, then it's probably important. Even more
 so, if other pages link to this document using link texts that also contain
 that word, then this adds social proof to the mix, and search results should
-probably list this page rather high up on the page.
+probably list this page higher up in the results.
 
 Another example is that, by inspecting the headline tags in an HTML document,
 we can auto-generate a table of contents for this document quite easily,
-without having authors to maintain this manually. Many content management
+without having authors maintain this manually. Many content management
 systems (CMS) do this, including Wikipedia.
 
 
