@@ -5,7 +5,7 @@ when we pick a programming language that has a great ecosystem, and an even
 more awesome community:
 
 Being faced with a certain task that we want to accomplish we can often look
-for other people's solutions, and simply re-use and build on their code.
+for other peoples' solutions, and simply re-use and build on their code.
 
 In the chapter <a href="http://ruby-for-beginners.rubymonstas.org/bonus_2/libraries.html">Using Libraries</a>
 you have learned that Ruby comes with lots of things available as soon as your
