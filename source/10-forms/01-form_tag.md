@@ -3,7 +3,7 @@
 HTML defines a couple tags for describing forms that are part of a document
 (web page).
 
-Here's how a simple form looks like in HTML:
+Here's how a simple form looks in HTML:
 
 ```html
 <form>
