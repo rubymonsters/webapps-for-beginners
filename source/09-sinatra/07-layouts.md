@@ -4,7 +4,7 @@ Our HTML still isn't quite valid: `<html>` and `<body>` tags are mandatory,
 even though browsers still render our HTML happily without them.
 
 We could add these wrapping tags to each and every one of our templates,
-every time we create a new one. However, that's quite some repitition, and
+every time we create a new one. However, that's quite some repetition, and
 should we ever want to change anything about them (which is likely) we'd
 have to change all of our templates.
 
@@ -24,7 +24,7 @@ get '/hello/:name' do
 end
 ```
 
-Don't forget to restart your application, and refresh the page. If you inspect
+Don't forget to restart your application and refresh the page. If you inspect
 the source code of the web page (right click on the page, and select "View Page
 Source", or whatever that's called in your browser) you'll see that it now has
 the `<html>` and `<body>` tags from our layout template.
@@ -34,7 +34,7 @@ to the options hash. Because this is too much stuff to fit on one line we have
 also sticked the template and options into local variables.
 
 As you can see the rendered "content" (from our main template) is being wrapped
-by, or inserted to our layout template.
+by, or inserted to, our layout template.
 
 What about that `yield` thing in our layout template though?
 
