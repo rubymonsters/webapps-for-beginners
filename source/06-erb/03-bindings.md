@@ -7,7 +7,7 @@ html = ERB.new(template).result(binding)
 ```
 
 Obviously we do not define a local variable, so it needs to be a method. Let's
-google that: <a href="">Ruby binding</a>
+google that: <a href="http://www.google.com/?q=Ruby+binding">Ruby binding</a>
 
 The first result goes to the <a href="http://ruby-doc.org/core-2.2.0/Binding.html">Ruby documentation</a>,
 saying (some rather cryptic stuff stripped for our purpose):
