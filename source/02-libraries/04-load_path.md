@@ -3,7 +3,7 @@
 *Where to look for all the things*
 
 Ruby is software, and software stores things somewhere on your file system.
-In order to define places on your computer, where interesting stuff is stored
+In order to define places on your computer where interesting stuff is stored,
 software often has the concept of a "load path".
 
 If you are using a Unix based operating system, such as Linux or Mac OSX you
@@ -21,7 +21,7 @@ starts your program. `puts` is smart enough to put each string in that array
 on a separate line.
 
 Each of these lines represents a directory on your computer where Ruby files
-are stored. If you use `require` anywhere in your application (e.g. `ruby
+are stored. If you use `require` anywhere in your application (e.g. `require
 "digest"`) then Ruby will look for a Ruby file with the same name (e.g.
 `digest.rb`) in each of these directories. It will load the first file with
 this name that it can find.
@@ -59,6 +59,6 @@ Whenever there's a `require "something"` statement in some Ruby code that I run
 on my computer, Ruby will check all these directories for a file
 `something.rb`.
 
-Would now be a good time to do a few exercises on
+Now let's do a few exercises on
 <a href="/exercises/using_rubygems.html">Rubygems</a> and
-<a href="/exercises/using_bundler.html">Bundler</a>?
+<a href="/exercises/using_bundler.html">Bundler</a>.

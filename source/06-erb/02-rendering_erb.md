@@ -87,8 +87,8 @@ Looks good?
 
 To recap, all that our code above does is the following:
 
-* Define an template with some HTML and some embedded ERB tags.
-* Define a couple variables that contain things that our template wants (`name` and `messages`).
+* Define a template with some HTML and some embedded ERB tags.
+* Define a couple of variables that contain things that our template wants (`name` and `messages`).
 * Create an instance of the class ERB, passing this template.
 * On this instance, call the method `result`.
 

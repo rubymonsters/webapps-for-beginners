@@ -14,8 +14,8 @@ know how exactly to formulate these messages. If you're not familiar with the
 term "protocol", it means a clearly specified language, a set of formal rules
 for how to talk to each other.
 
-When you open your browser, type a URL into the addressbar, and hit return,
-your browser will send a text message to another computer, which is associated
+When you open your browser, type a URL into the address bar, and hit return,
+your browser will send a text message to another computer associated
 with the hostname that is part of your URL. The computer on the other side
 will receive this message (called the request), and send another message back
 (called the response).
@@ -35,8 +35,8 @@ In essence, this message says *"Get me the page /location.html"*. Simple as
 that.
 
 The webserver that hosts our homepage then looks up the content of that page,
-and sends another message back to your browser, containing the content of
-the page, which is, of course HTML:
+and sends another message back to your browser containing the content of
+the page, which is, of course, HTML:
 
 ```http
 HTTP/1.1 200 OK
@@ -51,16 +51,16 @@ Content-Type: text/html
 ```
 
 That's it. Your browser will extract the HTML that is sent as the body of the
-message, and display it.
+message and display it.
 
 Let's look at the request and response in more detail. What does all of this
-stuff mean, exactly?
+stuff mean exactly?
 
 ## An HTTP Request
 
 HTTP defines that the first line of a request must contain three bits: a
 **verb**, a **resource**, and the version of the protocol. Out of these, we
-only really care about the first two bits, the version is only relevant in way
+only really care about the first two bits. The version is only relevant in way
 more advanced contexts.
 
 The **verb**, also called the "method", defines an operation. `GET` of course
@@ -109,7 +109,7 @@ for most `GET` requests, it will be `200 OK`.
 
 On the following lines, again, there will be some **headers**: key/value pairs
 that contain meta information about the response. In our case there is a header
-that says the content type of the body is `text/html` (which just means it's
+that says the content type of the body is `text/html` (which just means it is
 HTML).
 
 Now, when there's a **body** ("main content") on a request (sometimes requests
@@ -148,13 +148,13 @@ Footnotes:
 this, and some developers might argue that these explanations are wrong. Let's
 say these verbs mean these things in applications like Rails applications.
 The HTTP standard defines these verbs in more abstract, and generic terms,
-while Rails has its own, and more practical definition of these HTTP verbs.
+while Rails has its own, more practical definition of these HTTP verbs.
 
-E.g. `POST` actually means more "do whatevery you think is right" in terms
+E.g. `POST` actually means more "do whatever you think is right" in terms
 of the HTTP specification, while in the context of Rails it means "create this
 thing".
 
-For us, in praxis, for the time being, it is enough to remember that `GET`
+For us, in practice, for the time being, it is enough to remember that `GET`
 means "get", `POST` means "create", `PUT` means "update", and `DELETE` means
 "delete".
 

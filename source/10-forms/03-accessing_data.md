@@ -2,7 +2,7 @@
 
 We mentioned earlier that form data will be available in the `params` hash.
 
-Let's check that, and output the `params` in our route:
+Let's check that by outputting the `params` in our route:
 
 ```ruby
 get "/monstas" do
@@ -51,7 +51,7 @@ Awesome!
 So this is how you can pass (submit) data from the brower to your application,
 and use it in some way.
 
-Let's make one more improvement to our form. It currently always whipes out the
+Let's make one more improvement to our form. It currently always wipes out the
 text that has been submitted. Let's make sure we preseve it in the input element.
 
 We can do that by specifying the `value` attribute on the `input` tag, like so:

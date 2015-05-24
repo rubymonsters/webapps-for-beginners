@@ -69,7 +69,7 @@ routes, and we can ignore these for now.
 This is pretty cool.
 
 The `params` hash can contain more than matches from the URL. You'll later see
-that it also contains any data send from HTML forms as part of the HTTP
+that it also contains any data sent from HTML forms as part of the HTTP
 request. As well as any query params that can be part of the URL (separated
 with a question mark `?`).
 

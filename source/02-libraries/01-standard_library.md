@@ -2,7 +2,7 @@
 
 *Batteries included*
 
-Basically every programming language that you'll use in praxis has some kind
+Basically every programming language that you'll use in practice has some kind
 of standard library that is shipped with the language itself.
 
 When you install Ruby on your computer this will also install the <a
@@ -25,7 +25,7 @@ nuts and bolts, rather than bicycles or cars, but they're super useful
 nonetheless.
 
 In order to make one of these libraries available in your code you don't have
-to do anything else than use `require`. E.g. `require "zlib"` would make the
+to do anything else other than use `require`. E.g. `require "zlib"` would make the
 <a href="http://ruby-doc.org/stdlib-2.2.2/libdoc/zlib/rdoc/Zlib.html">zlib
 library</a> available, which means you could now use the methods `deflate` and
 `inflate` in order to compress and decompress files.

@@ -47,16 +47,16 @@ Rack uses a simple convention for these keys:
   will be translated to the hash key `HTTP_HOST` with the value `localhost:9292`.
 * All other uppercase keys represent additional information that has been
   passed (added) from the webserver that has received the request (in this case
-  WEBRick, which runs our little Rack application). For example, WEBRick adds
+  WEBrick, which runs our little Rack application). For example, WEBrick adds
   the key `PATH_INFO` with the resource (path), as well as the key
   `REQUEST_METHOD` with the verb (method) from the HTTP request. These weren't
-  headers in the request, but obvioulsy part of it. On top of this, WEBRick
+  headers in the request, but obvioulsy part of it. On top of this, WEBrick
   also adds other things, such as the `SERVER_SOFTWARE` key (telling us which
-  WEBRick and Ruby version we are using), and so on.
+  WEBrick and Ruby version we are using), and so on.
 * All keys that are prefixed with `rack.` represent internal additions that
   Rack adds.
 
-Let's write a little bit of code to make this more easy for us to inspect:
+Let's write a little bit of code to make this easier for us to inspect:
 
 ```ruby
 class Application
