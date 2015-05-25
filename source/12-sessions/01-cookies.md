@@ -1,8 +1,8 @@
 # Cookies
 
 A cookie is a little piece of information that a web application can send along
-with a response, and that will be stored by the browser. From then on, when the
-browser makes another request to the same application it will include the cookie
+with a response that will be stored by the browser. From then on, when the
+browser makes another request to the same application, it will include the cookie
 to the request, sending it back to the application.
 
 For example, an HTTP response that sets a cookie for a user's prefered visual
