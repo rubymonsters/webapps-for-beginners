@@ -23,7 +23,7 @@ this is solved with a little Javascript box that pops up and asks this
 question.  However, we don't want to get into Javascript too much just yet, and
 adding this route is a just as valid solution, too.
 
-Here's how these routes look like. We'll use the path `/members` in our
+Here's what these routes look like. We'll use the path `/members` in our
 example.
 
 * `GET /members` displays a list of all members
