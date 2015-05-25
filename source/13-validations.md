@@ -43,12 +43,12 @@ store a message to the session, and then redirect.
 
 Note that we call `to_s` ("to string") on the `name`. This is useful because
 there might not be any value stored on `params[:name]`. In this case we'd get
-`nil`, which does not know the method `empty?`. We therefor turn a potential
+`nil`, which does not know the method `empty?`. We therefore turn a potential
 `nil` value into an empty string first.  Of course, if there's a string stored
 on `params[:key]`, then `to_s` would just return the same string.
 
 The `if` statement then checks if the given `name` already is included in the
-names in our file: the array returned by `read_names`. (We had implemented this
+names in our file: the array returned by `read_names`. (We implemented this
 method in order use it in our `get` route for displaying all the names, and now
 we can just re-use it here.) If we already have the name, then, again, we just
 add a message to the session, and redirect.
@@ -117,7 +117,7 @@ and the user would have to re-enter it.
 
 For this reason modern web applications usually follow a different pattern.
 
-Instead of redirecting the user, when the submitted data is invalid, we would
+Instead of redirecting the user when the submitted data is invalid, we would
 just re-render the same template right away, with the same data.
 
 Here's how we could do that:
@@ -140,7 +140,7 @@ end
 ```
 
 As you can see we now only store a message to the session, and redirect, if
-the given data was valid. If it's not we store the validation message to
+the given data is valid. If it's not we store the validation message to
 the `@message` instance variable and render our template again.
 
 Cool. If you restart your application you can try how it works.
@@ -163,7 +163,7 @@ We can fix this by changing our view like so:
 Awesome.
 
 With this completed you have now walked through an important pattern for web
-applications, which also is used in Rails applications by default:
+applications, which is also used in Rails applications by default:
 
 * There is an HTML form which is being retrieved via a `GET` request.
 * This form posts to another route, which validates the submitted data.
