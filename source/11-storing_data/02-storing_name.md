@@ -1,7 +1,7 @@
 # Storing the name
 
 Now that we know how to append something to a file, let's use that in our
-application, and store all those names to a file.
+application and store all those names to a file.
 
 We could change our route like so:
 
@@ -17,7 +17,7 @@ get "/hello" do
 end
 ```
 
-However, that stuffs a lot of clutter into our route, while we'd like to keep
+However, that stuffs a lot of clutter into our route, and we'd like to keep
 these readable.
 
 So let's extract that to method right away:
