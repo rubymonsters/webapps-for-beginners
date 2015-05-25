@@ -1,6 +1,6 @@
 # Writing to a file
 
-How to append a string to a file in Ruby?
+How do you append a string to a file in Ruby?
 
 If you google for <a href="http://google.com?q=Ruby+file+append">"Ruby file append"</a>
 you'll find a bunch of answers that all basically look like this:
