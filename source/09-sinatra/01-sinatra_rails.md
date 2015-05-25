@@ -1,5 +1,7 @@
 # Sinatra versus Rails
 
+Why do we start with Sinatra, and not Ruby on Rails? How do the two compare?
+
 You could compare Sinatra to a bicycle, and Rails to a car. Both do
 the job of getting you from A to B.
 

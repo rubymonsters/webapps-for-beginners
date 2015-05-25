@@ -39,8 +39,9 @@ You should see something like this:
 
 That was easy, wasn't it.
 
-Sinatra uses Rack under the hood, but it deals with the nitty gritty details of
-looking at the `REQUEST_METHOD` and `REQUEST_PATH` for you.
+If you've read the chapters about [Rack](/rack.html)): Sinatra uses Rack under
+the hood, but it deals with the nitty gritty details of looking at the
+`REQUEST_METHOD` and `REQUEST_PATH` for you.
 
 It allows you to use the methods `get`, `post`, `put`, and `delete`
 with a path argument, and simply specify a block that will be called whenever a

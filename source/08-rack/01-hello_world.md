@@ -1,4 +1,4 @@
-# Your first Rack app
+# Bonus: Your first Rack app
 
 Let's jump right in.
 
@@ -20,7 +20,7 @@ number)? If it doesn't, install Rack with the command `gem install rack`.
 
 This gem comes with a little executable (command line program) called `rackup`.
 This command looks for a file `config.ru` in the current directory, and starts
-a web server using it.
+a web server using it, on your local computer.
 
 Make sure you have `cd`ed to your `rack` directory, and then run `rackup`. You
 should see something like:
@@ -61,11 +61,11 @@ This array contains 3 things:
 * a hash that contains a single header (the content type), and
 * an array containing a single string, which is the body.
 
-So the method `call` returns something that represents a response in Rack!
+So the method `call` returns something that represents an HTTP response in Rack!
 
 Rack makes it so that whenever there's a request coming in (on the computer
 that is `localhost`, i.e. your own, local computer, and on the port 9292),
-it will turn this request into a hash that is passed to the method `call`.
+it will turn this request into a hash `env` that is passed to the method `call`.
 I.e. the argument `env` contains the request information. We'll have a look
 at that in a minute.
 
@@ -74,6 +74,13 @@ Rack then expects that you return an array containing those three elements:
 * The HTTP response code
 * A hash of headers
 * The response body, which must respond to each (i.e. we can just use an array)
+
+<p class="hint">
+A Rack application implements a method <code>call</code> that takes a hash
+representing the request, and is supposed to return an array containing the
+status code, a hash containing the headers, and an array containing the request
+body.
+</p>
 
 Once it got these three things back from our method `call` it will create
 the respective response (text) message out of it, and send it back to the

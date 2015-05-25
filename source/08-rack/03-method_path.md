@@ -1,4 +1,4 @@
-# Method and Path
+# Bonus: Method and Path
 
 We saw that the `env` hash that Rack passes to the method `call` contains the
 keys `REQUEST_METHOD` and `REQUEST_PATH`.
@@ -54,7 +54,7 @@ the method `call`. So they'll be passed back to Rack, and turned into the
 actual HTTP response that is returned to your browser.
 
 If you restart your server, and point your browser to
-<a href="http://localhost:9292/ruby/monstas">http://localhost:9292/ruby/monstas</a>
+[http://localhost:9292/ruby/monstas](http://localhost:9292/ruby/monstas)
 you should now see something like this:
 
 <img src="/assets/images/08-rack_2.png">
@@ -67,7 +67,24 @@ requests with (albeit only slightly) different responses.
 
 Imagine working on this application more, and returning different HTML pages
 based on the `path` that is part of the request: You could use the ERB
-rendering method from the <a href="/erb.html">previous chapters about
-ERB</a> in order to render different ERB templates.
+rendering method from the [previous chapters about ERB](/erb.html) in order to
+render different ERB templates.
 
-And guess what, this is exactly what Sinatra makes super easy :)
+And guess what, this is exactly what [Sinatra](/sinatra.html) makes super easy :)
+
+In case you are wondering how to test the response for request methods other
+than `GET`, that's not so easy without knowing more about [HTML forms](/forms.html).
+However, if your computer has `curl` installed (a commandline tool to execute
+HTTP requests) you can try this:
+
+```
+curl -i -X POST http://localhost:9292
+```
+
+For me this outputs:
+
+```
+HTTP/1.1 405 Method Not Allowed
+```
+
+As well as a bunch of other response headers.

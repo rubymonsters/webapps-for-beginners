@@ -44,8 +44,37 @@ order to describe how your application responds to HTTP requests. It also has
 methods like `headers`, `session`, `cookies`, and other things that relate to
 concepts from HTTP.
 
+So, instead of writing code like this:
+
+```ruby
+def handle_request(method, path)
+  if method == "GET"
+    [200, { "Content-Type" => "text/html" }, ["You have requested the path #{path}, using GET"]]
+  else
+    [405, {}, ["Method not allowed: #{method}"]]
+  end
+end
+```
+
+Sinatra allows us to write code like this:
+
+```ruby
+get "/some/path" do
+  "You have requested the path /some/path"
+end
+
+post "*" do
+  status 405
+end
+```
+
+... which uses a "language" (i.e. methods provided by Sinatra) that is specific
+to the domain HTTP.
+
 Does that make sense?
 
-In short, the term DSL is used for libraries that allow you to write very
-descriptive, narrative Ruby code that "speaks" about the solution to the
-problem in this domain.
+<p class="hint">
+The term DSL is used for libraries that allow you to write descriptive,
+narrative Ruby code that "speaks" about the solution to a problem using
+terms that are specific to the given problem domain.
+</p>

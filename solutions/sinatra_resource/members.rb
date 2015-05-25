@@ -1,19 +1,23 @@
 require "sinatra"
 
 class Member
-  attr_reader :name
+  attr_accessor :name
 
   def initialize(name = nil)
-    @name = name
+    @name = name.to_s
+  end
+
+  def id
+    name
   end
 end
 
 class MemberValidator
-  attr_reader :name, :names, :messages
+  attr_reader :member, :members, :messages
 
-  def initialize(name, names)
-    @name = name.to_s
-    @names = names
+  def initialize(member, members)
+    @member = member
+    @members = members
     @messages = []
   end
 
@@ -24,28 +28,32 @@ class MemberValidator
 
   private
 
+    def names
+      members.map { |member| member.name }
+    end
+
     def validate
-      if name.empty?
+      if member.name.empty?
         messages << "You need to enter a name"
-      elsif names.include?(name)
-        messages << "#{name} is already included in our list."
+      elsif names.include?(member.name)
+        messages << "#{member.name} is already included in our list."
       end
     end
 end
 
 FILENAME = "names.txt"
 
-def members
-  names.map { |name| Member.new(name) }
-end
-
 def names
   return [] unless File.exists?(FILENAME)
   File.read(FILENAME).split("\n")
 end
 
-def find_member(name)
-  members.detect { |member| member.name == name }
+def members
+  names.map { |name| Member.new(name) }
+end
+
+def find_member(id)
+  members.detect { |member| member.id == id }
 end
 
 def add_member(name)
@@ -54,12 +62,21 @@ def add_member(name)
   end
 end
 
-def remove_member(name)
-  lines = names.reject { |other| name == other }
+def update_member(id, name)
+  lines = names.dup
+  lines[lines.index(id)] = name
+  store(lines)
+end
 
+def store(lines)
   File.open(FILENAME, "w+") do |file|
     file.puts(lines.join("\n"))
   end
+end
+
+def remove_member(name)
+  lines = names.reject { |other| name == other }
+  store(lines)
 end
 
 get "/members" do
@@ -73,39 +90,48 @@ get "/members/new" do
 end
 
 post "/members" do
-  name = params[:name]
-  validator = MemberValidator.new(name, names)
+  @member = Member.new(params[:name])
+  validator = MemberValidator.new(@member, members)
 
   if validator.valid?
-    add_member(name)
-    redirect "/members/#{name}"
+    add_member(@member.name)
+    redirect "/members/#{@member.id}"
   else
-    @member = Member.new(name)
     @messages = validator.messages
     erb :new
   end
 end
 
-get "/members/:name" do
-  @member = find_member(params[:name])
+get "/members/:id" do
+  @member = find_member(params[:id])
   erb :show
 end
 
-get "/members/:name/edit" do
-  @member = find_member(params[:name])
+get "/members/:id/edit" do
+  @member = find_member(params[:id])
   erb :edit
 end
 
-put "/members/:name" do
-  @member = find_member(params[:name])
+put "/members/:id" do
+  @member = find_member(params[:id])
+  @member.name = params[:name]
+  validator = MemberValidator.new(@member, members)
+
+  if validator.valid?
+    update_member(params[:id], @member.name)
+    redirect "/members/#{@member.id}"
+  else
+    @messages = validator.messages
+    erb :new
+  end
 end
 
-get "/members/:name/delete" do
-  @member = find_member(params[:name])
+get "/members/:id/delete" do
+  @member = find_member(params[:id])
   erb :delete
 end
 
-delete "/members/:name" do
-  remove_member(params[:name])
+delete "/members/:id" do
+  remove_member(params[:id])
   redirect "/members"
 end

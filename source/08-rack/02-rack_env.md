@@ -1,4 +1,4 @@
-# The Rack Env
+# Bonus: The Rack Env
 
 Let's have a look at the `env` data that is passed along with the request.
 Let's just print it out to the terminal as follows:
@@ -134,4 +134,9 @@ Luckily, we can just ignore most of these things. The only interesting keys for
 us are `REQUEST_METHOD` and `REQUEST_PATH`: They're the relevant bits from the
 HTTP request.
 
-Let's do something with them next.
+<p class="hint">
+The most interesting bits in the <code>env</code> hash are the
+<code>REQUEST_METHOD</code>, and <code>REQUEST_PATH</code>.
+</p>
+
+Let's do something with them.

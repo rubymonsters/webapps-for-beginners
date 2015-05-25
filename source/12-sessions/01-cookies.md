@@ -23,6 +23,9 @@ Cookie: theme=light
 ```
 
 This way the application could apply the "light" theme to the blog, because the
-user has selected it in some previous request: Cookies are a way to persist
-(keep) state (data) across multiple requests.
+user has selected it in some previous request.
+
+<p class="hint">
+Cookies are a way to persist (keep) state (data) across multiple HTTP requests.
+</p>
 

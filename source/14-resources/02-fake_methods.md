@@ -43,12 +43,17 @@ part of the request just like any other input tag.
 
 Now, whenever Sinatra receives a `POST` request that has a parameter with the
 name `_method` it will treat this request as if it was a request with the HTTP
-method (verb) given by this parameter.
+method (verb) given by this parameter. This way one can add data to the form
+that isn't relevant to the user, but relevant to the application.
 
-That means it will treat any `POST` request that has the parameter `_method`
-set to `put` as a `PUT` HTTP request: it will use a route that was defined with
-`put`.  Likewise, it will treat a `POST` requests that has the paramter set to
-`delete` as a `DELETE` HTTP request, and use the respective routes.
+Sinatra will treat any `POST` request that has the parameter `_method` set to
+`put` as a `PUT` HTTP request: it will use a route that was defined with `put`.
+Likewise, it will treat a `POST` requests that has the paramter set to `delete`
+as a `DELETE` HTTP request, and use the respective routes.
+
+This way we can write our application code *as if* browsers would support
+sending forms as `PUT` or `DELETE` requests, even though they don't. The only
+thing we need to do is add that little hidden input form field.
 
 
 <a name=footnote-1">[1]</a> You can read more about this, for example,

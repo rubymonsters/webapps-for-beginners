@@ -5,7 +5,7 @@ Building on top of cookies, even though HTTP itself does not have a concept of a
 tool or framework) supports sessions.
 
 A session is a way for a web application to set a cookie that persists
-arbitrary data across multiple requests.
+arbitrary data across multiple HTTP requests.
 
 Let's have a look how this works.
 

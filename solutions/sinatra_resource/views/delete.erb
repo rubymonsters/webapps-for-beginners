@@ -1,13 +1,13 @@
 <p>
   <a href="/members">All Members</a> |
-  <a href="/members/<%= @member.name %>"><%= @member.name %></a>
+  <a href="/members/<%= @member.id %>"><%= @member.name %></a>
 </p>
 
 <h1>Removing Member: <%= @member.name %></h1>
 
 <p>Are you sure you want to remove the member <%= @member.name %>?</p>
 
-<form action="/members/<%= @member.name %>" method="post">
+<form action="/members/<%= @member.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" value="Yes, remove">
 </form>

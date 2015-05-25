@@ -5,9 +5,9 @@ study group. There's a way to
 
 * list all of them
 * look at a member's details
-* add new members
+* add a new member
 * update a member's details
-* remove members
+* remove a member
 
 That's exactly what a *lot* of web applications do, with maybe certain
 variations.
@@ -30,7 +30,7 @@ example.
 * `GET /members/:id` displays the details for a single member
 * `GET /members/new` displays a form for creating a new member
 * `POST /members` creates a new member from that form
-* `GET `/members/:id/edit` displays a form for editing a member's details
+* `GET /members/:id/edit` displays a form for editing a member's details
 * `PUT /members/:id` updates a member's details from that form
 * `GET /members/:id/delete` asks for a confirmation to delete the member
 * `DELETE /members/:id` deletes the member

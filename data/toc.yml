@@ -50,6 +50,11 @@
   children:
     - groups_routes
     - fake_methods
+- path: databases
+  children:
+    - tables
+    - sql
+    - orm
 - path: exercises
   children:
     - using_rubygems

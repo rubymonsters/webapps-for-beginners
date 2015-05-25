@@ -5,9 +5,9 @@
 <ul>
   <% @members.each do |member| %>
     <li>
-      <a href="/members/<%= member.name %>"><%= member.name %></a>
-      <a href="/members/<%= member.name %>/edit">Edit</a>
-      <a href="/members/<%= member.name %>/delete">Remove</a>
+      <a href="/members/<%= member.id %>"><%= member.name %></a>
+      <a href="/members/<%= member.id %>/edit">Edit</a>
+      <a href="/members/<%= member.id %>/delete">Remove</a>
     </li>
   <% end %>
 </ul>
