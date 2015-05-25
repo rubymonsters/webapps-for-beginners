@@ -8,7 +8,7 @@ SQL was invented in the 1970s, and it's quite ugly to look at. However, lots
 of database systems support it, and so it's quite common to use SQL in web
 applications in some way.
 
-For example, we could retrieve all fields the first row from our `members`
+For example, we could retrieve all fields in the first row from our `members`
 table like this:
 
 ```sql
@@ -61,7 +61,7 @@ And deleting like this:
 DELETE FROM members WHERE id = 3;
 ```
 
-As you can see these statemets all look somewhat similar, starting with a certain
+As you can see these statements all look somewhat similar, starting with a certain
 command, naming the table, and ending with a semicolon. However, they also don't
 really look very consistent. For example, why does the `INSERT` statement separate
 the column names and inserted values, while the `UPDATE` statement pairs them?
@@ -70,5 +70,5 @@ There are lots of reasons, most of them historical, for why SQL reads weird, and
 it's quite unlikely that any of this will change anytime soon.
 
 For this reason there are tools (libraries) that make talking to the database
-a little bit more easy: they generate SQL code for you, and let your code be more
+a little bit easier: they generate SQL code for you, and let your code be more
 readable, using some kind of [DSL](/sinatra/dsl.html).
