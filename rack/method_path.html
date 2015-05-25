@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Method and Path | Webapps for Beginners</title>
+    <title>Bonus: Method and Path | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
@@ -98,22 +98,22 @@
   </li>
   <li class="directory expanded">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li>
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li>
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li class="active">
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -299,7 +321,7 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Method and Path</h1>
+        <h1>Bonus: Method and Path</h1>
 
 <p>We saw that the <code>env</code> hash that Rack passes to the method <code>call</code> contains the
 keys <code>REQUEST_METHOD</code> and <code>REQUEST_PATH</code>.</p>
@@ -354,7 +376,7 @@ the method <code>call</code>. So they&rsquo;ll be passed back to Rack, and turne
 actual HTTP response that is returned to your browser.</p>
 
 <p>If you restart your server, and point your browser to
-<a href="http://localhost:9292/ruby/monstas"><a href="http://localhost:9292/ruby/monstas">http://localhost:9292/ruby/monstas</a></a>
+<a href="http://localhost:9292/ruby/monstas">http://localhost:9292/ruby/monstas</a>
 you should now see something like this:</p>
 
 <p><img src="/assets/images/rack_2-afc29997.png"></p>
@@ -366,10 +388,23 @@ requests with (albeit only slightly) different responses.</p>
 
 <p>Imagine working on this application more, and returning different HTML pages
 based on the <code>path</code> that is part of the request: You could use the ERB
-rendering method from the <a href="/erb.html">previous chapters about
-ERB</a> in order to render different ERB templates.</p>
+rendering method from the <a href="../erb.html">previous chapters about ERB</a> in order to
+render different ERB templates.</p>
 
-<p>And guess what, this is exactly what Sinatra makes super easy :)</p>
+<p>And guess what, this is exactly what <a href="../sinatra.html">Sinatra</a> makes super easy :)</p>
+
+<p>In case you are wondering how to test the response for request methods other
+than <code>GET</code>, that&rsquo;s not so easy without knowing more about <a href="../forms.html">HTML forms</a>.
+However, if your computer has <code>curl</code> installed (a commandline tool to execute
+HTTP requests) you can try this:</p>
+<pre class="highlight plaintext"><code>curl -i -X POST http://localhost:9292
+</code></pre>
+
+<p>For me this outputs:</p>
+<pre class="highlight plaintext"><code>HTTP/1.1 405 Method Not Allowed
+</code></pre>
+
+<p>As well as a bunch of other response headers.</p>
 
         <nav class="page-nav"><a class="prev" href="/rack/rack_env.html">
   Previous

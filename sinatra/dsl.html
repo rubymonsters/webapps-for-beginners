@@ -98,22 +98,22 @@
   </li>
   <li class="directory">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li>
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li>
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li>
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -335,9 +357,9 @@ can be checked out, which will place an order.&rdquo;</em></p>
 
 <p>In the context of Ruby code the term &ldquo;domain specific language&rdquo; is used to
 describe a piece of code or library that provides classes and methods that
-allow to &ldquo;speak about them&rdquo;, or implement them, in the form of code.</p>
+allow us to &ldquo;speak about them&rdquo;, or implement them, in the form of code.</p>
 
-<p>The problem domain that Sinatra lives in is building web applications, which
+<p>The problem domain that Sinatra lives in is building web applications which
 speak HTTP:</p>
 
 <p>It has methods like <code>get</code>, <code>post</code>, <code>put</code>, and <code>delete</code>, which you can use in
@@ -345,11 +367,36 @@ order to describe how your application responds to HTTP requests. It also has
 methods like <code>headers</code>, <code>session</code>, <code>cookies</code>, and other things that relate to
 concepts from HTTP.</p>
 
+<p>So, instead of writing code like this:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">handle_request</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+  <span class="k">if</span> <span class="nb">method</span> <span class="o">==</span> <span class="s2">"GET"</span>
+    <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"You have requested the path </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">, using GET"</span><span class="p">]]</span>
+  <span class="k">else</span>
+    <span class="p">[</span><span class="mi">405</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s2">"Method not allowed: </span><span class="si">#{</span><span class="nb">method</span><span class="si">}</span><span class="s2">"</span><span class="p">]]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Sinatra allows us to write code like this:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/some/path"</span> <span class="k">do</span>
+  <span class="s2">"You have requested the path /some/path"</span>
+<span class="k">end</span>
+
+<span class="n">post</span> <span class="s2">"*"</span> <span class="k">do</span>
+  <span class="n">status</span> <span class="mi">405</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>&hellip; which uses a &ldquo;language&rdquo; (i.e. methods provided by Sinatra) that is specific
+to the domain HTTP.</p>
+
 <p>Does that make sense?</p>
 
-<p>In short, the term DSL is used for libraries that allow you to write very
-descriptive, narrative Ruby code that &ldquo;speaks&rdquo; about the solution to the
-problem in this domain.</p>
+<p class="hint">
+The term DSL is used for libraries that allow you to write descriptive,
+narrative Ruby code that &ldquo;speaks&rdquo; about the solution to a problem using
+terms that are specific to the given problem domain.
+</p>
 
         <nav class="page-nav"><a class="prev" href="/sinatra/sinatra_rails.html">
   Previous

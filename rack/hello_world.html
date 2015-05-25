@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Your first Rack app | Webapps for Beginners</title>
+    <title>Bonus: Your first Rack app | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
@@ -98,22 +98,22 @@
   </li>
   <li class="directory expanded">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li class="active">
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li>
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li>
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -299,7 +321,7 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Your first Rack app</h1>
+        <h1>Bonus: Your first Rack app</h1>
 
 <p>Let&rsquo;s jump right in.</p>
 
@@ -319,7 +341,7 @@ number)? If it doesn&rsquo;t, install Rack with the command <code>gem install ra
 
 <p>This gem comes with a little executable (command line program) called <code>rackup</code>.
 This command looks for a file <code>config.ru</code> in the current directory, and starts
-a web server using it.</p>
+a web server using it, on your local computer.</p>
 
 <p>Make sure you have <code>cd</code>ed to your <code>rack</code> directory, and then run <code>rackup</code>. You
 should see something like:</p>
@@ -360,11 +382,11 @@ just returns the same static array whenever it is called.</p>
 <li>an array containing a single string, which is the body.</li>
 </ul>
 
-<p>So the method <code>call</code> returns something that represents a response in Rack!</p>
+<p>So the method <code>call</code> returns something that represents an HTTP response in Rack!</p>
 
 <p>Rack makes it so that whenever there&rsquo;s a request coming in (on the computer
 that is <code>localhost</code>, i.e. your own, local computer, and on the port 9292),
-it will turn this request into a hash that is passed to the method <code>call</code>.
+it will turn this request into a hash <code>env</code> that is passed to the method <code>call</code>.
 I.e. the argument <code>env</code> contains the request information. We&rsquo;ll have a look
 at that in a minute.</p>
 
@@ -375,6 +397,13 @@ at that in a minute.</p>
 <li>A hash of headers</li>
 <li>The response body, which must respond to each (i.e. we can just use an array)</li>
 </ul>
+
+<p class="hint">
+A Rack application implements a method <code>call</code> that takes a hash
+representing the request, and is supposed to return an array containing the
+status code, a hash containing the headers, and an array containing the request
+body.
+</p>
 
 <p>Once it got these three things back from our method <code>call</code> it will create
 the respective response (text) message out of it, and send it back to the

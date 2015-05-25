@@ -98,22 +98,22 @@
   </li>
   <li class="directory">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li>
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li>
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li>
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -315,8 +337,8 @@ know how exactly to formulate these messages. If you&rsquo;re not familiar with 
 term &ldquo;protocol&rdquo;, it means a clearly specified language, a set of formal rules
 for how to talk to each other.</p>
 
-<p>When you open your browser, type a URL into the addressbar, and hit return,
-your browser will send a text message to another computer, which is associated
+<p>When you open your browser, type a URL into the address bar, and hit return,
+your browser will send a text message to another computer associated
 with the hostname that is part of your URL. The computer on the other side
 will receive this message (called the request), and send another message back
 (called the response).</p>
@@ -334,8 +356,8 @@ browser:</p>
 that.</p>
 
 <p>The webserver that hosts our homepage then looks up the content of that page,
-and sends another message back to your browser, containing the content of
-the page, which is, of course HTML:</p>
+and sends another message back to your browser containing the content of
+the page, which is, of course, HTML:</p>
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/html</span>
 
@@ -348,16 +370,16 @@ the page, which is, of course HTML:</p>
 </code></pre>
 
 <p>That&rsquo;s it. Your browser will extract the HTML that is sent as the body of the
-message, and display it.</p>
+message and display it.</p>
 
 <p>Let&rsquo;s look at the request and response in more detail. What does all of this
-stuff mean, exactly?</p>
+stuff mean exactly?</p>
 
 <h2>An HTTP Request</h2>
 
 <p>HTTP defines that the first line of a request must contain three bits: a
 <strong>verb</strong>, a <strong>resource</strong>, and the version of the protocol. Out of these, we
-only really care about the first two bits, the version is only relevant in way
+only really care about the first two bits. The version is only relevant in way
 more advanced contexts.</p>
 
 <p>The <strong>verb</strong>, also called the &ldquo;method&rdquo;, defines an operation. <code>GET</code> of course
@@ -410,7 +432,7 @@ for most <code>GET</code> requests, it will be <code>200 OK</code>.</p>
 
 <p>On the following lines, again, there will be some <strong>headers</strong>: key/value pairs
 that contain meta information about the response. In our case there is a header
-that says the content type of the body is <code>text/html</code> (which just means it&rsquo;s
+that says the content type of the body is <code>text/html</code> (which just means it is
 HTML).</p>
 
 <p>Now, when there&rsquo;s a <strong>body</strong> (&ldquo;main content&rdquo;) on a request (sometimes requests
@@ -451,13 +473,13 @@ is an interesting read.</p>
 this, and some developers might argue that these explanations are wrong. Let&rsquo;s
 say these verbs mean these things in applications like Rails applications.
 The HTTP standard defines these verbs in more abstract, and generic terms,
-while Rails has its own, and more practical definition of these HTTP verbs.</p>
+while Rails has its own, more practical definition of these HTTP verbs.</p>
 
-<p>E.g. <code>POST</code> actually means more &ldquo;do whatevery you think is right&rdquo; in terms
+<p>E.g. <code>POST</code> actually means more &ldquo;do whatever you think is right&rdquo; in terms
 of the HTTP specification, while in the context of Rails it means &ldquo;create this
 thing&rdquo;.</p>
 
-<p>For us, in praxis, for the time being, it is enough to remember that <code>GET</code>
+<p>For us, in practice, for the time being, it is enough to remember that <code>GET</code>
 means &ldquo;get&rdquo;, <code>POST</code> means &ldquo;create&rdquo;, <code>PUT</code> means &ldquo;update&rdquo;, and <code>DELETE</code> means
 &ldquo;delete&rdquo;.</p>
 

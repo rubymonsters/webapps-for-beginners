@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Accessing Form Data | Webapps for Beginners</title>
+    <title>Tables | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/forms/submitting_data.html">
+    <nav class="page-nav"><a class="prev" href="/databases.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/storing_data.html">
+    <nav class="page-nav"><a class="next" href="/databases/sql.html">
   Next
 </a></nav>
 
@@ -170,7 +170,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
@@ -185,7 +185,7 @@
           Submitting Data
         </a>
       </li>
-      <li class="active">
+      <li>
         <a href="/forms/accessing_data.html">
           Accessing Form Data
         </a>
@@ -263,12 +263,12 @@
       </li>
     </ul>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/databases.html">
       Databases
     </a>
     <ul>
-      <li>
+      <li class="active">
         <a href="/databases/tables.html">
           Tables
         </a>
@@ -321,72 +321,96 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Accessing Form Data</h1>
+        <h1>Tables</h1>
 
-<p>We mentioned earlier that form data will be available in the <code>params</code> hash.</p>
+<p>At it&rsquo;s core, you can imagine a  database as a bunch of spreadsheets, except
+they&rsquo;re called &ldquo;tables&rdquo;.</p>
 
-<p>Let&rsquo;s check that by outputting the <code>params</code> in our route:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="nb">p</span> <span class="n">params</span>
-  <span class="n">erb</span> <span class="ss">:monstas</span>
-<span class="k">end</span>
-</code></pre>
+<p>Each table has a bunch of columns, and can have an arbitrary number of rows
+(also referred to as &ldquo;records&rdquo;).  Columns have a name and a type. Their type
+specifies which kind of data can be stored. Each row has a number of cells
+(referred to as &ldquo;fields&rdquo;), and each one of the cells can hold some value
+with the type defined by the column.</p>
 
-<p>Again, restart the application, and load the URL
-<a href="http://localhost:4567/monstas?name=Monstas"><a href="http://localhost:4567/monstas?name=Monstas">http://localhost:4567/monstas?name=Monstas</a></a>.
-In your terminal you should then see something like:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="s2">"name"</span><span class="err">=&gt;</span><span class="s2">"Monstas"</span><span class="err">}</span><span class="w">
-</span></code></pre>
+<p>Let&rsquo;s have a look at an example.</p>
 
-<p>So this is how we can access the data that has been passed from the browser as
-part of the HTTP request, when it submitted the form.</p>
+<p>Imagine we have a table called <code>members</code>, and it contains our member data. So
+it could look like this:</p>
 
-<p>Let&rsquo;s do something with it!</p>
+<table><thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>joined_on</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Anja</td>
+<td>2013-06-24</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Carla</td>
+<td>2013-06-24</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Rebecca</td>
+<td>2013-06-31</td>
+</tr>
+</tbody></table>
 
-<p>Change your route like so:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
-  <span class="n">erb</span> <span class="ss">:monstas</span>
-<span class="k">end</span>
-</code></pre>
+<p>The <code>id</code> column would be a running number, so it would have the type <code>integer</code>.
+The <code>name</code> column is a <code>string</code> (databases call it this type a <code>varchar</code>), and
+the <code>joined_on</code> column is a <code>date</code>.</p>
 
-<p>And add this code at the top of your <code>monstas.erb</code> view:</p>
-<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@name</span> <span class="cp">%&gt;</span>
-  <span class="nt">&lt;h1&gt;</span>Hello <span class="cp">&lt;%=</span> <span class="vi">@name</span> <span class="cp">%&gt;</span>!<span class="nt">&lt;/h1&gt;</span>
-<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-</code></pre>
+<p>Databases usually contain many tables. And often data from one table relates
+to data in other tables.</p>
 
-<p>When you restart the server, and reload the page you should see something like
-this:</p>
+<p>For example, we could add the ability to post status updates to our members
+application. Maybe we would have a table <code>statuses</code>:</p>
 
-<p><img src="/assets/images/forms_2-5134e116.png"></p>
+<table><thead>
+<tr>
+<th>id</th>
+<th>member_id</th>
+<th>message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>Finished the search feature for speakerinnen.org</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>Working on the CSS cleanup with Maren next</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>Created some new designs for our stickers!</td>
+</tr>
+</tbody></table>
 
-<p>Awesome!</p>
+<p>The <code>id</code> column, again, contains a running number that allows to identify a
+single status update. The column <code>message</code> obviously contains the status update
+message.</p>
 
-<p>So this is how you can pass (submit) data from the brower to your application,
-and use it in some way.</p>
+<p>What about the <code>member_id</code> column though?</p>
 
-<p>Let&rsquo;s make one more improvement to our form. It currently always wipes out the
-text that has been submitted. Let&rsquo;s make sure we preseve it in the input element.</p>
+<p>It references a row in a different table: our <code>members</code> table. This means that,
+in this example, Anja has posted two status updates, Rebecca one, and Carla
+hasn&rsquo;t posted, yet.</p>
 
-<p>We can do that by specifying the <code>value</code> attribute on the <code>input</code> tag, like so:</p>
-<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">value=</span><span class="s">"&lt;%= @name %&gt;"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/form&gt;</span>
-</code></pre>
+<p>Now, how can we add data to a table, or retrieve it?</p>
 
-<p>When you restart your application, and reload the page, it should now put the
-name to the input element:</p>
-
-<p><img src="/assets/images/forms_3-11a66dfa.png"></p>
-
-<p>Perfect.</p>
-
-        <nav class="page-nav"><a class="prev" href="/forms/submitting_data.html">
+        <nav class="page-nav"><a class="prev" href="/databases.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/storing_data.html">
+        <nav class="page-nav"><a class="next" href="/databases/sql.html">
   Next
 </a></nav>
       </article>

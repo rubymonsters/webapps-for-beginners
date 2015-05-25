@@ -98,22 +98,22 @@
   </li>
   <li class="directory">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li>
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li>
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li>
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -308,7 +330,7 @@ submit the form that this button is part of.</p>
 the same URL that we are currently looking at, which is, in our case the path
 <code>/monstas</code>.</p>
 
-<p>We might as well specify it: this helps making clear what&rsquo;s going on.
+<p>We might as well specify it: this helps make clear what&rsquo;s going on.
 Curiously, the attribute is called <code>action</code> (and not <code>target</code> or <code>url</code> as one
 might expect):</p>
 <pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span><span class="nt">&gt;</span>
@@ -336,7 +358,7 @@ request <a href="#footnote-1">[1]</a> it will append it to the URL, after a
 question mark, as name/value pairs. These are called &ldquo;query parameters&rdquo; in
 HTTP.</p>
 
-<p>However, our form input text element does not a name, and so the browser cannot
+<p>However, our form input text element does not have a name, and so the browser cannot
 pass it in a meaningful way.</p>
 
 <p>So let&rsquo;s change that, and specify a name for our text input. Since we want

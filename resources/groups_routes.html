@@ -98,22 +98,22 @@
   </li>
   <li class="directory">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li>
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li>
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li>
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -307,9 +329,9 @@ study group. There&rsquo;s a way to</p>
 <ul>
 <li>list all of them</li>
 <li>look at a member&rsquo;s details</li>
-<li>add new members</li>
+<li>add a new member</li>
 <li>update a member&rsquo;s details</li>
-<li>remove members</li>
+<li>remove a member</li>
 </ul>
 
 <p>That&rsquo;s exactly what a <em>lot</em> of web applications do, with maybe certain
@@ -334,7 +356,7 @@ example.</p>
 <li><code>GET /members/:id</code> displays the details for a single member</li>
 <li><code>GET /members/new</code> displays a form for creating a new member</li>
 <li><code>POST /members</code> creates a new member from that form</li>
-<li><code>GET</code>/members/:id/edit` displays a form for editing a member&rsquo;s details</li>
+<li><code>GET /members/:id/edit</code> displays a form for editing a member&rsquo;s details</li>
 <li><code>PUT /members/:id</code> updates a member&rsquo;s details from that form</li>
 <li><code>GET /members/:id/delete</code> asks for a confirmation to delete the member</li>
 <li><code>DELETE /members/:id</code> deletes the member</li>

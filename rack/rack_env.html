@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>The Rack Env | Webapps for Beginners</title>
+    <title>Bonus: The Rack Env | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
@@ -98,22 +98,22 @@
   </li>
   <li class="directory expanded">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li>
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li class="active">
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li>
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -299,7 +321,7 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>The Rack Env</h1>
+        <h1>Bonus: The Rack Env</h1>
 
 <p>Let&rsquo;s have a look at the <code>env</code> data that is passed along with the request.
 Let&rsquo;s just print it out to the terminal as follows:</p>
@@ -345,17 +367,17 @@ lowercase.</p>
 will be translated to the hash key <code>HTTP_HOST</code> with the value <code>localhost:9292</code>.</li>
 <li>All other uppercase keys represent additional information that has been
 passed (added) from the webserver that has received the request (in this case
-WEBRick, which runs our little Rack application). For example, WEBRick adds
+WEBrick, which runs our little Rack application). For example, WEBrick adds
 the key <code>PATH_INFO</code> with the resource (path), as well as the key
 <code>REQUEST_METHOD</code> with the verb (method) from the HTTP request. These weren&rsquo;t
-headers in the request, but obvioulsy part of it. On top of this, WEBRick
+headers in the request, but obvioulsy part of it. On top of this, WEBrick
 also adds other things, such as the <code>SERVER_SOFTWARE</code> key (telling us which
-WEBRick and Ruby version we are using), and so on.</li>
+WEBrick and Ruby version we are using), and so on.</li>
 <li>All keys that are prefixed with <code>rack.</code> represent internal additions that
 Rack adds.</li>
 </ul>
 
-<p>Let&rsquo;s write a little bit of code to make this more easy for us to inspect:</p>
+<p>Let&rsquo;s write a little bit of code to make this easier for us to inspect:</p>
 <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
   <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
     <span class="nb">puts</span> <span class="n">inspect_env</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
@@ -429,7 +451,12 @@ Rack info
 us are <code>REQUEST_METHOD</code> and <code>REQUEST_PATH</code>: They&rsquo;re the relevant bits from the
 HTTP request.</p>
 
-<p>Let&rsquo;s do something with them next.</p>
+<p class="hint">
+The most interesting bits in the <code>env</code> hash are the
+<code>REQUEST_METHOD</code>, and <code>REQUEST_PATH</code>.
+</p>
+
+<p>Let&rsquo;s do something with them.</p>
 
         <nav class="page-nav"><a class="prev" href="/rack/hello_world.html">
   Previous

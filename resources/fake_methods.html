@@ -19,7 +19,7 @@
     <nav class="page-nav"><a class="prev" href="/resources/groups_routes.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/exercises.html">
+    <nav class="page-nav"><a class="next" href="/databases.html">
   Next
 </a></nav>
 
@@ -98,22 +98,22 @@
   </li>
   <li class="directory">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li>
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li>
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li>
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -338,12 +360,17 @@ part of the request just like any other input tag.</p>
 
 <p>Now, whenever Sinatra receives a <code>POST</code> request that has a parameter with the
 name <code>_method</code> it will treat this request as if it was a request with the HTTP
-method (verb) given by this parameter.</p>
+method (verb) given by this parameter. This way one can add data to the form
+that isn&rsquo;t relevant to the user, but relevant to the application.</p>
 
-<p>That means it will treat any <code>POST</code> request that has the parameter <code>_method</code>
-set to <code>put</code> as a <code>PUT</code> HTTP request: it will use a route that was defined with
-<code>put</code>.  Likewise, it will treat a <code>POST</code> requests that has the paramter set to
-<code>delete</code> as a <code>DELETE</code> HTTP request, and use the respective routes.</p>
+<p>Sinatra will treat any <code>POST</code> request that has the parameter <code>_method</code> set to
+<code>put</code> as a <code>PUT</code> HTTP request: it will use a route that was defined with <code>put</code>.
+Likewise, it will treat a <code>POST</code> requests that has the paramter set to <code>delete</code>
+as a <code>DELETE</code> HTTP request, and use the respective routes.</p>
+
+<p>This way we can write our application code <em>as if</em> browsers would support
+sending forms as <code>PUT</code> or <code>DELETE</code> requests, even though they don&rsquo;t. The only
+thing we need to do is add that little hidden input form field.</p>
 
 <p><a name=footnote-1">[1]</a> You can read more about this, for example,
 <a href="http://programmers.stackexchange.com/questions/114156/why-are-there-are-no-put-and-delete-methods-on-html-forms">here</a>.</p>
@@ -351,7 +378,7 @@ set to <code>put</code> as a <code>PUT</code> HTTP request: it will use a route 
         <nav class="page-nav"><a class="prev" href="/resources/groups_routes.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/exercises.html">
+        <nav class="page-nav"><a class="next" href="/databases.html">
   Next
 </a></nav>
       </article>

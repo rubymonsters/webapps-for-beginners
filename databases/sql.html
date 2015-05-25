@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Accessing Form Data | Webapps for Beginners</title>
+    <title>SQL | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/forms/submitting_data.html">
+    <nav class="page-nav"><a class="prev" href="/databases/tables.html">
   Previous
 </a></nav>
-    <nav class="page-nav"><a class="next" href="/storing_data.html">
+    <nav class="page-nav"><a class="next" href="/databases/orm.html">
   Next
 </a></nav>
 
@@ -170,7 +170,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/forms.html">
       Forms
     </a>
@@ -185,7 +185,7 @@
           Submitting Data
         </a>
       </li>
-      <li class="active">
+      <li>
         <a href="/forms/accessing_data.html">
           Accessing Form Data
         </a>
@@ -263,7 +263,7 @@
       </li>
     </ul>
   </li>
-  <li class="directory">
+  <li class="directory expanded">
     <a href="/databases.html">
       Databases
     </a>
@@ -273,7 +273,7 @@
           Tables
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="/databases/sql.html">
           SQL
         </a>
@@ -321,72 +321,71 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Accessing Form Data</h1>
+        <h1>SQL</h1>
 
-<p>We mentioned earlier that form data will be available in the <code>params</code> hash.</p>
+<p>SQL (Structured Query Language) is a language that (relational) databases
+support, and that allows us to ask (query) the database to retrieve certain
+information from tables.</p>
 
-<p>Let&rsquo;s check that by outputting the <code>params</code> in our route:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="nb">p</span> <span class="n">params</span>
-  <span class="n">erb</span> <span class="ss">:monstas</span>
-<span class="k">end</span>
+<p>SQL was invented in the 1970s, and it&rsquo;s quite ugly to look at. However, lots
+of database systems support it, and so it&rsquo;s quite common to use SQL in web
+applications in some way.</p>
+
+<p>For example, we could retrieve all fields the first row from our <code>members</code>
+table like this:</p>
+<pre class="highlight sql"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">members</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </code></pre>
 
-<p>Again, restart the application, and load the URL
-<a href="http://localhost:4567/monstas?name=Monstas"><a href="http://localhost:4567/monstas?name=Monstas">http://localhost:4567/monstas?name=Monstas</a></a>.
-In your terminal you should then see something like:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="s2">"name"</span><span class="err">=&gt;</span><span class="s2">"Monstas"</span><span class="err">}</span><span class="w">
-</span></code></pre>
+<p>The statement <code>SELECT</code> tells the database that we&rsquo;d like to retrieve data (as
+opposed to, for example, <code>INSERT</code> which inserts a new row, or <code>UPDATE</code> which
+updates an existing row). The star <code>*</code> means &ldquo;all fields&rdquo;. <code>FROM</code> specifies the
+table that we want to look at, and <code>WHERE</code> specifies a condition that this row
+needs to match: We&rsquo;d like to retrieve the row where the value in the <code>id</code>
+column equals <code>1</code>.</p>
 
-<p>So this is how we can access the data that has been passed from the browser as
-part of the HTTP request, when it submitted the form.</p>
-
-<p>Let&rsquo;s do something with it!</p>
-
-<p>Change your route like so:</p>
-<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
-  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
-  <span class="n">erb</span> <span class="ss">:monstas</span>
-<span class="k">end</span>
+<p>So our query above would return a result containing one row:</p>
+<pre class="highlight plaintext"><code>1 | Anja | 2013-06-24
 </code></pre>
 
-<p>And add this code at the top of your <code>monstas.erb</code> view:</p>
-<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@name</span> <span class="cp">%&gt;</span>
-  <span class="nt">&lt;h1&gt;</span>Hello <span class="cp">&lt;%=</span> <span class="vi">@name</span> <span class="cp">%&gt;</span>!<span class="nt">&lt;/h1&gt;</span>
-<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+<p>However, when we ask for all rows that have the <code>joined_on</code> date <code>2013-06-24</code>
+we&rsquo;d get back two rows:</p>
+<pre class="highlight sql"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">members</span> <span class="k">WHERE</span> <span class="n">joined_on</span> <span class="o">=</span> <span class="s1">'2013-06-24'</span><span class="p">;</span>
 </code></pre>
 
-<p>When you restart the server, and reload the page you should see something like
+<p>This would return:</p>
+<pre class="highlight plaintext"><code>1 | Anja  | 2013-06-24
+2 | Carla | 2013-06-24
+</code></pre>
+
+<p>In order to insert a new row to the table we could use an SQL statement like
 this:</p>
-
-<p><img src="/assets/images/forms_2-5134e116.png"></p>
-
-<p>Awesome!</p>
-
-<p>So this is how you can pass (submit) data from the brower to your application,
-and use it in some way.</p>
-
-<p>Let&rsquo;s make one more improvement to our form. It currently always wipes out the
-text that has been submitted. Let&rsquo;s make sure we preseve it in the input element.</p>
-
-<p>We can do that by specifying the <code>value</code> attribute on the <code>input</code> tag, like so:</p>
-<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/monstas"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">value=</span><span class="s">"&lt;%= @name %&gt;"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/form&gt;</span>
+<pre class="highlight sql"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">members</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">joined_at</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">'Maren'</span><span class="p">,</span> <span class="s1">'2013-06-24'</span><span class="p">);</span>
 </code></pre>
 
-<p>When you restart your application, and reload the page, it should now put the
-name to the input element:</p>
+<p>Updating looks like this:</p>
+<pre class="highlight sql"><code><span class="k">UPDATE</span> <span class="n">members</span> <span class="k">SET</span> <span class="n">joined_on</span> <span class="o">=</span> <span class="s1">'2013-06-24'</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre>
 
-<p><img src="/assets/images/forms_3-11a66dfa.png"></p>
+<p>And deleting like this:</p>
+<pre class="highlight sql"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">members</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre>
 
-<p>Perfect.</p>
+<p>As you can see these statemets all look somewhat similar, starting with a certain
+command, naming the table, and ending with a semicolon. However, they also don&rsquo;t
+really look very consistent. For example, why does the <code>INSERT</code> statement separate
+the column names and inserted values, while the <code>UPDATE</code> statement pairs them?</p>
 
-        <nav class="page-nav"><a class="prev" href="/forms/submitting_data.html">
+<p>There are lots of reasons, most of them historical, for why SQL reads weird, and
+it&rsquo;s quite unlikely that any of this will change anytime soon.</p>
+
+<p>For this reason there are tools (libraries) that make talking to the database
+a little bit more easy: they generate SQL code for you, and let your code be more
+readable, using some kind of <a href="../sinatra/dsl.html">DSL</a>.</p>
+
+        <nav class="page-nav"><a class="prev" href="/databases/tables.html">
   Previous
 </a></nav>
-        <nav class="page-nav"><a class="next" href="/storing_data.html">
+        <nav class="page-nav"><a class="next" href="/databases/orm.html">
   Next
 </a></nav>
       </article>

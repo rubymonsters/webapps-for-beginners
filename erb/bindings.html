@@ -98,22 +98,22 @@
   </li>
   <li class="directory">
     <a href="/rack.html">
-      Rack
+      Bonus: Rack
     </a>
     <ul>
       <li>
         <a href="/rack/hello_world.html">
-          Your first Rack app
+          Bonus: Your first Rack app
         </a>
       </li>
       <li>
         <a href="/rack/rack_env.html">
-          The Rack Env
+          Bonus: The Rack Env
         </a>
       </li>
       <li>
         <a href="/rack/method_path.html">
-          Method and Path
+          Bonus: Method and Path
         </a>
       </li>
     </ul>
@@ -264,6 +264,28 @@
     </ul>
   </li>
   <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
     <a href="/exercises.html">
       Exercises
     </a>
@@ -306,7 +328,7 @@
 </code></pre>
 
 <p>Obviously we do not define a local variable, so it needs to be a method. Let&rsquo;s
-google that: <a href="">Ruby binding</a></p>
+google that: <a href="http://www.google.com/?q=Ruby+binding">Ruby binding</a></p>
 
 <p>The first result goes to the <a href="http://ruby-doc.org/core-2.2.0/Binding.html">Ruby documentation</a>,
 saying (some rather cryptic stuff stripped for our purpose):</p>
@@ -322,10 +344,10 @@ passed [around].&rdquo;</em></p>
 <p>First of all, <a href="http://ruby-doc.org/core-2.2.2/Kernel.html">Kernel</a>
 is something we have never mentioned so far. It is a
 <a href="http://ruby-for-beginners.rubymonstas.org/bonus_2/modules">Ruby module</a>
-that is included to the class <code>Object</code>. That means that, whenever you create
-any object, this module, and thus all of its methods will be included.  Since
-Ruby&rsquo;s top level scope also is an object, <code>binding</code> is defined there, too. This
-also is, by the way, the secret reason to why methods like <code>p</code>, <code>puts</code>, and so
+that is included into the class <code>Object</code>. That means that, whenever you create
+any object, this module, and thus all of its methods, will be included.  Since
+Ruby&rsquo;s top level scope is also an object, <code>binding</code> is defined there too. This
+is also, by the way, the secret reason why methods like <code>p</code>, <code>puts</code>, and so
 on are available everywhere: they&rsquo;re defined in <code>Kernel</code>.</p>
 
 <p>Now, what&rsquo;s this execution context the documentation is talking about?</p>
@@ -350,7 +372,7 @@ ever need it. And, on top of this, as a Sinatra or Rails developer you also
 never need it because both Sinatra and Rails ship tools that hide this weird
 stuff from you.</p>
 
-<p>For now, the one thing you can remember is that, by calling <code>binding</code> and
+<p>For now, the one thing you can remember is that by calling <code>binding</code> and
 passing the result to the ERB instance, you simply pass <em>access</em> to the two
 local variables <code>name</code> and <code>messages</code>, so they can be used inside your ERB
 template.</p>
