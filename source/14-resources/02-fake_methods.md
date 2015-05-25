@@ -38,7 +38,7 @@ This works by adding a hidden form input tag to the form, like so:
 ```
 
 A hidden input tag is just that, it is hidden, meaning that it is not displayed
-to the user. However, it is there, and it will be send to the application as
+to the user. However, it is there, and it will be sent to the application as
 part of the request just like any other input tag.
 
 Now, whenever Sinatra receives a `POST` request that has a parameter with the
@@ -48,10 +48,10 @@ that isn't relevant to the user, but relevant to the application.
 
 Sinatra will treat any `POST` request that has the parameter `_method` set to
 `put` as a `PUT` HTTP request: it will use a route that was defined with `put`.
-Likewise, it will treat a `POST` requests that has the paramter set to `delete`
-as a `DELETE` HTTP request, and use the respective routes.
+Likewise, it will treat a `POST` request that has the paramter set to `delete`
+as a `DELETE` HTTP request, and use the respective route.
 
-This way we can write our application code *as if* browsers would support
+This way we can write our application code *as if* browsers support
 sending forms as `PUT` or `DELETE` requests, even though they don't. The only
 thing we need to do is add that little hidden input form field.
 
