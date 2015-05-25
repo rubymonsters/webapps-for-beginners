@@ -1,6 +1,6 @@
 # Tables
 
-At it's core, you can imagine a  database as a bunch of spreadsheets, except
+At its core, you can imagine a database as a bunch of spreadsheets, except
 they're called "tables".
 
 Each table has a bunch of columns, and can have an arbitrary number of rows
@@ -44,6 +44,6 @@ What about the `member_id` column though?
 
 It references a row in a different table: our `members` table. This means that,
 in this example, Anja has posted two status updates, Rebecca one, and Carla
-hasn't posted, yet.
+hasn't posted yet.
 
 Now, how can we add data to a table, or retrieve it?
