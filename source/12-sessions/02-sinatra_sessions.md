@@ -1,8 +1,8 @@
 # Sessions in Sinatra
 
 Building on top of cookies, even though HTTP itself does not have a concept of a
-"session" (or conversation), Sinatra (just as basically any web application
-tool or framework) supports sessions.
+"session" (or conversation), Sinatra, like basically any web application
+tool or framework, supports sessions.
 
 A session is a way for a web application to set a cookie that persists
 arbitrary data across multiple HTTP requests.
@@ -15,7 +15,7 @@ file, we'd like to pass a message to the `GET` request that the browser is
 going to be redirected to.
 
 We'd only want to display this message once right after the redirection from
-the `post` route: when we'd reload the page it should be gone. This is called
+the `post` route: when we reload the page it should be gone. This is called
 transient state, and a session is a great place to keep it.
 
 First, we need to enable the `:sessions` feature in Sinatra. You can do that
