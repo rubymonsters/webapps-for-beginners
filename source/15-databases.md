@@ -1,6 +1,6 @@
 # Databases
 
-Databases are applications that help us store data in a flexible, and powerful
+Databases are applications that help us store data in a flexible and powerful
 way, and they have been around ever since the 1960s. Nowadays there are lots
 of different types of databases.
 
