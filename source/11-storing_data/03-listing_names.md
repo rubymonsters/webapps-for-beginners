@@ -20,7 +20,7 @@ def read_names
 end
 ```
 
-However, this would break if there's no file with this name, yet. So let's
+However, this would break if no file with this name exists yet. So let's add 
 a little safeguard, and return an empty array if the file does not exist:
 
 ```ruby
