@@ -85,20 +85,20 @@ When you reload the page the message should be gone.
 
 How does this work?
 
-In our `post` route we store the message to the session hash. This has is
-something that Sinatra provides to us as developers. When we enable this
-feature then Sinatra will, after every request, store this hash to a cookie
+In our `post` route we store the message to the session hash. This is
+something Sinatra provides to us as developers. When we enable this
+feature Sinatra will, after every request, store this hash to a cookie
 with the name `rack.session`, in the encrypted form that you saw above.
 
 We say the hash is being <a href="http://en.wikipedia.org/wiki/Serialization">serialized</a>,
-which is a fancy way of saying that it is turned into some kind of format that
+which is a fancy way of saying it is turned into some kind of format that
 can be stored in text form. Sinatra (actually, Rack, under the hood) then also
 encrypts and signs this data, so it is safe to send it over the internet (in
 case we keep any sensitive data in it).
 
 Ok, so the `post` route includes the `Set-Cookie` header with this session
-cookie into its response, and sends it to the browser. The browser will, from
-now on, pass this cookie back the our application as part of every subsequent
+cookie in its response, and sends it to the browser. The browser will, from
+now on, pass this cookie back to our application as part of every subsequent
 request.
 
 When our browser is now redirected to `GET` the same URL again, it passes the
