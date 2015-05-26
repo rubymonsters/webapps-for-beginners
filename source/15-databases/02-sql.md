@@ -66,9 +66,3 @@ command, naming the table, and ending with a semicolon. However, they also don't
 really look very consistent. For example, why does the `INSERT` statement separate
 the column names and inserted values, while the `UPDATE` statement pairs them?
 
-There are lots of reasons, most of them historical, for why SQL reads weird, and
-it's quite unlikely that any of this will change anytime soon.
-
-For this reason there are tools (libraries) that make talking to the database
-a little bit easier: they generate SQL code for you, and let your code be more
-readable, using some kind of [DSL](/sinatra/dsl.html).
