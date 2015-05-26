@@ -355,7 +355,7 @@ side, even though in reality they&rsquo;re all <code>POST</code> requests.</p>
 </code></pre>
 
 <p>A hidden input tag is just that, it is hidden, meaning that it is not displayed
-to the user. However, it is there, and it will be send to the application as
+to the user. However, it is there, and it will be sent to the application as
 part of the request just like any other input tag.</p>
 
 <p>Now, whenever Sinatra receives a <code>POST</code> request that has a parameter with the
@@ -365,10 +365,10 @@ that isn&rsquo;t relevant to the user, but relevant to the application.</p>
 
 <p>Sinatra will treat any <code>POST</code> request that has the parameter <code>_method</code> set to
 <code>put</code> as a <code>PUT</code> HTTP request: it will use a route that was defined with <code>put</code>.
-Likewise, it will treat a <code>POST</code> requests that has the paramter set to <code>delete</code>
-as a <code>DELETE</code> HTTP request, and use the respective routes.</p>
+Likewise, it will treat a <code>POST</code> request that has the paramter set to <code>delete</code>
+as a <code>DELETE</code> HTTP request, and use the respective route.</p>
 
-<p>This way we can write our application code <em>as if</em> browsers would support
+<p>This way we can write our application code <em>as if</em> browsers support
 sending forms as <code>PUT</code> or <code>DELETE</code> requests, even though they don&rsquo;t. The only
 thing we need to do is add that little hidden input form field.</p>
 

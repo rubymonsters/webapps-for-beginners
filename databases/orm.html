@@ -323,8 +323,30 @@
         <nav class="menu"><a href="#"></a></nav>
         <h1>Object Relational Mappers</h1>
 
-<p><a href="https://github.com/jeremyevans/sequel">https://github.com/jeremyevans/sequel</a>
-<a href="https://github.com/rails/rails/tree/master/activerecord">https://github.com/rails/rails/tree/master/activerecord</a></p>
+<p>There are lots of reasons, most of them historical, why SQL reads weird, and
+it&rsquo;s quite unlikely that SQL will be come a more pleasant language, or replaced
+anytime soon.</p>
+
+<p>For this reason programmers have written lots, and lots of tools (libraries)
+that make talking to, and working with the database a little bit more easy.</p>
+
+<p>One class of such tools is called ORM: <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">Object Relational Mappers</a>.</p>
+
+<p>An ORM is a library that &ldquo;maps&rdquo; data, stored in a database, to objects, and
+usually has methods such as <code>save</code>, in order to save an object, <code>create</code>,
+<code>update</code>, and so on. In other words, they often also provide a
+<a href="../sinatra/dsl.html">DSL</a> for working with the database.</p>
+
+<p>Two widely used ORMs in Ruby are <a href="https://github.com/rails/rails/tree/master/activerecord">ActiveRecord</a>,
+which is part of Rails, and <a href="https://github.com/jeremyevans/sequel">Sequel</a>,
+which is more modern, slick, and performant.</p>
+
+<p>Since you&rsquo;ll get to know ActiveRecord when you learn Rails anyway we&rsquo;ll
+introduce Sequel first so you get to know two libraries, and can compare them.</p>
+
+<p>Install the Sequel gem like so:</p>
+<pre class="highlight plaintext"><code>$ gem install sequel
+</code></pre>
 
         <nav class="page-nav"><a class="prev" href="/databases/sql.html">
   Previous

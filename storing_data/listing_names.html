@@ -339,7 +339,7 @@ the newline character <code>&quot;\n&quot;</code> in order to get our names as a
 <span class="k">end</span>
 </code></pre>
 
-<p>However, this would break if there&rsquo;s no file with this name, yet. So let&rsquo;s
+<p>However, this would break if no file with this name exists yet. So let&rsquo;s add 
 a little safeguard, and return an empty array if the file does not exist:</p>
 <pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">read_names</span>
   <span class="k">return</span> <span class="p">[]</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">)</span>

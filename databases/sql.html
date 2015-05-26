@@ -331,7 +331,7 @@ information from tables.</p>
 of database systems support it, and so it&rsquo;s quite common to use SQL in web
 applications in some way.</p>
 
-<p>For example, we could retrieve all fields the first row from our <code>members</code>
+<p>For example, we could retrieve all fields in the first row from our <code>members</code>
 table like this:</p>
 <pre class="highlight sql"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">members</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </code></pre>
@@ -370,17 +370,10 @@ this:</p>
 <pre class="highlight sql"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">members</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 </code></pre>
 
-<p>As you can see these statemets all look somewhat similar, starting with a certain
+<p>As you can see these statements all look somewhat similar, starting with a certain
 command, naming the table, and ending with a semicolon. However, they also don&rsquo;t
 really look very consistent. For example, why does the <code>INSERT</code> statement separate
 the column names and inserted values, while the <code>UPDATE</code> statement pairs them?</p>
-
-<p>There are lots of reasons, most of them historical, for why SQL reads weird, and
-it&rsquo;s quite unlikely that any of this will change anytime soon.</p>
-
-<p>For this reason there are tools (libraries) that make talking to the database
-a little bit more easy: they generate SQL code for you, and let your code be more
-readable, using some kind of <a href="../sinatra/dsl.html">DSL</a>.</p>
 
         <nav class="page-nav"><a class="prev" href="/databases/tables.html">
   Previous

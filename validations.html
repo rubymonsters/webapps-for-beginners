@@ -364,12 +364,12 @@ store a message to the session, and then redirect.</p>
 
 <p>Note that we call <code>to_s</code> (&ldquo;to string&rdquo;) on the <code>name</code>. This is useful because
 there might not be any value stored on <code>params[:name]</code>. In this case we&rsquo;d get
-<code>nil</code>, which does not know the method <code>empty?</code>. We therefor turn a potential
+<code>nil</code>, which does not know the method <code>empty?</code>. We therefore turn a potential
 <code>nil</code> value into an empty string first.  Of course, if there&rsquo;s a string stored
 on <code>params[:key]</code>, then <code>to_s</code> would just return the same string.</p>
 
 <p>The <code>if</code> statement then checks if the given <code>name</code> already is included in the
-names in our file: the array returned by <code>read_names</code>. (We had implemented this
+names in our file: the array returned by <code>read_names</code>. (We implemented this
 method in order use it in our <code>get</code> route for displaying all the names, and now
 we can just re-use it here.) If we already have the name, then, again, we just
 add a message to the session, and redirect.</p>
@@ -436,7 +436,7 @@ and the user would have to re-enter it.</p>
 
 <p>For this reason modern web applications usually follow a different pattern.</p>
 
-<p>Instead of redirecting the user, when the submitted data is invalid, we would
+<p>Instead of redirecting the user when the submitted data is invalid, we would
 just re-render the same template right away, with the same data.</p>
 
 <p>Here&rsquo;s how we could do that:</p>
@@ -457,7 +457,7 @@ just re-render the same template right away, with the same data.</p>
 </code></pre>
 
 <p>As you can see we now only store a message to the session, and redirect, if
-the given data was valid. If it&rsquo;s not we store the validation message to
+the given data is valid. If it&rsquo;s not we store the validation message to
 the <code>@message</code> instance variable and render our template again.</p>
 
 <p>Cool. If you restart your application you can try how it works.</p>
@@ -478,7 +478,7 @@ form, with an input element called <code>name</code>, what we get is an empty st
 <p>Awesome.</p>
 
 <p>With this completed you have now walked through an important pattern for web
-applications, which also is used in Rails applications by default:</p>
+applications, which is also used in Rails applications by default:</p>
 
 <ul>
 <li>There is an HTML form which is being retrieved via a <code>GET</code> request.</li>

@@ -324,8 +324,8 @@
         <h1>Sessions in Sinatra</h1>
 
 <p>Building on top of cookies, even though HTTP itself does not have a concept of a
-&ldquo;session&rdquo; (or conversation), Sinatra (just as basically any web application
-tool or framework) supports sessions.</p>
+&ldquo;session&rdquo; (or conversation), Sinatra, like basically any web application
+tool or framework, supports sessions.</p>
 
 <p>A session is a way for a web application to set a cookie that persists
 arbitrary data across multiple HTTP requests.</p>
@@ -338,7 +338,7 @@ file, we&rsquo;d like to pass a message to the <code>GET</code> request that the
 going to be redirected to.</p>
 
 <p>We&rsquo;d only want to display this message once right after the redirection from
-the <code>post</code> route: when we&rsquo;d reload the page it should be gone. This is called
+the <code>post</code> route: when we reload the page it should be gone. This is called
 transient state, and a session is a great place to keep it.</p>
 
 <p>First, we need to enable the <code>:sessions</code> feature in Sinatra. You can do that
@@ -398,20 +398,20 @@ If you enter a name, and click submit you should then see something like this:</
 
 <p>How does this work?</p>
 
-<p>In our <code>post</code> route we store the message to the session hash. This has is
-something that Sinatra provides to us as developers. When we enable this
-feature then Sinatra will, after every request, store this hash to a cookie
+<p>In our <code>post</code> route we store the message to the session hash. This is
+something Sinatra provides to us as developers. When we enable this
+feature Sinatra will, after every request, store this hash to a cookie
 with the name <code>rack.session</code>, in the encrypted form that you saw above.</p>
 
 <p>We say the hash is being <a href="http://en.wikipedia.org/wiki/Serialization">serialized</a>,
-which is a fancy way of saying that it is turned into some kind of format that
+which is a fancy way of saying it is turned into some kind of format that
 can be stored in text form. Sinatra (actually, Rack, under the hood) then also
 encrypts and signs this data, so it is safe to send it over the internet (in
 case we keep any sensitive data in it).</p>
 
 <p>Ok, so the <code>post</code> route includes the <code>Set-Cookie</code> header with this session
-cookie into its response, and sends it to the browser. The browser will, from
-now on, pass this cookie back the our application as part of every subsequent
+cookie in its response, and sends it to the browser. The browser will, from
+now on, pass this cookie back to our application as part of every subsequent
 request.</p>
 
 <p>When our browser is now redirected to <code>GET</code> the same URL again, it passes the

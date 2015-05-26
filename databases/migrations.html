@@ -10,18 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
 
-    <title>Cookies | Webapps for Beginners</title>
+    <title>Migrations | Webapps for Beginners</title>
 
     <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <nav class="page-nav"><a class="prev" href="/sessions.html">
-  Previous
-</a></nav>
-    <nav class="page-nav"><a class="next" href="/sessions/sinatra_sessions.html">
-  Next
-</a></nav>
+    <nav class="page-nav"></nav>
+    <nav class="page-nav"></nav>
 
     <div>
       <nav class="toc">
@@ -224,12 +220,12 @@
       </li>
     </ul>
   </li>
-  <li class="directory expanded">
+  <li class="directory">
     <a href="/sessions.html">
       Sessions
     </a>
     <ul>
-      <li class="active">
+      <li>
         <a href="/sessions/cookies.html">
           Cookies
         </a>
@@ -321,39 +317,23 @@
       </nav>
       <article>
         <nav class="menu"><a href="#"></a></nav>
-        <h1>Cookies</h1>
+        <h1>Migrations</h1>
+<pre class="highlight ruby"><code><span class="no">Sequel</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">up</span> <span class="k">do</span>
+    <span class="n">create_table</span><span class="p">(</span><span class="ss">:artists</span><span class="p">)</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+      <span class="no">String</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:null</span><span class="o">=&gt;</span><span class="kp">false</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-<p>A cookie is a little piece of information that a web application can send along
-with a response that will be stored by the browser. From then on, when the
-browser makes another request to the same application, it will include the cookie
-to the request, sending it back to the application.</p>
-
-<p>For example, an HTTP response that sets a cookie for a user&rsquo;s prefered visual
-theme could look like this:</p>
-<pre class="highlight plaintext"><code>HTTP/1.0 200 OK
-Content-type: text/html
-Set-Cookie: theme=light
+  <span class="n">down</span> <span class="k">do</span>
+    <span class="n">drop_table</span><span class="p">(</span><span class="ss">:artists</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
-<p>From now on, the browser would then include the cookie to subsequent requests:</p>
-<pre class="highlight plaintext"><code>GET /blog.html HTTP/1.1
-Host: rubymonstas.org
-Cookie: theme=light
-</code></pre>
-
-<p>This way the application could apply the &ldquo;light&rdquo; theme to the blog, because the
-user has selected it in some previous request.</p>
-
-<p class="hint">
-Cookies are a way to persist (keep) state (data) across multiple HTTP requests.
-</p>
-
-        <nav class="page-nav"><a class="prev" href="/sessions.html">
-  Previous
-</a></nav>
-        <nav class="page-nav"><a class="next" href="/sessions/sinatra_sessions.html">
-  Next
-</a></nav>
+        <nav class="page-nav"></nav>
+        <nav class="page-nav"></nav>
       </article>
     </div>
 
