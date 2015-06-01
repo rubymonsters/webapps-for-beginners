@@ -1,4 +1,4 @@
-# Ruby Load Path
+# Ruby load path
 
 *Where to look for all the things*
 
@@ -6,7 +6,7 @@ Ruby is software, and software stores things somewhere on your file system.
 In order to define places on your computer where interesting stuff is stored,
 software often has the concept of a "load path".
 
-If you are using a Unix based operating system, such as Linux or Mac OSX you
+If you are using a Unix based operating system such as Linux or Mac OS X, you
 may have seen the environment variable `$PATH` in installation instructions.
 This variable defines all the directories where executable files are stored.
 
@@ -36,7 +36,7 @@ ruby -e 'puts $LOAD_PATH'
 The `-e` flag is a way to run some Ruby code without having to store it in
 a file.
 
-For me this prints:
+For me, this prints:
 
 ```
 /Users/sven/.rbenv/versions/2.2.1/lib/ruby/site_ruby/2.2.0
@@ -51,7 +51,7 @@ For me this prints:
 
 From this you can see that I am using <a href="https://github.com/sstephenson/rbenv">rbenv</a>
 to manage my Ruby versions, that my currently active Ruby version is `2.2.1`,
-and that I am running this on Mac OSX ("darwin").  All these paths are
+and that I am running this on Mac OS X ("darwin").  All these paths are
 directories somewhere in the directory where Ruby 2.2.1 is installed on my
 computer.
 
