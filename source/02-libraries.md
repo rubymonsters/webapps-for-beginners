@@ -1,6 +1,6 @@
 # Using Libraries
 
-Being able to stand on the shoulder of giants is one of the great advantages
+Being able to stand on the shoulders of giants is one of the great advantages
 when we pick a programming language that has a great ecosystem, and an even
 more awesome community:
 
