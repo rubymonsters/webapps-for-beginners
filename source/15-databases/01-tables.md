@@ -55,8 +55,8 @@ hasn't posted yet.
 
 If you think at the two columns `id` and `member_id` you notice that the column
 `id` is special: It must never contain duplicate values, because we want to use
-the `id` to identify a certain message (or member). This is called a *unique
-identifier*, and the column is called a unique one. Also, it auto-increments
+the `id` to identify a certain message (or member). This is called a *primary
+key*, and the column is called a unique one. Also, it usually auto-increments
 the id for us: Whenever we store a new row to this table then the database will
 assign an id, make sure we get the next number, and never get duplicate values.
 
@@ -73,4 +73,5 @@ Does that make sense? This is how we can store data in a database, give it a
 certain structure, and relate a piece of data (a row) in one table to data
 (rows) in other tables.
 
-Now, how can we add data to a table, or retrieve it?
+Now, how can we talk to a database like this? How can we actually add data to a
+table, or retrieve it?

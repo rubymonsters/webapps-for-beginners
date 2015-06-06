@@ -55,6 +55,8 @@
     - tables
     - sql
     - orm
+    - sqlite
+    - migrations
 - path: exercises
   children:
     - using_rubygems
@@ -62,3 +64,4 @@
     - mailbox_erb
     - mailbox_sinatra
     - sinatra_resource
+    - sql
