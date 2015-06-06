@@ -53,4 +53,24 @@ It references a row in a different table: our `members` table. This means that,
 in this example, Anja has posted two status updates, Rebecca one, and Carla
 hasn't posted yet.
 
+If you think at the two columns `id` and `member_id` you notice that the column
+`id` is special: It must never contain duplicate values, because we want to use
+the `id` to identify a certain message (or member). This is called a *unique
+identifier*, and the column is called a unique one. Also, it auto-increments
+the id for us: Whenever we store a new row to this table then the database will
+assign an id, make sure we get the next number, and never get duplicate values.
+
+These "features", or special properties of the `id` column also are considered
+part of the structure, alongside with the column name and type: we define
+these things when we create or modify the database structure.
+
+The column `member_id` on the other hand should not be unique: We want to be
+able to store many messages that all belong to the same member row, in the
+`members` table. Therefor we need to be able to have multiple rows with the
+same `member_id` in the `messages` table.
+
+Does that make sense? This is how we can store data in a database, give it a
+certain structure, and relate a piece of data (a row) in one table to data
+(rows) in other tables.
+
 Now, how can we add data to a table, or retrieve it?
