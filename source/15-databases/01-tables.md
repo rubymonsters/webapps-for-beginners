@@ -24,6 +24,13 @@ The `id` column would be a running number, so it would have the type `integer`.
 The `name` column is a `string` (databases call it this type a `varchar`), and
 the `joined_on` column is a `date`.
 
+For a table like this, the columns (with their name and type) are referred to
+as the database *structure*, whereas the rows represent the *data* that we
+store.  Rows change all the time: new members sign up, existing members change
+their details, or remove their profile etc. The structure remains the same,
+unless we, as developers, need another column, or table in order to store more
+data.
+
 Databases usually contain many tables. And often data from one table relates
 to data in other tables.
 
