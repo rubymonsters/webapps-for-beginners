@@ -9,8 +9,8 @@ different purposes. You can think of it as an app store that can be used to
 download specific versions of libraries, which you can then use.
 
 A package manager is a tool that knows how to install these packages on your
-system in a way so they're then available to be used. That means, when you
-install a gem using Rubygems you can then `require` and use it, just as if it
+system so that they are then available for use. That means when you
+install a gem using Rubygems, you can then `require` and use it, just as if it
 was part of the standard library.
 
 Gems are libraries, often quite small, sometimes quite big (such as Rails), that
@@ -54,20 +54,20 @@ coffee-script, compass, ..."*
 
 When you run `gem install middleman` you'll see that this not only installs
 the Middleman gem, but also all of its dependencies, and all dependencies
-that any of the dependencies might have. This means, when you install one
+that any of those dependencies might have. This means, when you install one
 gem you'll get all the other stuff that this gem needs, too.
 
 Also, each of these dependencies comes with a specification of a version number
 or range of version numbers. For example `~> 2.2.0` means *"allow any version
 of this gem that starts with 2.2"*.
 
-Once installed on your computer you can use a gem in your code in just the same
+Once installed on your computer, you can use a gem in your code in just the same
 way as you use something from the Ruby Standard Library: You `require` it.
 
 For example, in order to configure Middleman to generate this book we require
 a gem called `middleman-toc`
 <a href="https://github.com/rubymonsters/ruby-for-beginners/blob/master/config.rb#L1">here</a>.
-This is an extension to Middleman that allows to add a table of contents, and
+This is an extension to Middleman that allows us to add a table of contents, and
 we need to `require` it before Middleman can use it.
 
 

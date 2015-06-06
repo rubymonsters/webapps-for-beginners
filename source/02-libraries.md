@@ -1,6 +1,6 @@
 # Using Libraries
 
-Being able to stand on the shoulder of giants is one of the great advantages
+Being able to stand on the shoulders of giants is one of the great advantages
 when we pick a programming language that has a great ecosystem, and an even
 more awesome community:
 
@@ -11,7 +11,7 @@ In the chapter <a href="http://ruby-for-beginners.rubymonstas.org/bonus_2/librar
 you have learned that Ruby comes with lots of things available as soon as your
 program starts, but others need to be loaded using the method `require`. For
 example we did `require "digest"` and from then on there's a class
-`Digest::Sha2` defined, which provides some handy tools (methods) that we
+`Digest::SHA2` defined, which provides some handy tools (methods) that we
 really wouldn't want to write ourselves.
 
 But how exactly does that work?
