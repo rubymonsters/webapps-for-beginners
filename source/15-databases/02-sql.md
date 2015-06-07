@@ -92,3 +92,8 @@ very useful when you have access to a database, and you want to find out some
 bits of information that cannot be retrieved with the application that is using
 the database: You'd just directly talk to the database, and ask it for the
 information you need.
+
+Of course there are tools for this. We'll look at libraries that make it easy
+to talk to databases in the chapter about [ORMs](/databases/orm.html).
+
+Let's play with a real database, and run some SQL statements next.

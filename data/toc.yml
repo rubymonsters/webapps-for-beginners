@@ -54,8 +54,8 @@
   children:
     - tables
     - sql
-    - orm
     - sqlite
+    - orm
     - migrations
 - path: exercises
   children:

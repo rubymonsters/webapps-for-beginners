@@ -176,8 +176,8 @@ Sequel.migration do
   up do
     create_table(:members) do
       primary_key :id
-      String :name
-      DateTime :joined_at
+      string :name
+      datetime :joined_at
     end
   end
 
