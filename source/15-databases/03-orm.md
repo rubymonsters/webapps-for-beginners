@@ -4,9 +4,8 @@ There are lots of reasons, most of them historical, why SQL reads weird, and
 it's quite unlikely that SQL will become a more pleasant language, or replaced
 anytime soon.
 
-For this reason programmers have written lots, and lots of tools (libraries)
-that make talking to, and working with relations databases a little bit more
-easy.
+For this reason programmers have written lots and lots of tools (libraries),
+which make talking to, and working with relations databases a little bit easier.
 
 One class of such tools is called ORM: [Object Relational Mappers](http://en.wikipedia.org/wiki/Object-relational_mapping).
 
@@ -72,12 +71,10 @@ Two widely used ORMs in Ruby are [ActiveRecord](https://github.com/rails/rails/t
 which is part of Rails, and [Sequel](https://github.com/jeremyevans/sequel),
 which is more modern, slick, and performant.
 
-Since you'll get to know ActiveRecord when you learn Rails anyway we'll
-introduce Sequel first so you get to know two libraries, and can compare them.
+Since you will anyway get to know ActiveRecord later when you learn Rails, we will introduce Sequel first. This way you will get to know two libraries and can later compare them.
 
 You can install the Sequel gem like so:
 
 ```
 $ gem install sequel
 ```
-
