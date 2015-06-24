@@ -37,22 +37,15 @@ Also, let's store the names on an instance variable in our route, so we can
 then use it in the template later:
 
 ```ruby
-get "/hello" do
+get "/monstas" do
   @names = read_names
   store_name("names.txt", params["name"])
-  erb :hello
+  erb :monstas
 end
 ```
-Now we can output the names as an unordered list (`<ul>`) in our `hello.erb`.
+Now we can output the names as an unordered list (`<ul>`) in our `monstas.erb`.
 
-So let's replace this (we now want to display the full list):
-
-```erb
-<% if @message %>
-  <p><%= @message %></p>
-<% end %>
-```
-With this:
+So let's add this at the end of your file (we now want to display the full list):
 
 ```erb
 <ul>
