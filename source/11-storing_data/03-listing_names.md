@@ -38,8 +38,9 @@ then use it in the template later:
 
 ```ruby
 get "/monstas" do
+  @name = params["name"]
   @names = read_names
-  store_name("names.txt", params["name"])
+  store_name("names.txt", @name)
   erb :monstas
 end
 ```
