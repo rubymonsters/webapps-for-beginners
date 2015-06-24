@@ -28,11 +28,11 @@ enable :sessions
 Now, we want to store the message in our `post` route:
 
 ```ruby
-post "/hello" do
-  name = params[:name]
-  store_name("names.txt", name)
-  session[:message] = "Successfully stored the name #{name}."
-  redirect "/hello"
+post "/monstas" do
+  @name = params["name"]
+  store_name("names.txt", @name)
+  session[:message] = "Successfully stored the name #{@name}."
+  redirect "/monstas?name=#{@name}"
 end
 ```
 
@@ -56,10 +56,11 @@ know is that we can now use this data in the next request (the `GET` request)
 like so:
 
 ```ruby
-get "/hello" do
+get "/monstas" do
   @message = session.delete(:message)
+  @name = params["name"]
   @names = read_names
-  erb :hello
+  erb :monstas
 end
 ```
 
