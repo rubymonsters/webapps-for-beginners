@@ -19,35 +19,35 @@ message to the user, and ask them to submit the form again.
 We could change our `post` route like so:
 
 ```ruby
-post "/hello" do
-  name = params[:name]
+post "/monstas" do
+  @name = params["name"]
 
-  if name.to_s.empty?
+  if @name.to_s.empty?
     session[:message] = "You need to enter a name."
-  elsif read_names.include?(name)
-    session[:message] = "#{name} is already included in our list."
+  elsif read_names.include?(@name)
+    session[:message] = "#{@name} is already included in our list."
   else
-    store_name("names.txt", name)
-    session[:message] = "Successfully stored the name #{name}."
+    store_name("names.txt", @name)
+    session[:message] = "Successfully stored the name #{@name}."
   end
 
-  redirect "/hello?name=#{name}"
+  redirect "/monstas?name=#{@name}"
 end
 ```
 
 This is a valid implementation, and if you restart your application you
 can try it out.
 
-The `if` statement first checks if the `name` is empty. If it is we simply
+The `if` statement first checks if the `@name` is empty. If it is we simply
 store a message to the session, and then redirect.
 
-Note that we call `to_s` ("to string") on the `name`. This is useful because
-there might not be any value stored on `params[:name]`. In this case we'd get
+Note that we call `to_s` ("to string") on the `@name`. This is useful because
+there might not be any value stored on `params["name"]`. In this case we'd get
 `nil`, which does not know the method `empty?`. We therefor turn a potential
 `nil` value into an empty string first.  Of course, if there's a string stored
 on `params[:key]`, then `to_s` would just return the same string.
 
-The `if` statement then checks if the given `name` already is included in the
+The `if` statement then checks if the given `@name` already is included in the
 names in our file: the array returned by `read_names`. (We had implemented this
 method in order use it in our `get` route for displaying all the names, and now
 we can just re-use it here.) If we already have the name, then, again, we just
@@ -90,18 +90,18 @@ class NameValidator
     end
 end
 
-post "/hello" do
-  name = params[:name]
-  validator = NameValidator.new(name, read_names)
+post "/monstas" do
+  @name = params["name"]
+  validator = NameValidator.new(@name, read_names)
 
   if validator.valid?
-    store_name("names.txt", name)
-    session[:message] = "Successfully stored the name #{name}."
+    store_name("names.txt", @name)
+    session[:message] = "Successfully stored the name #{@name}."
   else
     session[:message] = validator.message
   end
 
-  redirect "/hello?name=#{name}"
+  redirect "/monstas?name=#{@name}"
 end
 ```
 
@@ -123,18 +123,18 @@ just re-render the same template right away, with the same data.
 Here's how we could do that:
 
 ```ruby
-post "/hello" do
-  @name = params[:name]
+post "/monstas" do
+  @name = params["name"]
   @names = read_names
   validator = NameValidator.new(@name, @names)
 
   if validator.valid?
     store_name("names.txt", @name)
     session[:message] = "Successfully stored the name #{@name}."
-    redirect "/hello?name=#{@name}"
+    redirect "/monstas?name=#{@name}"
   else
     @message = validator.message
-    erb :hello
+    erb :monstas
   end
 end
 ```
@@ -147,7 +147,7 @@ Cool. If you restart your application you can try how it works.
 
 However, this now displays an empty "Hello" at the top. Why's that?
 
-We assign `params[:name]` to the instance variable `@name` which we then check
+We assign `params["name"]` to the instance variable `@name` which we then check
 in our template: `<% if @name %>`. However, since this has been submitted by a
 form, with an input element called `name`, what we get is an empty string, not
 `nil`.
