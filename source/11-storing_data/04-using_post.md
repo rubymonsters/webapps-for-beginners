@@ -50,12 +50,14 @@ route:
 
 ```ruby
 get "/monstas" do
+  @name = params["name"]
   @names = read_names
   erb :monstas
 end
 
 post "/monstas" do
-  store_name("names.txt", params[:name])
+  @name = params["name"]
+  store_name("names.txt", @name)
 end
 ```
 
@@ -70,7 +72,8 @@ For starters, we could just send a little confirmation:
 
 ```ruby
 post "/monstas" do
-  store_name("names.txt", params[:name])
+  @name = params["name"]
+  store_name("names.txt", @name)
   "Ok!"
 end
 ```
