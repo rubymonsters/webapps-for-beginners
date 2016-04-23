@@ -64,7 +64,7 @@ cat schema.sql | sqlite3 members-2
 
 We could share this file with other developers, and they could create the same
 database with the same command, making sure they'd always end up with the same
-database that we have, and that our our application (Ruby code) requires.
+database that we have, and that our application (Ruby code) requires.
 
 However, there's another problem with this.
 
