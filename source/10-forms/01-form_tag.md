@@ -28,7 +28,7 @@ lots of other input element types. You can find a
 Let's make our little Sinatra application serve this form.
 
 Make a new template file `monstas.erb` in your `view` directory and add the the
-HTML above. Then replace your `get '/hello/:name'` route with the following:
+HTML above. Then replace your `get '/monstas/:name'` route with the following:
 
 ```ruby
 get "/monstas" do

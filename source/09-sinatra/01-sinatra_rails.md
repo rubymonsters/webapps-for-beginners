@@ -27,6 +27,5 @@ Rails on the other hand is better for learning how to use a database and
 actually store things, and learning the concept of a "resource".
 
 Also, next to Sinatra and Rails there are, of course, lots of other frameworks
-for building web applications. For example,
-<a href="http://lotusrb.org">Lotus</a> has gained popularity quite quickly
-recently.
+for building web applications. For example, <a href="http://hanamirb.org/">Hanami</a>
+has gained popularity quite quickly recently.

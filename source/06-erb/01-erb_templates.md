@@ -47,7 +47,7 @@ Ruby code in ERB tags that do not have an equal sign, such as `<% ... %>` will
 be executed, but any return values won't be captured, and just discarded.
 
 
-Footnotes:
+## Footnotes:
 
 <a name="footnote-1">[1]</a>
 *This idea actually predates Ruby's ERB library and

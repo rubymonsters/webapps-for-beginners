@@ -1,14 +1,14 @@
-# Bonus: Method and Path
+# Method and Path
 
 We saw that the `env` hash that Rack passes to the method `call` contains the
-keys `REQUEST_METHOD` and `REQUEST_PATH`.
+keys `REQUEST_METHOD` and `PATH_INFO`.
 
 Let's modify our app a little so we can make use of it:
 
 ```ruby
 class Application
   def call(env)
-    handle_request(env['REQUEST_METHOD'], env['REQUEST_PATH'])
+    handle_request(env['REQUEST_METHOD'], env['PATH_INFO'])
   end
 
   private
@@ -34,15 +34,19 @@ end
 Reading the code closely, do you understand what it does, and why?
 
 We have changed the method `call` to extract the values for the keys
-`REQUEST_METHOD` and `REQUEST_PATH`. And we then pass these two values to a new
-method `handle_request`, which checks the `method`:
+`REQUEST_METHOD` and `PATH_INFO`. And we then pass these two values to a new
+method `handle_request`, which checks the request `method`. Keep in mind that
+`method` here is just a variable name that refers to the HTTP concept of a
+"request method".  This, of course, is not the same as a Ruby method, it's just
+a variable that will hold a string such as `GET`, `POST` depending on the HTTP
+request.
 
-* If it's a `GET` request, then we call another method `get`, passing the `path`.
+* If `method` is `GET`, then we call another method `get`, passing the `path`.
   The method `get` complies with Rack's convention for returning a response: It
   returns an array that has the response status, headers, and a body. We've
   changed the body a little bit so it displays the `path` that was requested.
 
-* If it's not a `GET` request, then we call another method `method_not_allowed`.
+* If `method` is not `GET`, then we call another method `method_not_allowed`.
   This method also complies with Rack's convention, but returns a different
   response. This time we use the status code `405` which means exactly this:
   *"Method Not Allowed"*. Our little application just does not support any other

@@ -14,13 +14,10 @@ that's something Sinatra supports, too. They're called "layout" templates.
 Here's how it works:
 
 ```ruby
-get '/hello/:name' do
+get '/monstas/:name' do
   template = "<h1>Hello <%= name %></h1>"
-  options = {
-    :locals => { :name => params[:name] },
-    :layout => "<html><body><%= yield %></body></html>"
-  }
-  erb template, options
+  layout   = "<html><body><%= yield %></body></html>"
+  erb template, { :locals => params, :layout => layout }
 end
 ```
 
@@ -31,19 +28,23 @@ the `<html>` and `<body>` tags from our layout template.
 
 The only real change that we have made is that we've added the `:layout` option
 to the options hash. Because this is too much stuff to fit on one line we have
-also sticked the template and options into local variables.
+also sticked the template and layout into local variables.
 
 As you can see the rendered "content" (from our main template) is being wrapped
-by, or inserted to, our layout template.
+by, or inserted into, our layout template.
 
 What about that `yield` thing in our layout template though?
 
 `yield` is a keyword in Ruby that calls a block that was given to a method.
+Whenever you pass a block to a method (such as `each`, `collect`, `select`, and
+so on) this method can then call the block by using the keyword `yield`.
+Because we've never implemented a method that took a block we've also never
+discussed this keyword.
 
-Hmmmmm. Well, that's how it works under the hood, that is correct. However, in
-this context, all you need to remember is that, in a layout template, `<%=
-yield %>` marks the place where the other template (the one that is being
-wrapped) is supposed to be inserted.
+Hmmmmm. Ok, that's how it works under the hood, yes. However, in this context,
+all you need to remember is that, in a layout template, `<%= yield %>` marks
+the place where the other template (the one that is being wrapped) is supposed
+to be inserted.
 
 Does this make sense?
 
@@ -52,7 +53,8 @@ renders a different template. Say, there's one for the homepage, one for
 a user signup page, one for a user profile page, and so on. Each of these
 templates is supposed to be wrapped into the same layout, which has the
 enclosing `<html>`, `<body>`, and other tags, which are all common to each
-of these pages.
+of these pages. Maybe there's also a common header menu at the top, and a
+common footer at the end of the page.
 
 Each route will then render its own template, and specify the layout template
 to be used, which will replace the `<%= yield %>` tag with the template, and

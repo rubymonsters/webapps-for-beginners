@@ -2,17 +2,18 @@
 
 Now, sometimes the request path contains dynamic data.
 
-For example, the path of the URL <a href="https://rubygems.org/gems/middleman">https://rubygems.org/gems/middleman</a>
-is `/gems/middleman`. The path of the details page for the gem Rack on
-RubyGems.org is `/gems/rack`, the path for Sinatra is `/gems/sinatra`, and so
-on.
+For example, the path of the URL <a href="https://rubygems.org/gems/rack">https://rubygems.org/gems/rack</a>
+is `/gems/rack`. The path of the details page for the gem Sinatra on
+RubyGems.org is `/gems/sinatra`, the path for Middleman is `/gems/middleman`,
+and so on.
 
 Obviously we don't want to hardcode ("write out literally") all these names in
 our application code: We don't want to change our code for each and every new
-gem that is added. Instead we want to be able to express *"a path that starts
-with `/gems` followed by another, second segment"*.
+gem that is added: At the time of this writing RubyGems.org has 122,037.
+Instead we want to be able to express *"a path that starts with `/gems`
+followed by another, second segment"*.
 
-In Sinatra we can do this by specifying pattern as a path. Sinatra will then
+In Sinatra we can do this by specifying a pattern as a path. Sinatra will then
 match the pattern against the path, and see if it applies.
 
 Let's try that out.
@@ -21,13 +22,13 @@ Add the following route (request handler) to your program, at the end of the
 file:
 
 ```ruby
-get "/hello/:name" do
+get "/monstas/:name" do
   "Hello #{params["name"]}!"
 end
 ```
 
 Restart your Sinatra application, and point your browser to
-<a href="http://localhost:4567/hello/monstas">http://localhost:4567/hello/monstas</a>.
+<a href="http://localhost:4567/monstas/monstas">http://localhost:4567/monstas/monstas</a>.
 
 How does this work?
 
@@ -42,15 +43,15 @@ Sinatra therefore adds the key `"name"` to the `params` hash, and sets the
 given string from the path (i.e. from the URL) to it.
 
 When you point your browser to the URL
-<a href="http://localhost:4567/hello/Elizabeth">http://localhost:4567/hello/Elizabeth</a>
+<a href="http://localhost:4567/monstas/Elizabeth">http://localhost:4567/monstas/Elizabeth</a>
 your application will say *"Hello Elizabeth!"*, when you go to
-<a href="http://localhost:4567/hello/Juliane">http://localhost:4567/hello/Juliane</a>
+<a href="http://localhost:4567/monstas/Juliane">http://localhost:4567/monstas/Juliane</a>
 your application will say *"Hello Juliane!"*, and so on.
 
 Let's inspect the params hash, and return this string as the response body:
 
 ```ruby
-get "/hello/:name" do
+get "/monstas/:name" do
   params.inspect
 end
 ```

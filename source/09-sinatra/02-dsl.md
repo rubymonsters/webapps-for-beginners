@@ -12,7 +12,7 @@ tool can be applied.
 
 What does that mean?
 
-When you think about a hammer as a concept, then the domain the is relevant to
+When you think about a hammer as a concept, then the domain it is relevant to
 is "building physical things". In contrast, it is completely irrelevant to the
 domain of mathmatics. Likewise, the concept of an operating system, is
 something that is relevant in the domain of using computers, while it is
@@ -36,15 +36,15 @@ In the context of Ruby code the term "domain specific language" is used to
 describe a piece of code or library that provides classes and methods that
 allow us to "speak about them", or implement them, in the form of code.
 
-The problem domain that Sinatra lives in is building web applications which
-speak HTTP:
+The problem domain that Sinatra lives in is building web applications. And web
+applications which "speak" HTTP with browsers.
 
-It has methods like `get`, `post`, `put`, and `delete`, which you can use in
-order to describe how your application responds to HTTP requests. It also has
-methods like `headers`, `session`, `cookies`, and other things that relate to
-concepts from HTTP.
+It therefor has methods like, for example, `get`, `post`, `put`, and `delete`.
+You can use these methods in order to describe how your application responds to
+HTTP requests. It also has methods like `headers`, `session`, `cookies`, and
+other things that relate to concepts from HTTP.
 
-So, instead of writing code like this:
+So, instead of writing verbose code like this:
 
 ```ruby
 def handle_request(method, path)
@@ -68,8 +68,8 @@ post "*" do
 end
 ```
 
-... which uses a "language" (i.e. methods provided by Sinatra) that is specific
-to the domain HTTP.
+As you can see this code uses a "language" (i.e. methods provided by Sinatra)
+that is specific to the domain HTTP.
 
 Does that make sense?
 

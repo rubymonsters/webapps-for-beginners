@@ -10,7 +10,7 @@ has built-in support for that: when we call the method `erb` with a symbol
 instead of a string, then Sinatra assumes this is part of a filename, and
 it will look for a template file in a directory `views`.
 
-Let's create a new directory `views`, and add a file `hello.erb`, containing
+Let's create a new directory `views`, and add a file `monstas.erb`, containing
 our template:
 
 ```erb
@@ -26,8 +26,8 @@ Also, add a file `layout.erb` with our layout template:
 Now we are ready to change our route as follows:
 
 ```ruby
-get '/hello/:name' do
-  erb :hello, { :locals => { :name => params[:name] }, :layout => :layout }
+get '/monstas/:name' do
+  erb :monstas, { :locals => params, :layout => :layout }
 end
 ```
 
@@ -40,8 +40,8 @@ this filename by default (we could specify a different name though, in case
 we need different layout templates in different contexts):
 
 ```ruby
-get '/hello/:name' do
-  erb :hello, { :locals => { :name => params[:name] }, :layout => true }
+get '/monstas/:name' do
+  erb :monstas, { :locals => params, :layout => true }
 end
 ```
 
@@ -49,8 +49,8 @@ And finally, we can also even totally omit the option, because Sinatra
 assumes we want a layout and finds one in the `views` directory:
 
 ```ruby
-get '/hello/:name' do
-  erb :hello, { :locals => { :name => params[:name] } }
+get '/monstas/:name' do
+  erb :monstas, { :locals => params }
 end
 ```
 

@@ -142,7 +142,7 @@ that Konstantin Haase, maintainer of Sinatra, gave for Ruby Monstas in early
 <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">Wikipedia page about HTTP</a>
 is an interesting read.
 
-Footnotes:
+## Footnotes:
 
 <a name="footnote-1">[1]</a> There's a lot more to be said about HTTP verbs than
 this, and some developers might argue that these explanations are wrong. Let's

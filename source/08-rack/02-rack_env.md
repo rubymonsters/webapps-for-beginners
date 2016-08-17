@@ -1,4 +1,4 @@
-# Bonus: The Rack Env
+# The Rack Env
 
 Let's have a look at the `env` data that is passed along with the request.
 Let's just print it out to the terminal as follows:
@@ -45,6 +45,7 @@ Rack uses a simple convention for these keys:
 * All headers that have been part of the actual HTTP request are prefixed with
   `HTTP` and uppercased. For example the request header `host: localhost:9292`
   will be translated to the hash key `HTTP_HOST` with the value `localhost:9292`.
+  I.e. these are the actual HTTP headers that our browser has sent.
 * All other uppercase keys represent additional information that has been
   passed (added) from the webserver that has received the request (in this case
   WEBrick, which runs our little Rack application). For example, WEBrick adds
@@ -66,27 +67,29 @@ class Application
   end
 
   def inspect_env(env)
-    puts [request_headers(env), server_info(env), rack_info(env)]
+    puts format('Request headers', request_headers(env))
+    puts format('Server info', server_info(env))
+    puts format('Rack info', rack_info(env))
   end
 
   def request_headers(env)
-    pairs = env.select { |key, value| key.include?('HTTP_') }
-    format('Request headers', pairs)
+    env.select { |key, value| key.include?('HTTP_') }
   end
 
   def server_info(env)
-    pairs = env.reject { |key, value| key.include?('HTTP_') || key.include?('rack.') }
-    format('Server info', pairs)
+    env.reject { |key, value| key.include?('HTTP_') or key.include?('rack.') }
   end
 
   def rack_info(env)
-    pairs = env.select { |key, value| key.include?('rack.') }
-    format('Rack info', pairs)
+    env.select { |key, value| key.include?('rack.') }
   end
 
   def format(heading, pairs)
-    pairs = pairs.map { |key, value| '  ' + [key, value.inspect].join(': ') }
-    [heading, "", pairs, "\n"].join("\n")
+    [heading, "", format_pairs(pairs), "\n"].join("\n")
+  end
+
+  def format_pairs(pairs)
+    pairs.map { |key, value| '  ' + [key, value.inspect].join(': ') }
   end
 end
 ```
@@ -130,13 +133,14 @@ Rack info
 
 Now, that's way easier to read, right?
 
-Luckily, we can just ignore most of these things. The only interesting keys for
-us are `REQUEST_METHOD` and `REQUEST_PATH`: They're the relevant bits from the
-HTTP request.
+Luckily, we can just ignore most of these things.
+
+At the moment, the only interesting keys for us are `REQUEST_METHOD` and
+`PATH_INFO`: They're the relevant bits from the HTTP request.
 
 <p class="hint">
 The most interesting bits in the <code>env</code> hash are the
-<code>REQUEST_METHOD</code>, and <code>REQUEST_PATH</code>.
+<code>REQUEST_METHOD</code>, and <code>PATH_INFO</code>.
 </p>
 
-Let's do something with them.
+Ok, let's do something with them.

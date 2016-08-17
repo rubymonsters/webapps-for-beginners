@@ -20,7 +20,7 @@ def read_names
 end
 ```
 
-However, this would break if no file with this name exists yet. So let's add 
+However, this would break if no file with this name exists yet. So let's add
 a little safeguard, and return an empty array if the file does not exist:
 
 ```ruby
@@ -31,7 +31,8 @@ end
 ```
 
 Does this make sense? If the file does not exist we return an empty array `[]`.
-If it exists we read it, and split the content into lines.
+If it exists we read it, and split the content into lines. Even if the file
+exists, but it is empty, we'll still get an array.
 
 Also, let's store the names on an instance variable in our route, so we can
 then use it in the template later:
@@ -60,3 +61,6 @@ So let's add this at the end of your file (we now want to display the full list)
 
 Wheeeee! Pretty cool.
 
+The tag `ul` means "unordered list", and it is supposed to have one or many
+`li` tags, which means "list item". Yeah, HTML tag names are a little weird,
+their naming dates back a while.

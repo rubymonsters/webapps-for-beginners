@@ -59,7 +59,7 @@ it to the URL as query parameters (name/value pairs).
 Now, how can we make use of this form data in our application?
 
 
-Footnotes:
+## Footnotes:
 
 <a name="#footnote-1">[1]</a> You'll see later that form data is passed as part
 of the request body in case of `POST` requests. The request body is able to

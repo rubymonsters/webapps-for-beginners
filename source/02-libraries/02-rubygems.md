@@ -71,7 +71,7 @@ This is an extension to Middleman that allows us to add a table of contents, and
 we need to `require` it before Middleman can use it.
 
 
-Footnotes:
+## Footnotes:
 
 <a name="footnote-1">[1]</a> *As of this writing, there are <a href="https://rubygems.org/gems">6373 gems</a>
 hosted on RubyGems.org.*

@@ -10,10 +10,10 @@ response."*
 
 Imagine talking to a person with a very shortlived memory:
 
-"Hey, who are you?" - *"I'm a web application."*
-"Hey, who are you?" - *"I'm a web application."*
-"Hey, who are you?" - *"I'm a web application."*
-"How often have I just asked you who you are?" - *"I don't know, I don't keep track."*
+* Hey, who are you? - *I'm a web application.*
+* Hey, who are you? - *I'm a web application.*
+* Hey, who are you? - *I'm a web application.*
+* How often have I just asked you who you are? - *I don't know, I don't keep track.*
 
 That's what's meant by HTTP being stateless: The web application just responds
 to the request at hand, but has no way to identify how these requests relate to
@@ -30,5 +30,13 @@ Basically.
 However, of course there are ways to identify your users. We all know that we
 can sign in to a web application, and it would recognize who we are. Right?
 
-Often web applications use cookies for this.
+When you sign into Gmail it will display *your* emails, not anyone else's
+emails.  Obviously it needs to know who you are, so it can find *your* emails.
+The same happens for basically every useful, modern web application.
+
+In order to identfy who is making a request web applications often use cookies
+for this. There are other techniques, but using cookies is by far the most
+common one.
+
+So let's check that out.
 

@@ -29,7 +29,8 @@ $ ruby monstas.rb
 ```
 
 Again, there are lots of version numbers, that we can ignore, and it
-also tells us the port that it's running on.
+also tells us the port that it's running on. This time it's `4567`. For some
+reason Sinatra finds it important to use a different port number `¯\_(ツ)_/¯`
 
 So let's point the browser to <a href="http://localhost:4567">http://localhost:4567</a>.
 
@@ -39,9 +40,9 @@ You should see something like this:
 
 That was easy, wasn't it.
 
-If you've read the chapters about [Rack](/rack.html)): Sinatra uses Rack under
-the hood, but it deals with the nitty gritty details of looking at the
-`REQUEST_METHOD` and `REQUEST_PATH` for you.
+If you've read the chapters about [Rack](/rack.html) it is interesting to know
+that Sinatra uses Rack under the hood, but it deals with the nitty gritty
+details of looking at the `REQUEST_METHOD` and `REQUEST_PATH` for you.
 
 It allows you to use the methods `get`, `post`, `put`, and `delete`
 with a path argument, and simply specify a block that will be called whenever a

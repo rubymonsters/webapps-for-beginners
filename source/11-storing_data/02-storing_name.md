@@ -6,14 +6,14 @@ application and store all those names to a file.
 We could change our route like so:
 
 ```ruby
-get "/hello" do
+get "/monstas" do
   @name = params["name"]
 
   File.open("names.txt", "a+") do |file|
     file.puts(@name)
   end
 
-  erb :hello
+  erb :monstas
 end
 ```
 
@@ -29,10 +29,10 @@ def store_name(filename, string)
   end
 end
 
-get "/hello" do
+get "/monstas" do
   @name = params["name"]
   store_name("names.txt", @name)
-  erb :hello
+  erb :monstas
 end
 ```
 
@@ -46,9 +46,11 @@ name from the form.
 You can check this using command line tools like this:
 
 ```
+# check if the file is there
 $ ls names.txt
 names.txt
 
+# look at the content of the file
 $ cat names.txt
 Monstas
 ```

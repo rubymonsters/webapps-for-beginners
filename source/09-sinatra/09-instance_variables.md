@@ -17,9 +17,9 @@ If we now assign the same instance variable in our route, then Sinatra will
 make it available to the template, too:
 
 ```ruby
-get '/hello/:name' do
+get '/monstas/:name' do
   @name = params["name"]
-  erb :hello
+  erb :monstas
 end
 ```
 

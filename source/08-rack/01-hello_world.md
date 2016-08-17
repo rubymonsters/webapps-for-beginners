@@ -1,4 +1,4 @@
-# Bonus: Your first Rack app
+# Your first Rack app
 
 Let's jump right in.
 
@@ -7,7 +7,11 @@ In a new directory `rack` create a file `config.ru` with the following content:
 ```ruby
 class Application
   def call(env)
-    [200, { "Content-Type" => "text/html" }, ["Yay, your first web application! <3"]]
+    status  = 200
+    headers = { "Content-Type" => "text/html" }
+    body    = ["Yay, your first web application! <3"]
+
+    [status, headers, body]
   end
 end
 
@@ -33,7 +37,7 @@ $ rackup
 ```
 
 Of course the version numbers may be different, but the important bit that
-you want to look for is the port.
+you want to look for is the port. In our case that's `9292`.
 
 Now your web application has started you can point your browser to
 <a href="http://localhost:9292">http://localhost:9292</a>. You should see
@@ -41,10 +45,23 @@ something like this:
 
 <img src="/assets/images/08-rack_1.png">
 
-Pretty cool, isn't it? With just a few lines of plain Ruby code you have
-just written an actual web application.
+Pretty cool, isn't it? With just a few lines of simple Ruby code you have just
+written an actual web application, and started a fully functional web server
+with it.
 
-Now, let's have a closer look at the code.
+Now, let's have a closer look at the code. Here's our class again:
+
+```ruby
+class Application
+  def call(env)
+    status  = 200
+    headers = { "Content-Type" => "text/html" }
+    body    = ["Yay, your first web application! <3"]
+
+    [status, headers, body]
+  end
+end
+```
 
 We define a class `Application`, and, on the last line, create an instance
 of it, which we pass to the method `run`. The method `run` is defined by
@@ -64,16 +81,22 @@ This array contains 3 things:
 So the method `call` returns something that represents an HTTP response in Rack!
 
 Rack makes it so that whenever there's a request coming in (on the computer
-that is `localhost`, i.e. your own, local computer, and on the port 9292),
-it will turn this request into a hash `env` that is passed to the method `call`.
-I.e. the argument `env` contains the request information. We'll have a look
-at that in a minute.
+that is `localhost`, i.e. your own, local computer, and on the port `9292`),
+it will turn this request into a hash `env`. It will then hand us this hash by
+calling our method `call`.  I.e. the hash `env` that is passed to us as an
+argument contains the request information. We'll have a look at that in a
+minute.
 
-Rack then expects that you return an array containing those three elements:
+Rack then expects us (our method `call`) to return an array containing those
+three elements:
 
 * The HTTP response code
 * A hash of headers
 * The response body, which must respond to each (i.e. we can just use an array)
+
+In other words, that's also a kind of protocol (programmers also use the term
+"interface" here). Rack defines how we can interact with it in a formal way in
+terms of Ruby. The protocol is defined as something like:
 
 <p class="hint">
 A Rack application implements a method <code>call</code> that takes a hash
@@ -82,14 +105,42 @@ status code, a hash containing the headers, and an array containing the request
 body.
 </p>
 
-Once it got these three things back from our method `call` it will create
+Once Rack got these three things back from our method `call` it will create
 the respective response (text) message out of it, and send it back to the
-browser.
+browser, so the browser can handle it (and in our case display the body).
 
 Great!
 
+If you've paid attention close enough you may have noticed that our little
+Rack application actually is lying to the browser. Can you spot where?
 
-Footnotes:
+Our response header hash defines a `Content-Type` header. And in that header we
+claim that our response body has the content type `text/html`. But then we
+return a body that isn't HTML, but just plain text. So that's wrong. Luckily
+browsers are pretty forgiving. They try to do their best to still display
+useful information to the user, and fix things for us.
+
+We could fix our application by specifying that the `Content-Type` is plain
+text by setting the value to `text/plain`. But instead we can also simply
+turn the body into HTML like so:
+
+
+```ruby
+class Application
+  def call(env)
+    status  = 200
+    headers = { "Content-Type" => "text/html" }
+    body    = ["<html><body><h1>Yay, your first web application! <3</h1></body></html>"]
+
+    [status, headers, body]
+  end
+end
+
+run Application.new
+```
+
+
+## Footnotes:
 
 <a name="footnote-1">[1]</a> Most examples for Rack applications will use
 a `Proc` or `lambda`, which can be called using their method `call`. Here's an

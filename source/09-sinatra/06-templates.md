@@ -13,7 +13,7 @@ variables used in the template known as local variables in our route:
 require "sinatra"
 require "erb"
 
-get '/hello/:name' do
+get '/monstas/:name' do
   ERB.new("<h1>Hello <%= params[:name] %></h1>").result(binding)
 end
 ```
@@ -29,14 +29,14 @@ look like this:
 
 <img src="/assets/images/09-sinatra_2.png">
 
-Awesome, we're now serving HTML.
+Awesome, we're now serving HTML, not just plain text.
 
 However, Sinatra also has built-in support for ERB templates ("views"). We can
 achieve exactly the same thing without spelling out the
 `ERB.new(...).result(binding)` noise:
 
 ```ruby
-get '/hello/:name' do
+get '/monstas/:name' do
   erb "<h1>Hello <%= name %></h1>", { :locals => { :name => params[:name] } }
 end
 ```
@@ -49,4 +49,13 @@ options. If we specify a key `:locals` and give it another hash, then Sinatra
 will make each key/value pair on this hash available as *local* variables (thus
 "locals") in our ERB template.
 
-We think that's much nicer.
+Of course, since `params` already is a hash, and it already has the key `name`
+defined, we can also just say:
+
+```ruby
+get '/monstas/:name' do
+  erb "<h1>Hello <%= name %></h1>", { :locals => params }
+end
+```
+
+Nice, isn't it.

@@ -1,13 +1,14 @@
 # Tables
 
-At its core, you can imagine a database as a bunch of spreadsheets, except
-they're called "tables".
+At its core, you can imagine a database as a bunch of spreadsheets. Except
+they're called "tables", and they can be huge, containing tons and tons of
+rows. More than any spreadsheet ever could handle.
 
 Each table has a bunch of columns, and can have an arbitrary number of rows
-(also referred to as "records").  Columns have a name and a type. Their type
-specifies which kind of data can be stored. Each row has a number of cells
-(referred to as "fields"), and each one of the cells can hold some value
-with the type defined by the column.
+(also referred to as "records"). Columns (also referred to as "fields") have a
+name and a type. Their type specifies which kind of data can be stored. Each
+row has a number of cells , and each one of the cells can hold some value with
+the type defined by the column.
 
 Let's have a look at an example.
 
@@ -53,10 +54,10 @@ It references a row in a different table: our `members` table. This means that,
 in this example, Anja has posted two status updates, Rebecca one, and Carla
 hasn't posted yet.
 
-If you think at the two columns `id` and `member_id` you notice that the column
+If you look at the two columns `id` and `member_id` you notice that the column
 `id` is special: It must never contain duplicate values, because we want to use
 the `id` to identify a certain message (or member). This is called a *primary
-key*, and the column is called a unique one. Also, it usually auto-increments
+key*, and the column is called a "unique" one. Also, it usually auto-increments
 the id for us: Whenever we store a new row to this table then the database will
 assign an id, make sure we get the next number, and never get duplicate values.
 

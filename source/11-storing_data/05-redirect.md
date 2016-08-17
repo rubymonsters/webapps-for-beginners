@@ -32,7 +32,17 @@ code `303` and add a `location` header to the response with the value
 `http://localhost:4567/monstas` (since we have passed the path `/monstas`, but the
 `location` header needs a full URL).
 
-We also want to see the the Welcome message when we post a new name. For it to work, we have to redirect to `"/monstas?name=#{@name}"`.
+We also want to see the the Welcome message when we post a new name. For that to
+work, we can redirect to `"/monstas?name=#{@name}"`. Our `GET` route will then
+include ("render") the name into the HTML page:
+
+```ruby
+post "/monstas" do
+  @name = params[:name]
+  store_name("names.txt", @name)
+  redirect "/monstas?name=#{name}"
+end
+```
 
 If you restart the server, go to <a href="http://localhost:4567/monstas">http://localhost:4567/monstas</a>,
 and submit the form you'll see that your browser will be redirected, and make

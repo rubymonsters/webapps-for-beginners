@@ -8,7 +8,7 @@ What's up with that term?
 The request is being picked up by the webserver, and then *routed* to a piece
 of code that handles the request, and specifies the response. They're like the
 info desk at a shopping mall: You (as an HTTP request) walk up to them, and
-tell them "GET /something". They'll route (send) you to a certain shop on a
+tell them `GET /something`. They'll route (send) you to a certain shop on a
 certain floor where you can find what you're after.
 
 So, this would be three Sinatra routes:

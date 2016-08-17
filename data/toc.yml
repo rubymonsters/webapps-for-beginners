@@ -50,13 +50,19 @@
   children:
     - groups_routes
     - fake_methods
+    - writing_resources
 - path: databases
   children:
     - tables
     - sql
     - sqlite
     - orm
-    - migrations
+- path: migrations
+  children:
+    - database_structure
+    - incremental_changes
+    - rollbacks
+    - tools
 - path: exercises
   children:
     - using_rubygems
