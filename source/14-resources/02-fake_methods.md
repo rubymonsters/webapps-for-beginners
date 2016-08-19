@@ -41,6 +41,13 @@ A hidden input tag is just that, it is hidden, meaning that it is not displayed
 to the user. However, it is there, and it will be sent to the application as
 part of the request just like any other input tag.
 
+In order to make this work we also need to tell Sinatra that we want this
+kind of behaviour. Developers say we need to "opt in" to it. Like so:
+
+```ruby
+use Rack::MethodOverride
+```
+
 Now, whenever Sinatra receives a `POST` request that has a parameter with the
 name `_method` it will treat this request as if it was a request with the HTTP
 method (verb) given by this parameter. This way one can add data to the form

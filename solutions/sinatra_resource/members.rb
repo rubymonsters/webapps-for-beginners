@@ -79,6 +79,8 @@ def remove_member(name)
   store(lines)
 end
 
+use Rack::MethodOverride
+
 get "/members" do
   @members = members
   erb :index

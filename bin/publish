@@ -21,7 +21,7 @@ function setup() {
 function commit() {
   local msg=$1
   run "git add -A ."
-  run "git commit -am '$msg'"
+  run "git commit -am '$msg' || true"
   run "git push"
 }
 
@@ -32,7 +32,7 @@ function compile() {
 function push() {
   run "$git add -A ."
   run "$git commit -am 'build'"
-  run "$git push origin HEAD:gh-pages"
+  run "$git push -f origin HEAD:gh-pages"
 }
 
 if [ ! -d build/.git ]; then
