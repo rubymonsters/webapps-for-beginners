@@ -37,7 +37,7 @@ And that's where Bundler comes to the rescue:
 
 Bundler allows you to define which gems your application depends on (in a file
 called `Gemfile`. Here's the one we're using for
-<a href="https://github.com/rubymonsters/ruby-for-beginners/blob/master/Gemfile">this book</a>).
+<a href="https://github.com/rubymonsters/ruby-for-beginners/blob/main/Gemfile">this book</a>).
 When we run `bundle install`, this will figure out which
 gem versions work well with each other (a task that Bundler is *great* at), and
 store the solution to this riddle to a separate file (called `Gemfile.lock`).
