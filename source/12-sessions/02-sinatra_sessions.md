@@ -80,7 +80,7 @@ Doing so we can then disply it in our view:
 <% end %>
 ```
 
-Let's try it out. Restart your application, and go to <a href="http://localhost:4567">http://localhost:4567</a>.
+Let's try it out. Restart your application, and go to <a href="http://localhost:4567/monstas">http://localhost:4567/monstas</a>.
 If you enter a name, and click submit you should then see something like this:
 
 <img src="/assets/images/12-sessions_1.png">
