@@ -40,7 +40,7 @@ include ("render") the name into the HTML page:
 post "/monstas" do
   @name = params[:name]
   store_name("names.txt", @name)
-  redirect "/monstas?name=#{name}"
+  redirect "/monstas?name=#{@name}"
 end
 ```
 
