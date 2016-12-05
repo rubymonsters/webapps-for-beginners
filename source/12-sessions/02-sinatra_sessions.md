@@ -46,7 +46,7 @@ Ok, cool.
 The `session` looks like a simple Ruby hash, but if we store something to it
 then Sinatra will set a cookie for us. It does so by sending a `Set-Cookie`
 header along the reponse. This header will have a long, messy looking,
-encrypted string as a value.
+encoded string as a value.
 
 In my browser it looks like this:
 
@@ -90,7 +90,7 @@ How does this work?
 In our `post` route we store the message to the session hash. This is
 something Sinatra provides to us as developers. When we enable this
 feature Sinatra will, after every request, store this hash to a cookie
-with the name `rack.session`, in the encrypted form that you saw above.
+with the name `rack.session`, in the encoded form that you saw above.
 
 We say the hash is being <a href="http://en.wikipedia.org/wiki/Serialization">serialized</a>,
 which is a fancy way of saying it is turned into some kind of format that
