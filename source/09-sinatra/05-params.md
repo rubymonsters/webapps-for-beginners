@@ -60,12 +60,14 @@ If you restart your application, and reload the page in your browser, then it
 should display something like this:
 
 ```
-{"splat"=>[], "captures"=>["monstas"], "name"=>"monstas"}
+{"name"=>"monstas"}
 ```
 
 So this confirms that `params` is a hash, and the key `"name"` has the value
-`"monstas"` set.  `splat` and `captures` are for building more complicated
-routes, and we can ignore these for now.
+`"monstas"` set. In fact, it isn't _really_ a hash, just something very similar
+to a hash called `Sinatra::IndifferentHash` which is exacly like a hash, with a
+small trick applied so that we can access the keys indistinctly as strings or
+symbols. That's why we could use `params[:name]` in the previous example.
 
 This is pretty cool.
 
