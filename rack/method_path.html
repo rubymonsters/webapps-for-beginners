@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Method and Path | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/rack/rack_env.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/sinatra.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory expanded">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li class="active">
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Method and Path</h1>
+
+<p>We saw that the <code>env</code> hash that Rack passes to the method <code>call</code> contains the
+keys <code>REQUEST_METHOD</code> and <code>PATH_INFO</code>.</p>
+
+<p>Let&rsquo;s modify our app a little so we can make use of it:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">handle_request</span><span class="p">(</span><span class="n">env</span><span class="p">[</span><span class="s1">'REQUEST_METHOD'</span><span class="p">],</span> <span class="n">env</span><span class="p">[</span><span class="s1">'PATH_INFO'</span><span class="p">])</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+    <span class="k">def</span> <span class="nf">handle_request</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+      <span class="k">if</span> <span class="nb">method</span> <span class="o">==</span> <span class="s2">"GET"</span>
+        <span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+      <span class="k">else</span>
+        <span class="n">method_not_allowed</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+      <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"You have requested the path </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">, using GET"</span><span class="p">]]</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">method_not_allowed</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
+      <span class="p">[</span><span class="mi">405</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s2">"Method not allowed: </span><span class="si">#{</span><span class="nb">method</span><span class="si">}</span><span class="s2">"</span><span class="p">]]</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Reading the code closely, do you understand what it does, and why?</p>
+
+<p>We have changed the method <code>call</code> to extract the values for the keys
+<code>REQUEST_METHOD</code> and <code>PATH_INFO</code>. And we then pass these two values to a new
+method <code>handle_request</code>, which checks the request <code>method</code>. Keep in mind that
+<code>method</code> here is just a variable name that refers to the HTTP concept of a
+&ldquo;request method&rdquo;.  This, of course, is not the same as a Ruby method, it&rsquo;s just
+a variable that will hold a string such as <code>GET</code>, <code>POST</code> depending on the HTTP
+request.</p>
+
+<ul>
+<li><p>If <code>method</code> is <code>GET</code>, then we call another method <code>get</code>, passing the <code>path</code>.
+The method <code>get</code> complies with Rack&rsquo;s convention for returning a response: It
+returns an array that has the response status, headers, and a body. We&rsquo;ve
+changed the body a little bit so it displays the <code>path</code> that was requested.</p></li>
+<li><p>If <code>method</code> is not <code>GET</code>, then we call another method <code>method_not_allowed</code>.
+This method also complies with Rack&rsquo;s convention, but returns a different
+response. This time we use the status code <code>405</code> which means exactly this:
+<em>&ldquo;Method Not Allowed&rdquo;</em>. Our little application just does not support any other
+methods.</p></li>
+</ul>
+
+<p>Because these response arrays are the return values of these two methods,
+they&rsquo;ll also be the return value of the method <code>handle_request</code>, and it turn
+the method <code>call</code>. So they&rsquo;ll be passed back to Rack, and turned into the
+actual HTTP response that is returned to your browser.</p>
+
+<p>If you restart your server, and point your browser to
+<a href="http://localhost:9292/ruby/monstas">http://localhost:9292/ruby/monstas</a>
+you should now see something like this:</p>
+
+<p><img src="/assets/images/rack_2-afc29997.png"></p>
+
+<p>Congratulations!</p>
+
+<p>You have just written your first web application that responds to different
+requests with (albeit only slightly) different responses.</p>
+
+<p>Imagine working on this application more, and returning different HTML pages
+based on the <code>path</code> that is part of the request: You could use the ERB
+rendering method from the <a href="../erb.html">previous chapters about ERB</a> in order to
+render different ERB templates.</p>
+
+<p>And guess what, this is exactly what <a href="../sinatra.html">Sinatra</a> makes super easy :)</p>
+
+<p>In case you are wondering how to test the response for request methods other
+than <code>GET</code>, that&rsquo;s not so easy without knowing more about <a href="../forms.html">HTML forms</a>.
+However, if your computer has <code>curl</code> installed (a commandline tool to execute
+HTTP requests) you can try this:</p>
+<pre class="highlight plaintext"><code>curl -i -X POST http://localhost:9292
+</code></pre>
+
+<p>For me this outputs:</p>
+<pre class="highlight plaintext"><code>HTTP/1.1 405 Method Not Allowed
+</code></pre>
+
+<p>As well as a bunch of other response headers.</p>
+
+        <nav class="page-nav"><a class="prev" href="/rack/rack_env.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/sinatra.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

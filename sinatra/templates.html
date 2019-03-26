@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Rendering templates | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/sinatra/params.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/sinatra/layouts.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory expanded">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li class="active">
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Rendering templates</h1>
+
+<p>So far, our application does not actually return HTML, it returns just plain
+text.</p>
+
+<p>Let&rsquo;s fix that.</p>
+
+<p>For this we&rsquo;ll want to re-use what we&rsquo;ve learned about rendering ERB templates.
+In order to use ERB we need to require it, define an ERB template, and make any
+variables used in the template known as local variables in our route:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"sinatra"</span>
+<span class="nb">require</span> <span class="s2">"erb"</span>
+
+<span class="n">get</span> <span class="s1">'/monstas/:name'</span> <span class="k">do</span>
+  <span class="no">ERB</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"&lt;h1&gt;Hello &lt;%= params[:name] %&gt;&lt;/h1&gt;"</span><span class="p">).</span><span class="nf">result</span><span class="p">(</span><span class="nb">binding</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This code is familiar to you, isn&rsquo;t it?</p>
+
+<p>We get use <code>params[:name]</code> in the template because <code>params</code> is &ldquo;known&rdquo; in the
+scope that is passed as part of the <code>binding</code>. The rest is just the same
+as in our examples in the chapters about <a href="/erb.html">ERB</a></p>
+
+<p>If you restart the server, and reload the page in your browser, it should now
+look like this:</p>
+
+<p><img src="/assets/images/sinatra_2-5a50e4bb.png"></p>
+
+<p>Awesome, we&rsquo;re now serving HTML, not just plain text.</p>
+
+<p>However, Sinatra also has built-in support for ERB templates (&ldquo;views&rdquo;). We can
+achieve exactly the same thing without spelling out the
+<code>ERB.new(...).result(binding)</code> noise:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/monstas/:name'</span> <span class="k">do</span>
+  <span class="n">erb</span> <span class="s2">"&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;"</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span> <span class="p">}</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>I.e. Sinatra has a method <code>erb</code> that hides all the details of rendering the
+template from us, and also accepts a template.</p>
+
+<p>On top of this, it also accepts a hash that allows us to specify various
+options. If we specify a key <code>:locals</code> and give it another hash, then Sinatra
+will make each key/value pair on this hash available as <em>local</em> variables (thus
+&ldquo;locals&rdquo;) in our ERB template.</p>
+
+<p>Of course, since <code>params</code> already is a hash, and it already has the key <code>name</code>
+defined, we can also just say:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s1">'/monstas/:name'</span> <span class="k">do</span>
+  <span class="n">erb</span> <span class="s2">"&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;"</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="n">params</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Nice, isn&rsquo;t it.</p>
+
+        <nav class="page-nav"><a class="prev" href="/sinatra/params.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/sinatra/layouts.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

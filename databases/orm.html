@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Object Relational Mappers | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/databases/sqlite.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/migrations.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory expanded">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li class="active">
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Object Relational Mappers</h1>
+
+<p><em>Map database contents to Ruby objects</em></p>
+
+<p>There are lots of reasons, most of them historical, why SQL reads weird, and
+it&rsquo;s quite unlikely that SQL will become a more pleasant language, or replaced
+anytime soon.</p>
+
+<p>For this reason programmers have written lots and lots of tools (libraries),
+which make talking to, and working with relations databases a little bit
+easier.</p>
+
+<p>One class of such tools is called ORM: <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">Object Relational Mappers</a>.</p>
+
+<p>An ORM is a library that &ldquo;maps&rdquo; data, stored in a database, to objects, and
+usually has methods such as <code>save</code>, in order to save an object as a database
+row, <code>create</code> to insert new data, <code>update</code> to change it, and so on. In other
+words, they usually provide a <a href="../sinatra/dsl.html">DSL</a> for working with the
+database.</p>
+
+<p>Your data is stored in the database as rows, because that&rsquo;s what databases
+do. However in your Ruby application (or whatever language you use for this)
+you would see, and use this data as objects: because that&rsquo;s what Ruby is
+great at. The ORM is a tool that transforms your database data to Ruby
+objects and vice versa.</p>
+
+<p>Does that make sense?</p>
+
+<p>Let&rsquo;s look at an example.</p>
+
+<p>If we have a database table <code>members</code> like this:</p>
+
+<table><thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>joined_on</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Anja</td>
+<td>2013-06-23</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Carla</td>
+<td>2013-06-24</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Rebecca</td>
+<td>2013-06-31</td>
+</tr>
+</tbody></table>
+
+<p>Then in our Ruby code, using an ORM, we could communicate with it like so:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Member</span> <span class="c1"># we'd need to somehow include the ORM functionality</span>
+<span class="k">end</span>
+
+<span class="c1"># Find one member</span>
+
+<span class="n">member</span> <span class="o">=</span> <span class="no">Member</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="n">member</span><span class="p">.</span><span class="nf">name</span><span class="si">}</span><span class="s2"> has joined on </span><span class="si">#{</span><span class="n">member</span><span class="p">.</span><span class="nf">joined_on</span><span class="si">}</span><span class="s2">."</span>
+
+<span class="c1"># Change the member's joined_on date:</span>
+
+<span class="n">member</span><span class="p">.</span><span class="nf">joined_on</span> <span class="o">=</span> <span class="s1">'2013-06-24'</span>
+<span class="n">member</span><span class="p">.</span><span class="nf">save</span>
+
+<span class="nb">puts</span>
+<span class="nb">puts</span> <span class="s2">"Correction!"</span>
+<span class="n">member</span> <span class="o">=</span> <span class="no">Member</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="n">member</span><span class="p">.</span><span class="nf">name</span><span class="si">}</span><span class="s2"> has joined on </span><span class="si">#{</span><span class="n">member</span><span class="p">.</span><span class="nf">joined_on</span><span class="si">}</span><span class="s2">."</span>
+
+<span class="c1"># Find several members based on their joined_on date:</span>
+
+<span class="nb">puts</span>
+<span class="nb">puts</span> <span class="s2">"Who joined on 2013-06-24?"</span>
+<span class="n">members</span> <span class="o">=</span> <span class="no">Member</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">joined_on: </span><span class="s1">'2013-06-24'</span><span class="p">)</span>
+<span class="n">members</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">member</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="n">member</span><span class="p">.</span><span class="nf">name</span><span class="si">}</span><span class="s2"> has joined on </span><span class="si">#{</span><span class="n">member</span><span class="p">.</span><span class="nf">joined_on</span><span class="si">}</span><span class="s2">."</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>And this would output:</p>
+<pre class="highlight plaintext"><code>Anja has joined on 2013-06-23.
+
+Correction!
+Anja has joined on 2013-06-24.
+
+Who joined on 2013-06-24?
+Anja has joined on 2013-06-24.
+Carla has joined on 2013-06-24.
+</code></pre>
+
+<p>Of course the details of this Ruby code might vary, depending on the concrete
+ORM tool that we are using.</p>
+
+<p>But the basic idea is that we can use Ruby classes and objects to retrieve some
+data from the database (as in <code>Member.find(id: 1)</code>), which would then appear in
+our application as a normal Ruby object. We can call methods to look up fields
+(such as in <code>member.name</code>, which returns the value from the <code>name</code> column).
+And we can use the same object to modify, and save the data back to the
+database.</p>
+
+<p>Two widely used ORMs in Ruby are <a href="https://github.com/rails/rails/tree/master/activerecord">ActiveRecord</a>,
+which is part of Rails, and <a href="https://github.com/jeremyevans/sequel">Sequel</a>,
+which is more modern, slick, and performant.</p>
+
+<p>Since you will anyway get to know ActiveRecord later when you learn Rails, we
+will introduce Sequel first. This way you will get to know two libraries and
+can later compare them.</p>
+
+<p>You can install the Sequel gem like so:</p>
+<pre class="highlight plaintext"><code>$ gem install sequel
+</code></pre>
+
+        <nav class="page-nav"><a class="prev" href="/databases/sqlite.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/migrations.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

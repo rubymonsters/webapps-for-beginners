@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Params | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/sinatra/routes.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/sinatra/templates.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory expanded">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li class="active">
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Params</h1>
+
+<p>Now, sometimes the request path contains dynamic data.</p>
+
+<p>For example, the path of the URL <a href="https://rubygems.org/gems/rack"><a href="https://rubygems.org/gems/rack">https://rubygems.org/gems/rack</a></a>
+is <code>/gems/rack</code>. The path of the details page for the gem Sinatra on
+RubyGems.org is <code>/gems/sinatra</code>, the path for Middleman is <code>/gems/middleman</code>,
+and so on.</p>
+
+<p>Obviously we don&rsquo;t want to hardcode (&ldquo;write out literally&rdquo;) all these names in
+our application code: We don&rsquo;t want to change our code for each and every new
+gem that is added: At the time of this writing RubyGems.org has 122,037.
+Instead we want to be able to express <em>&ldquo;a path that starts with <code>/gems</code>
+followed by another, second segment&rdquo;</em>.</p>
+
+<p>In Sinatra we can do this by specifying a pattern as a path. Sinatra will then
+match the pattern against the path, and see if it applies.</p>
+
+<p>Let&rsquo;s try that out.</p>
+
+<p>Add the following route (request handler) to your program, at the end of the
+file:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas/:name"</span> <span class="k">do</span>
+  <span class="s2">"Hello </span><span class="si">#{</span><span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span><span class="si">}</span><span class="s2">!"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Restart your Sinatra application, and point your browser to
+<a href="http://localhost:4567/monstas/monstas"><a href="http://localhost:4567/monstas/monstas">http://localhost:4567/monstas/monstas</a></a>.</p>
+
+<p>How does this work?</p>
+
+<p><code>params</code> is a hash that Sinatra makes available for you in your route blocks, and
+it will automatically include relevant data from the request.</p>
+
+<p>In our case our route specifies a path that is a pattern: the last part of the
+path starts with a colon <code>:</code>. This tells Sinatra that we&rsquo;d like to accept any
+string here, and that we&rsquo;d like to call this string <code>name</code>.</p>
+
+<p>Sinatra therefore adds the key <code>&quot;name&quot;</code> to the <code>params</code> hash, and sets the
+given string from the path (i.e. from the URL) to it.</p>
+
+<p>When you point your browser to the URL
+<a href="http://localhost:4567/monstas/Elizabeth"><a href="http://localhost:4567/monstas/Elizabeth">http://localhost:4567/monstas/Elizabeth</a></a>
+your application will say <em>&ldquo;Hello Elizabeth!&rdquo;</em>, when you go to
+<a href="http://localhost:4567/monstas/Juliane"><a href="http://localhost:4567/monstas/Juliane">http://localhost:4567/monstas/Juliane</a></a>
+your application will say <em>&ldquo;Hello Juliane!&rdquo;</em>, and so on.</p>
+
+<p>Let&rsquo;s inspect the params hash, and return this string as the response body:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas/:name"</span> <span class="k">do</span>
+  <span class="n">params</span><span class="p">.</span><span class="nf">inspect</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If you restart your application, and reload the page in your browser, then it
+should display something like this:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="s2">"name"</span><span class="err">=&gt;</span><span class="s2">"monstas"</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<p>So this confirms that <code>params</code> is a hash, and the key <code>&quot;name&quot;</code> has the value
+<code>&quot;monstas&quot;</code> set. In fact, it isn&rsquo;t <em>really</em> a hash, just something very similar
+to a hash called <code>Sinatra::IndifferentHash</code> which is exacly like a hash, with a
+small trick applied so that we can access the keys indistinctly as strings or
+symbols. That&rsquo;s why we could use <code>params[:name]</code> in the previous example.</p>
+
+<p>This is pretty cool.</p>
+
+<p>The <code>params</code> hash can contain more than matches from the URL. You&rsquo;ll later see
+that it also contains any data sent from HTML forms as part of the HTTP
+request. As well as any query params that can be part of the URL (separated
+with a question mark <code>?</code>).</p>
+
+<p>But for now it&rsquo;s good to know that Sinatra adds matches from the path pattern
+to the <code>params</code> hash.</p>
+
+        <nav class="page-nav"><a class="prev" href="/sinatra/routes.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/sinatra/templates.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Rubygems | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/libraries/standard_library.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/libraries/bundler.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory expanded">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li class="active">
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Rubygems</h1>
+
+<p><em>Ruby&rsquo;s package manager</em></p>
+
+<p>A gem is a library that has been prepared in a way so it can be distributed
+(published and downloaded) via the internet.  Such libraries are commonly
+refered to as &ldquo;packages&rdquo;, and there are many different package managers for
+different purposes. You can think of it as an app store that can be used to
+download specific versions of libraries, which you can then use.</p>
+
+<p>A package manager is a tool that knows how to install these packages on your
+system so that they are then available for use. That means when you
+install a gem using Rubygems, you can then <code>require</code> and use it, just as if it
+was part of the standard library.</p>
+
+<p>Gems are libraries, often quite small, sometimes quite big (such as Rails), that
+provide certain tools for solving certain problems, just like the libraries
+contained in the Ruby Standard Library. There are tons of gems <a href="#footnote-1">[1]</a>
+for tons of purposes, so you&rsquo;ll often hear someone saying <em>&ldquo;Hah, there&rsquo;s a Gem
+for that!&rdquo;</em> If you found the example of a library that helps to &ldquo;sign in to a
+web application via Google&rdquo; hilarious, there actually is a
+<a href="https://rubygems.org/gems/google-oauth/versions/0.0.2">gem for that</a>
+:)</p>
+
+<p>So, how do you use this?</p>
+
+<p>Ruby has a built-in command line tool <code>gem</code>, which also is installed alongside
+your Ruby installation, and it allows you to manage gems on your computer.</p>
+
+<p>When you run <code>gem list</code> in your terminal you should see a list of all the
+gems that are installed on your computer (for the currently selected Ruby
+version if you use a Ruby version manager, such as RVM).</p>
+
+<p>In order to install a certain gem you can run <code>gem install [the-gem-name]</code>.
+E.g. <code>gem install middleman</code> would install the
+<a href="https://middlemanapp.com/">Middleman</a> library, which is a super
+handy tool for generating static web pages. This book is published using
+Middleman.</p>
+
+<p>Where does <code>gem</code> fetch all these gems (packages) from though?</p>
+
+<p>Ruby gems are centrally hosted on <a href="https://rubygems.org">RubyGems.org</a>,
+and Middleman, for example, has
+<a href="https://rubygems.org/gems/middleman">an entry on this site</a>, too.
+You can see the latest version number of this gem (which is <code>4.0.0.beta.2</code> as
+of this writing), who the authors are, useful links to their homepage, source
+code, documentation, and so on.</p>
+
+<p>You can also see that the gem Middleman depends on a variety of other gems,
+such as coffee-script, compass, execjs, and haml. This means that the authors
+of Middleman themselves make use of code which in turn is packaged as gems,
+too. This is a very common thing to do. We say <em>&ldquo;Middleman&rsquo;s dependencies are
+coffee-script, compass, &hellip;&rdquo;</em></p>
+
+<p>When you run <code>gem install middleman</code> you&rsquo;ll see that this not only installs
+the Middleman gem, but also all of its dependencies, and all dependencies
+that any of those dependencies might have. This means, when you install one
+gem you&rsquo;ll get all the other stuff that this gem needs, too.</p>
+
+<p>Also, each of these dependencies comes with a specification of a version number
+or range of version numbers. For example <code>~&gt; 2.2.0</code> means <em>&ldquo;allow any version
+of this gem that starts with 2.2&rdquo;</em>.</p>
+
+<p>Once installed on your computer, you can use a gem in your code in just the same
+way as you use something from the Ruby Standard Library: You <code>require</code> it.</p>
+
+<p>For example, in order to configure Middleman to generate this book we require
+a gem called <code>middleman-toc</code>
+<a href="https://github.com/rubymonsters/ruby-for-beginners/blob/master/config.rb#L1">here</a>.
+This is an extension to Middleman that allows us to add a table of contents, and
+we need to <code>require</code> it before Middleman can use it.</p>
+
+<h2>Footnotes:</h2>
+
+<p><a name="footnote-1">[1]</a> <em>As of this writing, there are <a href="https://rubygems.org/gems">6373 gems</a>
+hosted on RubyGems.org.</em></p>
+
+        <nav class="page-nav"><a class="prev" href="/libraries/standard_library.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/libraries/bundler.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

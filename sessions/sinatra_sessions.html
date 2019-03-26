@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Sessions in Sinatra | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/sessions/cookies.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/validations.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory expanded">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li class="active">
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Sessions in Sinatra</h1>
+
+<p>Building on top of cookies, even though HTTP itself does not have a concept of a
+&ldquo;session&rdquo; (or conversation), Sinatra, like basically any web application
+tool or framework, supports sessions.</p>
+
+<p>A session is a way for a web application to set a cookie that persists
+an identifier across multiple HTTP requests, and then relate these requests
+to each other: If you&rsquo;ve signed in before the web application will be able to
+know that you&rsquo;re still the same user you&rsquo;ve identified as a couple requests
+earlier. If you&rsquo;ve done something else before, and something has been stored
+to your session, then the web application will be able to use it later.</p>
+
+<p>In our example we&rsquo;ll persist (store) a short confirmation message across two
+requests: The <code>POST</code> request will store the message, and redirect the browser
+to another URL. The browser will make that <code>GET</code> request, and we&rsquo;ll display
+the confirmation message.</p>
+
+<p>Let&rsquo;s have a look how this works.</p>
+
+<p>Say the message we&rsquo;d like to pass from our <code>POST</code> route to the next request is
+<em>&ldquo;Successfully stored the name [name]&rdquo;</em>. I.e. after storing the name to the
+file, we&rsquo;d like to pass a message to the <code>GET</code> request that the browser is
+going to be redirected to later.</p>
+
+<p>In order to make this work we first need to enable the <code>:sessions</code> feature in
+Sinatra. You can do that by adding this line above of your routes:</p>
+<pre class="highlight ruby"><code><span class="n">enable</span> <span class="ss">:sessions</span>
+</code></pre>
+
+<p>Now, we want to store the message in our <code>post</code> route:</p>
+<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="vi">@name</span><span class="p">)</span>
+  <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Successfully stored the name </span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">."</span>
+  <span class="n">redirect</span> <span class="s2">"/monstas?name=</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Ok, cool.</p>
+
+<p>The <code>session</code> looks like a simple Ruby hash, but if we store something to it
+then Sinatra will set a cookie for us. It does so by sending a <code>Set-Cookie</code>
+header along the reponse. This header will have a long, messy looking,
+encoded string as a value.</p>
+
+<p>In my browser it looks like this:</p>
+<pre class="highlight plaintext"><code>Set-Cookie: rack.session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiRWI4OTdhMDJlNDBkMDFlNjcxNWUw%0AZGI1ZWU5MzQ0YTQyMjAzYjFiZTE2YzYxNzgwMWQxYjI3NzhiOWNhYTQ4YzUG%0AOwBGSSIJY3NyZgY7AEZJIiU2ZjdjN2Y0ZmM0MTdmMGJkNjBkNmY5MmQ1NDEx%0ANGQ4ZgY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi03NGNlNDIxYTczNjMwZDY3MWViNTlkYzIzN2YyN2M5NGU3ZWU4NTRm%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLTA3NjBhNDRjMzU0%0AODIxMzJjZjIyNDQyYTBkODhjMDhiYjg1NTYyNTAGOwBGSSIIZm9vBjsARkki%0ACGJhcgY7AFQ%3D%0A; path=/; HttpOnly
+</code></pre>
+
+<p>Wow. Ok, the name of the cookie gives us a hint that this is a session, and it
+is managed by Rack, which is what Sinatra uses under the hood to persist the
+session.</p>
+
+<p>Luckily we do not need to understand how exactly it does this. All we need to
+know is that we can now use this data in the next request (the <code>GET</code> request)
+like so:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@message</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
+  <span class="n">erb</span> <span class="ss">:monstas</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>I.e. we grab <code>:message</code> from our session, and stuff it into the instance variable <code>@message</code>.
+Doing so we can then disply it in our view:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@message</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Let&rsquo;s try it out. Restart your application, and go to <a href="http://localhost:4567/monstas"><a href="http://localhost:4567/monstas">http://localhost:4567/monstas</a></a>.
+If you enter a name, and click submit you should then see something like this:</p>
+
+<p><img src="/assets/images/sessions_1-ba6cd233.png"></p>
+
+<p>How does this work?</p>
+
+<p>In our <code>post</code> route we store the message to the session hash. This is
+something Sinatra provides to us as developers. When we enable this
+feature Sinatra will, after every request, store this hash to a cookie
+with the name <code>rack.session</code>, in the encoded form that you saw above.</p>
+
+<p>We say the hash is being <a href="http://en.wikipedia.org/wiki/Serialization">serialized</a>,
+which is a fancy way of saying it is turned into some kind of format that
+can be stored in text form. Sinatra (actually, Rack, under the hood) then also
+encrypts and signs this data, so it is safe to send it over the internet (in
+case we keep any sensitive data in it). Thus hackers cannot easily tamper
+with it, it is a shared secret between our web application (Sinatra) and us
+(our browser).</p>
+
+<p>Ok, so the <code>post</code> route includes the <code>Set-Cookie</code> header with this session
+cookie in its response, and sends it to the browser. The browser will, from
+now on, pass this cookie back to our application as part of every subsequent
+request. That&rsquo;s how cookies work: once set, they&rsquo;ll be included into every
+request that is being made from now on &hellip; and our web application can use
+it.</p>
+
+<p>When our browser is now redirected to <code>GET</code> the same URL again, it passes the
+cookie, and Sinatra will, because we have the <code>:sessions</code> feature enabled,
+<em>deserialize</em> (i.e. decrypt and read) the data, and put it back into the
+hash that is returned by the method <code>session</code>, so we can work with it.</p>
+
+<p>In our <code>get</code> route, if we find something in <code>session[:message]</code> we will display
+it in the view. If nothing is stored on that key in the session then the view
+won&rsquo;t display anything either.</p>
+
+<p>Does that make sense?</p>
+
+<p>Awesome :)</p>
+
+<h2>Transient state</h2>
+
+<p>However, there&rsquo;s a little problem with our approach. Have you noticed?</p>
+
+<p>Let&rsquo;s recap what our application does:</p>
+
+<ul>
+<li>On the <code>GET /monstas</code> route we render a view that includes a form.</li>
+<li>This form, when submitted, makes a <code>POST</code> request to the same path <code>/monstas</code>, and includes the <code>name</code> variable.</li>
+<li>On the <code>POST /monstas</code> route we find the <code>name</code> data in the <code>params</code> hash.</li>
+<li>We store it to the file.</li>
+<li>We set the confirmation message to <code>session[:message]</code>.</li>
+<li>We redirect the browser to <code>GET /monstas</code>.</li>
+<li>The browser requests <code>GET /monstas</code>.</li>
+<li>We find the confirmation message on <code>session[:message]</code>.</li>
+<li>We display the message.</li>
+</ul>
+
+<p>This works great.</p>
+
+<p>However, the message is now stored in our session cookie. And that means that
+from now on, whenever you browse (make a <code>GET</code> request) to the path <code>/monstas</code>
+the browser will always include the same cookie (data) to the request. And our
+application will always find it, and always display the same confirmation
+message &hellip; even though we haven&rsquo;t actually added any new names this time.</p>
+
+<p>Instead, what we really want to do is display the confirmation message only
+once: on the <code>GET</code> request that is made right after the <code>POST</code> request
+redirected to <code>/monstas</code>. When we then reload the page (or close and reopen
+the browser and go to <code>/monstas</code> tomorrow) the confirmation message should
+be gone.</p>
+
+<p>Right?</p>
+
+<p>This is called &ldquo;transient state&rdquo;: State that is only there for a brief moment,
+and then goes away. And a session is a great place to keep it.</p>
+
+<p>So how can we fix that?</p>
+
+<p>All we have to do is delete the message from the session right before we
+display it:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@message</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:message</span><span class="p">)</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
+  <span class="n">erb</span> <span class="ss">:monstas</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Deleting it from the <code>session</code> will return the value that was stored on this
+key, and we assign it to the instance variable <code>@message</code>, which makes it
+available to our template.</p>
+
+<p>In other words, if anything is stored on this key it will be assigned to the
+<code>@message</code> instance variable, and the view will display it. If nothing&rsquo;s stored
+on the key, then deleting the key will simply return nil, and nothing will be
+displayed in the view.</p>
+
+<p>Problem solved :)</p>
+
+        <nav class="page-nav"><a class="prev" href="/sessions/cookies.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/validations.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

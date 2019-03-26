@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Sinatra Resource | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/exercises/mailbox_sinatra.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/exercises/sql.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory expanded">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li class="active">
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Sinatra Resource</h1>
+
+<p>After reading the chapter about <a href="/resources.html">Resources</a> your
+objective is to implement a resource <code>members</code> in Sinatra.</p>
+
+<h2>Exercise 5.1</h2>
+
+<p>Start by writing a Sinatra application that has an <code>index</code> and a <code>show</code> route:</p>
+
+<ol>
+<li>On <code>GET</code> to <code>/members</code> display a list of member names, which are stored
+in a file <code>members.txt</code>. The erb template name is <code>index.erb</code>.</li>
+<li>Each of the member names is a link that points to <code>/members/:name</code> (<code>:name</code>
+being the given member&rsquo;s name)</li>
+<li>On <code>GET</code> to <code>/members/:name</code> display a details page for this member
+(i.e. just show their name), and a link &ldquo;All Members&rdquo; that goes back to
+<code>/members</code>. The erb template name is <code>show.erb</code>.</li>
+</ol>
+
+<h2>Exercise 5.2</h2>
+
+<p>Now add the <code>new</code> and <code>create</code> routes:</p>
+
+<ol>
+<li>Add a link &ldquo;New member&rdquo; to the <code>index.erb</code> view, and point it to
+<code>/members/new</code>.</li>
+<li>On <code>GET</code> to <code>/members/new</code> display a form that <code>POST</code>s to <code>/members</code>.
+This form has one input element called <code>name</code> and a submit button. Also,
+add a link &ldquo;Back&rdquo; that goes to <code>/members</code>.</li>
+<li>On <code>POST</code> to <code>/members</code> validate that the given name is not empty, and
+not already in our list. If the validation succeeds, redirect the user
+to <code>/members/:name</code> and pass a success message by using the session.
+If the validation fails re-render the form and display an error message.</li>
+<li>Make sure the success message is displayed in the <code>show.erb</code> view.</li>
+</ol>
+
+<h2>Exercise 5.3</h2>
+
+<p>Next add the <code>edit</code> and <code>update</code> routes:</p>
+
+<ol>
+<li>In the <code>index.erb</code> view add a link &ldquo;Edit&rdquo; next to each of the listed names,
+and point it to <code>/members/:name/edit</code>.</li>
+<li>Also, add the same link to the <code>show.erb</code> view.</li>
+<li>On <code>GET</code> to <code>/members/:name/edit</code> display a form that <code>PUT</code>s to
+<code>/members/:name</code>. This form has the same elements as the form on <code>new.erb</code>.
+Also, add a link &ldquo;Back&rdquo; that goes to <code>/members</code>.</li>
+<li>On <code>PUT</code> to <code>/members/:name</code> validate the given name. If the validation
+succeeds redirect the user to <code>/members/:name</code> and pass a success message
+by using the session. If the validation fails re-render the form and display
+an error message.</li>
+</ol>
+
+<h2>Exercise 5.4</h2>
+
+<p>Finally add the <code>delete</code> and <code>destroy</code> routes:</p>
+
+<ol>
+<li>In the index view add a link &ldquo;Delete&rdquo; next to each of the &ldquo;Edit&rdquo; links,
+and point it to <code>/members/:name/delete</code>.</li>
+<li>Also, add the same link to the <code>show.erb</code> view.</li>
+<li>On <code>GET</code> to <code>/members/:name/delete</code> prompt the user for confirmation:
+&ldquo;Do you really want to remove the member [name]?&rdquo;, and add a form that sends
+a <code>DELETE</code> request to <code>/members/:name</code>, with a button &ldquo;Remove Member&rdquo;.
+Also add a link &ldquo;Back&rdquo; that goes to `/members/.</li>
+<li>On <code>DELETE</code> to <code>/members/:name</code> remove the name from the file <code>names.txt</code>,
+and redirect to <code>/members</code></li>
+</ol>
+
+<p class="hint">
+For the two forms on the <code>edit.erb</code> and <code>delete.erb</code>
+views you&rsquo;ll need to apply the trick from the
+<a href="/resources/fake_methods.html">Faking HTTP verbs</a> chapter.
+</p>
+
+<p class="hint">
+If you have a hard time figuring out why a certain request does not work as
+expected try reading the logs of your Sinatra application (in your terminal).
+If that still doesn&rsquo;t give you a good hint try inspecting the request in your
+browser&rsquo;s web inspector on the network tab.
+</p>
+
+        <nav class="page-nav"><a class="prev" href="/exercises/mailbox_sinatra.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/exercises/sql.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

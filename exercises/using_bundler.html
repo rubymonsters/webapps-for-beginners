@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Using Bundler | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/exercises/using_rubygems.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/exercises/mailbox_erb.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory expanded">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li class="active">
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Using Bundler</h1>
+
+<p>Imagine you&rsquo;d want, for some reason, use an older version of a particular gem,
+rather than the latest one.</p>
+
+<p>Maybe the authors of this gem have made a change that breaks your application.
+Of course they&rsquo;d normally try to avoid this at all costs, but sometimes it
+still happens. (Another, maybe more common, case is that you are working on a
+Rails application that has been started a year ago, or is even older than that.
+Now a new major version of Rails comes out, and ships lots of changes that
+would break this application. So you want to stick to the older version of
+Rails until you get around making it ready for the newer one.)</p>
+
+<p>One way to use an older version of a particular gem is to simply uninstall
+any newer versions from your system. E.g. you could run:</p>
+<pre class="highlight plaintext"><code>gem uninstall rails
+gem install rails --version '~&gt; 3'
+</code></pre>
+
+<p>This would uninstall all rails gems, and then install the latest version of
+Rails that still starts with a <code>3</code> (i.e. ignoring all the newer versions that,
+as time of this writing, start with a <code>4</code>).</p>
+
+<p>However, this is quite cumbersome. You&rsquo;d need to figure out what versions of
+all the gems that you want to use are compatible with each other. And if you
+ever switch from one application to another you&rsquo;d have to uninstall and
+reinstall all those gems over and over.</p>
+
+<p>Instead, Bundler provides a much better way of picking certain gem versions
+out of the plethora of gems that might be installed on your computer.</p>
+
+<p>In this example we are going to use the Chronic gem, which provides a great
+way to convert natural language date formats to Ruby <code>Time</code> objects.</p>
+
+<p>Inside a new directory <code>chronic</code> create a file <code>Gemfile</code>, and add the following
+lines:</p>
+<pre class="highlight plaintext"><code>source "https://rubygems.org"
+
+gem "chronic", "~&gt; 0.9.0"
+</code></pre>
+
+<p>The <code>source</code> directive says that we&rsquo;d like to use the standard RubyGems.org
+as a source for our gems. There are other sources, such as private Rubygems
+servers run by companies to host their own, internal gems, or Rubygems servers
+that people run in order to sell paid versions of their gems.</p>
+
+<p>The <code>gem</code> directive declares that we&rsquo;d like to use the gem <code>chronic</code>, and
+we&rsquo;d like to use any version that starts with <code>0.9</code> (for whatever reason).</p>
+
+<p>Now, make sure you have <code>cd</code>ed to that directory, and run:</p>
+<pre class="highlight plaintext"><code>bundle install
+</code></pre>
+
+<p>You&rsquo;ll see that Bundler first fetches some meta data from RubyGems.org. This
+means it checks what versions of the Chronic gem are available, what dependencies
+it has, and what dependencies these might have.</p>
+
+<p>In our case Chronic doesn&rsquo;t have any other dependencies, and so Bundler just
+installs it. You will see that it installs a version starting with <code>0.9</code> (as
+time of this writing that would be <code>0.9.1</code>).</p>
+
+<p>In order to check what gems are part of your bundle you can run <code>bundle show</code>.
+You can also open the file <code>Gemfile.lock</code> that Bundler has created.</p>
+
+<p>With this we&rsquo;ve created a little gems sandbox that makes, no matter what other
+gems are available on your system, just two gems available to our Ruby code:
+Chronic, and Bundler itself.</p>
+
+<p>Lets have a look at the load path to confirm that:</p>
+<pre class="highlight plaintext"><code>bundle exec ruby -e 'puts $LOAD_PATH'
+</code></pre>
+
+<p>You&rsquo;ll se a bunch of directories that belong to your Ruby installation, and make
+its standard library available. But you&rsquo;ll also see two directories that end with
+something similar to this:</p>
+<pre class="highlight plaintext"><code>gems/chronic-0.9.1/lib
+gems/bundler-1.9.6/lib
+</code></pre>
+
+<p>This means that any code that we run using our bundle (i.e. standing in this
+directory, and using <code>bundle exec</code> as a prefix) will be able to require, and
+use the Chronic library.</p>
+
+<p>Let&rsquo;s try that. Create a new file <code>19-bundler.rb</code> in this directory, and add the
+following lines:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"chronic"</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="no">Chronic</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s1">'tomorrow'</span><span class="p">)</span>
+<span class="nb">p</span> <span class="n">time</span><span class="p">.</span><span class="nf">class</span>
+<span class="nb">p</span> <span class="n">time</span>
+</code></pre>
+
+<p>This will output something like this:</p>
+<pre class="highlight plaintext"><code>Time
+2015-05-15 12:00:00 +0200
+</code></pre>
+
+<p>You can see that the method <code>parse</code> takes a natural language string, and converts
+it into an instance of the Ruby class <code>Time</code> (see here for the
+<a href="http://ruby-doc.org/core-2.2.0/Time.html">documentation</a>), so we can
+now use this object&rsquo;s methods to do more interesting stuff. E.g. let&rsquo;s look up
+which month that is:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"chronic"</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="no">Chronic</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s1">'tomorrow'</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">time</span><span class="p">.</span><span class="nf">month</span>
+</code></pre>
+
+<p>Let&rsquo;s say for some reason we&rsquo;d now want to upgrade the Chronic gem, and use the
+latest version in the newer <code>0.10</code> series. Maybe the authors have added some
+new functionality that we&rsquo;d like to use, or they&rsquo;ve fixed a certain bug.</p>
+
+<p>In order to do this we need to allow Bundler using the <code>0.10</code> series of versions.
+So in your Gemfile change <code>~&gt; 0.9.0</code> to <code>~&gt; 0.10.0</code>.</p>
+
+<p>If you now run:</p>
+<pre class="highlight plaintext"><code>bundle update chronic
+</code></pre>
+
+<p>You&rsquo;ll see that it now installs a newer version of this gem. Also, it has changed
+the version number in the <code>Gemfile.lock</code> file.</p>
+
+<p>Bundler is a really cool piece of software. It is one of those things that,
+once you&rsquo;ve used it for a while, wonder how life was possible before it existed
+(<em>&ldquo;How on earth did people meet before there were cellphones?!?&rdquo;</em>). If you ask
+any seasoned Ruby developer how their life was before Bundler, they&rsquo;ll probably
+respond <em>&ldquo;Quite miserable&rdquo;</em>, or maybe give you a blank stare and say <em>&ldquo;Ummm, I
+forgot&rdquo;</em>.</p>
+
+        <nav class="page-nav"><a class="prev" href="/exercises/using_rubygems.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/exercises/mailbox_erb.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

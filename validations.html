@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Validations | Webapps for Beginners</title>
+
+    <link href="assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/sessions/sinatra_sessions.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/resources.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="active">
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Validations</h1>
+
+<p>Our little application now already makes use of a bunch of things that you will
+regularly find in web applications.</p>
+
+<p>We have a form that posts data to another route. The <code>post</code> route picks up the
+data, and stores it, then redirects to another route, which displays the data.
+We also use a session, and a query parameter to pass data from one route to
+another.</p>
+
+<p>Pretty cool. You&rsquo;ll see a lot of these very same concepts in use when you start
+building your first Rails application. All of these things will work pretty
+much the same way in Rails. Except, you&rsquo;ve now built them manually yourself,
+so you know how this stuff works under the hood.</p>
+
+<p>Let&rsquo;s look at one other concept that Rails helps with, too: Validating user
+input.</p>
+
+<p>If you look at our little application we still are a little naive in accepting
+whatever data comes in to our <code>post</code> route: We simply store whatever the user
+sends, whenever they send it.</p>
+
+<p>Do we really want to store duplicate names? What if the same name is being
+submitted over and over again? And what if there&rsquo;s no name submitted at all?</p>
+
+<p>What we really want to do is validate the incoming data (in our case the name),
+and only accept and store it when we find it&rsquo;s valid. If it&rsquo;s not, then we want
+to display a message to the user, and ask them to submit the form again.</p>
+
+<p>We could change our <code>post</code> route like so:</p>
+<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+
+  <span class="k">if</span> <span class="vi">@name</span><span class="p">.</span><span class="nf">nil?</span> <span class="n">or</span> <span class="vi">@name</span><span class="p">.</span><span class="nf">empty?</span>
+    <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"You need to enter a name."</span>
+  <span class="k">elsif</span> <span class="n">read_names</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2"> is already included in our list."</span>
+  <span class="k">else</span>
+    <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="vi">@name</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Successfully stored the name </span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">."</span>
+  <span class="k">end</span>
+
+  <span class="n">redirect</span> <span class="s2">"/monstas?name=</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This is a valid implementation, and if you restart your application you
+can try it out.</p>
+
+<p>The <code>if</code> statement first checks if the <code>@name</code> is empty. If it is we simply
+store a message to the session, and then redirect.</p>
+
+<p>Note the duplicate condition <code>@name.nil? or @name.empty?</code>. The name parameter
+could either be missing (and thus, be <code>nil</code>), or it could be an empty string,
+so we need to check both cases.</p>
+
+<p>This could be simplified to one condition like so:</p>
+<pre class="highlight ruby"><code>  <span class="k">if</span> <span class="vi">@name</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">empty?</span>
+</code></pre>
+
+<p>If it&rsquo;s <code>nil</code>, then <code>nil.to_s</code> would return an empty string. If it&rsquo;s an empty
+string, then <code>&quot;&quot;.to_s</code> returns the same empty string again.</p>
+
+<p>The <code>if</code> statement then also checks if the given <code>@name</code> already is included in
+the names in our file: the array returned by <code>read_names</code>. If we already have
+the name, then, again, we just add a message to the session, and redirect.</p>
+
+<p>Only in the last case, when the name is not empty, and not already known,
+we do store it, and add the respective message to the session, and redirect.</p>
+
+<p>Alright, this works.</p>
+
+<p>However, it&rsquo;s worth considering that this adds quite a bit of stuff to our
+route. And if we have a lot of routes then that&rsquo;s a lot of code to add.</p>
+
+<p>So what if we extract this to a separate class?</p>
+
+<p>Extracting code to a class (or method) is a useful technique to keep your
+code clean and readable. The routes can focus on their job (passing data
+from the request to the view, reading data from our file, storing new
+data to the file etc), and the new class can focus on a different task:
+Finding out if the passed data is valid.</p>
+
+<p>So let&rsquo;s try that, and implement a little Ruby class that hides some of the
+logic from the route. Here&rsquo;s how we could do it:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">NameValidator</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span><span class="p">.</span><span class="nf">to_s</span>
+    <span class="vi">@names</span> <span class="o">=</span> <span class="n">names</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">valid?</span>
+    <span class="n">validate</span>
+    <span class="vi">@message</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">message</span>
+    <span class="vi">@message</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+    <span class="k">def</span> <span class="nf">validate</span>
+      <span class="k">if</span> <span class="vi">@name</span><span class="p">.</span><span class="nf">empty?</span>
+        <span class="vi">@message</span> <span class="o">=</span> <span class="s2">"You need to enter a name."</span>
+      <span class="k">elsif</span> <span class="vi">@names</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
+        <span class="vi">@message</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2"> is already included in our list."</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">validator</span> <span class="o">=</span> <span class="no">NameValidator</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="vi">@name</span><span class="p">,</span> <span class="n">read_names</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">validator</span><span class="p">.</span><span class="nf">valid?</span>
+    <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="vi">@name</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Successfully stored the name </span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">."</span>
+  <span class="k">else</span>
+    <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span><span class="p">.</span><span class="nf">message</span>
+  <span class="k">end</span>
+
+  <span class="n">redirect</span> <span class="s2">"/monstas?name=</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This adds quite a bit of code that we need to figure out, and type. But it
+seems worth it: Our route is now much shorter, and way easier to understand
+from just a quick look at it. We could move the <code>NameValidator</code> to a separate
+file.</p>
+
+<p>Cool, this works great.</p>
+
+<h2>Rerendering the form</h2>
+
+<p>However, imagine we&rsquo;d now have a much bigger form, with lots of fields. And
+we&rsquo;d validate each of these fields and have several validation messages.
+Imagine we&rsquo;d have like 20 form fields, and the user has made mistakes on 5 of
+them.</p>
+
+<p>We&rsquo;d want our application to display the same form again, and display the
+validation messages alongside with it. The original data should be, again,
+prefilled to the form, so the user does not have to type it all again.</p>
+
+<p>In order to preserve the form data that had been entered by the user we&rsquo;d
+need to append it all to the URL (as we do with the name in <code>&quot;/monstas?name=#{@name}&quot;</code>).
+And we&rsquo;d need to store all the validation messages to the session.</p>
+
+<p>This is a lot of stuff. And it actually also might break because URLs cannot be
+very long.</p>
+
+<p>For this reason modern web applications usually follow a different pattern:</p>
+
+<p>If the submitted data is invalid, instead of redirecting the user, we would
+simply re-render the same template right there, with the same data.</p>
+
+<p>Here&rsquo;s how we could do that:</p>
+<pre class="highlight ruby"><code><span class="n">post</span> <span class="s2">"/monstas"</span> <span class="k">do</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="vi">@names</span> <span class="o">=</span> <span class="n">read_names</span>
+  <span class="n">validator</span> <span class="o">=</span> <span class="no">NameValidator</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="vi">@name</span><span class="p">,</span> <span class="vi">@names</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">validator</span><span class="p">.</span><span class="nf">valid?</span>
+    <span class="n">store_name</span><span class="p">(</span><span class="s2">"names.txt"</span><span class="p">,</span> <span class="vi">@name</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">[</span><span class="ss">:message</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Successfully stored the name </span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">."</span>
+    <span class="n">redirect</span> <span class="s2">"/monstas?name=</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">else</span>
+    <span class="vi">@message</span> <span class="o">=</span> <span class="n">validator</span><span class="p">.</span><span class="nf">message</span>
+    <span class="n">erb</span> <span class="ss">:monstas</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>As you can see we now only store a message to the session, and redirect, only
+if the given data is valid. If it&rsquo;s not then we store the validation message to
+the <code>@message</code> instance variable and render our template again.</p>
+
+<p>Cool. If you restart your application you can try how it works.</p>
+
+<p>However, this now displays an empty &ldquo;Hello&rdquo; at the top. Why&rsquo;s that?</p>
+
+<p>We assign <code>params[&quot;name&quot;]</code> to the instance variable <code>@name</code> which we then check
+in our template: <code>&lt;% if @name %&gt;</code>. However, since this has been submitted by a
+form, with an input element called <code>name</code>, what we get is an empty string, not
+<code>nil</code>.</p>
+
+<p>We can fix this by changing our view like so:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">unless</span> <span class="vi">@name</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">empty?</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Hello <span class="cp">&lt;%=</span> <span class="vi">@name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h1&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Awesome.</p>
+
+<p>With this completed you have now walked through an important pattern for web
+applications, which is also used in Rails applications by default:</p>
+
+<ul>
+<li>There is an HTML form which is being retrieved via a <code>GET</code> request.</li>
+<li>This form posts to another route, which validates the submitted data.</li>
+<li>If the data is valid, it does something with it (in our case we store it) and
+redirects, passing a message via the session.</li>
+<li>If it&rsquo;s not valid, it renders an error message, as well as the form,
+with the form fields populated with the given data.</li>
+</ul>
+
+<p>Make sure to remember this pattern. Maybe write it down to a cheatsheet,
+formulate it in your own words. Maybe try turning it into a comic.</p>
+
+<p>Next, let&rsquo;s take this a step further and have a look at something that Rails
+calls &ldquo;resources&rdquo;.</p>
+
+        <nav class="page-nav"><a class="prev" href="/sessions/sinatra_sessions.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/resources.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

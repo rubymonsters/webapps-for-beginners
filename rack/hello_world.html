@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>Your first Rack app | Webapps for Beginners</title>
+
+    <link href="../assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/rack.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/rack/rack_env.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory expanded">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li class="active">
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>Your first Rack app</h1>
+
+<p>Let&rsquo;s jump right in.</p>
+
+<p>In a new directory <code>rack</code> create a file <code>config.ru</code> with the following content:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">status</span>  <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">}</span>
+    <span class="n">body</span>    <span class="o">=</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]</span>
+
+    <span class="p">[</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">run</span> <span class="no">Application</span><span class="p">.</span><span class="nf">new</span>
+</code></pre>
+
+<p>Now, make sure you have the gem Rack installed: In your terminal check <code>gem
+list rack</code>. Does that show something like <code>rack (1.6.1)</code> (or any other version
+number)? If it doesn&rsquo;t, install Rack with the command <code>gem install rack</code>.</p>
+
+<p>This gem comes with a little executable (command line program) called <code>rackup</code>.
+This command looks for a file <code>config.ru</code> in the current directory, and starts
+a web server using it, on your local computer.</p>
+
+<p>Make sure you have <code>cd</code>ed to your <code>rack</code> directory, and then run <code>rackup</code>. You
+should see something like:</p>
+<pre class="highlight plaintext"><code>$ rackup
+[2015-05-15 18:37:42] INFO  WEBrick 1.3.1
+[2015-05-15 18:37:42] INFO  ruby 2.2.1 (2015-02-26) [x86_64-darwin14]
+[2015-05-15 18:37:42] INFO  WEBrick::HTTPServer#start: pid=17588 port=9292
+</code></pre>
+
+<p>Of course the version numbers may be different, but the important bit that
+you want to look for is the port. In our case that&rsquo;s <code>9292</code>.</p>
+
+<p>Now your web application has started you can point your browser to
+<a href="http://localhost:9292"><a href="http://localhost:9292">http://localhost:9292</a></a>. You should see
+something like this:</p>
+
+<p><img src="/assets/images/rack_1-9460dec3.png"></p>
+
+<p>Pretty cool, isn&rsquo;t it? With just a few lines of simple Ruby code you have just
+written an actual web application, and started a fully functional web server
+with it.</p>
+
+<p>Now, let&rsquo;s have a closer look at the code. Here&rsquo;s our class again:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">status</span>  <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">}</span>
+    <span class="n">body</span>    <span class="o">=</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]</span>
+
+    <span class="p">[</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We define a class <code>Application</code>, and, on the last line, create an instance
+of it, which we pass to the method <code>run</code>. The method <code>run</code> is defined by
+Rack, and expects to be passed <em>something</em> that responds to the method <code>call</code>.
+<a href="#footnote-1">[1]</a></p>
+
+<p>That&rsquo;s why we defined a method <code>call</code> on our class. This method takes one
+argument <code>env</code>. It does not use the <code>env</code> (whatever that is), yet, but instead
+just returns the same static array whenever it is called.</p>
+
+<p>This array contains 3 things:</p>
+
+<ul>
+<li>The number 200, which represents the status code,</li>
+<li>a hash that contains a single header (the content type), and</li>
+<li>an array containing a single string, which is the body.</li>
+</ul>
+
+<p>So the method <code>call</code> returns something that represents an HTTP response in Rack!</p>
+
+<p>Rack makes it so that whenever there&rsquo;s a request coming in (on the computer
+that is <code>localhost</code>, i.e. your own, local computer, and on the port <code>9292</code>),
+it will turn this request into a hash <code>env</code>. It will then hand us this hash by
+calling our method <code>call</code>.  I.e. the hash <code>env</code> that is passed to us as an
+argument contains the request information. We&rsquo;ll have a look at that in a
+minute.</p>
+
+<p>Rack then expects us (our method <code>call</code>) to return an array containing those
+three elements:</p>
+
+<ul>
+<li>The HTTP response code</li>
+<li>A hash of headers</li>
+<li>The response body, which must respond to each (i.e. we can just use an array)</li>
+</ul>
+
+<p>In other words, that&rsquo;s also a kind of protocol (programmers also use the term
+&ldquo;interface&rdquo; here). Rack defines how we can interact with it in a formal way in
+terms of Ruby. The protocol is defined as something like:</p>
+
+<p class="hint">
+A Rack application implements a method <code>call</code> that takes a hash
+representing the request, and is supposed to return an array containing the
+status code, a hash containing the headers, and an array containing the request
+body.
+</p>
+
+<p>Once Rack got these three things back from our method <code>call</code> it will create
+the respective response (text) message out of it, and send it back to the
+browser, so the browser can handle it (and in our case display the body).</p>
+
+<p>Great!</p>
+
+<p>If you&rsquo;ve paid attention close enough you may have noticed that our little
+Rack application actually is lying to the browser. Can you spot where?</p>
+
+<p>Our response header hash defines a <code>Content-Type</code> header. And in that header we
+claim that our response body has the content type <code>text/html</code>. But then we
+return a body that isn&rsquo;t HTML, but just plain text. So that&rsquo;s wrong. Luckily
+browsers are pretty forgiving. They try to do their best to still display
+useful information to the user, and fix things for us.</p>
+
+<p>We could fix our application by specifying that the <code>Content-Type</code> is plain
+text by setting the value to <code>text/plain</code>. But instead we can also simply
+turn the body into HTML like so:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Application</span>
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">status</span>  <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">}</span>
+    <span class="n">body</span>    <span class="o">=</span> <span class="p">[</span><span class="s2">"&lt;html&gt;&lt;body&gt;&lt;h1&gt;Yay, your first web application! &lt;3&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;"</span><span class="p">]</span>
+
+    <span class="p">[</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">run</span> <span class="no">Application</span><span class="p">.</span><span class="nf">new</span>
+</code></pre>
+
+<h2>Footnotes:</h2>
+
+<p><a name="footnote-1">[1]</a> Most examples for Rack applications will use
+a <code>Proc</code> or <code>lambda</code>, which can be called using their method <code>call</code>. Here&rsquo;s an
+example, using a lambda:</p>
+<pre class="highlight ruby"><code><span class="n">application</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">env</span><span class="o">|</span>
+  <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"text/html"</span> <span class="p">},</span> <span class="p">[</span><span class="s2">"Yay, your first web application! &lt;3"</span><span class="p">]]</span>
+<span class="k">end</span>
+
+<span class="n">run</span> <span class="n">application</span>
+</code></pre>
+
+<p>This is why the author of Rack picked <code>call</code> as the main method: Our web
+application will be &ldquo;called&rdquo; by Rack, and so it can be just an anonymous <code>Proc</code>
+or <code>lambda</code>. Pretty slick.</p>
+
+<p>However, in our example we use a class, so we can add more methods to it later.</p>
+
+        <nav class="page-nav"><a class="prev" href="/rack.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/rack/rack_env.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="../assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="../assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>

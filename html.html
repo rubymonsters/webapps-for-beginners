@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Webapps for Beginners">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="BEd2YAbpSQrRqU2-5wUifTTzvqTMGLLE269b0JZTfCs" />
+
+    <title>HTML | Webapps for Beginners</title>
+
+    <link href="assets/stylesheets/monstas-4fb1ecb5.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-870787d6.png" />
+  </head>
+
+  <body>
+    <nav class="page-nav"><a class="prev" href="/libraries/load_path.html">
+  Previous
+</a></nav>
+    <nav class="page-nav"><a class="next" href="/erb.html">
+  Next
+</a></nav>
+
+    <div>
+      <nav class="toc">
+        <h1>Contents</h1>
+        <ul>
+  <li>
+    <a href="/index.html">
+      Webapps For Beginners
+    </a>
+  </li>
+  <li>
+    <a href="/preface.html">
+      Preface
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/libraries.html">
+      Using Libraries
+    </a>
+    <ul>
+      <li>
+        <a href="/libraries/standard_library.html">
+          Ruby Standard Library
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/rubygems.html">
+          Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/bundler.html">
+          Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/libraries/load_path.html">
+          Ruby load path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="active">
+    <a href="/html.html">
+      HTML
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/erb.html">
+      Embedded Ruby
+    </a>
+    <ul>
+      <li>
+        <a href="/erb/erb_templates.html">
+          ERB Templates
+        </a>
+      </li>
+      <li>
+        <a href="/erb/rendering_erb.html">
+          Rendering ERB
+        </a>
+      </li>
+      <li>
+        <a href="/erb/bindings.html">
+          Bindings
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/http.html">
+      HTTP
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/rack.html">
+      Rack
+    </a>
+    <ul>
+      <li>
+        <a href="/rack/hello_world.html">
+          Your first Rack app
+        </a>
+      </li>
+      <li>
+        <a href="/rack/rack_env.html">
+          The Rack Env
+        </a>
+      </li>
+      <li>
+        <a href="/rack/method_path.html">
+          Method and Path
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sinatra.html">
+      Sinatra
+    </a>
+    <ul>
+      <li>
+        <a href="/sinatra/sinatra_rails.html">
+          Sinatra versus Rails
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/dsl.html">
+          Domain specific languages
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/hello_world.html">
+          Your first Sinatra app
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/routes.html">
+          Routes
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/params.html">
+          Params
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/templates.html">
+          Rendering templates
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/layouts.html">
+          Layouts
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/template_files.html">
+          Template files
+        </a>
+      </li>
+      <li>
+        <a href="/sinatra/instance_variables.html">
+          Using instance variables
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/forms.html">
+      Forms
+    </a>
+    <ul>
+      <li>
+        <a href="/forms/form_tag.html">
+          HTML Form Tags
+        </a>
+      </li>
+      <li>
+        <a href="/forms/submitting_data.html">
+          Submitting Data
+        </a>
+      </li>
+      <li>
+        <a href="/forms/accessing_data.html">
+          Accessing Form Data
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/storing_data.html">
+      Storing data
+    </a>
+    <ul>
+      <li>
+        <a href="/storing_data/writing_file.html">
+          Writing to a file
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/storing_name.html">
+          Storing the name
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/listing_names.html">
+          Listing all names
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/using_post.html">
+          Using POST
+        </a>
+      </li>
+      <li>
+        <a href="/storing_data/redirect.html">
+          Using Redirects
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/sessions.html">
+      Sessions
+    </a>
+    <ul>
+      <li>
+        <a href="/sessions/cookies.html">
+          Cookies
+        </a>
+      </li>
+      <li>
+        <a href="/sessions/sinatra_sessions.html">
+          Sessions in Sinatra
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/validations.html">
+      Validations
+    </a>
+  </li>
+  <li class="directory">
+    <a href="/resources.html">
+      Resources
+    </a>
+    <ul>
+      <li>
+        <a href="/resources/groups_routes.html">
+          Groups of routes
+        </a>
+      </li>
+      <li>
+        <a href="/resources/fake_methods.html">
+          Faking HTTP verbs
+        </a>
+      </li>
+      <li>
+        <a href="/resources/writing_resources.html">
+          Writing resources
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/databases.html">
+      Databases
+    </a>
+    <ul>
+      <li>
+        <a href="/databases/tables.html">
+          Tables
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sql.html">
+          SQL
+        </a>
+      </li>
+      <li>
+        <a href="/databases/sqlite.html">
+          SQLite
+        </a>
+      </li>
+      <li>
+        <a href="/databases/orm.html">
+          Object Relational Mappers
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/migrations.html">
+      Migrations
+    </a>
+    <ul>
+      <li>
+        <a href="/migrations/database_structure.html">
+          Database Structure
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/incremental_changes.html">
+          Incremental Changes
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/rollbacks.html">
+          Rollbacks
+        </a>
+      </li>
+      <li>
+        <a href="/migrations/tools.html">
+          Tools
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="directory">
+    <a href="/exercises.html">
+      Exercises
+    </a>
+    <ul>
+      <li>
+        <a href="/exercises/using_rubygems.html">
+          Using Rubygems
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/using_bundler.html">
+          Using Bundler
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_erb.html">
+          Generating HTML with ERB
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/mailbox_sinatra.html">
+          Mailbox via Sinatra
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sinatra_resource.html">
+          Sinatra Resource
+        </a>
+      </li>
+      <li>
+        <a href="/exercises/sql.html">
+          SQL
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+      </nav>
+      <article>
+        <nav class="menu"><a href="#"></a></nav>
+        <h1>HTML</h1>
+
+<p><a href="http://en.wikipedia.org/wiki/HTML">HTML</a>, meaning &ldquo;HyperText Markup
+Language&rdquo;, is a document format used for defining the semantic structure of a
+single web page.  One could say that HTML is what the internet is made of: All
+the websites that we are looking at every day are all defined (described) as
+HTML.</p>
+
+<p>HTML was first proposed by <a href="http://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a>
+in 1989, and layed grounds for the World Wide Web&rsquo;s huge breakthrough during
+the 1990s. It is defined by the <a href="http://en.wikipedia.org/wiki/World_Wide_Web_Consortium">W3C</a>
+and it&rsquo;s latest version is <a href="http://en.wikipedia.org/wiki/HTML5">HTML 5</a>
+which added a bunch of exciting, and useful features.</p>
+
+<p>The fundamental, primary feature of any web browser, such as Firefox, Chrome,
+Safari, is to render (display) HTML documents:</p>
+
+<p>Whenever you type a URL into the browser&rsquo;s address bar (or click a link, such
+as <a href="http://rubymonstas.org"><a href="http://rubymonstas.org">http://rubymonstas.org</a></a>) then the
+browser will send a request to this address (i.e. to some application running
+on some computer that responds to this address), and it will (in most cases)
+get an HTML document back as a response, which it will display to you.</p>
+
+<p>What is meant by &ldquo;semantic structure&rdquo; though?</p>
+
+<p>Maybe it is best to look at an example first. This is a fairly simple, but
+valid HTML document:</p>
+<pre class="highlight html"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Ruby Monstas HTML Example<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Ruby Monstas HTML Example<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;p&gt;</span>One paragraph of text.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Another paragraph of text, containing an emphasized <span class="nt">&lt;em&gt;</span>word<span class="nt">&lt;/em&gt;</span>.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;h2&gt;</span>A list of items<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>First item<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Second item<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Third item<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>If you look at this document you&rsquo;ll notice the recurring pattern of &ldquo;tags&rdquo; that
+start with <code>&lt;something&gt;</code> and then are closed with <code>&lt;/something&gt;</code>. E.g. the
+entire document starts with an opening <code>&lt;html&gt;</code> tag, and ends with a closing
+<code>&lt;/html&gt;</code> tag.</p>
+
+<p>HTML entirely consists of these tags that have a certain meaning, can be nested,
+and contain content.</p>
+
+<p>Here&rsquo;s what the HTML tags used in this example mean:</p>
+
+<ul>
+<li><code>&lt;html&gt;...&lt;/html&gt;</code> - the HTML document as a whole</li>
+<li><code>&lt;head&gt;...&lt;/head&gt;</code> - the header of the document, containing meta information (i.e. information <em>about</em> the document, not <em>part of</em> the document itself)</li>
+<li><code>&lt;title&gt;...&lt;/title&gt;</code> - an example of one bit of meta information, the title of the page as displayed in your browser history, and the browser window title (or tab)</li>
+<li><code>&lt;body&gt;...&lt;/body&gt;</code> - the body of the document itself, i.e. the whole of its content</li>
+<li><code>&lt;h1&gt;...&lt;/h1&gt;</code>, <code>&lt;h2&gt;...&lt;/h2&gt;</code> - a headline level 1, and level 2, containing the headline&rsquo;s text. HTML defines heading levels 1-6, which should be enough to define the structure even of large documents.</li>
+<li><code>&lt;p&gt;...&lt;/p&gt;</code> - a single paragraph, containing the paragraph&rsquo;s text.</li>
+<li><code>&lt;ul&gt;...&lt;/ul&gt;</code> - an unordered list (i.e. a list that uses bullet points, as opposed to, e.g., a numbered list)</li>
+<li><code>&lt;li&gt;...&lt;/li&gt;</code> - a single list item, must be contained in either a <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> tag</li>
+</ul>
+
+<p>You can read <code>&lt;html&gt;</code> as <em>&ldquo;Ok, let&rsquo;s start an HTML document!&rdquo;</em>.
+Then <code>&lt;head&gt;</code> says: <em>&ldquo;Oh, btw, here&rsquo;s some extra meta information about the document &hellip;&rdquo;</em>
+and <code>&lt;title&gt;</code> says: <em>&ldquo;The title of this document is: [&hellip;]&rdquo;</em>.
+<code>&lt;/title&gt;</code> meaning <em>&ldquo;Ok, we&rsquo;re done with the title&rdquo;</em>,
+just like <code>&lt;/head&gt;</code> meaning <em>&ldquo;Ok, we&rsquo;re done with the meta information part.&rdquo;</em></p>
+
+<p>When the browser sees <code>&lt;body&gt;</code> it reads that as <em>&ldquo;Ok, now here comes the real content part of the document.&rdquo;</em></p>
+
+<p>Inside that content section it first finds an <code>&lt;h1&gt;</code> tag, and reads <em>&ldquo;Aha, the
+main headline is [&hellip;]&rdquo;</em>, so it will display this as a headline to you. It then
+finds two <code>&lt;p&gt;</code> tags containing a few bits of plain text, so it displays two
+paragraphs. The last paragraph has an emphasized word, so it makes that one
+cursive (or something else, depending on style definitions defined elsewhere).
+Next it finds a 2nd level headline <code>&lt;h2&gt;</code>, and then an &ldquo;unordered list&rdquo; <code>&lt;ul&gt;</code>,
+i.e. a list with bullet points.</p>
+
+<p>It is important to understand that HTML only defines the <strong>semantic structure</strong>
+of a document. It does, as such, say nothing about the visual representation of,
+for example, a headline, the spacing between paragraphs, the font family and size
+used, any colors, borders, or even element placement: The visual representation
+is defined in a different language called <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a>
+(or by the browser&rsquo;s defaults, should there not be any custom style definition
+for this web page, as in our example above).</p>
+
+<p>Why is the semantic structure of a document useful at all, even disregarding
+its visual styling when presented in the browser window?</p>
+
+<p>Maybe the simplest example is a link. In order to describe a link in text (HTML
+is stored as plain text) we&rsquo;ll need to tell three pieces of information to the
+browser:</p>
+
+<ul>
+<li>That we&rsquo;d like to define a link,</li>
+<li>what text to display for the link, and</li>
+<li>what other web address to link to.</li>
+</ul>
+
+<p>This is a valid example of a link in HTML, using the tag <code>a</code> (which means
+&ldquo;anchor&rdquo;):</p>
+<pre class="highlight html"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://rubymonstas.org"</span><span class="nt">&gt;</span>Ruby Monstas Homepage<span class="nt">&lt;/a&gt;</span>
+</code></pre>
+
+<p>This HTML, when rendered in a web browser, looks like this:
+<a href="http://rubymonstas.org">Ruby Monstas Homepage</a>, i.e. there&rsquo;s a link
+with the text &ldquo;Ruby Montas Homepage&rdquo; and it links to the target URL (&ldquo;href&rdquo;)
+<a href="http://rubymonstas.org">http://rubymonstas.org</a>.</p>
+
+<p>Does this make sense?</p>
+
+<p>This is why HTML is called a &ldquo;markup language&rdquo;. It is a language that &ldquo;marks
+up&rdquo; certain each part of the content with its structural meaning, such as
+<em>&ldquo;This is a link, with this target URL&rdquo;</em>, or <em>&ldquo;This is a heading with this
+level&rdquo;</em>, <em>&ldquo;This is a simple paragraph&rdquo;</em>, and so on.</p>
+
+<p>If you think about it, there are lots of useful applications, that leverage
+the information that is provided by defining the <strong>semantic structure</strong> of a
+document (as opposed to its visual representation).</p>
+
+<p>For example, one could apply different &ldquo;themes&rdquo;, as in styles, to the same HTML
+page depending on people&rsquo;s preferences, or depending on the device this website
+is displayed on (e.g. desktop browser windows versus mobile devices).</p>
+
+<p>But also, the entire success of Google as a search engine relied on the fact
+that the semantic structure of a document provides clues about the relevance of
+certain search terms in this document: If a word is contained in the URL, the
+document title, the toplevel headlines, then it&rsquo;s probably important. Even more
+so, if other pages link to this document using link texts that also contain
+that word, then this adds social proof to the mix, and search results should
+probably list this page higher up in the results.</p>
+
+<p>Another example is that, by inspecting the headline tags in an HTML document,
+we can auto-generate a table of contents for this document quite easily,
+without having authors maintain this manually. Many content management
+systems (CMS) do this, including Wikipedia.</p>
+
+        <nav class="page-nav"><a class="prev" href="/libraries/load_path.html">
+  Previous
+</a></nav>
+        <nav class="page-nav"><a class="next" href="/erb.html">
+  Next
+</a></nav>
+      </article>
+    </div>
+
+    <footer>
+      <ul>
+        <li><a href="http://rubymonstas.org">Ruby Monstas</a></li>
+        <li><a href="http://ruby-for-beginners.rubymonstas.org">Ruby For Beginners</a></li>
+        <li><a href="http://webapps-for-beginners.rubymonstas.org">Webapps For Beginners</a></li>
+        <li><a href="http://testing-for-beginners.rubymonstas.org">Testing For Beginners</a></li>
+        <li><a href="mailto:ruby.monsters@gmail.com">Email</a></li>
+        <li><a href="https://twitter.com/rubymonsters">Twitter</a></li>
+        <li><a href="https://github.com/rubymonsters">GitHub</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license cc:license">License</a></li>
+        <li><a href="http://foundation.travis-ci.org/imprint/">Imprint</a></li>
+      </ul>
+    </footer>
+
+    <script src="assets/javascripts/modernizr-4c875d94.js" type="text/javascript"></script>
+    <script src="assets/javascripts/monstas-e84d6217.js" type="text/javascript"></script>
+  </body>
+</html>
