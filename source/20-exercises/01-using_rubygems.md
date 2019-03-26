@@ -90,7 +90,7 @@ for the key `"subject"` stored on that hash.
 So this prints out `"Hi there, Ruby Monstas!"`.
 
 By the way, if you've read the bonus chapter on
-<a href="http://ruby-for-beginners.rubymonstas.org/bonus_1/alternative-syntax.html">Alternative Syntax</a>
+<a href="http://ruby-for-beginners.rubymonstas.org/bonus/alternative-syntax.html">Alternative Syntax</a>
 then you may have notices that we also have a perfect example of a usecase for
 the `%(..)` string syntax here:
 
