@@ -8,6 +8,6 @@ and over again, when you define a lot of resources for your web application.
 However, in this course, we'll want to implement our `members` resource
 ourselves, and do all the legwork that is required.
 
-So how about heading over to the exercise [Sinatra Resource](http://localhost:4567/exercises/sinatra_resource.html).
+So how about heading over to the exercise <a href="/exercises/sinatra_resource.html">Sinatra Resource</a>.
 
 Give it a shot!
