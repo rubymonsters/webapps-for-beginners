@@ -1,11 +1,9 @@
 # Sinatra
 
-<a href="http://www.sinatrarb.com/">Sinatra</a> is a quite popular, small
-framework for writing web applications. It sits somewhere between Rack and
-Rails in terms of how many features it provides, what kind of things it
-makes easy for developers, and what kind of things one has to implement on
-your own.
+<a href="http://www.sinatrarb.com/">Sinatra</a> is a small, popular framework for writing web applications in Ruby.
 
-We'll use Sinatra for introducing quite a few concepts that are common to
-all web applications, before we later move on to learning how to
-build a Rails appplication.
+In the last section we looked at Rack. Sinatra uses Rack under the hood, adding more features to enable developers to more quickly build web applications.
+
+Rails is another popular framework built on Rack. Rails provides _even more_ features, allowing developers to reason and write about higher level abstractions.
+
+Rails code can sometimes seem like "magic" to developers who don't understand the concepts that have been abstracted away. This is why we recommend learning these concepts in Sinatra before you move on to learning Rails. That's the focus of this section.

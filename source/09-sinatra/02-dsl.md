@@ -1,50 +1,28 @@
 # Domain specific languages
 
-Sinatra, on its homepage, does not call itself a framework. Instead it calls
-itself a DSL, which is quite a common term in the Ruby world.
+On its homepage Sinatra does not call itself a framework. It calls itself a DSL, which is quite a common term in the Ruby world.
 
-So let's talk about that for a moment, too.
+So let's talk about that for a moment.
 
-DSL is short for <a href="http://en.wikipedia.org/wiki/Domain-specific_language">"Domain specific language"</a>.
-"Domain" in this case refers to the "problem domain", i.e. the "problem at
-hand", or rather the context of the problem. The domain where a solution or
-tool can be applied.
+DSL is short for <a href="http://en.wikipedia.org/wiki/Domain-specific_language">"Domain specific language"</a>. "Domain" in this case refers to the "problem domain", i.e. the problem your code is trying to solve. Or rather, the context of the problem. The domain where a solution or tool is applied.
 
 What does that mean?
 
-When you think about a hammer as a concept, then the domain it is relevant to
-is "building physical things". In contrast, it is completely irrelevant to the
-domain of mathmatics. Likewise, the concept of an operating system, is
-something that is relevant in the domain of using computers, while it is
-entirely irrelevant in the domain of baking pizza.
+When you think about a hammer, its domain is building physical things. But it is irrelevant to the domain of mathematics. Likewise, an operating system's domain is the management of a computer's resources. But it is entirely irrelevant to the domain of baking pizza.
 
-Applications are built to solve problems in a certain domain. In a commercial
-context the domain often is what a business' customers care about.
+Applications are built to solve problems in a certain domain. In a commercial context the domain is typically what a business' customers care about when they use it.
 
-Consider a book shop application, such as Amazon, back when it still did
-nothing else but selling books. The domain of this application is the entirety
-of concepts that their users have in mind, and that they care about when they
-use it. In our example the domain would include concepts like: books,
-categories, a shopping cart, orders, payment methods, delivery addresses, and
-so on.
+Consider a book shop application, such as Amazon. (Back when all it did was sell books!) Amazon's domain included concepts like: books, categories, shopping, orders, payments, deliveries, and so on.
 
-A domain specific language is a language that includes terms to speak about
-these concepts: *"Books can be placed into a shopping cart."* or *"A shopping cart
-can be checked out, which will place an order."*
+A domain specific language is a language that includes terms to speak about the concepts in its domain. e.g.: *"Books can be placed into a shopping cart"*, or *"A shopping cart can be checked out, which will place an order"*.
 
-In the context of Ruby code the term "domain specific language" is used to
-describe a piece of code or library that provides classes and methods that
-allow us to "speak about them", or implement them, in the form of code.
+In the context of Ruby code, a "domain specific language" is a piece of code or a library that provides classes and methods that allow us to speak about a domain in the form of code.
 
-The problem domain that Sinatra lives in is building web applications. And web
-applications which "speak" HTTP with browsers.
+The problem domain that Sinatra lives in is building web applications – web applications that _speak_ to browsers using HTTP.
 
-It therefor has methods like, for example, `get`, `post`, `put`, and `delete`.
-You can use these methods in order to describe how your application responds to
-HTTP requests. It also has methods like `headers`, `session`, `cookies`, and
-other things that relate to concepts from HTTP.
+It therefore has methods like `get`, `post`, `put` and `delete`. You can use these methods in order to describe how your application responds to HTTP requests. It also has methods like `headers`, `session`, `cookies`, which relate to HTTP concepts.
 
-So, instead of writing verbose code like this:
+So instead of writing verbose code like this:
 
 ```ruby
 def handle_request(method, path)
@@ -56,7 +34,7 @@ def handle_request(method, path)
 end
 ```
 
-Sinatra allows us to write code like this:
+Sinatra lets us write:
 
 ```ruby
 get "/some/path" do
@@ -68,13 +46,8 @@ post "*" do
 end
 ```
 
-As you can see this code uses a "language" (i.e. methods provided by Sinatra)
-that is specific to the domain HTTP.
-
-Does that make sense?
+As you can see this code uses a "language" (i.e. methods provided by Sinatra) that is specific to the domain HTTP.
 
 <p class="hint">
-The term DSL is used for libraries that allow you to write descriptive,
-narrative Ruby code that "speaks" about the solution to a problem using
-terms that are specific to the given problem domain.
+The term DSL is used for libraries that allow you to write descriptive, narrative Ruby code that "speaks" about the solution to a problem using terms that are specific to the problem domain.
 </p>
