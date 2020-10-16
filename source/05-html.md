@@ -7,7 +7,7 @@ the websites that we are looking at every day are all defined (described) as
 HTML.
 
 HTML was first proposed by <a href="http://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a>
-in 1989, and layed grounds for the World Wide Web's huge breakthrough during
+in 1989, and laid grounds for the World Wide Web's huge breakthrough during
 the 1990s. It is defined by the <a href="http://en.wikipedia.org/wiki/World_Wide_Web_Consortium">W3C</a>
 and it's latest version is <a href="http://en.wikipedia.org/wiki/HTML5">HTML 5</a>
 which added a bunch of exciting, and useful features.
