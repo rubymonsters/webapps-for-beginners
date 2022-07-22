@@ -119,7 +119,7 @@ GEM
     timers (4.0.1)
       hitimes
     titleize (1.3.0)
-    tzinfo (1.2.5)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     uber (0.0.13)
     uglifier (2.7.1)
